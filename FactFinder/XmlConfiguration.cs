@@ -29,8 +29,8 @@ namespace Omikron.FactFinder
         public IDictionary<string, string> ServerMappings { get; private set; }
         public ICollection<string> IgnoredClientParams { get; private set; }
         public ICollection<string> IgnoredServerParams { get; private set; }
-        public ICollection<string> RequiredClientParams { get; private set; }
-        public ICollection<string> RequiredServerParams { get; private set; }
+        public IDictionary<string, string> RequiredClientParams { get; private set; }
+        public IDictionary<string, string> RequiredServerParams { get; private set; }
 
         public string PageContentEncoding { get; private set; }
         public string PageUrlEncoding { get; private set; }
@@ -86,17 +86,19 @@ namespace Omikron.FactFinder
                     select (string)element.Attribute("name")
                 ).ToList();
 
-                RequiredServerParams = (
-                    from element
-                    in configuration.Element("params").Element("server").Elements("require")
-                    select (string)element.Attribute("name")
-                ).ToList();
+                RequiredServerParams = new Dictionary<string, string>();
 
-                RequiredClientParams = (
-                    from element
-                    in configuration.Element("params").Element("client").Elements("require")
-                    select (string)element.Attribute("name")
-                ).ToList();
+                foreach (XElement element in configuration.Element("params").Element("server").Elements("require"))
+                {
+                    RequiredServerParams.Add((string)element.Attribute("name"), (string)element.Attribute("default"));
+                }
+
+                RequiredClientParams = new Dictionary<string, string>();
+
+                foreach (XElement element in configuration.Element("params").Element("client").Elements("require"))
+                {
+                    RequiredClientParams.Add((string)element.Attribute("name"), (string)element.Attribute("default"));
+                }
 
                 ServerMappings = new Dictionary<string, string>();
 

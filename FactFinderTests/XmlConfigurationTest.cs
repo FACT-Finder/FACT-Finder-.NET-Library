@@ -110,14 +110,16 @@ namespace FactFinderTests
             expectedClientIgnore.Add("timestamp");
 
             Assert.IsTrue(expectedClientIgnore.SequenceEqual(Configuration.IgnoredClientParams));
-            
-            var expectedServerRequire = new List<string>();
 
-            Assert.IsTrue(expectedServerRequire.SequenceEqual(Configuration.RequiredServerParams));
+            var expectedServerRequire = new Dictionary<string, string>();
 
-            var expectedClientRequire = new List<string>();
+            expectedServerRequire.Add("channel", "de");
 
-            Assert.IsTrue(expectedClientRequire.SequenceEqual(Configuration.RequiredClientParams));
+            Assert.IsTrue(expectedServerRequire.DictionaryEquals(Configuration.RequiredServerParams));
+
+            var expectedClientRequire = new Dictionary<string, string>();
+
+            Assert.IsTrue(expectedClientRequire.DictionaryEquals(Configuration.RequiredClientParams));
 
             var expectedServerMappings = new Dictionary<string, string>();
 

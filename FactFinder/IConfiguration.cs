@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Omikron.FactFinder
 {
-    interface IConfiguration
+    public interface IConfiguration
     {
         bool IsDebugModeOn { get; }
 
@@ -26,8 +26,8 @@ namespace Omikron.FactFinder
         IDictionary<string, string> ServerMappings { get; }
         ICollection<string> IgnoredClientParams { get; }
         ICollection<string> IgnoredServerParams { get; }
-        ICollection<string> RequiredClientParams { get; }
-        ICollection<string> RequiredServerParams { get; }
+        IDictionary<string, string> RequiredClientParams { get; }
+        IDictionary<string, string> RequiredServerParams { get; }
         
         string PageContentEncoding { get; }
         string PageUrlEncoding { get; }

@@ -45,6 +45,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ParametersConverterTest.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="XmlConfigurationTest.cs" />
     <Content Include="Properties\AssemblyInfo.cs" />

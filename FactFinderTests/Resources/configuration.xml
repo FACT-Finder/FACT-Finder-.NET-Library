@@ -38,6 +38,7 @@
             <ignore name="password" />
             <ignore name="username" />
             <ignore name="timestamp" />
+            <require name="channel" default="de" />
         </server>
 
         <!-- parameter settings for the client -->
