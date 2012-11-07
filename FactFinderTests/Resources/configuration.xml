@@ -38,7 +38,6 @@
             <ignore name="password" />
             <ignore name="username" />
             <ignore name="timestamp" />
-            <require name="channel" default="de" />
         </server>
 
         <!-- parameter settings for the client -->
@@ -50,6 +49,7 @@
             <ignore name="username" />
             <ignore name="timestamp" />
             <mapping from="query" to="keywords" />
+            <require name="test" default="value"/>
         </client>
     </params>
 

@@ -25,11 +25,11 @@ namespace Omikron.FactFinder
         public string AdvancedAuthPrefix { get; private set; }
         public string AdvancedAuthPostfix { get; private set; }
 
-        public IDictionary<string, string> ClientMappings { get; private set; }
+        public IDictionary<string, string> PageMappings { get; private set; }
         public IDictionary<string, string> ServerMappings { get; private set; }
-        public ICollection<string> IgnoredClientParams { get; private set; }
+        public ICollection<string> IgnoredPageParams { get; private set; }
         public ICollection<string> IgnoredServerParams { get; private set; }
-        public IDictionary<string, string> RequiredClientParams { get; private set; }
+        public IDictionary<string, string> RequiredPageParams { get; private set; }
         public IDictionary<string, string> RequiredServerParams { get; private set; }
 
         public string PageContentEncoding { get; private set; }
@@ -45,7 +45,7 @@ namespace Omikron.FactFinder
                 XElement configuration = XElement.Load(fileName);
 
                 IsDebugModeOn = Convert.ToBoolean((string)configuration.Element("debug"));
-                RequestProtocol = (string)configuration.Element("protocol");
+                RequestProtocol = (string)configuration.Element("search").Element("protocol");
                 ServerAddress = (string)configuration.Element("search").Element("address");
                 ServerPort = (string)configuration.Element("search").Element("port");
                 Context = (string)configuration.Element("search").Element("context");
@@ -80,7 +80,7 @@ namespace Omikron.FactFinder
                     select (string)element.Attribute("name")
                 ).ToList();
 
-                IgnoredClientParams = (
+                IgnoredPageParams = (
                     from element
                     in configuration.Element("params").Element("client").Elements("ignore")
                     select (string)element.Attribute("name")
@@ -93,11 +93,11 @@ namespace Omikron.FactFinder
                     RequiredServerParams.Add((string)element.Attribute("name"), (string)element.Attribute("default"));
                 }
 
-                RequiredClientParams = new Dictionary<string, string>();
+                RequiredPageParams = new Dictionary<string, string>();
 
                 foreach (XElement element in configuration.Element("params").Element("client").Elements("require"))
                 {
-                    RequiredClientParams.Add((string)element.Attribute("name"), (string)element.Attribute("default"));
+                    RequiredPageParams.Add((string)element.Attribute("name"), (string)element.Attribute("default"));
                 }
 
                 ServerMappings = new Dictionary<string, string>();
@@ -107,11 +107,11 @@ namespace Omikron.FactFinder
                     ServerMappings.Add((string)element.Attribute("from"), (string)element.Attribute("to"));
                 }
 
-                ClientMappings = new Dictionary<string, string>();
+                PageMappings = new Dictionary<string, string>();
 
                 foreach (XElement element in configuration.Element("params").Element("client").Elements("mapping"))
                 {
-                    ClientMappings.Add((string)element.Attribute("from"), (string)element.Attribute("to"));
+                    PageMappings.Add((string)element.Attribute("from"), (string)element.Attribute("to"));
                 }
 
                 PageContentEncoding = (string)configuration.Element("encoding").Element("pageContent");

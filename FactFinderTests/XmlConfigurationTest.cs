@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 
-namespace FactFinderTests
+namespace Omikron.FactFinderTests
 {
     /// <summary>
     /// Summary description for ConfigurationTest
@@ -71,6 +71,7 @@ namespace FactFinderTests
         {
             Assert.IsTrue(Configuration.IsDebugModeOn);
 
+            Assert.AreEqual(@"http", Configuration.RequestProtocol);
             Assert.AreEqual(@"demoshop.fact-finder.de", Configuration.ServerAddress);
             Assert.AreEqual(@"80", Configuration.ServerPort);
             Assert.AreEqual(@"FACT-Finder", Configuration.Context);
@@ -109,29 +110,29 @@ namespace FactFinderTests
             expectedClientIgnore.Add("username");
             expectedClientIgnore.Add("timestamp");
 
-            Assert.IsTrue(expectedClientIgnore.SequenceEqual(Configuration.IgnoredClientParams));
+            Assert.IsTrue(expectedClientIgnore.SequenceEqual(Configuration.IgnoredPageParams));
 
             var expectedServerRequire = new Dictionary<string, string>();
-
-            expectedServerRequire.Add("channel", "de");
 
             Assert.IsTrue(expectedServerRequire.DictionaryEquals(Configuration.RequiredServerParams));
 
             var expectedClientRequire = new Dictionary<string, string>();
 
-            Assert.IsTrue(expectedClientRequire.DictionaryEquals(Configuration.RequiredClientParams));
+            expectedClientRequire["test"] = "value";
+
+            Assert.IsTrue(expectedClientRequire.DictionaryEquals(Configuration.RequiredPageParams));
 
             var expectedServerMappings = new Dictionary<string, string>();
 
-            expectedServerMappings.Add("keywords", "query");
+            expectedServerMappings["keywords"] = "query";
 
             Assert.IsTrue(expectedServerMappings.DictionaryEquals(Configuration.ServerMappings));
 
             var expectedClientMappings = new Dictionary<string, string>();
 
-            expectedClientMappings.Add("query", "keywords");
+            expectedClientMappings["query"] = "keywords";
 
-            Assert.IsTrue(expectedClientMappings.DictionaryEquals(Configuration.ClientMappings));            
+            Assert.IsTrue(expectedClientMappings.DictionaryEquals(Configuration.PageMappings));            
         }
 
         [TestMethod]

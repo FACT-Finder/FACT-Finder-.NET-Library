@@ -22,11 +22,11 @@ namespace Omikron.FactFinder
         string AdvancedAuthPrefix { get; }
         string AdvancedAuthPostfix { get; }
 
-        IDictionary<string, string> ClientMappings { get; }
+        IDictionary<string, string> PageMappings { get; }
         IDictionary<string, string> ServerMappings { get; }
-        ICollection<string> IgnoredClientParams { get; }
+        ICollection<string> IgnoredPageParams { get; }
         ICollection<string> IgnoredServerParams { get; }
-        IDictionary<string, string> RequiredClientParams { get; }
+        IDictionary<string, string> RequiredPageParams { get; }
         IDictionary<string, string> RequiredServerParams { get; }
         
         string PageContentEncoding { get; }

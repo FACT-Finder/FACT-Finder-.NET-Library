@@ -9,7 +9,7 @@
     <ProjectGuid>{CFA27A01-9AEE-4DCE-A980-947D7D434B70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FactFinderTests</RootNamespace>
+    <RootNamespace>Omikron.FactFinderTests</RootNamespace>
     <AssemblyName>FactFinderTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -38,6 +38,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -45,8 +46,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParametersConverterTest.cs" />
+    <Compile Include="ParametersHandlerTest.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="UrlBuilderTest.cs" />
     <Compile Include="XmlConfigurationTest.cs" />
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
