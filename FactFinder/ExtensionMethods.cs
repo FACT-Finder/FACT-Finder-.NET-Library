@@ -30,8 +30,13 @@ namespace Omikron.FactFinder
 
             byte[] password = Encoding.Default.GetBytes(input);
             byte[] result = new MD5CryptoServiceProvider().ComputeHash(password);
-            
-            return System.BitConverter.ToString(result);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                sb.Append(result[i].ToString("x2"));
+            }
+            return sb.ToString();
         }
     }
 }

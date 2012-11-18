@@ -9,33 +9,17 @@ namespace Omikron.FactFinder
 {
     public class HttpDataProvider : DataProvider
     {
-        public string RequestTypeString
+        public override RequestType Type
         {
             get
             {
-                switch (Type)
-                {
-                    case RequestType.Search:
-                        return "Search.ff";
-                    case RequestType.Suggest:
-                        return "Suggest.ff";
-                    case RequestType.ShoppingCartInformationCollector:
-                        return "Scic.ff";
-                    case RequestType.TagCloud:
-                        return "WhatsHot.ff";
-                    case RequestType.Recommendation:
-                        return "Recommender.ff";
-                    case RequestType.ProductCampaign:
-                        return "ProductCampaign.ff";
-                    case RequestType.SimilarRecords:
-                        return "SimilarRecords.ff";
-                    case RequestType.Compare:
-                        return "Compare.ff";
-                    case RequestType.Import:
-                        return "Import.ff";
-                    default:
-                        return "";
-                }
+                return base.Type;
+            }
+            set
+            {
+                base.Type = value;
+                UrlBuilder.Action = value.ToString();
+                _dataUpToDate = false;
             }
         }
 
@@ -48,7 +32,7 @@ namespace Omikron.FactFinder
 
         private string _data;
         private bool _dataUpToDate = false;
-        public string Data
+        public override string Data
         {
             get
             {
@@ -58,14 +42,14 @@ namespace Omikron.FactFinder
             }
         }
 
+        public HttpStatusCode LastStatusCode { get; set; }
 
-
-        public override string GetData()
+        private string GetData()
         {
             if (Type == null)
                 throw new Exception("Request type not set. Request could not be sent out.");
 
-            Uri url = GetAuthenticationUrl();
+            Uri url = GetAuthenticationUrl(); 
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url.ToString());
             webRequest.KeepAlive = false;
@@ -74,13 +58,13 @@ namespace Omikron.FactFinder
             if (Configuration.Language != "")
             {
                 webRequest.Headers.Add("Accept-Language", Configuration.Language);
-            }
-
-            webRequest.ContentType = "text/plain";
+            }          
 
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
 
-            StreamReader responseStream = new StreamReader(webResponse.GetResponseStream(), Encoding.Unicode);
+            LastStatusCode = webResponse.StatusCode;
+
+            StreamReader responseStream = new StreamReader(webResponse.GetResponseStream(), true);
 
             string response = responseStream.ReadToEnd();
 
@@ -105,29 +89,34 @@ namespace Omikron.FactFinder
             }
         }
 
-        public void SetParameters(IDictionary<string, string> parameters)
+        public override void SetParameters(IDictionary<string, string> parameters)
         {
             UrlBuilder.SetParameters(parameters);
+            _dataUpToDate = false;
         }
 
-        public void ResetParameters(IDictionary<string, string> parameters)
+        public override void ResetParameters(IDictionary<string, string> parameters)
         {
             UrlBuilder.ResetParameters(parameters);
+            _dataUpToDate = false;
         }
 
-        public void SetParameter(KeyValuePair<string, string> parameter)
+        public override void SetParameter(KeyValuePair<string, string> parameter)
         {
             UrlBuilder.SetParameter(parameter.Key, parameter.Value);
+            _dataUpToDate = false;
         }
 
-        public void SetParameter(string name, string value)
+        public override void SetParameter(string name, string value)
         {
             UrlBuilder.SetParameter(name, value);
+            _dataUpToDate = false;
         }
 
-        public void UnsetParameter(string name)
+        public override void UnsetParameter(string name)
         {
             UrlBuilder.UnsetParameter(name);
+            _dataUpToDate = false;
         }
     }
 }

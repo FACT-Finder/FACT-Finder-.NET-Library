@@ -73,7 +73,6 @@ namespace Omikron.FactFinder
                 AdvancedAuthPostfix = (string)configuration.Element("search").Element("auth").Element("advancedPostfix");
 
                 Language = (string)configuration.Element("search").Element("language");
-
                 IgnoredServerParams = (
                     from element
                     in configuration.Element("params").Element("server").Elements("ignore")

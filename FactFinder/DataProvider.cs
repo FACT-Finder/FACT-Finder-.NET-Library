@@ -9,7 +9,9 @@ namespace Omikron.FactFinder
     {
         public IConfiguration Configuration { get; protected set; }
         public IDictionary<string, string> Parameters { get; protected set; }
-        public RequestType Type { get; set; }
+        public virtual RequestType Type { get; set; }
+
+        public virtual string Data { get; private set; }
 
         public DataProvider(IConfiguration configuration)
         {
@@ -17,9 +19,7 @@ namespace Omikron.FactFinder
             Configuration = configuration;
         }
 
-        abstract public string GetData();
-
-        public void SetParameters(IDictionary<string, string> parameters)
+        public virtual void SetParameters(IDictionary<string, string> parameters)
         {
             foreach (KeyValuePair<string, string> parameter in parameters)
             {
@@ -27,22 +27,22 @@ namespace Omikron.FactFinder
             }
         }
 
-        public void ResetParameters(IDictionary<string, string> parameters)
+        public virtual void ResetParameters(IDictionary<string, string> parameters)
         {
             Parameters = parameters;
         }
 
-        public void SetParameter(KeyValuePair<string, string> parameter)
+        public virtual void SetParameter(KeyValuePair<string, string> parameter)
         {
             Parameters[parameter.Key] = parameter.Value;
         }
 
-        public void SetParameter(string name, string value)
+        public virtual void SetParameter(string name, string value)
         {
             Parameters[name] = value;
         }
 
-        public void UnsetParameter(string name)
+        public virtual void UnsetParameter(string name)
         {
             Parameters.Remove(name);
         }

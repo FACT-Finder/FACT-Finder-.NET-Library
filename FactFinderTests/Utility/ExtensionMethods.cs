@@ -3,7 +3,7 @@ using System;
 using System.Collections.Specialized;
 using System.Web;
 
-namespace Omikron.FactFinderTests
+namespace Omikron.FactFinderTests.Utility
 {
     public static class ExtensionMethods
     {

@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests
 {

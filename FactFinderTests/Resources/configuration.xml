@@ -4,7 +4,7 @@
 
     <!-- search settings -->
     <search>
-        <protocol>http</protocol> <!-- possible values: http, https -->
+        <protocol>http</protocol> <!-- possible production values: http, https -->
         <address>demoshop.fact-finder.de</address>
         <port>80</port>
         <context>FACT-Finder</context>

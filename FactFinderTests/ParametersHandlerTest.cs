@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests
 {
