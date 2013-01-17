@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Omikron.FactFinder.Default;
 using Omikron.FactFinder.Data;
 using System.Web.Script.Serialization;

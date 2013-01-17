@@ -13,8 +13,8 @@ namespace Omikron.FactFinder.Data
     public class Item
     {
         public string Label { get; private set; }
-        public string Url { get; private set; }
-        public bool Selected { get; set; }
+        public virtual string Url { get; private set; }
+        public virtual bool Selected { get; private set; }
 
         public Item(string label, string url, bool selected = false)
         {

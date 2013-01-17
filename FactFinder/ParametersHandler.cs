@@ -71,5 +71,10 @@ namespace Omikron.FactFinder
                     parameters.Add(parameter);
             }
         }
+
+        public string GeneratePageLink(Dictionary<string, string> parameters, string linkTarget)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

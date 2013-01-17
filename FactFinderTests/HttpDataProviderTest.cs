@@ -1,13 +1,6 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
 using System.Net;
-using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests
 {
