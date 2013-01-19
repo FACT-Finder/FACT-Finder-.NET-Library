@@ -10,6 +10,8 @@ namespace Omikron.FactFinder.Data
         public int CurrentPage { get; private set; }
         public int PageCount { get; private set; }
 
+        public int DisplayPageCount { get; set; }
+
         private ParametersHandler ParametersHandler;
 
         public Paging(int currentPage, int pageCount, ParametersHandler parametersHandler)
@@ -45,6 +47,28 @@ namespace Omikron.FactFinder.Data
                 return "";
 
             return GetPageLink(CurrentPage + 1, linkTarget);
+        }
+
+        public int GetFirstPageNumberShown()
+        {
+            if (CurrentPage <= DisplayPageCount / 2 || PageCount < DisplayPageCount)
+                return 1;
+            else if (CurrentPage > (PageCount - DisplayPageCount + 1))
+                return PageCount - DisplayPageCount + 1;
+            else
+                return CurrentPage - DisplayPageCount / 2;
+        }
+
+        public int GetLastPageNumberShown()
+        {
+            if (PageCount < DisplayPageCount)
+                return PageCount;
+
+            int firstPageNumber = GetFirstPageNumberShown();
+            if (firstPageNumber + DisplayPageCount >= PageCount)
+                return PageCount;
+            else
+                return firstPageNumber + DisplayPageCount;
         }
     }
 }
