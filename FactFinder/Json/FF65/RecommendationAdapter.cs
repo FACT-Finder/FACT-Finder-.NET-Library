@@ -2,6 +2,7 @@
 using Omikron.FactFinder.Default;
 using Omikron.FactFinder.Data;
 using System.Web.Script.Serialization;
+using Omikron.FactFinder.Json.Helper;
 
 namespace Omikron.FactFinder.Json.FF65
 {
@@ -15,35 +16,39 @@ namespace Omikron.FactFinder.Json.FF65
             DataProvider.SetParameter("do", "getRecommendation");
         }
 
-        protected override Result CreateRecommendations()
+        protected override ResultRecords CreateRecommendations()
         {
             JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
 
-            var jsonData = (object[])jsonSerializer.DeserializeObject(Data);
+            jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
 
-            int count = jsonData.Length;
+            dynamic jsonData = jsonSerializer.Deserialize(Data, typeof(object));
+
             var records = new List<Record>();
 
             int position = 0;
 
-            foreach (var rawRecord in jsonData)
+            foreach (var recordData in jsonData)
             {
-                var record = (Dictionary<string, object>)rawRecord;
-
                 if (IDsOnly)
                 {
-                    string stringID = (string)record["id"];
-                    Record ffRecord = new Record(stringID);
+                    Record ffRecord = new Record((string)recordData.id);
                     records.Add(ffRecord);
                     continue;
                 }
 
-                records.Add(new Record(record["id"].ToString(), 100, position, position, (Dictionary<string,object>)record["record"]));
+                records.Add(new Record(
+                    (string)recordData.id,
+                    100,
+                    position, 
+                    position,
+                    recordData.record.AsDictionary()
+                ));
 
                 position++;
-            }            
+            }
 
-            return new Result(records, count);
+            return new ResultRecords(records, jsonData.Length);
         }
     }
 }

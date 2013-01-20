@@ -1,5 +1,8 @@
-﻿public enum BreadCrumbItemType
+﻿namespace Omikron.FactFinder.Data
 {
-    Search,
-    Filter
+    public enum BreadCrumbItemType
+    {
+        Search,
+        Filter
+    }
 }

@@ -5,17 +5,17 @@ using System.Text;
 
 namespace Omikron.FactFinder.Data
 {
-    public class Result : List<Record>
+    public class ResultRecords : List<Record>
     {
         public int FoundRecordsCount { get; private set; }
 
-        public Result()
+        public ResultRecords()
             : base()
         {
             FoundRecordsCount = 0;
         }
 
-        public Result(IEnumerable<Record> collection, int foundRecordsCount)
+        public ResultRecords(IEnumerable<Record> collection, int foundRecordsCount)
             : base(collection)
         {
             FoundRecordsCount = foundRecordsCount;

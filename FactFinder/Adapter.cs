@@ -9,7 +9,7 @@
             DataProvider = dataProvider;
         }
 
-        protected string Data
+        protected virtual string Data
         {
             get
             {

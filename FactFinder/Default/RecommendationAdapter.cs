@@ -6,15 +6,15 @@ namespace Omikron.FactFinder.Default
 {
     public class RecommendationAdapter : Adapter
     {
-        private Result _recommendations;
-        public Result Recommendations
+        private ResultRecords _recommendations;
+        public ResultRecords Recommendations
         {
             get
             {
                 if (ProductIDs.Count == 0)
                 {
                     // TODO: log "Recommendations cannot be loaded without a product ID."
-                    return new Result();
+                    return new ResultRecords();
                 }
 
                 if (_recommendations == null || !RecommendationsUpToDate)
@@ -79,9 +79,9 @@ namespace Omikron.FactFinder.Default
             RecommendationsUpToDate = false;
         }
         
-        protected virtual Result CreateRecommendations()
+        protected virtual ResultRecords CreateRecommendations()
         {
-            return new Result();
+            return new ResultRecords();
         }
     }
 }

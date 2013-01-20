@@ -2,6 +2,7 @@
 using Omikron.FactFinder.Default;
 using Omikron.FactFinder.Data;
 using System.Web.Script.Serialization;
+using Omikron.FactFinder.Json.Helper;
 
 namespace Omikron.FactFinder.Json.FF65
 {
@@ -17,20 +18,22 @@ namespace Omikron.FactFinder.Json.FF65
 
         protected override IList<TagQuery> CreateTagCloud()
         {
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+            var jsonSerializer = new JavaScriptSerializer();
 
-            var jsonData = jsonSerializer.Deserialize<Dictionary<string, string>[]>(Data);
+            jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
+
+            dynamic jsonData = jsonSerializer.Deserialize(Data, typeof(object));
 
             var tagCloud = new List<TagQuery>();
 
             foreach (var tagQuery in jsonData)
             {
                 tagCloud.Add(new TagQuery(
-                    tagQuery["query"],
-                    tagQuery["params"],
+                    (string)tagQuery.query,
+                    (string)tagQuery["params"],
                     false,
-                    float.Parse(tagQuery["weight"]),
-                    int.Parse(tagQuery["searchCount"])
+                    (float)tagQuery.weight,
+                    (int)tagQuery.searchCount
                 ));
             }
 
