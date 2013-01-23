@@ -1,6 +1,6 @@
-﻿
+﻿ 
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactFinder", "FactFinder\FactFinder.csproj", "{57500ECF-7016-43FD-B4FB-500CE429AA8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactFinderTests", "FactFinderTests\FactFinderTests.csproj", "{CFA27A01-9AEE-4DCE-A980-947D7D434B70}"
