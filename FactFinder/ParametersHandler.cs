@@ -76,5 +76,15 @@ namespace Omikron.FactFinder
         {
             throw new NotImplementedException();
         }
+
+        public IDictionary<string, string> ParseParametersFromResultString(string p)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string CreatePageLink(IDictionary<string, string> parameters)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

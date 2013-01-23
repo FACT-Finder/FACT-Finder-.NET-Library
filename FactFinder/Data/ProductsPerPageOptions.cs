@@ -10,6 +10,10 @@ namespace Omikron.FactFinder.Data
         public Item DefaultOption { get; private set; }
         public Item SelectedOption { get; private set; }
 
+        public ProductsPerPageOptions()
+            : base()
+        { }
+
         public ProductsPerPageOptions(
             IDictionary<int, string> options, 
             int defaultOption = -1, 

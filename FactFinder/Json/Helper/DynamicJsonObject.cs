@@ -29,6 +29,16 @@ namespace Omikron.FactFinder.Json.Helper
             return _dictionary;
         }
 
+        public IDictionary<string, string> AsStringDictionary()
+        {
+            var stringDictionary = new Dictionary<string, string>(_dictionary.Count);
+            foreach (var pair in _dictionary)
+            {
+                stringDictionary[pair.Key] = (string)pair.Value;
+            }
+            return stringDictionary;
+        }
+
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             return TryGetFieldFromName(binder.Name, out result);

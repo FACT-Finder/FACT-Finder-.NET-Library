@@ -30,7 +30,7 @@ namespace Omikron.FactFinder.Json.FF65
             {
                 tagCloud.Add(new TagQuery(
                     (string)tagQuery.query,
-                    (string)tagQuery["params"],
+                    (string)tagQuery.@params,
                     false,
                     (float)tagQuery.weight,
                     (int)tagQuery.searchCount
