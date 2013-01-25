@@ -16,8 +16,8 @@ namespace Omikron.FactFinder.Default
             }
         }
 
-        public TagCloudAdapter(DataProvider dataProvider)
-            : base(dataProvider)
+        public TagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+            : base(dataProvider, parametersHandler)
         { }
         
         protected virtual IList<TagQuery> CreateTagCloud()

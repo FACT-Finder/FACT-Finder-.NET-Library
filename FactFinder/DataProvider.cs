@@ -8,7 +8,7 @@ namespace Omikron.FactFinder
     public abstract class DataProvider
     {
         public IConfiguration Configuration { get; protected set; }
-        public IDictionary<string, string> Parameters { get; protected set; }
+        public virtual IDictionary<string, string> Parameters { get; protected set; }
         public virtual RequestType Type { get; set; }
 
         public virtual string Data { get; private set; }

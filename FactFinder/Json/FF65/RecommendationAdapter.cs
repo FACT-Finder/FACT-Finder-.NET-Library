@@ -8,8 +8,8 @@ namespace Omikron.FactFinder.Json.FF65
 {
     public class JsonRecommendationAdapter : RecommendationAdapter
     {
-        public JsonRecommendationAdapter(DataProvider dataProvider)
-            : base(dataProvider)
+        public JsonRecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+            : base(dataProvider, parametersHandler)
         {
             DataProvider.Type = RequestType.Recommendation;
             DataProvider.SetParameter("format", "json");

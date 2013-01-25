@@ -8,8 +8,8 @@ namespace Omikron.FactFinder.Default
     public class SearchAdapter : Adapter
     {
         protected SearchStatus _articleNumberSearchStatus;
-        protected bool _isArticleNumberSearch;
-        protected bool _isSearchTimedOut;
+        protected bool? _isArticleNumberSearch;
+        protected bool? _isSearchTimedOut;
         protected SearchStatus _searchStatus;
         protected ResultRecords _result;
         protected AfterSearchNavigation _asn;
@@ -38,7 +38,7 @@ namespace Omikron.FactFinder.Default
             {
                 if (_isArticleNumberSearch == null)
                     _isArticleNumberSearch = CreateIsArticleNumberSearch();
-                return _isArticleNumberSearch;
+                return (bool)_isArticleNumberSearch;
             }
         }
 
@@ -48,7 +48,7 @@ namespace Omikron.FactFinder.Default
             {
                 if (_isSearchTimedOut == null)
                     _isSearchTimedOut = CreateIsSearchTimedOut();
-                return _isSearchTimedOut;
+                return (bool)_isSearchTimedOut;
             }
         }
 

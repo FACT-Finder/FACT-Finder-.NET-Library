@@ -8,8 +8,8 @@ namespace Omikron.FactFinder.Json.FF65
 {
     public class JsonTagCloudAdapter : TagCloudAdapter
     {
-        public JsonTagCloudAdapter(DataProvider dataProvider)
-            : base(dataProvider)
+        public JsonTagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+            : base(dataProvider, parametersHandler)
         {
             DataProvider.Type = RequestType.TagCloud;
             DataProvider.SetParameter("format", "json");

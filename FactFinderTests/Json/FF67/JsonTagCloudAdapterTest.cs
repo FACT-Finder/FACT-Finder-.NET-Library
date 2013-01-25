@@ -22,8 +22,9 @@ namespace Omikron.FactFinderTests.Json.FF67
             Configuration = new XmlConfiguration(@"Resources\configuration.xml");
             Clock = new UnixClock();
             var dataProvider = new HttpDataProvider(Configuration);
+            var parametersHandler = new ParametersHandler(Configuration);
 
-            TagCloudAdapter = new JsonTagCloudAdapter(dataProvider);
+            TagCloudAdapter = new JsonTagCloudAdapter(dataProvider, parametersHandler);
         }
 
         [TestMethod]

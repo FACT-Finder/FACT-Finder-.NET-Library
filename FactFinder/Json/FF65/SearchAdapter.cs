@@ -49,7 +49,7 @@ namespace Omikron.FactFinder.Json.FF65
             {
                 LoadArticleNumberSearchInformation();
             }
-            return _isArticleNumberSearch;
+            return (bool)_isArticleNumberSearch;
         }
 
         private void LoadArticleNumberSearchInformation()
@@ -83,6 +83,19 @@ namespace Omikron.FactFinder.Json.FF65
             return (bool)JsonData.timedOut;
         }
 
+        protected override SearchStatus CreateSearchStatus()
+        {
+            switch ((string)JsonData.resultStatus)
+            {
+            case "nothingFound":
+                return SearchStatus.EmptyResult;
+            case "resultsFound":
+                return SearchStatus.ResultsFound;
+            default:
+                return SearchStatus.NoResult;
+            }
+        }
+
         protected override SearchParameters CreateSearchParameters()
         {
             SearchParameters searchParameters;
@@ -102,11 +115,10 @@ namespace Omikron.FactFinder.Json.FF65
         {
             var result = new List<Record>();
             int resultCount = 0;
-
-            if (JsonData.records.Length() > 0)
+            var jsonData = JsonData;
+            if (jsonData.records.Count > 0)
             {
                 resultCount = (int)JsonData.resultCount;
-                var encodingHandler = new EncodingHandler();
 
                 int positionOffset = (Paging.CurrentPage - 1) * Int32.Parse(ProductsPerPageOptions.SelectedOption.Label);
 
@@ -126,8 +138,6 @@ namespace Omikron.FactFinder.Json.FF65
                         fieldValues.Remove("__ORIG_POSITION__");
                     }
 
-                    encodingHandler.EncodeServerContentsForPage(fieldValues);
-
                     result.Add(new Record(
                         recordData.id.ToString(),
                         (float)recordData.searchSimilarity,
@@ -145,71 +155,63 @@ namespace Omikron.FactFinder.Json.FF65
         {
             var asn = new List<AsnGroup>();
 
-            if (JsonData.groups.Length > 0)
+            foreach (var groupData in JsonData.groups)
             {
-                var encodingHandler = new EncodingHandler();
+                string groupName = (string)groupData.name;
+                string groupUnit = (string)groupData.unit;
 
-                foreach (var groupData in JsonData.groups)
+                var asnGroup = new AsnGroup(
+                    new List<AsnFilterItem>(),
+                    groupName,
+                    (int)groupData.detailedLinks,
+                    groupUnit,
+                    GetAsnGroupStyleFromString((string)groupData.filterStyle)
+                );
+
+                var elements = groupData.elements;
+                elements.AddRange((IEnumerable<object>)groupData.selectedElements);
+
+                foreach (var element in elements)
                 {
-                    string groupName = encodingHandler.EncodeServerContentForPage((string)groupData.name);
-                    string groupUnit = (string)groupData.unit;
-
-                    var asnGroup = new AsnGroup(
-                        new List<AsnFilterItem>(),
-                        groupName,
-                        (int)groupData.detailedLinks,
-                        groupUnit,
-                        GetAsnGroupStyleFromString((string)groupData.filterStyle)
+                    string filterLink = ParametersHandler.GeneratePageLink(
+                        ParametersHandler.ParseParametersFromString((string)element.searchParams)
                     );
 
-                    // Merge element lists together
-                    int nElements = groupData.elements.Length;
-                    int nSelectedElements = groupData.selectedElements.Length;
-                    dynamic[] elements = new dynamic[nElements + nSelectedElements];
-                    Array.Copy(groupData.elements, 0, elements, 0, nElements);
-                    Array.Copy(groupData.selectedElements, 0, elements, nElements, nSelectedElements);
+                    AsnFilterItem filter;
 
-                    foreach (var element in elements)
+                    if (asnGroup.Style == AsnGroupStyle.Slider)
                     {
-                        string filterLink = ParametersHandler.CreatePageLink(
-                            ParametersHandler.ParseParametersFromResultString((string)element.searchParams)
+                        IDictionary<string, string> parameters = ParametersHandler.ParseParametersFromString((string)element.searchParams);
+                        filterLink += String.Format("&{0}=", parameters.Last());
+
+                        filter = new AsnSliderItem(
+                            filterLink,
+                            (float)element.absoluteMinValue,
+                            (float)element.absoluteMaxValue,
+                            (float)element.selectedMinValue,
+                            (float)element.selectedMaxValue,
+                            (string)element.associatedFieldName
                         );
-
-                        AsnFilterItem filter;
-
-                        if (asnGroup.Style == AsnGroupStyle.Slider)
-                        {
-                            IDictionary<string, string> parameters = ParametersHandler.ParseParametersFromResultString((string)element.searchParams)
-                            filterLink += String.Format("&{0}=", parameters.Last());
-
-                            filter = new AsnSliderItem(
-                                filterLink,
-                                (float)element.absoluteMinValue,
-                                (float)element.absoluteMaxValue,
-                                (float)element.selectedMinValue,
-                                (float)element.selectedMaxValue,
-                                (string)element.associatedFieldName
-                            );
-                        }
-                        else
-                        {
-                            filter = new AsnFilterItem(
-                                encodingHandler.EncodeServerContentForPage((string)element.name),
-                                filterLink,
-                                (bool)element.selected,
-                                (int)element.recordCount,
-                                (int)element.clusterLevel,
-                                (string)element.previewImageURL,
-                                (string)element.associatedFieldName
-                            );
-                        }
-
-                        asnGroup.Add(filter);
+                    }
+                    else
+                    {
+                        filter = new AsnFilterItem(
+                            (string)element.name,
+                            filterLink,
+                            (bool)element.selected,
+                            (int)element.recordCount,
+                            (int)element.clusterLevel,
+                            (string)element.previewImageURL,
+                            (string)element.associatedFieldName
+                        );
                     }
 
-                    asn.Add(asnGroup);
+                    asnGroup.Add(filter);
                 }
+
+                asn.Add(asnGroup);
             }
+
             return new AfterSearchNavigation(asn);
         }
 
@@ -235,22 +237,17 @@ namespace Omikron.FactFinder.Json.FF65
         {
             var sorting = new List<Item>();
 
-            if (JsonData.sortsList.Length > 0)
+            foreach (var sortItemData in JsonData.sortsList)
             {
-                var encodingHandler = new EncodingHandler();
+                string sortLink = ParametersHandler.GeneratePageLink(
+                    ParametersHandler.ParseParametersFromString(sortItemData.searchParams)
+                );
 
-                foreach (var sortItemData in JsonData.sortsList)
-                {
-                    string sortLink = ParametersHandler.CreatePageLink(
-                        ParametersHandler.ParseParametersFromResultString(sortItemData.searchParams)
-                    );
-
-                    sorting.Add(new Item(
-                        encodingHandler.EncodeServerContentForPage(sortItemData.description),
-                        sortLink,
-                        (bool)sortItemData.selected
-                    ));
-                }
+                sorting.Add(new Item(
+                    sortItemData.description,
+                    sortLink,
+                    (bool)sortItemData.selected
+                ));
             }
 
             return sorting;
@@ -279,8 +276,8 @@ namespace Omikron.FactFinder.Json.FF65
                 if ((bool)optionData.selected)
                     selectedOption = value;
 
-                options[value] = ParametersHandler.CreatePageLink(
-                    ParametersHandler.ParseParametersFromResultString((string)optionData.searchParams)
+                options[value] = ParametersHandler.GeneratePageLink(
+                    ParametersHandler.ParseParametersFromString((string)optionData.searchParams)
                 );
             }
 
@@ -290,16 +287,14 @@ namespace Omikron.FactFinder.Json.FF65
         protected override IList<BreadCrumbItem> CreateBreadCrumbTrail()
         {
             var breadCrumbTrail = new List<BreadCrumbItem>();
-            int nBreadCrumbs = JsonData.breadCrumbTrailItems.Length;
+            int nBreadCrumbs = JsonData.breadCrumbTrailItems.Count;
             if (nBreadCrumbs > 0)
             {
-                var encodingHandler = new EncodingHandler();
-
                 int i = 1;
                 foreach (var breadCrumbData in JsonData.breadCrumbTrailItems)
                 {
-                    string link = ParametersHandler.CreatePageLink(
-                        ParametersHandler.ParseParametersFromResultString((string)breadCrumbData.searchParams)
+                    string link = ParametersHandler.GeneratePageLink(
+                        ParametersHandler.ParseParametersFromString((string)breadCrumbData.searchParams)
                     );
 
                     string fieldName = "";
@@ -308,12 +303,12 @@ namespace Omikron.FactFinder.Json.FF65
                     BreadCrumbItemType type = GetBreadCrumbItemTypeFromString((string)breadCrumbData.type);
                     if (type == BreadCrumbItemType.Filter)
                     {
-                        fieldName = encodingHandler.EncodeServerContentForPage((string)breadCrumbData.associatedFieldName);
+                        fieldName = (string)breadCrumbData.associatedFieldName;
                         fieldUnit = ""; // TODO: Where is this data in JSON?
                     }
                     
                     breadCrumbTrail.Add(new BreadCrumbItem(
-                        encodingHandler.EncodeServerContentForPage((string)breadCrumbData.value),
+                        (string)breadCrumbData.value,
                         link,
                         (i == nBreadCrumbs),
                         type,
@@ -338,6 +333,70 @@ namespace Omikron.FactFinder.Json.FF65
             default:
                 return BreadCrumbItemType.Search;
             }
+        }
+
+        protected override CampaignList CreateCampaigns()
+        {
+            var campaigns = new List<Campaign>();
+
+            foreach (var campaignData in JsonData.campaigns)
+            {
+                var campaign = new Campaign(
+                    (string)campaignData.name,
+                    (string)campaignData.category,
+                    (string)campaignData.target.destination
+                );
+
+                if (campaignData.feedbackTexts.Count > 0)
+                {
+                    var feedback = new Dictionary<string, string>();
+
+                    foreach (var feedbackData in campaignData.feedbackTexts)
+                    {
+                        string nr = feedbackData.nr.ToString();
+                        feedback[nr] = (string)feedbackData.text;
+                    }
+
+                    campaign.AddFeedback(feedback);
+                }
+
+                if (campaignData.pushedProductsRecords.Count > 0)
+                {
+                    var pushedProducts = new List<Record>();
+
+                    foreach(var recordData in campaignData.pushedProductsRecords)
+                    {
+                        var record = new Record((string)recordData.id);
+                        record.SetFieldValues(recordData.record.AsDictionary());
+                        pushedProducts.Add(record);
+                    }
+
+                    campaign.AddPushedProducts(pushedProducts);
+                }
+
+                campaigns.Add(campaign);
+            }
+
+            return new CampaignList(campaigns);
+        }
+
+        protected override IList<SuggestQuery> CreateSingleWordSearch()
+        {
+            var singleWordSearch = new List<SuggestQuery>();
+
+            foreach (var swsData in JsonData.singleWordResults)
+            {
+                string query = (string)swsData.word;
+                var parameters = new Dictionary<string, string>();
+                parameters["query"] = query;
+                singleWordSearch.Add(new SuggestQuery(
+                    query,
+                    ParametersHandler.GeneratePageLink(parameters),
+                    (int)swsData.recordData
+                ));
+            }
+
+            return singleWordSearch;
         }
     }
 }

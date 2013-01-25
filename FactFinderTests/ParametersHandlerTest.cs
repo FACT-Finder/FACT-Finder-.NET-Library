@@ -36,7 +36,7 @@ namespace Omikron.FactFinderTests
             expectedServerParameters["productsPerPage"] = "12";
             expectedServerParameters["channel"] = "de";
 
-            var actualServerParameters = ParametersHandlerTest.ParametersConverter.GetServerRequestParams(pageParameters);
+            var actualServerParameters = ParametersHandlerTest.ParametersConverter.GetServerRequestParameters(pageParameters);
 
             Assert.IsTrue(expectedServerParameters.DictionaryEquals(actualServerParameters));
         }
@@ -52,7 +52,7 @@ namespace Omikron.FactFinderTests
 
             expectedServerParameters["channel"] = "en";
 
-            var actualServerParameters = ParametersHandlerTest.ParametersConverter.GetServerRequestParams(pageParameters);
+            var actualServerParameters = ParametersHandlerTest.ParametersConverter.GetServerRequestParameters(pageParameters);
 
             Assert.IsTrue(expectedServerParameters.DictionaryEquals(actualServerParameters));
 
@@ -78,7 +78,7 @@ namespace Omikron.FactFinderTests
             expectedPageParameters["productsPerPage"] = "12";
             expectedPageParameters["test"] = "value";
 
-            var actualPageParameters = ParametersHandlerTest.ParametersConverter.GetPageRequestParams(serverParameters);
+            var actualPageParameters = ParametersHandlerTest.ParametersConverter.GetPageRequestParameters(serverParameters);
 
             Assert.IsTrue(expectedPageParameters.DictionaryEquals(actualPageParameters));
         }

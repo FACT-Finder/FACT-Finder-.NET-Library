@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Web;
 using System.Text;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace Omikron.FactFinder
 {
@@ -20,6 +21,13 @@ namespace Omikron.FactFinder
 
             return query.ToString();
         }
+
+        public static IDictionary<string, string> ToDictionary(this NameValueCollection source)   
+        {   
+            return source.Cast<string>()  
+                         .Select(s => new { Key = s, Value = source[s] })  
+                         .ToDictionary(p => p.Key, p => p.Value); 
+        }  
 
         public static string ToMD5(this string input)
         {

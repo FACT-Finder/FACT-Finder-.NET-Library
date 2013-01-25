@@ -1,4 +1,5 @@
-﻿namespace Omikron.FactFinder
+﻿using System.Collections.Generic;
+namespace Omikron.FactFinder
 {
     public abstract class Adapter
     {
@@ -17,6 +18,16 @@
             {
                 return DataProvider.Data;
             }
+        }
+
+        public void SetParameter(string name, string value)
+        {
+            DataProvider.SetParameter(name, value);
+        }
+
+        public void SetParameters(IDictionary<string, string> parameters)
+        {
+            DataProvider.SetParameters(parameters);
         }
     }
 }

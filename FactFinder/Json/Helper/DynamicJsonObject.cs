@@ -71,9 +71,9 @@ namespace Omikron.FactFinder.Json.Helper
             }
 
             var arrayList = result as ArrayList;
-            if (arrayList != null && arrayList.Count > 0)
+            if (arrayList != null)
             {
-                if (arrayList[0] is IDictionary<string, object>)
+                if (arrayList.Count > 0 && arrayList[0] is IDictionary<string, object>)
                     result = new List<object>(arrayList.Cast<IDictionary<string, object>>().Select(x => new DynamicJsonObject(x)));
                 else
                     result = new List<object>(arrayList.Cast<object>());

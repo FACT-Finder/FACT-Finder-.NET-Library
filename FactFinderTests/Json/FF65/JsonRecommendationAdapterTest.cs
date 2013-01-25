@@ -22,8 +22,9 @@ namespace Omikron.FactFinderTests.Json.FF65
             Configuration = new XmlConfiguration(@"Resources\configuration.xml");
             Clock = new UnixClock();
             var dataProvider = new HttpDataProvider(Configuration);
+            var parametersHandler = new ParametersHandler(Configuration);
 
-            RecommendationAdapter = new JsonRecommendationAdapter(dataProvider);
+            RecommendationAdapter = new JsonRecommendationAdapter(dataProvider, parametersHandler);
         }
 
         [TestMethod]

@@ -23,11 +23,20 @@ namespace Omikron.FactFinder
             }
         }
 
+        public override IDictionary<string, string> Parameters
+        {
+            get
+            {
+                return UrlBuilder.GetParameters();
+            }
+        }
+
         protected UrlBuilder UrlBuilder;
 
-        public HttpDataProvider(IConfiguration configuration) : base(configuration)
+        public HttpDataProvider(IConfiguration configuration) 
+            : base(configuration)
         {
-            UrlBuilder = new UrlBuilder(configuration, new ParametersHandler(configuration), new UnixClock());
+            UrlBuilder = new UrlBuilder(configuration, new ParametersHandler(Configuration), new UnixClock());
         }
 
         private string _data;

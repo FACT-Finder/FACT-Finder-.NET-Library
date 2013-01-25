@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ExtensionMethodsTest.cs" />
     <Compile Include="HttpDataProviderTest.cs" />
+    <Compile Include="Json\FF65\JsonSearchAdapterTest.cs" />
     <Compile Include="Json\FF65\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonRecommendationAdapterTest.cs" />

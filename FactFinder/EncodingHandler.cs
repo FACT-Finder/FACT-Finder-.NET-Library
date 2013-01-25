@@ -7,14 +7,11 @@ namespace Omikron.FactFinder
 {
     public class EncodingHandler
     {
-        internal void EncodeServerContentsForPage(Dictionary<string, object> fieldValues)
-        {
-            throw new NotImplementedException();
-        }
+        protected IConfiguration Configuration;
 
-        internal string EncodeServerContentForPage(string p)
+        public EncodingHandler(IConfiguration configuration)
         {
-            throw new NotImplementedException();
+            Configuration = configuration;
         }
     }
 }

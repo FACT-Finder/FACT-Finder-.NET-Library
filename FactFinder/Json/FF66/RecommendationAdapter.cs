@@ -2,8 +2,8 @@
 {
     public class JsonRecommendationAdapter : Omikron.FactFinder.Json.FF65.JsonRecommendationAdapter
     {
-        public JsonRecommendationAdapter(DataProvider dataProvider)
-            : base(dataProvider)
+        public JsonRecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+            : base(dataProvider, parametersHandler)
         { }
 
         /*

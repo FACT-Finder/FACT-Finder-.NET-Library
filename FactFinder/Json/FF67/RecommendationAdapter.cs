@@ -8,8 +8,8 @@ namespace Omikron.FactFinder.Json.FF67
 {
     public class JsonRecommendationAdapter : Omikron.FactFinder.Json.FF66.JsonRecommendationAdapter
     {
-        public JsonRecommendationAdapter(DataProvider dataProvider)
-            : base(dataProvider)
+        public JsonRecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+            : base(dataProvider, parametersHandler)
         { }
 
         public void SetProductIDs(IList<int> productIDs)

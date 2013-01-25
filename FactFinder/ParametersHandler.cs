@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Web;
+using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder
 {
@@ -14,7 +17,7 @@ namespace Omikron.FactFinder
             Configuration = configuration;
         }
 
-        public IDictionary<string, string> GetServerRequestParams(IDictionary<string, string> pageParameters)
+        public IDictionary<string, string> GetServerRequestParameters(IDictionary<string, string> pageParameters)
         {
             var result = new Dictionary<string, string>(pageParameters);
 
@@ -26,7 +29,7 @@ namespace Omikron.FactFinder
             return result;
         }
 
-        public IDictionary<string, string> GetPageRequestParams(IDictionary<string, string> serverParameters)
+        public IDictionary<string, string> GetPageRequestParameters(IDictionary<string, string> serverParameters)
         {
             var result = new Dictionary<string, string>(serverParameters);
 
@@ -72,17 +75,35 @@ namespace Omikron.FactFinder
             }
         }
 
-        public string GeneratePageLink(Dictionary<string, string> parameters, string linkTarget)
+        public string GeneratePageLink(IDictionary<string, string> parameters, string linkTarget = "")
+        {
+            if (linkTarget == "")
+            {
+                linkTarget = GetRequestTarget();
+            }
+
+            parameters = GetPageRequestParameters(parameters);
+
+            return String.Format("{0}?{1}", linkTarget, parameters.ToUriQueryString());
+        }
+
+        private string GetRequestTarget()
+        {
+            return "dummyTarget";
+        }
+
+        public IDictionary<string, string>  ParseParametersFromString(string queryString)
+        {
+            NameValueCollection query = HttpUtility.ParseQueryString(queryString);
+            return query.ToDictionary();
+        }
+
+        public SearchParameters GetFactFinderParametersFromString(string paramString)
         {
             throw new NotImplementedException();
         }
 
-        public IDictionary<string, string> ParseParametersFromResultString(string p)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string CreatePageLink(IDictionary<string, string> parameters)
+        public SearchParameters GetFactFinderParameters()
         {
             throw new NotImplementedException();
         }

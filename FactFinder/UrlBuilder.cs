@@ -53,7 +53,7 @@ namespace Omikron.FactFinder
 
         public Uri GetUrlWithoutAuthentication()
         {
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParams(Parameters);
+            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}/{3}/{4}?{5}",
@@ -69,7 +69,7 @@ namespace Omikron.FactFinder
 
         public Uri GetUrlWithSimpleAuthentication()
         {
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParams(Parameters);
+            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
 
             parameters["timestamp"] = Clock.Now().ToString();
             parameters["username"] = Configuration.User;
@@ -88,7 +88,7 @@ namespace Omikron.FactFinder
 
         public Uri GetUrlWithAdvancedAuthentication()
         {
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParams(Parameters);
+            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
 
             string timestamp = Clock.Now().ToString();
 
@@ -114,7 +114,7 @@ namespace Omikron.FactFinder
 
         public Uri GetUrlWithHttpAuthentication()
         {
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParams(Parameters);
+            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}@{3}:{4}/{5}/{6}?{7}",

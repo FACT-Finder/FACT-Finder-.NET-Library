@@ -73,7 +73,9 @@
     <Compile Include="IConfiguration.cs" />
     <Compile Include="DataProvider.cs" />
     <Compile Include="IUnixClock.cs" />
+    <Compile Include="EncodingHandler.cs" />
     <Compile Include="Json\FF65\RecommendationAdapter.cs" />
+    <Compile Include="Json\FF65\SearchAdapter.cs" />
     <Compile Include="Json\FF65\TagCloudAdapter.cs" />
     <Compile Include="Json\FF66\RecommendationAdapter.cs" />
     <Compile Include="Json\FF66\TagCloudAdapter.cs" />

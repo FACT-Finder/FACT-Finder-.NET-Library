@@ -2,8 +2,8 @@
 {
     public class JsonTagCloudAdapter : Omikron.FactFinder.Json.FF65.JsonTagCloudAdapter
     {
-        public JsonTagCloudAdapter(DataProvider dataProvider)
-            : base(dataProvider)
+        public JsonTagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+            : base(dataProvider, parametersHandler)
         { }
 
         /*

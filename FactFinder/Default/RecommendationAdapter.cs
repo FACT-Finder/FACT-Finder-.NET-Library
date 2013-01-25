@@ -62,8 +62,8 @@ namespace Omikron.FactFinder.Default
             }
         }
 
-        public RecommendationAdapter(DataProvider dataProvider)
-            : base(dataProvider)
+        public RecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+            : base(dataProvider, parametersHandler)
         {
             ProductIDs = new List<int>();
             RecommendationsUpToDate = false;
