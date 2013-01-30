@@ -115,8 +115,8 @@ namespace Omikron.FactFinder.Json.FF65
         {
             var result = new List<Record>();
             int resultCount = 0;
-            var jsonData = JsonData;
-            if (jsonData.records.Count > 0)
+
+            if (JsonData.records.Count > 0)
             {
                 resultCount = (int)JsonData.resultCount;
 
@@ -387,8 +387,10 @@ namespace Omikron.FactFinder.Json.FF65
             foreach (var swsData in JsonData.singleWordResults)
             {
                 string query = (string)swsData.word;
-                var parameters = new Dictionary<string, string>();
-                parameters["query"] = query;
+                var parameters = new Dictionary<string, string>()
+                {
+                    {"query", query}
+                };
                 singleWordSearch.Add(new SuggestQuery(
                     query,
                     ParametersHandler.GeneratePageLink(parameters),

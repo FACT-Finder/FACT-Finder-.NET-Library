@@ -77,12 +77,15 @@
     <Compile Include="Json\FF65\RecommendationAdapter.cs" />
     <Compile Include="Json\FF65\SearchAdapter.cs" />
     <Compile Include="Json\FF65\TagCloudAdapter.cs" />
+    <Compile Include="Json\FF66\SearchAdapter.cs" />
     <Compile Include="Json\FF66\RecommendationAdapter.cs" />
     <Compile Include="Json\FF66\TagCloudAdapter.cs" />
+    <Compile Include="Json\FF67\SearchAdapter.cs" />
     <Compile Include="Json\FF67\RecommendationAdapter.cs" />
     <Compile Include="Json\FF67\TagCloudAdapter.cs" />
-    <Compile Include="Json\FF68\RecommendationAdapter.cs" />
     <Compile Include="Json\FF68\TagCloudAdapter.cs" />
+    <Compile Include="Json\FF68\RecommendationAdapter.cs" />
+    <Compile Include="Json\FF68\SearchAdapter.cs" />
     <Compile Include="Json\Helper\DynamicJsonConverter.cs" />
     <Compile Include="Json\Helper\DynamicJsonObject.cs" />
     <Compile Include="ParametersHandler.cs" />
