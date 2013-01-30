@@ -65,6 +65,7 @@
     <Compile Include="Data\SingleWordSearchQuery.cs" />
     <Compile Include="Data\SuggestQuery.cs" />
     <Compile Include="Data\TagQuery.cs" />
+    <Compile Include="Default\SuggestAdapter.cs" />
     <Compile Include="Default\SearchAdapter.cs" />
     <Compile Include="Default\RecommendationAdapter.cs" />
     <Compile Include="Default\TagCloudAdapter.cs" />
@@ -74,15 +75,19 @@
     <Compile Include="DataProvider.cs" />
     <Compile Include="IUnixClock.cs" />
     <Compile Include="EncodingHandler.cs" />
+    <Compile Include="Json\FF65\SuggestAdapter.cs" />
     <Compile Include="Json\FF65\RecommendationAdapter.cs" />
     <Compile Include="Json\FF65\SearchAdapter.cs" />
     <Compile Include="Json\FF65\TagCloudAdapter.cs" />
+    <Compile Include="Json\FF66\SuggestAdapter.cs" />
     <Compile Include="Json\FF66\SearchAdapter.cs" />
     <Compile Include="Json\FF66\RecommendationAdapter.cs" />
     <Compile Include="Json\FF66\TagCloudAdapter.cs" />
     <Compile Include="Json\FF67\SearchAdapter.cs" />
     <Compile Include="Json\FF67\RecommendationAdapter.cs" />
+    <Compile Include="Json\FF67\SuggestAdapter.cs" />
     <Compile Include="Json\FF67\TagCloudAdapter.cs" />
+    <Compile Include="Json\FF68\SuggestAdapter.cs" />
     <Compile Include="Json\FF68\TagCloudAdapter.cs" />
     <Compile Include="Json\FF68\RecommendationAdapter.cs" />
     <Compile Include="Json\FF68\SearchAdapter.cs" />

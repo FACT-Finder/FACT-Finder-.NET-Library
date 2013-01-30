@@ -48,14 +48,18 @@
   <ItemGroup>
     <Compile Include="ExtensionMethodsTest.cs" />
     <Compile Include="HttpDataProviderTest.cs" />
+    <Compile Include="Json\FF65\JsonSuggestAdapterTest.cs" />
     <Compile Include="Json\FF65\JsonSearchAdapterTest.cs" />
     <Compile Include="Json\FF65\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF66\JsonSuggestAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonSuggestAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonSuggestAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonTagCloudAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonTagCloudAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonTagCloudAdapterTest.cs" />
