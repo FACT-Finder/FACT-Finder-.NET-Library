@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -43,7 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter.cs" />
-    <Compile Include="AuthenticationType.cs" />
+    <Compile Include="Configuration\AuthenticationType.cs" />
+    <Compile Include="Configuration\AuthenticationElement.cs" />
+    <Compile Include="Configuration\ConnectionProtocol.cs" />
+    <Compile Include="Configuration\ConnectionSection.cs" />
+    <Compile Include="Configuration\MappingRuleElementCollection.cs" />
+    <Compile Include="Configuration\RequireRuleElementCollection.cs" />
+    <Compile Include="Configuration\MappingRuleElement.cs" />
+    <Compile Include="Configuration\ParameterRulesElement.cs" />
+    <Compile Include="Configuration\RequireRuleElement.cs" />
+    <Compile Include="Configuration\IgnoreRuleElement.cs" />
+    <Compile Include="Configuration\IgnoreRuleElementCollection.cs" />
+    <Compile Include="Configuration\ParametersSection.cs" />
     <Compile Include="Data\AdvisorAnswer.cs" />
     <Compile Include="Data\AdvisorQuestion.cs" />
     <Compile Include="Data\AfterSearchNavigation.cs" />

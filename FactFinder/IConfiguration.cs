@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Omikron.FactFinder.Configuration;
 
 namespace Omikron.FactFinder
 {
-    public interface IConfiguration
+    public interface LOLIConfiguration
     {
         bool IsDebugModeOn { get; }
 

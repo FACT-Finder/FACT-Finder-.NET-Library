@@ -7,11 +7,9 @@ namespace Omikron.FactFinder
 {
     public class EncodingHandler
     {
-        protected IConfiguration Configuration;
 
-        public EncodingHandler(IConfiguration configuration)
+        public EncodingHandler()
         {
-            Configuration = configuration;
         }
     }
 }

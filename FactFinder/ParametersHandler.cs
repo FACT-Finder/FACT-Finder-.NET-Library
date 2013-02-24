@@ -1,41 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web;
+using Omikron.FactFinder.Configuration;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder
 {
     public class ParametersHandler
     {
-        private IConfiguration Configuration;
-
-        public ParametersHandler(IConfiguration configuration)
+        public ParametersHandler()
         {
-            Configuration = configuration;
         }
 
         public IDictionary<string, string> GetServerRequestParameters(IDictionary<string, string> pageParameters)
         {
+            var config = ParametersSection.GetSection();
+
             var result = new Dictionary<string, string>(pageParameters);
 
-            RemoveIgnoredParameters(result, Configuration.IgnoredServerParams);
-            ApplyParameterMappings(result, Configuration.ServerMappings);
+            RemoveIgnoredParameters(result, config.Server.IgnoreRules.ToList());
+            ApplyParameterMappings(result, config.Server.MappingRules.ToDictionary());
             AddChannelParameter(result);
-            AddRequiredParameters(result, Configuration.RequiredServerParams);
+            AddRequiredParameters(result, config.Server.RequireRules.ToDictionary());
 
             return result;
         }
 
-        public IDictionary<string, string> GetPageRequestParameters(IDictionary<string, string> serverParameters)
+        public IDictionary<string, string> GetClientRequestParameters(IDictionary<string, string> serverParameters)
         {
+            var config = ParametersSection.GetSection();
+
             var result = new Dictionary<string, string>(serverParameters);
 
-            RemoveIgnoredParameters(result, Configuration.IgnoredPageParams);
-            ApplyParameterMappings(result, Configuration.PageMappings);
-            AddRequiredParameters(result, Configuration.RequiredPageParams);
+            RemoveIgnoredParameters(result, config.Client.IgnoreRules.ToList());
+            ApplyParameterMappings(result, config.Client.MappingRules.ToDictionary());
+            AddRequiredParameters(result, config.Client.RequireRules.ToDictionary());
 
             return result;
         }
@@ -43,7 +46,7 @@ namespace Omikron.FactFinder
         private void AddChannelParameter(Dictionary<string, string> result)
         {
             if (!result.ContainsKey("channel") || result["channel"].Length == 0)
-                result["channel"] = Configuration.Channel;
+                result["channel"] = ConnectionSection.GetSection().Channel;
         }
 
         private void RemoveIgnoredParameters(IDictionary<string, string> parameters, ICollection<string> ignoreList)
@@ -82,7 +85,7 @@ namespace Omikron.FactFinder
                 linkTarget = GetRequestTarget();
             }
 
-            parameters = GetPageRequestParameters(parameters);
+            parameters = GetClientRequestParameters(parameters);
 
             return String.Format("{0}?{1}", linkTarget, parameters.ToUriQueryString());
         }

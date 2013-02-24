@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -65,12 +66,12 @@
     <Compile Include="Json\FF66\JsonTagCloudAdapterTest.cs" />
     <Compile Include="Json\FF65\JsonTagCloudAdapterTest.cs" />
     <Compile Include="ParametersHandlerTest.cs" />
+    <Compile Include="ConfigurationTest.cs" />
     <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="UrlBuilderTest.cs" />
     <Compile Include="Utility\TestWebRequest.cs" />
     <Compile Include="Utility\TestWebRequestCreate.cs" />
     <Compile Include="Utility\TestWebResponse.cs" />
-    <Compile Include="XmlConfigurationTest.cs" />
     <Content Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,12 +81,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\configuration.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="app.config">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

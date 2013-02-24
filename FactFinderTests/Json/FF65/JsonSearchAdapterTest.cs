@@ -13,17 +13,15 @@ namespace Omikron.FactFinderTests.Json.FF65
     [DeploymentItem(@"Resources\configuration.xml", "Resources")]
     public class JsonSearchAdapterTest
     {
-        private static XmlConfiguration Configuration { get; set; }
         private UnixClock Clock { get; set; }
         private JsonSearchAdapter SearchAdapter { get; set; }
 
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Configuration = new XmlConfiguration(@"Resources\configuration.xml");
             Clock = new UnixClock();
-            var parametersHandler = new ParametersHandler(Configuration);
-            var dataProvider = new HttpDataProvider(Configuration);
+            var parametersHandler = new ParametersHandler();
+            var dataProvider = new HttpDataProvider();
 
             SearchAdapter = new JsonSearchAdapter(dataProvider, parametersHandler);
         }

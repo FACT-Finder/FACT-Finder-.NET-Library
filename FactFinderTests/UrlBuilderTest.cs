@@ -7,6 +7,8 @@ using Omikron.FactFinder;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
 using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinder.Configuration;
+using System.Configuration;
 
 namespace Omikron.FactFinderTests
 {
@@ -14,16 +16,14 @@ namespace Omikron.FactFinderTests
     [DeploymentItem(@"Resources\configuration.xml", "Resources")]
     public class UrlBuilderTest
     {
-        private static XmlConfiguration Configuration { get; set; }
         private UnixClockStub Clock { get; set; }
         private UrlBuilder UrlBuilder { get; set; }
 
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Configuration = new XmlConfiguration(@"Resources\configuration.xml");
             Clock = new UnixClockStub();
-            UrlBuilder = new UrlBuilder(Configuration, new ParametersHandler(Configuration), Clock);
+            UrlBuilder = new UrlBuilder(new ParametersHandler(), Clock);
         }
 
         [TestMethod]
@@ -133,6 +133,8 @@ namespace Omikron.FactFinderTests
         [TestMethod]
         public void TestSimpleAuthenticationUrl()
         {
+            var config = ConnectionSection.GetSection();
+
             Clock.StubValue = 1370000000000;
 
             UrlBuilder.Action = "Test.ff";
@@ -140,9 +142,9 @@ namespace Omikron.FactFinderTests
 
             var expectedUri = new Uri(
                 @"http://demoshop.fact-finder.de:80/FACT-Finder/Test.ff?" + 
-                @"channel=de&format=xml&timestamp=" + Clock.StubValue + 
-                @"&username=" + Configuration.User +
-                @"&password=" + Configuration.Password.ToMD5()
+                @"channel=de&format=xml&timestamp=" + Clock.StubValue +
+                @"&username=" + config.Authentication.UserName +
+                @"&password=" + config.Authentication.Password.ToMD5()
             );
 
             Uri actualUri = UrlBuilder.GetUrlWithSimpleAuthentication();
@@ -153,22 +155,24 @@ namespace Omikron.FactFinderTests
         [TestMethod]
         public void TestAdvancedAuthenticationUrl()
         {
+            var config = ConnectionSection.GetSection();
+
             Clock.StubValue = 1370000000000;
 
             UrlBuilder.Action = "Test.ff";
             UrlBuilder.SetParameter("format", "xml");
 
             string passwordParameter = (
-                Configuration.AdvancedAuthPrefix +
+                config.Authentication.Prefix +
                 Clock.StubValue +
-                Configuration.Password.ToMD5() +
-                Configuration.AdvancedAuthPostfix
+                config.Authentication.Password.ToMD5() +
+                config.Authentication.Postfix
             ).ToMD5();
 
             var expectedUri = new Uri(
                 @"http://demoshop.fact-finder.de:80/FACT-Finder/Test.ff?" +
                 @"channel=de&format=xml&timestamp=" + Clock.StubValue +
-                @"&username=" + Configuration.User +
+                @"&username=" + config.Authentication.UserName +
                 @"&password=" + passwordParameter
             );
 

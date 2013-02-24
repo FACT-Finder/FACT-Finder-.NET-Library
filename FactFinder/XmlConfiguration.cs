@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Omikron.FactFinder.Configuration;
 
 namespace Omikron.FactFinder
 {
-    public class XmlConfiguration : IConfiguration
+    public class LOLXmlConfiguration : LOLIConfiguration
     {
         public bool IsDebugModeOn { get; private set; }
 
@@ -38,7 +39,7 @@ namespace Omikron.FactFinder
 
         private IDictionary<string, string> CustomValues { get; set; }
 
-        public XmlConfiguration(string fileName)
+        public LOLXmlConfiguration(string fileName)
         {
             try
             {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Runtime.Serialization;
+using Omikron.FactFinder.Configuration;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
@@ -239,7 +241,7 @@ namespace Omikron.FactFinder.Default
 
         protected virtual SearchParameters CreateSearchParameters()
         {
-            return new SearchParameters("", DataProvider.Configuration.Channel);
+            return new SearchParameters("", ConnectionSection.GetSection().Channel);
         }
 
         [Serializable]

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using Omikron.FactFinder.Configuration;
+using System.Configuration;
 
 namespace Omikron.FactFinder
 {
@@ -33,10 +35,10 @@ namespace Omikron.FactFinder
 
         protected UrlBuilder UrlBuilder;
 
-        public HttpDataProvider(IConfiguration configuration) 
-            : base(configuration)
+        public HttpDataProvider() 
+            : base()
         {
-            UrlBuilder = new UrlBuilder(configuration, new ParametersHandler(Configuration), new UnixClock());
+            UrlBuilder = new UrlBuilder(new ParametersHandler(), new UnixClock());
         }
 
         private string _data;
@@ -64,9 +66,11 @@ namespace Omikron.FactFinder
             webRequest.KeepAlive = false;
             webRequest.Method = "GET";
 
-            if (Configuration.Language != "")
+            var config = ConnectionSection.GetSection();
+
+            if (config.Language != "")
             {
-                webRequest.Headers.Add("Accept-Language", Configuration.Language);
+                webRequest.Headers.Add("Accept-Language", config.Language);
             }          
 
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
@@ -85,7 +89,9 @@ namespace Omikron.FactFinder
 
         private Uri GetAuthenticationUrl()
         {
-            switch (Configuration.AuthenticationType)
+            var config = ConnectionSection.GetSection();
+
+            switch (config.Authentication.Type)
             {
                 case AuthenticationType.Http:
                     return UrlBuilder.GetUrlWithHttpAuthentication();

@@ -8,16 +8,14 @@ namespace Omikron.FactFinderTests
     [DeploymentItem(@"Resources\configuration.xml", "Resources")]
     public class HttpDataProviderTest
     {
-        private static XmlConfiguration Configuration { get; set; }
         private UnixClock Clock { get; set; }
         private HttpDataProvider DataProvider { get; set; }
 
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Configuration = new XmlConfiguration(@"Resources\configuration.xml");
             Clock = new UnixClock();
-            DataProvider = new HttpDataProvider(Configuration);
+            DataProvider = new HttpDataProvider();
 
             //WebRequest.RegisterPrefix("test", new TestWebRequestCreate());
             //TestWebRequestCreate.CreateTestRequest("lol?");

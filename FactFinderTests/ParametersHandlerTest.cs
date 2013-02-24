@@ -17,8 +17,7 @@ namespace Omikron.FactFinderTests
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            var configuration = new XmlConfiguration(@"Resources\configuration.xml");
-            ParametersConverter = new ParametersHandler(configuration);
+            ParametersConverter = new ParametersHandler();
         }
 
         [TestMethod]
@@ -78,7 +77,7 @@ namespace Omikron.FactFinderTests
             expectedPageParameters["productsPerPage"] = "12";
             expectedPageParameters["test"] = "value";
 
-            var actualPageParameters = ParametersHandlerTest.ParametersConverter.GetPageRequestParameters(serverParameters);
+            var actualPageParameters = ParametersHandlerTest.ParametersConverter.GetClientRequestParameters(serverParameters);
 
             Assert.IsTrue(expectedPageParameters.DictionaryEquals(actualPageParameters));
         }
