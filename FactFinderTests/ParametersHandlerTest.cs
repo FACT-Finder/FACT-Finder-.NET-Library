@@ -9,7 +9,6 @@ using Omikron.FactFinderTests.Utility;
 namespace Omikron.FactFinderTests
 {
     [TestClass]
-    [DeploymentItem(@"Resources\configuration.xml", "Resources")]
     public class ParametersHandlerTest
     {
         private static ParametersHandler ParametersConverter { get; set; }

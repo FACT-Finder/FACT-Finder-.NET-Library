@@ -13,7 +13,6 @@ using System.Configuration;
 namespace Omikron.FactFinderTests
 {
     [TestClass]
-    [DeploymentItem(@"Resources\configuration.xml", "Resources")]
     public class UrlBuilderTest
     {
         private UnixClockStub Clock { get; set; }

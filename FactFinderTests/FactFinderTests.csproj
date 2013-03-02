@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\Dependencies\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -67,6 +70,7 @@
     <Compile Include="Json\FF65\JsonTagCloudAdapterTest.cs" />
     <Compile Include="ParametersHandlerTest.cs" />
     <Compile Include="ConfigurationTest.cs" />
+    <Compile Include="TestSetup.cs" />
     <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="UrlBuilderTest.cs" />
     <Compile Include="Utility\TestWebRequest.cs" />
@@ -83,6 +87,7 @@
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

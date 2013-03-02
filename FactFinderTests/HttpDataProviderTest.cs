@@ -5,7 +5,6 @@ using System.Net;
 namespace Omikron.FactFinderTests
 {
     [TestClass]
-    [DeploymentItem(@"Resources\configuration.xml", "Resources")]
     public class HttpDataProviderTest
     {
         private UnixClock Clock { get; set; }

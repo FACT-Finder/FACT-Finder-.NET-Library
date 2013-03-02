@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using log4net;
+using log4net.Config;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Configuration;
 

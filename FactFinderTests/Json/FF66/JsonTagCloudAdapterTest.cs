@@ -9,7 +9,6 @@ using Omikron.FactFinder.Json.FF66;
 namespace Omikron.FactFinderTests.Json.FF66
 {
     [TestClass]
-    [DeploymentItem(@"Resources\configuration.xml", "Resources")]
     public class JsonTagCloudAdapterTest
     {
         private UnixClock Clock { get; set; }

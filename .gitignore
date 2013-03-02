@@ -25,3 +25,8 @@
 /FactFinder/obj/Debug/FactFinder.csprojResolveAssemblyReference.cache
 /FactFinderTests/obj/Debug/FactFinderTests.csprojResolveAssemblyReference.cache
 /FactFinderTests/bin/Debug/FactFinderTests.dll.config
+/FactFinder/bin/Debug/log4net.dll
+/FactFinder/bin/Debug/log4net.xml
+/FactFinderTests/bin/Debug/app.config
+/FactFinderTests/bin/Debug/log4net.dll
+/FactFinderTests/bin/Debug/log4net.xml

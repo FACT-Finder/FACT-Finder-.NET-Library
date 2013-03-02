@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
+using log4net;
 
 namespace Omikron.FactFinder.Configuration
 {
@@ -182,6 +183,9 @@ namespace Omikron.FactFinder.Configuration
         /// </remarks>
         public static ConnectionSection GetSection(string definedName)
         {
+            ILog log = LogManager.GetLogger(typeof(ConnectionSection));
+            log.Debug(String.Format("Retrieving configuration section <{0}>", definedName));
+            
             if (m_section == null)
             {
                 string cfgFileName = ".config";
