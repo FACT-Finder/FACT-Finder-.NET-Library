@@ -5,19 +5,27 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinderTests.Utility;
+using log4net;
 
 namespace Omikron.FactFinderTests
 {
     [TestClass]
-    public class ParametersHandlerTest
+    public class ParametersHandlerTest : BaseTest
     {
         private static ParametersHandler ParametersConverter { get; set; }
 
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
+            log = LogManager.GetLogger(typeof(UrlBuilderTest));
             ParametersConverter = new ParametersHandler();
         }
+
+        [TestInitialize]
+        public override void InitializeTest()
+        {
+            base.InitializeTest();
+        }        
 
         [TestMethod]
         public void TestGetServerRequestParameters()

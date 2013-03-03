@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using log4net;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
@@ -16,9 +17,18 @@ namespace Omikron.FactFinder.Default
             }
         }
 
+        private static ILog log;
+
+        static TagCloudAdapter()
+        {
+            log = LogManager.GetLogger(typeof(TagCloudAdapter));
+        }
+
         public TagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
-        { }
+        {
+            log.Debug("Initialize new RecommendationAdapter.");
+        }
         
         protected virtual IList<TagQuery> CreateTagCloud()
         {

@@ -6,18 +6,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Json.FF65;
 using Omikron.FactFinder.Data;
+using log4net;
 
 namespace Omikron.FactFinderTests.Json.FF65
 {
     [TestClass]
-    public class JsonSearchAdapterTest
+    public class JsonSearchAdapterTest : BaseTest
     {
         private UnixClock Clock { get; set; }
         private JsonSearchAdapter SearchAdapter { get; set; }
 
-        [TestInitialize()]
-        public void MyTestInitialize()
+        [ClassInitialize]
+        public static void InitializeClass(TestContext context)
         {
+            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+        }
+
+        [TestInitialize]
+        public override void InitializeTest()
+        {
+            base.InitializeTest();
             Clock = new UnixClock();
             var parametersHandler = new ParametersHandler();
             var dataProvider = new HttpDataProvider();

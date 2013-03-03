@@ -24,6 +24,8 @@ namespace Omikron.FactFinder.Configuration
 
         private static ConfigurationPropertyCollection _properties;
 
+        private static ILog log;
+
         #endregion
 
         #region Properties
@@ -85,6 +87,8 @@ namespace Omikron.FactFinder.Configuration
 
         static ConnectionSection()
         {
+            log = LogManager.GetLogger(typeof(ConnectionSection));
+
             _protocol = new ConfigurationProperty(
                 "protocol",
                 typeof(ConnectionProtocol),
@@ -183,11 +187,10 @@ namespace Omikron.FactFinder.Configuration
         /// </remarks>
         public static ConnectionSection GetSection(string definedName)
         {
-            ILog log = LogManager.GetLogger(typeof(ConnectionSection));
-            log.Debug(String.Format("Retrieving configuration section <{0}>", definedName));
-            
             if (m_section == null)
             {
+                log.Debug(String.Format("Retrieving configuration section <{0}>", definedName));
+            
                 string cfgFileName = ".config";
                 if (HttpContext.Current == null)
                 {

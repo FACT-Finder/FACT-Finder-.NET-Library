@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using log4net;
-using log4net.Config;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Configuration;
 
 namespace Omikron.FactFinderTests
 {
     [TestClass]
-    public class ConfigurationTest
+    public class ConfigurationTest : BaseTest
     {
+        [ClassInitialize]
+        public static void InitializeClass(TestContext context)
+        {
+            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+        }
+
+        [TestInitialize]
+        public override void InitializeTest()
+        {
+            base.InitializeTest();
+        }
+
         [TestMethod]
         public void TestConnectionSection()
         {

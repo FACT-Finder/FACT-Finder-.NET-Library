@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using log4net;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
@@ -62,9 +63,18 @@ namespace Omikron.FactFinder.Default
             }
         }
 
+        private static ILog log;
+
+        static RecommendationAdapter()
+        {
+            log = LogManager.GetLogger(typeof(RecommendationAdapter));
+        }
+
         public RecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {
+            log.Debug("Initialize new RecommendationAdapter.");
+            
             ProductIDs = new List<int>();
             RecommendationsUpToDate = false;
             MaxResults = 0;

@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using log4net;
 using Omikron.FactFinder.Data;
 namespace Omikron.FactFinder.Json.FF66
 {
     public class JsonSearchAdapter : Omikron.FactFinder.Json.FF65.JsonSearchAdapter
     {
+        private static ILog log;
+
+        static JsonSearchAdapter()
+        {
+            log = LogManager.GetLogger(typeof(JsonSearchAdapter));
+        }
+
         public JsonSearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         { }

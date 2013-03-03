@@ -1,18 +1,26 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using System.Net;
+using log4net;
 
 namespace Omikron.FactFinderTests
 {
     [TestClass]
-    public class HttpDataProviderTest
+    public class HttpDataProviderTest : BaseTest
     {
         private UnixClock Clock { get; set; }
         private HttpDataProvider DataProvider { get; set; }
 
-        [TestInitialize()]
-        public void MyTestInitialize()
+        [ClassInitialize]
+        public static void InitializeClass(TestContext context)
         {
+            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+        }
+
+        [TestInitialize]
+        public override void InitializeTest()
+        {
+            base.InitializeTest();
             Clock = new UnixClock();
             DataProvider = new HttpDataProvider();
 

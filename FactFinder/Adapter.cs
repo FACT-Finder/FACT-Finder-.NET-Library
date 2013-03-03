@@ -1,10 +1,18 @@
 ﻿using System.Collections.Generic;
+using log4net;
 namespace Omikron.FactFinder
 {
     public abstract class Adapter
     {
         protected DataProvider DataProvider;
         protected ParametersHandler ParametersHandler;
+
+        private static ILog log;
+
+        static Adapter()
+        {
+            log = LogManager.GetLogger(typeof(Adapter));
+        }
 
         public Adapter(DataProvider dataProvider, ParametersHandler parametersHandler)
         {

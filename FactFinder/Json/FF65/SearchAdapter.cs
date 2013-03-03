@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Script.Serialization;
+using log4net;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Default;
 using Omikron.FactFinder.Json.Helper;
@@ -11,6 +12,13 @@ namespace Omikron.FactFinder.Json.FF65
 {
     public class JsonSearchAdapter : SearchAdapter
     {
+        private static ILog log;
+
+        static JsonSearchAdapter()
+        {
+            log = LogManager.GetLogger(typeof(JsonSearchAdapter));
+        }
+
         public JsonSearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {

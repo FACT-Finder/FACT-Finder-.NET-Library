@@ -6,6 +6,7 @@ using System.Net;
 using System.IO;
 using Omikron.FactFinder.Configuration;
 using System.Configuration;
+using log4net;
 
 namespace Omikron.FactFinder
 {
@@ -35,9 +36,17 @@ namespace Omikron.FactFinder
 
         protected UrlBuilder UrlBuilder;
 
+        private static ILog log;
+
+        static HttpDataProvider()
+        {
+            log = LogManager.GetLogger(typeof(HttpDataProvider));
+        }
+
         public HttpDataProvider() 
             : base()
         {
+            log.Debug("Initialize new HttpDataProvider.");
             UrlBuilder = new UrlBuilder(new ParametersHandler(), new UnixClock());
         }
 
@@ -58,7 +67,10 @@ namespace Omikron.FactFinder
         private string GetData()
         {
             if (Type == null)
-                throw new Exception("Request type not set. Request could not be sent out.");
+            {
+                log.Error("Request type not set. Request could not be sent out.");
+                return "";
+            }
 
             Uri url = GetAuthenticationUrl(); 
 
@@ -71,8 +83,9 @@ namespace Omikron.FactFinder
             if (config.Language != "")
             {
                 webRequest.Headers.Add("Accept-Language", config.Language);
-            }          
+            }
 
+            log.InfoFormat("Sending request to URL: {0}", url.ToString());
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
 
             LastStatusCode = webResponse.StatusCode;

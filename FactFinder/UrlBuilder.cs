@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using log4net;
 using Omikron.FactFinder.Configuration;
 
 namespace Omikron.FactFinder
@@ -16,8 +17,16 @@ namespace Omikron.FactFinder
 
         public string Action { get; set; }
 
+        private static ILog log;
+
+        static UrlBuilder()
+        {
+            log = LogManager.GetLogger(typeof(UrlBuilder));
+        }
+
         public UrlBuilder(ParametersHandler parametersHandler, IUnixClock clock)
         {
+            log.Debug("Initialize new UrlBuilder.");
             ParametersHandler = parametersHandler;
             Clock = clock;
             Parameters = new Dictionary<string, string>();

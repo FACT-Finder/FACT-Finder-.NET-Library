@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
+using log4net;
 
 namespace Omikron.FactFinder.Configuration
 {
@@ -16,6 +17,8 @@ namespace Omikron.FactFinder.Configuration
         private static ConfigurationProperty _clientRules;
 
         private static ConfigurationPropertyCollection _properties;
+
+        private static ILog log;
 
         #endregion
 
@@ -42,6 +45,8 @@ namespace Omikron.FactFinder.Configuration
 
         static ParametersSection()
         {
+            log = LogManager.GetLogger(typeof(ParametersSection));
+
             _serverRules = new ConfigurationProperty(
                 "server",
                 typeof(ParameterRulesElement),
@@ -94,6 +99,8 @@ namespace Omikron.FactFinder.Configuration
         {
             if (m_section == null)
             {
+                log.Debug(String.Format("Retrieving configuration section <{0}>", definedName));
+
                 string cfgFileName = ".config";
                 if (HttpContext.Current == null)
                 {

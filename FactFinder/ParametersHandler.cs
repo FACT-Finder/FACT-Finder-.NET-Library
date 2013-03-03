@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web;
+using log4net;
 using Omikron.FactFinder.Configuration;
 using Omikron.FactFinder.Data;
 
@@ -12,8 +13,16 @@ namespace Omikron.FactFinder
 {
     public class ParametersHandler
     {
+        private static ILog log;
+
+        static ParametersHandler()
+        {
+            log = LogManager.GetLogger(typeof(ParametersHandler));
+        }
+
         public ParametersHandler()
         {
+            log.Debug("Initialize new ParametersHandler.");
         }
 
         public IDictionary<string, string> GetServerRequestParameters(IDictionary<string, string> pageParameters)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using log4net;
 
 namespace Omikron.FactFinder
 {
@@ -11,6 +12,13 @@ namespace Omikron.FactFinder
         public virtual RequestType Type { get; set; }
 
         public virtual string Data { get; private set; }
+
+        private static ILog log;
+
+        static DataProvider()
+        {
+            log = LogManager.GetLogger(typeof(DataProvider));
+        }
 
         public DataProvider()
         {

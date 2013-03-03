@@ -1,13 +1,23 @@
 ﻿using System.Collections.Generic;
+using log4net;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
 {
     public class ScicAdapter : Adapter
     {
+        private static ILog log;
+
+        static ScicAdapter()
+        {
+            log = LogManager.GetLogger(typeof(ScicAdapter));
+        }
+
         public ScicAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
-        { }
+        {
+            log.Debug("Initialize new RecommendationAdapter.");
+        }
 
         // returns success boolean
         public virtual bool ApplyTracking()

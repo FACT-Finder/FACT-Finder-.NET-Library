@@ -90,7 +90,6 @@
     <Compile Include="Default\TagCloudAdapter.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="HttpDataProvider.cs" />
-    <Compile Include="IConfiguration.cs" />
     <Compile Include="DataProvider.cs" />
     <Compile Include="IUnixClock.cs" />
     <Compile Include="EncodingHandler.cs" />
@@ -126,9 +125,10 @@
     <Compile Include="UnixClock.cs" />
     <Compile Include="UnixClockStub.cs" />
     <Compile Include="UrlBuilder.cs" />
-    <Compile Include="XmlConfiguration.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="LoggingGuidelines.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,11 +3,19 @@ using Omikron.FactFinder.Default;
 using Omikron.FactFinder.Data;
 using System.Web.Script.Serialization;
 using Omikron.FactFinder.Json.Helper;
+using log4net;
 
 namespace Omikron.FactFinder.Json.FF65
 {
     public class JsonRecommendationAdapter : RecommendationAdapter
     {
+        private static ILog log;
+
+        static JsonRecommendationAdapter()
+        {
+            log = LogManager.GetLogger(typeof(JsonRecommendationAdapter));
+        }
+
         public JsonRecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {

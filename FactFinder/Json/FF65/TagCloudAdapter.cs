@@ -3,11 +3,19 @@ using Omikron.FactFinder.Default;
 using Omikron.FactFinder.Data;
 using System.Web.Script.Serialization;
 using Omikron.FactFinder.Json.Helper;
+using log4net;
 
 namespace Omikron.FactFinder.Json.FF65
 {
     public class JsonTagCloudAdapter : TagCloudAdapter
     {
+        private static ILog log;
+
+        static JsonTagCloudAdapter()
+        {
+            log = LogManager.GetLogger(typeof(JsonTagCloudAdapter));
+        }
+
         public JsonTagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {

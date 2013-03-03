@@ -70,7 +70,7 @@
     <Compile Include="Json\FF65\JsonTagCloudAdapterTest.cs" />
     <Compile Include="ParametersHandlerTest.cs" />
     <Compile Include="ConfigurationTest.cs" />
-    <Compile Include="TestSetup.cs" />
+    <Compile Include="BaseTest.cs" />
     <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="UrlBuilderTest.cs" />
     <Compile Include="Utility\TestWebRequest.cs" />

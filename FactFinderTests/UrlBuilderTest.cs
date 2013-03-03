@@ -9,18 +9,26 @@ using System.Security.Cryptography;
 using Omikron.FactFinderTests.Utility;
 using Omikron.FactFinder.Configuration;
 using System.Configuration;
+using log4net;
 
 namespace Omikron.FactFinderTests
 {
     [TestClass]
-    public class UrlBuilderTest
+    public class UrlBuilderTest : BaseTest
     {
         private UnixClockStub Clock { get; set; }
         private UrlBuilder UrlBuilder { get; set; }
 
-        [TestInitialize()]
-        public void MyTestInitialize()
+        [ClassInitialize]
+        public static void InitializeClass(TestContext context)
         {
+            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+        }
+
+        [TestInitialize]
+        public override void InitializeTest()
+        {
+            base.InitializeTest();
             Clock = new UnixClockStub();
             UrlBuilder = new UrlBuilder(new ParametersHandler(), Clock);
         }
