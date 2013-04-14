@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Omikron.FactFinder.Data
+
+@{
+    var campaigns = PageData["campaigns"] as CampaignList;
+}
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
@@ -27,14 +33,21 @@
                 </div>
 
                 <div id="SearchboxCMPlaceHolder">
-                    @*<?php echo $campaigns->getFeedback('header'); ?>*@
+                    @if(campaigns != null) { 
+                        @:@campaigns.GetFeedbackFor("header")
+                    }
                 </div>
             </div>
 
             <div id="content">
-				<div id="asnColumn" class="<?php echo $i18n->msg('resultpage_asnHintCssClass'); ?>" >
-					@*<?php echo $campaigns->getFeedback('above asn'); ?>*@
-					@*<?php echo $campaigns->getFeedback('below asn'); ?>*@
+				<div id="asnColumn" class="asnHintEN" >
+                    @if(campaigns != null) { 
+                        @:@campaigns.GetFeedbackFor("above asn")
+                    }
+                    @if (campaigns != null)
+                    { 
+                        @:@campaigns.GetFeedbackFor("below asn")
+                    }
 				</div>
 
 				<div id="resultColumn">
@@ -42,7 +55,9 @@
                 </div>
 
 				<div id="infoColumn">
-					@* <?php if (isset($campaigns)) echo $campaigns->getFeedback('above info panel'); ?> *@
+                    @if(campaigns != null) { 
+                        @:@campaigns.GetFeedbackFor("above info panel")
+                    }
                     <div id="infoPlaceHolder"></div>
 				</div>
             </div>

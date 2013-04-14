@@ -2,6 +2,7 @@
 
 @{
     var asn = PageData["asn"] as AfterSearchNavigation;
+    var campaigns = PageData["campaigns"] as CampaignList;
     var ffParameters = PageData["ffParameters"] as SearchParameters;
     
     if(asn != null)
@@ -98,7 +99,7 @@
     
             </div>
     
-    		@*<?php echo $campaigns->getFeedback('below each asn group'); ?>*@
+    		@:@campaigns.GetFeedbackFor("below each asn group")
         }
     }
 }
