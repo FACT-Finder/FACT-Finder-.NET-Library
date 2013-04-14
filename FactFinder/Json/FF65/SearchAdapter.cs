@@ -186,8 +186,8 @@ namespace Omikron.FactFinder.Json.FF65
                     GetAsnGroupStyleFromString((string)groupData.filterStyle)
                 );
 
-                var elements = groupData.elements;
-                elements.AddRange((IEnumerable<object>)groupData.selectedElements);
+                var elements = groupData.selectedElements;
+                elements.AddRange((IEnumerable<object>)groupData.elements);
 
                 foreach (var element in elements)
                 {
