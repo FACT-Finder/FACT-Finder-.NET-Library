@@ -1,0 +1,152 @@
+﻿@using System.Text
+@using Omikron.FactFinder.Data
+
+@{
+    var campaigns = PageData["campaigns"] as CampaignList;
+    
+    if(campaigns.HasAdvisorTree())
+    {
+        <div id="advisorCampaign">
+		    <p>Debug-Ausgabe:</p>
+		    <div style="margin-left:10px;">
+		    @foreach (AdvisorQuestion question in campaigns.GetAdvisorTree())
+            {
+                PageData["question"] = question;
+                @RenderPage("~/templates/_advisorQuestion");
+		    }
+		    </div>
+		</div>
+    }
+    
+    if(campaigns.HasActiveQuestions())
+    {
+        <div id="advisorCampaign">
+        @foreach (AdvisorQuestion question in campaigns.GetActiveQuestions())
+        {
+            <p class="question">@question.Text</p>
+			foreach(AdvisorAnswer answer in question.Answers) {
+				<a class="answer" href="@(answer.Parameters)">@answer.Text</a>
+			}
+        }
+        </div>
+    }
+
+    var result = PageData["result"] as ResultRecords;
+    var ffParameters = PageData["ffParameters"] as SearchParameters;
+    
+    if(result != null && result.Count > 0 && !ffParameters.IsNavigation)
+    {
+        var breadCrumbTrail = PageData["breadCrumbTrail"] as IList<BreadCrumbItem>;
+        bool first = true;
+
+        StringBuilder sb = new StringBuilder();
+        
+        foreach(var breadCrumb in breadCrumbTrail)
+        {
+            if (sb.Length > 0) {
+                sb.Append(" &raquo; ");
+            }
+
+            sb.Append(String.Format("<a href=\"{0}\">{1}</a>", breadCrumb.Url, breadCrumb.Label));
+        }
+        
+        <p id="breadCrumbTrail">
+            Your search for "@Html.Raw(sb.ToString())" matched @result.FoundRecordsCount products.
+        </p>
+    }
+    
+    @:@campaigns.GetFeedbackFor("below breadcrumb")
+
+    var sws = PageData["singleWordSearch"] as IList<SuggestQuery>;
+    
+    if(sws != null && sws.Count > 0 && !ffParameters.IsNavigation)
+    {
+        <p class="resultSingleQueries">For some parts of your query we found these result counts:</p>
+        <ul class="resultsSingleQueriesList">
+        @foreach (var query in sws)
+        {
+            <li>
+                <a href="@(query.Url)">@query.Query (@query.HitCount)</a>
+            </li>
+        }
+        </ul>
+    }
+    
+    @:@campaigns.GetFeedbackFor("above search result")
+
+    if(result != null && result.Count > 0 && !ffParameters.IsNavigation)
+    {
+        var sorting = PageData["sorting"] as IList<Item>;
+        <div class="optionBox sortBox">
+            Sorting:
+			<select onchange="document.location.href=this.value;">
+            @foreach (Item sortItem in sorting)
+            {
+                <option value="@(sortItem.Url)"@(sortItem.Selected ? " selected" : "")>
+                    @(sortItem.Selected ? sortItem.Label+" (selected)" : sortItem.Label)
+                </option>
+            }
+            </select>
+        </div>
+    
+        @RenderPage("~/templates/_paging.cshtml")
+    }
+    else
+    {
+        <div class="paging browseTop">
+            Select a category to see the products in it.
+        </div>
+    }
+    
+    @RenderPage("~/templates/_previewImageAsn.cshtml")
+
+    <div id="results">
+    @{
+        @:@campaigns.GetFeedbackFor("above pushed product")
+
+        var asn = PageData["asn"] as AfterSearchNavigation;
+        
+        if((asn == null || !asn.HasPreviewImages()) && campaigns != null && campaigns.HasPushedProducts())
+        {
+            <div id="pushedProducts">
+                <p>Our Topsellers</p>
+                @foreach(Record record in campaigns.GetPushedProducts())
+                {
+                    PageData["record"] = record;
+                    @RenderPage("~/templates/_product.cshtml");
+                }
+            </div>
+            <div class="clear">&nbsp;</div>
+        }
+        
+	    <div id="resultWrap">
+	    @foreach(Record record in result) {
+            PageData["record"] = record;
+            @RenderPage("~/templates/_product.cshtml");
+	    }
+	    </div>
+    }
+    </div>
+    <div class="clear">&nbsp;</div>
+    
+    if(result != null && result.Count > 0 && !ffParameters.IsNavigation)
+    {
+        @RenderPage("~/templates/_paging.cshtml");
+        
+        <div class="optionBox">
+            <select onchange="document.location.href=this.value;">
+            @{
+                var productsPerPageOptions = PageData["productsPerPageOptions"] as ProductsPerPageOptions;
+                foreach (Item option in productsPerPageOptions)
+                {
+                    <option value="@(option.Url)"@(option.Selected ? " selected" : "")>
+                        @option.Label Products per Page
+                    </option>
+                }
+            }
+            </select>
+        </div>
+    }
+    
+    @:@campaigns.GetFeedbackFor("below search result")
+}

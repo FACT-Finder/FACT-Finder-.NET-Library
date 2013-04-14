@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using log4net;
@@ -8,7 +9,7 @@ namespace Omikron.FactFinder
 {
     public abstract class DataProvider
     {
-        public virtual IDictionary<string, string> Parameters { get; protected set; }
+        public virtual NameValueCollection Parameters { get; protected set; }
         public virtual RequestType Type { get; set; }
 
         public virtual string Data { get; private set; }
@@ -22,18 +23,25 @@ namespace Omikron.FactFinder
 
         public DataProvider()
         {
-            Parameters = new Dictionary<string, string>();
+            Parameters = new NameValueCollection();
         }
 
-        public virtual void SetParameters(IDictionary<string, string> parameters)
+        /// <summary>
+        /// Sets the given parameters. All previous values for the given keys will be replaced.
+        /// Unmentioned keys will remain.
+        /// </summary>
+        /// <param name="parameters">Key-value pairs to be added.</param>
+        public virtual void SetParameters(NameValueCollection parameters)
         {
-            foreach (KeyValuePair<string, string> parameter in parameters)
+            foreach (string key in parameters)
             {
-                Parameters[parameter.Key] = parameter.Value;
+                Parameters.Remove(key);
             }
+
+            Parameters.Add(parameters);
         }
 
-        public virtual void ResetParameters(IDictionary<string, string> parameters)
+        public virtual void ResetParameters(NameValueCollection parameters)
         {
             Parameters = parameters;
         }

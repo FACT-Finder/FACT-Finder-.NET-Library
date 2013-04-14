@@ -1,0 +1,20 @@
+﻿@using Omikron.FactFinder.Data
+
+@{
+    var question = PageData["question"] as AdvisorQuestion;
+    
+    <span class="question">@question.Text</span><br/>
+	<div style="margin-left:10px;">
+	@foreach(AdvisorAnswer answer in question.Answers) {
+		<span class="answer">@answer.Text</span><br/>
+		if(@answer.HasSubQuestions()) {
+			<div style="margin-left:10px;">
+			@foreach(AdvisorQuestion subquestion in answer.SubQuestions) {
+                PageData["question"] = subquestion;
+                @RenderPage("~/templates/_advisorQuestion");
+			}
+            </div>
+		}
+	}
+	</div>
+}

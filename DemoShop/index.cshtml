@@ -1,0 +1,84 @@
+﻿@using Omikron.FactFinder
+@using Omikron.FactFinder.Data
+@using Omikron.FactFinder.Default
+@using Omikron.FactFinder.Json.FF68
+
+@{
+    PageData["Title"] = "FACT-Finder Demoshop - Searched for...";
+
+    ParametersHandler parametersHandler = new ParametersHandler();
+    DataProvider searchProvider = new HttpDataProvider();
+    DataProvider tagCloudProvider = new HttpDataProvider();
+    
+    SearchAdapter searchAdapter = new JsonSearchAdapter(searchProvider, parametersHandler);
+    TagCloudAdapter tagCloudAdapter = new JsonTagCloudAdapter(tagCloudProvider, parametersHandler);
+    
+    if(Int32.Parse(parametersHandler.GetRequestParam("productsPerPage", "12")) > 60)
+    {
+        searchProvider.SetParameter("productsPerPage", "12");
+    }
+
+    SearchParameters ffParameters = parametersHandler.GetFactFinderParameters();
+    PageData["ffParameters"] = ffParameters;
+
+    try
+    {
+        PageData["campaigns"] = searchAdapter.Campaigns;
+
+        if (PageData["campaigns"].HasRedirect())
+        {
+            // do redirect
+        }
+
+        PageData["status"] = searchAdapter.SearchStatus;
+        PageData["isArticleNumberSearch"] = searchAdapter.IsArticleNumberSearch;
+        PageData["isSearchTimedOut"] = searchAdapter.IsSearchTimedOut;
+
+        PageData["productsPerPageOptions"] = searchAdapter.ProductsPerPageOptions;
+        PageData["breadCrumbTrail"] = searchAdapter.BreadCrumbTrail;
+        PageData["singleWordSearch"] = searchAdapter.SingleWordSearch;
+        PageData["paging"] = searchAdapter.Paging;
+        PageData["sorting"] = searchAdapter.Sorting;    
+        PageData["asn"] = searchAdapter.Asn;
+        PageData["result"] = searchAdapter.Result;
+
+        PageData["tagCloud"] = tagCloudAdapter.TagCloud;
+
+        PageData["util"] = new Util(ffParameters, searchAdapter);
+    
+        switch((SearchStatus)PageData["status"])
+        {
+        case SearchStatus.ResultsFound:
+            Layout = "~/_LayoutResults.cshtml";
+            @RenderPage("~/templates/_result.cshtml");
+            break;
+        case SearchStatus.EmptyResult:
+            Layout = "~/_LayoutEmptyResult.cshtml";
+            PageData["message"] = String.Format("No result for <strong>\"{0}\"</strong>", ffParameters.Query);
+            @RenderPage("~/templates/_emptyResult.cshtml");
+            break;
+        case SearchStatus.NoResult:
+            Layout = "~/_LayoutError.cshtml";
+            PageData["error"] = "No result - an error occurred...";
+            @RenderPage("~/templates/_error.cshtml");
+            break;
+        default:
+            Layout = "~/_LayoutError.cshtml";
+            PageData["error"] = "An error occurred...";
+            @RenderPage("~/templates/_error.cshtml");
+            break;
+        }
+    } 
+    catch(SearchAdapter.NoQueryException e)
+    {
+        Layout = "~/_LayoutEmptyResult.cshtml";
+        PageData["message"] = "Please enter a search query.";
+        @RenderPage("~/templates/_emptyResult.cshtml");
+    }
+    /*catch(Exception e)
+    {
+        Layout = "~/_LayoutError.cshtml";
+        PageData["error"] = e.Message;
+        @RenderPage("~/templates/_error.cshtml");
+    }*/
+}

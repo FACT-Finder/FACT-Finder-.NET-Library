@@ -1,0 +1,14 @@
+﻿@using Omikron.FactFinder.Data
+
+@{
+    var tagCloud = PageData["tagCloud"] as IList<TagQuery>;
+}
+
+<div id="tagCloud">
+	<h3>Tag Cloud</h3>
+	<p>
+	@foreach(TagQuery tagQuery in tagCloud) {
+		<a href="@(tagQuery.Url)" style="padding-left:0px; font-size:@(100 + tagQuery.Weight*100)%">@tagQuery.Label</a>
+    }
+	</p>
+</div>

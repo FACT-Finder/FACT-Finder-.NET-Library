@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using log4net;
 using Omikron.FactFinder.Data;
 
@@ -98,7 +99,7 @@ namespace Omikron.FactFinder.Default
             if (originalPageSize == -1)
                 originalPageSize = pageSize;
 
-            var parameters = new Dictionary<string, string>()
+            var parameters = new NameValueCollection()
             {
                 {"query", query},
                 {"id", id},
@@ -149,7 +150,7 @@ namespace Omikron.FactFinder.Default
             string userID = ""
         )
         {
-            var parameters = new Dictionary<string, string>()
+            var parameters = new NameValueCollection()
             {
                 {"id", id},
                 {"sid", sid},
@@ -198,7 +199,7 @@ namespace Omikron.FactFinder.Default
             string userID = ""
         )
         {
-            var parameters = new Dictionary<string, string>()
+            var parameters = new NameValueCollection()
             {
                 {"id", id},
                 {"sid", sid},
@@ -238,7 +239,7 @@ namespace Omikron.FactFinder.Default
             string mainID
         )
         {
-            var parameters = new Dictionary<string, string>()
+            var parameters = new NameValueCollection()
             {
                 {"id", id},
                 {"sid", sid},

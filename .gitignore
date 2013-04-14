@@ -1,32 +1,10 @@
-/FactFinder/bin/Debug/FactFinder.dll
-/FactFinder/bin/Debug/FactFinder.pdb
-/FactFinder/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-/FactFinder/obj/Debug/FactFinder.csproj.FileListAbsolute.txt
-/FactFinder/obj/Debug/FactFinder.dll
-/FactFinder/obj/Debug/FactFinder.pdb
-/FactFinder/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
 /FACT-Finder .NET Library.suo
 /FACT-Finder .NET Library.vsmdi
-/FactFinderTests/bin/Debug/FactFinder.dll
-/FactFinderTests/bin/Debug/FactFinder.pdb
-/FactFinderTests/bin/Debug/FactFinderTests.dll
-/FactFinderTests/bin/Debug/FactFinderTests.pdb
-/FactFinderTests/bin/Debug/Resources/configuration.xml
-/FactFinderTests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-/FactFinderTests/obj/Debug/FactFinderTests.csproj.FileListAbsolute.txt
-/FactFinderTests/obj/Debug/FactFinderTests.dll
-/FactFinderTests/obj/Debug/FactFinderTests.pdb
-/FactFinderTests/obj/Debug/ResolveAssemblyReference.cache
-/FactFinderTests/obj/Debug/TempPE/Properties.Resources.Designer.cs.dll
-/FactFinderTests/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
-/FactFinderTests/obj/Release/build.force
-/TestResults
 /FACT-Finder .NET Library.v11.suo
-/FactFinder/obj/Debug/FactFinder.csprojResolveAssemblyReference.cache
-/FactFinderTests/obj/Debug/FactFinderTests.csprojResolveAssemblyReference.cache
-/FactFinderTests/bin/Debug/FactFinderTests.dll.config
-/FactFinder/bin/Debug/log4net.dll
-/FactFinder/bin/Debug/log4net.xml
-/FactFinderTests/bin/Debug/app.config
-/FactFinderTests/bin/Debug/log4net.dll
-/FactFinderTests/bin/Debug/log4net.xml
+/FactFinder/obj
+/FactFinder/bin
+/FactFinderTests/obj
+/FactFinderTests/bin
+/TestResults
+/DemoShop/Bin
+/packages

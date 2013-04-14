@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Web.Script.Serialization;
@@ -12,10 +13,19 @@ namespace Omikron.FactFinder.Json.FF65
 {
     public class JsonSearchAdapter : SearchAdapter
     {
+        private static IDictionary<string, string> sortingDescriptions;
         private static ILog log;
 
         static JsonSearchAdapter()
         {
+            sortingDescriptions = new Dictionary<string, string>()
+            {
+                { "sort.relevanceDescription", "Relevance" },
+                { "sort.titleAsc", "Name (A-Z)" },
+                { "sort.titleDesc", "Name (Z-A)" },
+                { "sort.priceAsc", "Increasing Price" },
+                { "sort.priceDesc", "Decreasing Price" }
+            };
             log = LogManager.GetLogger(typeof(JsonSearchAdapter));
         }
 
@@ -189,8 +199,8 @@ namespace Omikron.FactFinder.Json.FF65
 
                     if (asnGroup.Style == AsnGroupStyle.Slider)
                     {
-                        IDictionary<string, string> parameters = ParametersHandler.ParseParametersFromString((string)element.searchParams);
-                        filterLink += String.Format("&{0}=", parameters.Last());
+                        NameValueCollection parameters = ParametersHandler.ParseParametersFromString((string)element.searchParams);
+                        filterLink += String.Format("&{0}=", parameters.AllKeys.Last());
 
                         filter = new AsnSliderItem(
                             filterLink,
@@ -209,8 +219,8 @@ namespace Omikron.FactFinder.Json.FF65
                             (bool)element.selected,
                             (int)element.recordCount,
                             (int)element.clusterLevel,
-                            (string)element.previewImageURL,
-                            (string)element.associatedFieldName
+                            (string)(element.previewImageURL ?? ""),
+                            (string)(element.associatedFieldName ?? "")
                         );
                     }
 
@@ -252,7 +262,7 @@ namespace Omikron.FactFinder.Json.FF65
                 );
 
                 sorting.Add(new Item(
-                    sortItemData.description,
+                    sortingDescriptions[sortItemData.description],
                     sortLink,
                     (bool)sortItemData.selected
                 ));
@@ -263,11 +273,39 @@ namespace Omikron.FactFinder.Json.FF65
 
         protected override Paging CreatePaging()
         {
-            return new Paging(
+
+            var paging = new Paging(
                 (int)JsonData.paging.currentPage,
                 (int)JsonData.paging.pageCount,
+                BuildPageLink(JsonData.paging.previousLink),
+                BuildPageLink(JsonData.paging.nextLink),
                 ParametersHandler
             );
+
+            foreach (var pageLinkData in JsonData.paging.pageLinks)
+            {
+                paging.Add(BuildPageLink(pageLinkData));
+            }
+
+            return paging;
+        }
+
+        private Item BuildPageLink(dynamic linkData)
+        {
+            Item link = null;
+            if (linkData != null)
+            {
+                string pageLink = ParametersHandler.GeneratePageLink(
+                    ParametersHandler.ParseParametersFromString(linkData.searchParams)
+                );
+
+                link = new Item(
+                    linkData.caption,
+                    pageLink,
+                    (bool)linkData.currentPage
+                );
+            }
+            return link;
         }
 
         protected override ProductsPerPageOptions CreateProductsPerPageOptions()
@@ -392,10 +430,13 @@ namespace Omikron.FactFinder.Json.FF65
         {
             var singleWordSearch = new List<SuggestQuery>();
 
+            if (JsonData.singleWordResults == null)
+                return singleWordSearch;
+
             foreach (var swsData in JsonData.singleWordResults)
             {
                 string query = (string)swsData.word;
-                var parameters = new Dictionary<string, string>()
+                var parameters = new NameValueCollection()
                 {
                     {"query", query}
                 };

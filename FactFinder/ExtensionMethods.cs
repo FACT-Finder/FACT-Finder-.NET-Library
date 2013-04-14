@@ -12,11 +12,27 @@ namespace Omikron.FactFinder
     {
         public static string ToUriQueryString(this IDictionary<string, string> dictionary)
         {
+            // This is actually an HttpValueCollection, whose ToString() overload does all the work
             NameValueCollection query = HttpUtility.ParseQueryString(string.Empty);
             
             foreach (KeyValuePair<string, string> pair in dictionary)
             {
                 query[pair.Key] = pair.Value;
+            }
+
+            return query.ToString();
+        }
+
+        public static string ToUriQueryString(this NameValueCollection nvc)
+        {
+            // This is actually an HttpValueCollection, whose ToString() overload does all the work
+            NameValueCollection query = HttpUtility.ParseQueryString(string.Empty);
+
+            foreach (string key in nvc)
+            {
+                char[] delimiter = { ',' };
+                foreach (string value in nvc[key].Split(delimiter))
+                    query[key] = nvc[key];
             }
 
             return query.ToString();

@@ -38,67 +38,77 @@ namespace Omikron.FactFinderTests
         {
             UrlBuilder.SetParameter("query", "bmx");
 
-            var expectedParameters = new Dictionary<string, string>();
+            var expectedParameters = new NameValueCollection();
             expectedParameters["query"] = "bmx";
 
-            IDictionary<string, string> actualParameters = UrlBuilder.GetParameters();
-            Assert.IsTrue(expectedParameters.DictionaryEquals(actualParameters));
+            NameValueCollection actualParameters = UrlBuilder.GetParameters();
+            Assert.IsTrue(expectedParameters.NameValueCollectionEquals(actualParameters));
 
             UrlBuilder.SetParameter("format", "xml");
 
             expectedParameters["format"] = "xml";
 
-            Assert.IsTrue(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsTrue(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
         }
 
         [TestMethod]
         public void TestSetParameters()
         {
-            var expectedParameters = new Dictionary<string, string>();
-            expectedParameters["query"] = "bmx";
-            expectedParameters["channel"] = "de";
-            expectedParameters["verbose"] = "true";
+            var expectedParameters = new NameValueCollection()
+            {
+                {"query", "bmx"},
+                {"channel", "de"},
+                {"verbose", "true"}
+            };
 
             UrlBuilder.SetParameters(expectedParameters);
 
-            Assert.IsTrue(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsTrue(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
 
-            var newParameters = new Dictionary<string, string>();
-            newParameters["channel"] = "uk";
-            newParameters["format"] = "xml";
+            var newParameters = new NameValueCollection()
+            {
+                {"channel", "uk"},
+                {"format", "xml"}
+            };
+
             expectedParameters["channel"] = "uk";
             expectedParameters["format"] = "xml";
 
-            Assert.IsFalse(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsFalse(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
 
             UrlBuilder.SetParameters(newParameters);
-            Assert.IsTrue(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsTrue(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
         }
 
         [TestMethod]
         public void TestResetParameters()
         {
-            var expectedParameters = new Dictionary<string, string>();
-            expectedParameters["query"] = "bmx";
-            expectedParameters["channel"] = "de";
-            expectedParameters["verbose"] = "true";
+            var expectedParameters = new NameValueCollection()
+            {
+                {"query", "bmx"},
+                {"channel", "de"},
+                {"verbose", "true"}
+            };
 
             UrlBuilder.ResetParameters(expectedParameters);
 
-            Assert.IsTrue(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsTrue(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
 
-            var newParameters = new Dictionary<string, string>();
-            newParameters["channel"] = "uk";
-            newParameters["format"] = "xml";
+            var newParameters = new NameValueCollection()
+            {
+                {"channel", "uk"},
+                {"format", "xml"}
+            };
+
             expectedParameters["channel"] = "uk";
             expectedParameters["format"] = "xml";
             expectedParameters.Remove("query");
             expectedParameters.Remove("verbose");
 
-            Assert.IsFalse(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsFalse(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
 
             UrlBuilder.ResetParameters(newParameters);
-            Assert.IsTrue(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsTrue(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
         }
 
         [TestMethod]
@@ -109,10 +119,12 @@ namespace Omikron.FactFinderTests
 
             UrlBuilder.UnsetParameter("format");
 
-            var expectedParameters = new Dictionary<string, string>();
-            expectedParameters["query"] = "bmx";
+            var expectedParameters = new NameValueCollection()
+            {
+                {"query", "bmx"}
+            };
 
-            Assert.IsTrue(expectedParameters.DictionaryEquals(UrlBuilder.GetParameters()));
+            Assert.IsTrue(expectedParameters.NameValueCollectionEquals(UrlBuilder.GetParameters()));
         }
 
         [TestMethod]

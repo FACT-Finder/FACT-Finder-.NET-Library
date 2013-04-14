@@ -5,6 +5,7 @@ using System.Web.Script.Serialization;
 using Omikron.FactFinder.Json.Helper;
 using System;
 using log4net;
+using System.Collections.Specialized;
 
 namespace Omikron.FactFinder.Json.FF65
 {
@@ -46,8 +47,11 @@ namespace Omikron.FactFinder.Json.FF65
             foreach (var suggestData in JsonData)
             {
                 string query = (string)suggestData.query;
-                var parameters = new Dictionary<string, string>()
-                { {"query", query} };
+                var parameters = new NameValueCollection()
+                {
+                    {"query", query} 
+                };
+
                 suggestions.Add(new SuggestQuery(
                     query,
                     ParametersHandler.GeneratePageLink(parameters),

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using log4net;
 namespace Omikron.FactFinder
 {
@@ -33,7 +34,7 @@ namespace Omikron.FactFinder
             DataProvider.SetParameter(name, value);
         }
 
-        public void SetParameters(IDictionary<string, string> parameters)
+        public void SetParameters(NameValueCollection parameters)
         {
             DataProvider.SetParameters(parameters);
         }

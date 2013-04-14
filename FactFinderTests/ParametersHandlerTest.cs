@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinderTests.Utility;
 using log4net;
+using System.Collections.Specialized;
 
 namespace Omikron.FactFinderTests
 {
@@ -30,44 +31,44 @@ namespace Omikron.FactFinderTests
         [TestMethod]
         public void TestGetServerRequestParameters()
         {
-            var pageParameters = new Dictionary<string, string>();
+            var pageParameters = new NameValueCollection();
 
             pageParameters["keywords"] = "test";
             pageParameters["username"] = "admin";
             pageParameters["productsPerPage"] = "12";
 
-            var expectedServerParameters = new Dictionary<string, string>();
+            var expectedServerParameters = new NameValueCollection();
 
             expectedServerParameters["query"] = "test";
             expectedServerParameters["productsPerPage"] = "12";
             expectedServerParameters["channel"] = "de";
 
-            var actualServerParameters = ParametersHandlerTest.ParametersConverter.GetServerRequestParameters(pageParameters);
+            var actualServerParameters = ParametersHandlerTest.ParametersConverter.ClientToServerRequestParameters(pageParameters);
 
-            Assert.IsTrue(expectedServerParameters.DictionaryEquals(actualServerParameters));
+            Assert.IsTrue(expectedServerParameters.NameValueCollectionEquals(actualServerParameters));
         }
 
         [TestMethod]
         public void TestOverwriteChannel()
         {
-            var pageParameters = new Dictionary<string, string>();
+            var pageParameters = new NameValueCollection();
 
             pageParameters["channel"] = "en";
 
-            var expectedServerParameters = new Dictionary<string, string>();
+            var expectedServerParameters = new NameValueCollection();
 
             expectedServerParameters["channel"] = "en";
 
-            var actualServerParameters = ParametersHandlerTest.ParametersConverter.GetServerRequestParameters(pageParameters);
+            var actualServerParameters = ParametersHandlerTest.ParametersConverter.ClientToServerRequestParameters(pageParameters);
 
-            Assert.IsTrue(expectedServerParameters.DictionaryEquals(actualServerParameters));
+            Assert.IsTrue(expectedServerParameters.NameValueCollectionEquals(actualServerParameters));
 
         }
 
         [TestMethod]
         public void TestGetPageRequestParameters()
         {
-            var serverParameters = new Dictionary<string, string>();
+            var serverParameters = new NameValueCollection();
 
             serverParameters["query"] = "test";
             serverParameters["username"] = "admin";
@@ -78,15 +79,15 @@ namespace Omikron.FactFinderTests
             serverParameters["channel"] = "de";
             serverParameters["productsPerPage"] = "12";
 
-            var expectedPageParameters = new Dictionary<string, string>();
+            var expectedPageParameters = new NameValueCollection();
 
             expectedPageParameters["keywords"] = "test";
             expectedPageParameters["productsPerPage"] = "12";
             expectedPageParameters["test"] = "value";
 
-            var actualPageParameters = ParametersHandlerTest.ParametersConverter.GetClientRequestParameters(serverParameters);
+            var actualPageParameters = ParametersHandlerTest.ParametersConverter.ServerToClientRequestParameters(serverParameters);
 
-            Assert.IsTrue(expectedPageParameters.DictionaryEquals(actualPageParameters));
+            Assert.IsTrue(expectedPageParameters.NameValueCollectionEquals(actualPageParameters));
         }
     }
 }

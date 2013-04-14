@@ -1,0 +1,37 @@
+﻿@using Omikron.FactFinder.Data
+
+@{
+    var paging = PageData["paging"] as Paging;
+}
+
+<div class="paging">
+	@if (paging != null && paging.PageCount > 1) {
+		<table width="100%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="previousPage">
+					@if (paging.PreviousPageLink != null) 
+                    {
+						<a href="@(paging.PreviousPageLink.Url)">previous page</a>
+					}
+				</td>
+				<td class="pageLinks">
+					@foreach (Item page in paging) {
+						if (page.Selected) {
+							<span class="paging currentPage">@page.Label</span>
+						} else {
+							<a class="paging" href="@(page.Url)">@page.Label</a>
+						}
+					}
+				</td>
+				<td class="nextPage">
+					@if (paging.NextPageLink != null)
+                    {
+						<a href="@(paging.NextPageLink.Url)">next page</a>
+					}
+				</td>
+			</tr>
+		</table>
+    } else {
+		@:Page 1 of 1
+	}	
+</div>

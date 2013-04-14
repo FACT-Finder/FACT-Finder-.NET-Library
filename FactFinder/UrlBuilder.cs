@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Omikron.FactFinder
         private ParametersHandler ParametersHandler;
         private IUnixClock Clock;
 
-        private IDictionary<string, string> Parameters;
+        private NameValueCollection Parameters;
 
         public string Action { get; set; }
 
@@ -29,7 +30,7 @@ namespace Omikron.FactFinder
             log.Debug("Initialize new UrlBuilder.");
             ParametersHandler = parametersHandler;
             Clock = clock;
-            Parameters = new Dictionary<string, string>();
+            Parameters = parametersHandler.GetRequestParamsForServer();
         }
 
         public void SetParameter(string name, string value)
@@ -37,22 +38,30 @@ namespace Omikron.FactFinder
             Parameters[name] = value;
         }
 
-        public IDictionary<string, string> GetParameters()
+        public NameValueCollection GetParameters()
         {
             return Parameters;
         }
 
-        public void SetParameters(IDictionary<string, string> parameters)
+        /// <summary>
+        /// Sets the given parameters. All previous values for the given keys will be replaced.
+        /// Unmentioned keys will remain.
+        /// </summary>
+        /// <param name="parameters">Key-value pairs to be added.</param>
+        public void SetParameters(NameValueCollection parameters)
         {
-            foreach (var parameter in parameters)
+
+            foreach (string key in parameters)
             {
-                Parameters[parameter.Key] = parameter.Value;
+                Parameters.Remove(key);
             }
+
+            Parameters.Add(parameters);
         }
 
-        public void ResetParameters(IDictionary<string, string> parameters)
+        public void ResetParameters(NameValueCollection parameters)
         {
-            Parameters = new Dictionary<string, string>(parameters);
+            Parameters = new NameValueCollection(parameters);
         }
 
         public void UnsetParameter(string name)
@@ -64,7 +73,7 @@ namespace Omikron.FactFinder
         {
             var config = ConnectionSection.GetSection();
 
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}/{3}/{4}?{5}",
@@ -82,7 +91,7 @@ namespace Omikron.FactFinder
         {
             var config = ConnectionSection.GetSection();
 
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
 
             parameters["timestamp"] = Clock.Now().ToString();
             parameters["username"] = config.Authentication.UserName;
@@ -103,7 +112,7 @@ namespace Omikron.FactFinder
         {
             var config = ConnectionSection.GetSection();
 
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
 
             string timestamp = Clock.Now().ToString();
 
@@ -131,7 +140,7 @@ namespace Omikron.FactFinder
         {
             var config = ConnectionSection.GetSection();
 
-            IDictionary<string, string> parameters = ParametersHandler.GetServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}@{3}:{4}/{5}/{6}?{7}",

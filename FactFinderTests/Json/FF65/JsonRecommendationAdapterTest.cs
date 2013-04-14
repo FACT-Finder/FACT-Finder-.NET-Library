@@ -69,7 +69,7 @@ namespace Omikron.FactFinderTests.Json.FF65
             var recommendations = RecommendationAdapter.Recommendations;
             RecommendationAdapter.IDsOnly = false;
             recommendations = RecommendationAdapter.Recommendations;
-            Assert.IsNotNull(recommendations[0].GetFieldValue("products_price"));
+            Assert.IsNotNull(recommendations[0].GetFieldValue("Price"));
         }
 
         [TestMethod]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using log4net;
 using Omikron.FactFinder.Data;
 namespace Omikron.FactFinder.Json.FF66
@@ -46,10 +47,13 @@ namespace Omikron.FactFinder.Json.FF66
         {
             var singleWordSearch = new List<SuggestQuery>();
 
+            if (JsonData.singleWordResults == null)
+                return singleWordSearch;
+
             foreach (var swsData in JsonData.singleWordResults)
             {
                 string query = (string)swsData.word;
-                var parameters = new Dictionary<string, string>()
+                var parameters = new NameValueCollection()
                 {
                     {"query", query}
                 };

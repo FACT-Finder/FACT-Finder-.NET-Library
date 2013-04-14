@@ -20,6 +20,14 @@ namespace Omikron.FactFinder.Data
             }
         }
 
+        public string BaseUrl
+        {
+            get
+            {
+                return base.Url;
+            }
+        }
+
         public override bool Selected
         {
             get

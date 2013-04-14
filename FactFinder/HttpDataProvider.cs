@@ -7,6 +7,7 @@ using System.IO;
 using Omikron.FactFinder.Configuration;
 using System.Configuration;
 using log4net;
+using System.Collections.Specialized;
 
 namespace Omikron.FactFinder
 {
@@ -26,7 +27,7 @@ namespace Omikron.FactFinder
             }
         }
 
-        public override IDictionary<string, string> Parameters
+        public override NameValueCollection Parameters
         {
             get
             {
@@ -117,13 +118,13 @@ namespace Omikron.FactFinder
             }
         }
 
-        public override void SetParameters(IDictionary<string, string> parameters)
+        public override void SetParameters(NameValueCollection parameters)
         {
             UrlBuilder.SetParameters(parameters);
             _dataUpToDate = false;
         }
 
-        public override void ResetParameters(IDictionary<string, string> parameters)
+        public override void ResetParameters(NameValueCollection parameters)
         {
             UrlBuilder.ResetParameters(parameters);
             _dataUpToDate = false;

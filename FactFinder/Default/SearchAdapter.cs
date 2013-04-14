@@ -160,9 +160,9 @@ namespace Omikron.FactFinder.Default
             get
             {
                 var parameters = DataProvider.Parameters;
-                if ((!parameters.ContainsKey("query") || parameters["query"].Length == 0) &&
-                    (!parameters.ContainsKey("seoPath") || parameters["seoPath"].Length == 0) &&
-                    (!parameters.ContainsKey("catalog") || parameters["catalog"] != "true"))
+                if (String.IsNullOrEmpty(parameters["query"]) &&
+                    String.IsNullOrEmpty(parameters["seoPath"]) &&
+                    parameters["catalog"] != "true")
                 {
                     throw new NoQueryException();
                 }
@@ -226,7 +226,7 @@ namespace Omikron.FactFinder.Default
 
         protected virtual Paging CreatePaging()
         {
-            return new Paging(1, 1, ParametersHandler);
+            return new Paging(1, 1, null, null, ParametersHandler);
         }
 
         protected virtual ProductsPerPageOptions CreateProductsPerPageOptions()

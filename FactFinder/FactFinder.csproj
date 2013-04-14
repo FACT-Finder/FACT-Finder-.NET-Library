@@ -125,6 +125,7 @@
     <Compile Include="UnixClock.cs" />
     <Compile Include="UnixClockStub.cs" />
     <Compile Include="UrlBuilder.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LoggingGuidelines.txt" />
