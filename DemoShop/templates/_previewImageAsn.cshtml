@@ -1,0 +1,73 @@
+﻿@using Omikron.FactFinder.Data
+
+@{
+    var asn = PageData["asn"] as AfterSearchNavigation;
+    
+    if(asn != null && asn.HasPreviewImages())
+    {
+        foreach(AsnGroup group in asn)
+        {
+            if(group.HasPreviewImages())
+            {
+                <div id="asnTop">
+                    <h3>@group.Name</h3>
+                    @{
+                        int linkCount = 0;
+                        foreach(AsnFilterItem item in group)
+                        {
+                            if(item.Selected)
+                            {
+                                continue;
+                            }
+                            
+                            if(linkCount < group.DetailedLinkCount)
+                            {
+                                <div class="asnImage">
+								    <div>
+									    <a href="@(item.Url)">
+										    <img src="@(item.PreviewImage)" 
+                                                alt="" 
+                                                title="@(item.Label)" 
+                                                onerror="imageNotFound(this)" 
+                                                onload="resizePicture(this, 80, 115)" />
+									    </a>
+								    </div>
+								    <p>
+									    <a href="@(item.Url)">
+										    @item.Label @group.Unit <span>(@item.MatchCount)</span>
+									    </a>
+								    </p>
+							    </div>
+                                linkCount++;
+                            }
+                            else
+                            {
+                                if(linkCount == group.DetailedLinkCount)
+                                {
+                                    @:<p class="selectLine">
+									@:<select onchange="if (this.value != '') {document.location.href=this.value;}">
+										    <option value="">@(group.Count - linkCount) more...</option>
+                                }
+                                <option value="@(item.Url)">
+                                    @item.Label @group.Unit (@item.MatchCount)
+                                </option>
+                                linkCount++;
+                            }
+                        }
+                        
+                        if (linkCount > group.DetailedLinkCount)
+                        {
+                            @:</select>
+                            @:</p>
+                        }
+                        if (group.Count <= group.DetailedLinkCount)
+                        {
+                            <div class="clear"></div>
+                        }
+                    }
+                </div>
+                break;
+            }
+        }
+    }
+}

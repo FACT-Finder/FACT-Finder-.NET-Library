@@ -1,0 +1,6 @@
+Version 1.0
+released 2013-04-14
+
+# FACT-Finder .NET Library released as port from FACT-Finder PHP Framework (https://github.com/FACT-Finder/FACT-Finder-PHP-Framework)
+# contains all of the most important features: Search, Suggest, Import, TagCloud, Recommendations, Scic (the latter remains to be tested)
+# includes demo shop (which is also a port from the PHP pendant) using ASP.NET Web Pages which showcases these features

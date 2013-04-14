@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactFinder", "FactFinder\FactFinder.csproj", "{57500ECF-7016-43FD-B4FB-500CE429AA8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactFinderTests", "FactFinderTests\FactFinderTests.csproj", "{CFA27A01-9AEE-4DCE-A980-947D7D434B70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6318DCC-2E4D-4FB3-84FB-254EC5A4E6B7}"
+	ProjectSection(SolutionItems) = preProject
+		FACT-Finder .NET Library.vsmdi = FACT-Finder .NET Library.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DemoShop", "http://localhost:57748", "{A67D6088-DDC4-4697-9023-F6389674CD26}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{57500ecf-7016-43fd-b4fb-500ce429aa8c}|FactFinder.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_57748"
+		Debug.AspNetCompiler.PhysicalPath = "DemoShop\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57748\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_57748"
+		Release.AspNetCompiler.PhysicalPath = "DemoShop\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57748\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "DemoShop\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FACT-Finder .NET Library.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57500ECF-7016-43FD-B4FB-500CE429AA8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57500ECF-7016-43FD-B4FB-500CE429AA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57500ECF-7016-43FD-B4FB-500CE429AA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57500ECF-7016-43FD-B4FB-500CE429AA8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFA27A01-9AEE-4DCE-A980-947D7D434B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA27A01-9AEE-4DCE-A980-947D7D434B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFA27A01-9AEE-4DCE-A980-947D7D434B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA27A01-9AEE-4DCE-A980-947D7D434B70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A67D6088-DDC4-4697-9023-F6389674CD26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67D6088-DDC4-4697-9023-F6389674CD26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A67D6088-DDC4-4697-9023-F6389674CD26}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67D6088-DDC4-4697-9023-F6389674CD26}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

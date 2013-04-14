@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CFA27A01-9AEE-4DCE-A980-947D7D434B70}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Omikron.FactFinderTests</RootNamespace>
+    <AssemblyName>FactFinderTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\Dependencies\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExtensionMethodsTest.cs" />
+    <Compile Include="HttpDataProviderTest.cs" />
+    <Compile Include="Json\FF65\JsonSuggestAdapterTest.cs" />
+    <Compile Include="Json\FF65\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF65\JsonRecommendationAdapterTest.cs" />
+    <Compile Include="Json\FF66\JsonRecommendationAdapterTest.cs" />
+    <Compile Include="Json\FF66\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF66\JsonSuggestAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonRecommendationAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonSuggestAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonRecommendationAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonSuggestAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonTagCloudAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonTagCloudAdapterTest.cs" />
+    <Compile Include="Json\FF66\JsonTagCloudAdapterTest.cs" />
+    <Compile Include="Json\FF65\JsonTagCloudAdapterTest.cs" />
+    <Compile Include="ParametersHandlerTest.cs" />
+    <Compile Include="ConfigurationTest.cs" />
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="Utility\ExtensionMethods.cs" />
+    <Compile Include="UrlBuilderTest.cs" />
+    <Compile Include="Utility\TestWebRequest.cs" />
+    <Compile Include="Utility\TestWebRequestCreate.cs" />
+    <Compile Include="Utility\TestWebResponse.cs" />
+    <Content Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FactFinder\FactFinder.csproj">
+      <Project>{57500ECF-7016-43FD-B4FB-500CE429AA8C}</Project>
+      <Name>FactFinder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

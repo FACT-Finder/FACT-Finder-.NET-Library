@@ -1,0 +1,47 @@
+﻿Here are some guidelines for how and what to log (using log4net):
+
+Which logger names should I use?
+================================
+
+Every class that needs logging gets its own logger. Use the overload of 
+LogManager.GetLogger() that takes a System.Type argument and call it with
+typeof(YourClassNameHere). This will automatically create logger names like
+"Fully.Qualified.Path.To.YourClassNameHere". The advantage is that any
+application using the library can configure a logger named "Fully.Qualified",
+say, to set logging options for all classes within that namespace.
+
+To make this easiest, all classes that need logging have a private static
+logger that gets initialised inside the static constructor:
+
+private static ILog log;
+
+static YourClassNameHere()
+{
+    log = LogManager.GetLogger(typeof(YourClassNameHere));
+}
+
+Which logging level should I use?
+=================================
+
+The library tries to adhere to the following rules:
+
+FATAL - Something very critical went wrong and the library cannot function
+        at all. For instance, log a FATAL message if FACT-Finder is
+        completely unreachable.
+ERROR - This indicates a problem that has only a local effect. For instance,
+        if a certain feature is not supported by the FACT-Finder version in
+        use, an ERROR can be logged and an empty result returned - but
+        execution of the library can continue otherwise.
+WARN  - These should be used, when the programmer anticipates that the
+        user has misused the library, without actually running into errors.
+        For instance, deprecation information can be logged at WARN level.
+        Non-critically inconsistent parameters are also a candidate for this.
+INFO  - Log messages at this level are used to trace very coarse-grained
+        control flow. Logging at this level should allow the user to see
+        when the library is active and what it does, but the messages should
+        not clutter up a production log too much. For instance, creation of
+        important objects (like Adapters) or requests to the FACT-Finder server
+        should be logged at INFO level.
+DEBUG - This is for all logging messages that are too fine-grained to be
+        logged in a production environment. Any information that is deemed
+        useful for development by a programmer can be logged at DEBUG level.

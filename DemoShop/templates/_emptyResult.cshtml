@@ -1,0 +1,47 @@
+﻿@using Omikron.FactFinder.Data
+
+<p id="breadCrumbTrail">@Html.Raw(PageData["message"])</p>
+
+@if (PageData["isSearchTimedOut"] ?? false) {
+    <p class="timeout">The search exceeded the maximum search time. The result might not be complete. The reason is an overstrained server.</p>
+}
+
+@* if (isset($campaigns)) echo $campaigns->getFeedback('below breadcrumb'); *@
+Your query did not match to any record.<br />
+Please try other search terms.
+@* if (isset($campaigns)) echo $campaigns->getFeedback('above search result'); *@
+
+<hr class="resultLineNoMatch">
+
+@{
+    // single words
+    var sws = PageData["singleWordSearch"] as IList<SuggestQuery>;
+    if (sws != null && sws.Count > 0) {
+		<p class="resultSingleQueries">For some parts of your query we found these result counts:</p>
+		<ul class="resultSingleQueriesList">
+		@foreach(var suggestion in sws) {
+			<li>
+                <a href="@(suggestion.Url)">@suggestion.Query (@suggestion.HitCount)</a>
+			</li>
+		}
+		</ul>
+	}
+
+    // if (isset($campaigns)) echo $campaigns->getFeedback('above pushed product');
+
+    var campaigns = PageData["campaigns"] as CampaignList;
+    if (campaigns != null && campaigns.GetPushedProducts().Count > 0) {
+	    <p class="noMatchTopseller">Alternatively, we present you our most popular products. Maybe you like one.</p>
+
+	    <div id="pushedProducts">
+		    @foreach(var record in campaigns.GetPushedProducts()) {
+                PageData["record"] = record;
+                RenderPage("~/templates/_product.cshtml");
+			}
+	    </div>
+    }
+
+    <div class="clear">&nbsp;</div>
+
+    // if (isset($campaigns)) echo $campaigns->getFeedback('below search result');
+}

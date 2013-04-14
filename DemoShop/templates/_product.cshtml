@@ -1,0 +1,75 @@
+﻿@using Omikron.FactFinder
+@using Omikron.FactFinder.Data
+
+@{
+    var fieldnames = new Dictionary<string, string>()
+    {
+    	{"id", "ArticleNumber"},
+	    {"title", "Name"},
+		{"artNo", "EAN"},
+		{"price", "Price"},
+		{"description", "Description"},
+		{"imageUrl", "ImageURL"},
+		{"detailUrl", "ProductURL"}
+    };
+
+    var record = PageData["record"] as Record;
+    var util = PageData["util"] as Util;
+
+    string articleNr    = (string)record.GetFieldValue(fieldnames["artNo"]);
+    string title        = (string)record.GetFieldValue(fieldnames["title"]);
+    string price        = (string)record.GetFieldValue(fieldnames["price"]);
+    string description  = (string)record.GetFieldValue(fieldnames["description"]);
+    string imageUrl     = (string)record.GetFieldValue(fieldnames["imageUrl"]);
+    string detailUrl    = (string)record.GetFieldValue(fieldnames["detailUrl"]);
+    string sid          = "";
+}
+
+<div class="productWrap">
+	<div class="product">
+		<div class="picture">
+			<a href="@detailUrl" onclick="@(util.CreateJavaScriptClickCode(record, title, sid))">
+				<img valign="top" src="@imageUrl" alt="no picture"
+					title="@title" onload="resizePicture(this, 120, 170)" onerror="imageNotFound(this)"
+					onmouseover="TagToTip('descr@(articleNr)', SHADOW, true)" onmouseout="UnTip()" />
+			</a>
+		</div>
+
+		<div style="display:none">
+			<span id="descr@(articleNr)" class="hoverDescription">
+				<p style="width:200px; font-weight: bold; margin-bottom: 2px;">@title</p>
+				<p style="width:200px; text-align: right; margin-top: 0;">
+					Art. No.: @articleNr
+				</p>
+				<p style="width:200px;">
+				@{
+                    if(description.Length > 160)
+                    {
+                        @:@(description.Substring(0, 157))...
+                    }
+                    else
+                    {
+                        @:@description
+                    }
+				}
+			</p>
+			</span>
+		</div>
+
+		<div class="title">
+			<a href="@(detailUrl)" onclick="@(util.CreateJavaScriptClickCode(record, title, sid))">
+			@{
+                if(title.Length > 23)
+                {
+                    @:@(title.Substring(0, 20))...
+                }
+                else
+                {
+                    @:@title
+                }
+			}
+			</a>
+		</div>
+		<div class="price">@(price)&euro;</div>
+	</div>
+</div>

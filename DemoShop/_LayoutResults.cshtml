@@ -1,0 +1,102 @@
+﻿@using Omikron.FactFinder.Data
+
+
+@{
+    var asn = PageData["asn"] as AfterSearchNavigation;
+    var campaigns = PageData["campaigns"] as CampaignList;
+    var tagCloud = PageData["tagCloud"] as IList<TagQuery>;
+    var ffParameters = PageData["ffParameters"] as SearchParameters;
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+        <title>@PageData["Title"]</title>
+
+        <link rel="shortcut icon" href="@Href("~/files/images/favicon.ico")">
+        <link rel="stylesheet" type="text/css" href="@Href("~/files/css/main.css")">
+        
+        <script type="text/javascript" src="@Href("~/files/js/ffsuggest.js")"></script>
+        <script type="text/javascript" src="@Href("~/files/js/ffscic.js")"></script>
+        <script type="text/javascript" src="@Href("~/files/js/jquery/jquery-1.2.6.min.js")"></script>
+        <script type="text/javascript" src="http://static.express.fact-finder.com/onetouchslider-1.0/de.factfinder.asn.slider.OneTouchSlider.nocache.js"></script>
+        
+		<script language="JavaScript" type="text/javascript">
+		    @RenderPage("~/templates/js/demoshop.js.cshtml")
+			@RenderPage("~/templates/js/infomodus.js.cshtml")
+		</script>
+
+        @campaigns.GetFeedbackFor("html header")
+    </head>
+    <body>
+        <script type="text/javascript" src="@Href("~/files/js/wz_tooltip/wz_tooltip.js")"></script>
+        <div id="container">
+            <div id="header">
+                @RenderPage("~/templates/_header.cshtml")
+            </div>
+
+            <div id="searchboxLine" class="asnHint">
+                <div id="searchbox">
+                    @RenderPage("~/templates/_searchbox.cshtml")
+                </div>
+
+                <div id="SearchboxCMPlaceHolder">
+                    @campaigns.GetFeedbackFor("header")
+                </div>
+
+                @if(!ffParameters.IsNavigation)
+                {
+                    <div id="buttons">
+                        <img src="@Href("~/files/images/modus_info_off.png")" alt="Info" id="infoButton">
+                    </div>
+                }
+            </div>
+
+            <div id="content">
+				<div id="asnColumn" class="asnHintEN" >
+					@campaigns.GetFeedbackFor("above asn")
+
+					@RenderPage("~/templates/_asn.cshtml")
+
+					@campaigns.GetFeedbackFor("before asn")
+				</div>
+
+				<div id="resultColumn">
+                    @RenderBody()
+                </div>
+
+				<div id="infoColumn">
+					@campaigns.GetFeedbackFor("above info panel")
+
+					@if (!ffParameters.IsNavigation) {
+						<div id="infoPlaceHolder">
+							<h3>Info column</h3>
+                            <p>When you activate the Help mode, an explanatory text for the elements on this page will appear. Move the mouse cursor over an element to display the help text for that element.</p>
+						</div>
+                    }
+
+					@if (asn.HasPreviewImages() && campaigns.HasPushedProducts()) {
+						<div id="pushedProducts">
+							<p>Our Topsellers</p>
+
+							@foreach (Record record in campaigns.GetPushedProducts()) {
+                                PageData["record"] = record;
+                                @RenderPage("~/templates/_product.cshtml")
+							}
+						</div>
+                    }
+					
+					@if (tagCloud != null && tagCloud.Count > 0) {
+						@RenderPage("~/templates/_tagCloud.cshtml")
+					}
+                    <div class="clear">&nbsp;</div>
+				</div>
+            </div>
+            
+            <div id="footer">
+                @RenderPage("~/templates/_footer.cshtml")
+            </div>
+        </div>
+    </body>
+</html>

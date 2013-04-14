@@ -1,0 +1,70 @@
+﻿@using Omikron.FactFinder.Data
+
+@{
+    var campaigns = PageData["campaigns"] as CampaignList;
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+        <title>@PageData["Title"]</title>
+
+        <link rel="shortcut icon" href="@Href("~/files/images/favicon.ico")">
+        <link rel="stylesheet" type="text/css" href="@Href("~/files/css/main.css")">
+        
+        <script type="text/javascript" src="@Href("~/files/js/ffsuggest.js")"></script>
+        <script type="text/javascript" src="@Href("~/files/js/jquery/jquery-1.2.6.min.js")"></script>
+        
+		<script language="JavaScript" type="text/javascript">
+		    @RenderPage("~/templates/js/demoshop.js.cshtml")
+		</script>
+    </head>
+    <body>
+        <script type="text/javascript" src="@Href("~/files/js/wz_tooltip/wz_tooltip.js")"></script>
+        <div id="container">
+            <div id="header">
+                @RenderPage("~/templates/_header.cshtml")
+            </div>
+
+            <div id="searchboxLine" class="asnHint">
+                <div id="searchbox">
+                    @RenderPage("~/templates/_searchbox.cshtml")
+                </div>
+
+                <div id="SearchboxCMPlaceHolder">
+                    @if(campaigns != null) { 
+                        @:@campaigns.GetFeedbackFor("header")
+                    }
+                </div>
+            </div>
+
+            <div id="content">
+				<div id="asnColumn" class="asnHintEN" >
+                    @if(campaigns != null) { 
+                        @:@campaigns.GetFeedbackFor("above asn")
+                    }
+                    @if (campaigns != null)
+                    { 
+                        @:@campaigns.GetFeedbackFor("below asn")
+                    }
+				</div>
+
+				<div id="resultColumn">
+                    @RenderBody()
+                </div>
+
+				<div id="infoColumn">
+                    @if(campaigns != null) { 
+                        @:@campaigns.GetFeedbackFor("above info panel")
+                    }
+                    <div id="infoPlaceHolder"></div>
+				</div>
+            </div>
+            
+            <div id="footer">
+                @RenderPage("~/templates/_footer.cshtml")
+            </div>
+        </div>
+    </body>
+</html>
