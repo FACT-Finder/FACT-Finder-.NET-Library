@@ -17,6 +17,17 @@ namespace Omikron.FactFinder.Default
             }
         }
 
+        private string _rawSuggestions;
+        public string RawSuggestions
+        {
+            get
+            {
+                if (_rawSuggestions == null)
+                    _rawSuggestions = CreateRawSuggestions();
+                return _rawSuggestions;
+            }
+        }
+
         private static ILog log;
 
         static SuggestAdapter()
@@ -27,12 +38,17 @@ namespace Omikron.FactFinder.Default
         public SuggestAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {
-            log.Debug("Initialize new RecommendationAdapter.");
+            log.Debug("Initialize new SuggestAdapter.");
         }
 
         protected virtual IList<SuggestQuery> CreateSuggestions()
         {
             return new List<SuggestQuery>();
+        }
+
+        protected virtual string CreateRawSuggestions()
+        {
+            return Data;
         }
     }
 }

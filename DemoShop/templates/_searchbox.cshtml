@@ -1,12 +1,18 @@
-﻿<div class="suggestFormWrap" >
+﻿@using Omikron.FactFinder.Data
+
+@{
+    var ffParameters = PageData["ffParameters"] as SearchParameters;
+}
+
+<div class="suggestFormWrap" >
 	<form action="@Href("~")" method="GET" name="search_word_inc">
 		<input type="hidden" name="queryFromSuggest" />
 		<!-- input type="hidden" name="{* $channelParam *}" value="{* channel *}" / -->
 		<input type="text" name="query" id="query" value=
-            @if(true /*$ffparams->getQuery() == '' || $ffparams->isNavigation()*/){
+            @if(ffParameters.Query == "" || ffParameters.IsNavigation) {
 			    @: "enter search query..." class="default"
 			} else {
-				@: "@Request.QueryString["query"]"
+				@: "@(ffParameters.Query)"
             }
 			autocomplete="off" />
 
@@ -19,7 +25,7 @@
 				var formname			= 'search_word_inc';
 				var queryParamName		= 'query';
 				var channelParamName	= 'channel';
-				var channel				= '';
+				var channel				= '@(ffParameters.Channel)';
 				var divLayername		= 'suggestLayer';
 				var instanceName		= 'suggest';
 				var debugMode			= false;

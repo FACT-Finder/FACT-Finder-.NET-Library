@@ -1,0 +1,11 @@
+﻿@using Omikron.FactFinder
+@using Omikron.FactFinder.Default
+@using Omikron.FactFinder.Raw
+
+@{
+    var parametersHandler = new ParametersHandler();
+    var suggestProvider = new HttpDataProvider();
+    var suggestAdapter = new RawSuggestAdapter(suggestProvider, parametersHandler);
+}
+
+@(suggestAdapter.RawSuggestions)
