@@ -1,11 +1,19 @@
-﻿@using Omikron.FactFinder
+﻿@using System.Globalization
+
+@using Omikron.FactFinder
 @using Omikron.FactFinder.Data
 @using Omikron.FactFinder.Default
 @using Omikron.FactFinder.Json.FF68
 
 @{
-    PageData["Title"] = "FACT-Finder Demoshop - Searched for...";
-
+    // Uncomment as necessary for localization testing
+    // (If all lines are uncommented, the request's preferred language will be used)
+    
+    // Culture = "de-de"; UICulture = "de-de";
+    // Culture = "en-gb"; UICulture = "en-gb";
+    // Culture = "en-us"; UICulture = "en-us";
+    
+    PageData["Title"] = String.Format(Resources.Page.PageTitle, Request.Params["query"]);
     ParametersHandler parametersHandler = new ParametersHandler();
     DataProvider searchProvider = new HttpDataProvider();
     DataProvider tagCloudProvider = new HttpDataProvider();
@@ -54,17 +62,17 @@
             break;
         case SearchStatus.EmptyResult:
             Layout = "~/_LayoutEmptyResult.cshtml";
-            PageData["message"] = String.Format("No result for <strong>\"{0}\"</strong>", ffParameters.Query);
+            PageData["message"] = String.Format(Resources.Messages.EmptyResult, ffParameters.Query);
             @RenderPage("~/templates/_emptyResult.cshtml");
             break;
         case SearchStatus.NoResult:
             Layout = "~/_LayoutError.cshtml";
-            PageData["error"] = "No result - an error occurred...";
+            PageData["error"] = Resources.Messages.NoResult;
             @RenderPage("~/templates/_error.cshtml");
             break;
         default:
             Layout = "~/_LayoutError.cshtml";
-            PageData["error"] = "An error occurred...";
+            PageData["error"] = Resources.Messages.Error;
             @RenderPage("~/templates/_error.cshtml");
             break;
         }
@@ -72,7 +80,7 @@
     catch(SearchAdapter.NoQueryException e)
     {
         Layout = "~/_LayoutEmptyResult.cshtml";
-        PageData["message"] = "Please enter a search query.";
+        PageData["message"] = Resources.Messages.NoQuery;
         @RenderPage("~/templates/_emptyResult.cshtml");
     }
     /*catch(Exception e)

@@ -46,7 +46,7 @@
                                 {
                                     @:<p class="selectLine">
 									@:<select onchange="if (this.value != '') {document.location.href=this.value;}">
-										    <option value="">@(group.Count - linkCount) more...</option>
+										    <option value="">@String.Format(Resources.AfterSearchNavigation.MoreLinks, group.Count - linkCount)</option>
                                 }
                                 <option value="@(item.Url)">
                                     @item.Label @group.Unit (@item.MatchCount)

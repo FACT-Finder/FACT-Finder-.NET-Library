@@ -32,7 +32,7 @@
 							    rightBorder: @(slider.AbsoluteMaximum),
 							    currentLeft: @(slider.SelectedMinimum),
 							    currentRight: @(slider.SelectedMaximum),
-							    unit: htmlDecode('&euro;'),
+							    unit: '@(group.Unit)',
 								callback: sliderSelect
 							});
 						}
@@ -53,7 +53,7 @@
                     {
                         <p class="asnElement selected lvl@(item.ClusterLevel)">
                             <a href="@(item.Url)">@item.Label @group.Unit<br />
-                            <span>(remove filter)</span></a>
+                            <span>(@Resources.AfterSearchNavigation.RemoveFilter)</span></a>
                         </p>
                     }
                     else
@@ -68,14 +68,14 @@
                                 }
                                 </a>
                             </p>
-                                linkCount++;
+                            linkCount++;
                         }
                         else
                         {
                             if (linkCount == group.DetailedLinkCount)
                             {
                                 @:<select onchange="if (this.value = (this.value != \'\') {document.location.href=this.value;}">
-                                    <option value="">@(group.Count - linkCount) more...</option>
+                                    <option value="">@String.Format(Resources.AfterSearchNavigation.MoreLinks, group.Count - linkCount)</option>
                             }
                             <option value="@(item.Url)">
                                 @item.Label @group.Unit
@@ -84,7 +84,7 @@
                                     @: (@item.MatchCount)
                                 }
                             </option>
-                                linkCount++;
+                            linkCount++;
                         }
                     }
                 }

@@ -91,7 +91,7 @@ function resizePicture(img, maxWidth, maxHeight){
 function hideDefaultInputText(){
 	var input = document.forms['search_word_inc']['query'];
 	//if the default text is in the field remove it and remove css-class
-	if($.trim(input.value) == 'enter search query...'){
+	if($.trim(input.value) == '@(Resources.Page.EnterSearchQuery)'){
 		input.value = '';
 		$(input).removeClass('default');
 	}
@@ -100,7 +100,7 @@ function checkInputText(){
 	var input = document.forms['search_word_inc']['query'];
 	if($.trim(input.value) == ''){
 		//if there is no query write default text and add css class.
-		input.value = 'enter search query...';
+		input.value = '@(Resources.Page.EnterSearchQuery)';
 		$(input).addClass('default');
 	}
 }
