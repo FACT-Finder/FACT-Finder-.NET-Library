@@ -1,14 +1,18 @@
 ﻿@using Omikron.FactFinder.Data
 
+@{ 
+    var campaigns = PageData["campaigns"] as CampaignList; 
+}
+
 <p id="breadCrumbTrail">@Html.Raw(PageData["message"])</p>
 
 @if (PageData["isSearchTimedOut"] ?? false) {
     <p class="timeout">@Resources.Messages.SearchTimedOut</p>
 }
 
-@* if (isset($campaigns)) echo $campaigns->getFeedback('below breadcrumb'); *@
+@Html.Raw(campaigns.GetFeedbackFor("below breadcrumb"))
+
 @Html.Raw(Resources.Messages.EmptyResultLong)
-@* if (isset($campaigns)) echo $campaigns->getFeedback('above search result'); *@
 
 <hr class="resultLineNoMatch">
 
@@ -25,22 +29,19 @@
 		}
 		</ul>
 	}
+    
+    @:@Html.Raw(campaigns.GetFeedbackFor("above pushed product"))
 
-    // if (isset($campaigns)) echo $campaigns->getFeedback('above pushed product');
-
-    var campaigns = PageData["campaigns"] as CampaignList;
     if (campaigns != null && campaigns.GetPushedProducts().Count > 0) {
 	    <p class="noMatchTopseller">@Resources.Messages.EmptyResultTopseller</p>
 
 	    <div id="pushedProducts">
 		    @foreach(var record in campaigns.GetPushedProducts()) {
                 PageData["record"] = record;
-                RenderPage("~/templates/_product.cshtml");
+                @RenderPage("~/templates/_product.cshtml");
 			}
 	    </div>
     }
 
     <div class="clear">&nbsp;</div>
-
-    // if (isset($campaigns)) echo $campaigns->getFeedback('below search result');
 }

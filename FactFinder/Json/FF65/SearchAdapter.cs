@@ -344,22 +344,21 @@ namespace Omikron.FactFinder.Json.FF65
                     );
 
                     string fieldName = "";
-                    string fieldUnit = "";
 
                     BreadCrumbItemType type = GetBreadCrumbItemTypeFromString((string)breadCrumbData.type);
                     if (type == BreadCrumbItemType.Filter)
                     {
                         fieldName = (string)breadCrumbData.associatedFieldName;
-                        fieldUnit = ""; // TODO: Where is this data in JSON?
                     }
                     
                     breadCrumbTrail.Add(new BreadCrumbItem(
-                        (string)breadCrumbData.value,
+                        (string)breadCrumbData.text,
                         link,
                         (i == nBreadCrumbs),
                         type,
                         fieldName,
-                        fieldUnit
+                        "" // The JSON response does not have a separate field for the unit but instead includes
+                           // it in the "text" field.
                     ));
 
                     ++i;

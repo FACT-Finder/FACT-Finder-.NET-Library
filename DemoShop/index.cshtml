@@ -5,6 +5,8 @@
 @using Omikron.FactFinder.Default
 @using Omikron.FactFinder.Json.FF68
 
+
+
 @{
     // Uncomment as necessary for localization testing
     // (If all lines are uncommented, the request's preferred language will be used)
@@ -35,7 +37,7 @@
 
         if (PageData["campaigns"].HasRedirect())
         {
-            // do redirect
+            Response.Redirect(PageData["campaigns"].GetRedirectUrl(), true); // execution ends here
         }
 
         PageData["status"] = searchAdapter.SearchStatus;

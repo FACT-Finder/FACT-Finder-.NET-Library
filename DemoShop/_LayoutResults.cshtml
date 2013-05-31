@@ -27,7 +27,7 @@
 			@RenderPage("~/templates/js/infomodus.js.cshtml")
 		</script>
 
-        @campaigns.GetFeedbackFor("html header")
+        @Html.Raw(campaigns.GetFeedbackFor("html header"))
     </head>
     <body>
         <script type="text/javascript" src="@Href("~/files/js/wz_tooltip/wz_tooltip.js")"></script>
@@ -42,7 +42,7 @@
                 </div>
 
                 <div id="SearchboxCMPlaceHolder">
-                    @campaigns.GetFeedbackFor("header")
+                    @Html.Raw(campaigns.GetFeedbackFor("header"))
                 </div>
 
                 @if(!ffParameters.IsNavigation)
@@ -55,11 +55,11 @@
 
             <div id="content">
 				<div id="asnColumn" class="@Resources.AfterSearchNavigation.AsnHintCSSClass" >
-					@campaigns.GetFeedbackFor("above asn")
+					@Html.Raw(campaigns.GetFeedbackFor("above asn"))
 
 					@RenderPage("~/templates/_asn.cshtml")
 
-					@campaigns.GetFeedbackFor("before asn")
+					@Html.Raw(campaigns.GetFeedbackFor("below asn"))
 				</div>
 
 				<div id="resultColumn">
@@ -67,7 +67,7 @@
                 </div>
 
 				<div id="infoColumn">
-					@campaigns.GetFeedbackFor("above info panel")
+					@Html.Raw(campaigns.GetFeedbackFor("above info panel"))
 
 					@if (!ffParameters.IsNavigation) {
 						<div id="infoPlaceHolder">

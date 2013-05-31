@@ -39,7 +39,7 @@ namespace Omikron.FactFinderTests
 
                 Assert.AreEqual(@"user", section.Authentication.UserName);
                 Assert.AreEqual(@"userpw", section.Authentication.Password);
-                Assert.AreEqual(AuthenticationType.Simple, section.Authentication.Type);
+                Assert.AreEqual(AuthenticationType.Advanced, section.Authentication.Type);
                 Assert.AreEqual(@"FACT-FINDER", section.Authentication.Prefix);
                 Assert.AreEqual(@"FACT-FINDER", section.Authentication.Postfix);
             }

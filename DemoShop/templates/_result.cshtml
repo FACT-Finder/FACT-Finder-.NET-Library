@@ -40,7 +40,7 @@
         </p>
     }
     
-    @:@campaigns.GetFeedbackFor("below breadcrumb")
+    @:@Html.Raw(campaigns.GetFeedbackFor("below breadcrumb"))
 
     var sws = PageData["singleWordSearch"] as IList<SuggestQuery>;
     
@@ -57,7 +57,7 @@
         </ul>
     }
     
-    @:@campaigns.GetFeedbackFor("above search result")
+    @:@Html.Raw(campaigns.GetFeedbackFor("above search result"))
 
     if(result != null && result.Count > 0 && !ffParameters.IsNavigation)
     {
@@ -87,7 +87,7 @@
 
     <div id="results">
     @{
-        @:@campaigns.GetFeedbackFor("above pushed product")
+        @:@Html.Raw(campaigns.GetFeedbackFor("above pushed product"))
 
         var asn = PageData["asn"] as AfterSearchNavigation;
         
@@ -133,5 +133,5 @@
         </div>
     }
     
-    @:@campaigns.GetFeedbackFor("below search result")
+    @:@Html.Raw(campaigns.GetFeedbackFor("below search result"))
 }
