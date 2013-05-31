@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AsnHintCSSClass" xml:space="preserve">
-    <value>asnHintEN</value>
+  <data name="AfterSearchNavigation" xml:space="preserve">
+    <value>&lt;h3&gt;ASN group&lt;/h3&gt;&lt;p&gt;Filter the search results here.&lt;/p&gt;&lt;p&gt;Click on the individual elements, to set up a filter that will reduce the search result to the desired element.&lt;/p&gt;&lt;p&gt;To remove the filter again, simply click on the "Remove selection" link.&lt;/p&gt;</value>
   </data>
-  <data name="MoreLinks" xml:space="preserve">
-    <value>{0} more...</value>
+  <data name="BreadCrumbTrail" xml:space="preserve">
+    <value>&lt;h3&gt;Navigation history&lt;/h3&gt;&lt;p&gt;This area shows the actions you have conducted with the search result.&lt;/p&gt;&lt;p&gt;Here the search term and the selected filters are shown.&lt;/p&gt;&lt;p&gt;By clicking the individual elements, it is possible to return to an earlier state.&lt;/p&gt;</value>
   </data>
-  <data name="RemoveFilter" xml:space="preserve">
-    <value>remove</value>
+  <data name="Paging" xml:space="preserve">
+    <value>&lt;h3&gt;Paging&lt;/h3&gt;&lt;p&gt;If the search result has several pages, you can scroll through the search result here.&lt;/p&gt;</value>
+  </data>
+  <data name="Placeholder" xml:space="preserve">
+    <value>&lt;h3&gt;Info column&lt;/h3&gt;&lt;p&gt;When you activate the Help mode, an explanatory text for the elements on this page will appear. Move the mouse cursor over an element to display the help text for that element.&lt;/p&gt;</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>&lt;h3&gt;Search result&lt;/h3&gt;&lt;p&gt;Here the products found by the search request are shown.&lt;/p&gt;&lt;p&gt;Click on the individual products, to proceed to the Details page.&lt;/p&gt;&lt;p&gt;To remove items from the search result, proceed to the "Configuration mode" at the top right. A trash can will appear, into which it is possible to drag individual items. For further information, read the Help text, which appears when hovering over the trash can.&lt;/p&gt;</value>
+  </data>
+  <data name="Sorting" xml:space="preserve">
+    <value>&lt;h3&gt;Sort order&lt;/h3&gt;&lt;p&gt;The sort order to be applied to the search result can be selected here. Sorting by relevance is the default sorting mode.&lt;/p&gt;</value>
   </data>
 </root>

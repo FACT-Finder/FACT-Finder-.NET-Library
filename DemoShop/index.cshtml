@@ -9,7 +9,7 @@
     // Uncomment as necessary for localization testing
     // (If all lines are uncommented, the request's preferred language will be used)
     
-    // Culture = "de-de"; UICulture = "de-de";
+    Culture = "de-de"; UICulture = "de-de";
     // Culture = "en-gb"; UICulture = "en-gb";
     // Culture = "en-us"; UICulture = "en-us";
     
@@ -77,12 +77,13 @@
             break;
         }
     } 
-    catch(SearchAdapter.NoQueryException e)
+    catch(SearchAdapter.NoQueryException)
     {
         Layout = "~/_LayoutEmptyResult.cshtml";
         PageData["message"] = Resources.Messages.NoQuery;
         @RenderPage("~/templates/_emptyResult.cshtml");
     }
+    // Uncomment for productive use
     /*catch(Exception e)
     {
         Layout = "~/_LayoutError.cshtml";

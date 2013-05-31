@@ -135,8 +135,14 @@
   <data name="NoResult" xml:space="preserve">
     <value>Kein Ergebnis - ein Fehler ist aufgetreten...</value>
   </data>
+  <data name="ResultCount" xml:space="preserve">
+    <value>Ihre Suche nach "{0}" ergab {1} Treffer</value>
+  </data>
   <data name="SearchTimedOut" xml:space="preserve">
     <value>Die Suche hat die maximal erlaube Zeitspanne überschritten. Das Suchergebnis ist unter Umständen nicht vollständig. Die Ursache ist ein überlasteter Demo-Suchserver.</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Schränken Sie auf eine Kategorie ein, um die Produkte von dieser Kategorie zu sehen.</value>
   </data>
   <data name="SingleWordResults" xml:space="preserve">
     <value>Für Teile Ihrer Suchanfrage konnten folgende Ergebnisanzahlen ermittelt werden:</value>

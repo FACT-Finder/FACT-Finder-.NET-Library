@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AsnHintCSSClass" xml:space="preserve">
-    <value>asnHintEN</value>
+  <data name="AfterSearchNavigation" xml:space="preserve">
+    <value>&lt;h3&gt;ASN-Gruppe&lt;/h3&gt;&lt;p&gt;Hier können Sie das Suchergebnis weiter einschränken.&lt;/p&gt;</value>
   </data>
-  <data name="MoreLinks" xml:space="preserve">
-    <value>{0} more...</value>
+  <data name="BreadCrumbTrail" xml:space="preserve">
+    <value>&lt;h3&gt;Breadcrumbs&lt;/h3&gt;&lt;p&gt;Durch die Breadcrumbs kann man zu einem vorherigen Stand der Anfrage springen.&lt;/p&gt;</value>
   </data>
-  <data name="RemoveFilter" xml:space="preserve">
-    <value>remove</value>
+  <data name="Paging" xml:space="preserve">
+    <value>&lt;h3&gt;Paging&lt;/h3&gt;&lt;p&gt;Hier können Sie durch das Suchergebnis blättern, falls es mehrere Seiten gibt.&lt;/p&gt;</value>
+  </data>
+  <data name="Placeholder" xml:space="preserve">
+    <value>&lt;h3&gt;Infospalte&lt;/h3&gt;&lt;p&gt;Wenn Sie den Infomodus aktivieren (Fragezeichensymbol oben), dann erscheint hier eine Beschreibung beim überfahren der entsprechenden Bereiche&lt;/p&gt;</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>&lt;h3&gt;Suchergebnis&lt;/h3&gt;&lt;p&gt;Hier sehen Sie die Produkte, die durch die Suchanfrage gefunden wurden.&lt;/p&gt;</value>
+  </data>
+  <data name="Sorting" xml:space="preserve">
+    <value>&lt;h3&gt;Sortierung&lt;/h3&gt;&lt;p&gt;Hier können Sie das Suchergebnis sortieren.&lt;/p&gt;</value>
   </data>
 </root>

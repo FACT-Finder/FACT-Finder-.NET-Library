@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AsnHintCSSClass" xml:space="preserve">
-    <value>asnHintEN</value>
+  <data name="NextPage" xml:space="preserve">
+    <value>next page</value>
   </data>
-  <data name="MoreLinks" xml:space="preserve">
-    <value>{0} more...</value>
+  <data name="PageMofN" xml:space="preserve">
+    <value>Page {0} or {1}</value>
   </data>
-  <data name="RemoveFilter" xml:space="preserve">
-    <value>remove</value>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>previous page</value>
+  </data>
+  <data name="ProductsPerPage" xml:space="preserve">
+    <value>{0} products per page</value>
   </data>
 </root>

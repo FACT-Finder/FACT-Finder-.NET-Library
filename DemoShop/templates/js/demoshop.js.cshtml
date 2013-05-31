@@ -53,7 +53,7 @@ $(document).ready(
 
 
 function activateManagement(){
-	$('img#managementButton').attr('src', 'files/images/demoshop/modus_management_on.png');
+	$('img#managementButton').attr('src', 'files/images/modus_management_on.png');
 
 	//activate trash if this is possible (=function exists)
 	if(typeof activateProductTrash == 'function'){
@@ -64,7 +64,7 @@ function activateManagement(){
 
 }
 function deactivateManagement(){
-	$('img#managementButton').attr('src', 'files/images/demoshop/modus_management_off.png');
+	$('img#managementButton').attr('src', 'files/images/modus_management_off.png');
 
 	if(typeof deactivateProductTrash == 'function'){
 		deactivateProductTrash();
@@ -78,7 +78,7 @@ function deactivateManagement(){
 function imageNotFound(img){
 	//if the product picture wasn't found use a default picture
 	$(img).show();
-	img.src = 'files/images/demoshop/noProductPicture.jpg';
+	img.src = 'files/images/noProductPicture.jpg';
 	img.onerror = null;
 }
 function resizePicture(img, maxWidth, maxHeight){

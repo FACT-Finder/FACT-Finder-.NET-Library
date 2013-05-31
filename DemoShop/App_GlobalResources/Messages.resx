@@ -135,8 +135,14 @@
   <data name="NoResult" xml:space="preserve">
     <value>No result - an error occurred...</value>
   </data>
+  <data name="ResultCount" xml:space="preserve">
+    <value>Your search for "{0}" matched {1} products.</value>
+  </data>
   <data name="SearchTimedOut" xml:space="preserve">
     <value>The search exceeded the maximum search time. The result might not be complete. The reason is an overstrained server.</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Select a category to see its products.</value>
   </data>
   <data name="SingleWordResults" xml:space="preserve">
     <value>For some parts of your query we obtained the following result counts:</value>

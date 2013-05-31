@@ -443,7 +443,7 @@ namespace Omikron.FactFinder.Json.FF65
                 singleWordSearch.Add(new SuggestQuery(
                     query,
                     ParametersHandler.GeneratePageLink(parameters),
-                    (int)swsData.recordData
+                    (int)swsData.recordCount
                 ));
             }
 

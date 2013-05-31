@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AsnHintCSSClass" xml:space="preserve">
-    <value>asnHintEN</value>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
   </data>
-  <data name="MoreLinks" xml:space="preserve">
-    <value>{0} more...</value>
-  </data>
-  <data name="RemoveFilter" xml:space="preserve">
-    <value>remove</value>
+  <data name="Copyright" xml:space="preserve">
+    <value>FACT-Finder is a technology of the Omikron Data Quality GmbH Copyright 2000-2013</value>
   </data>
 </root>

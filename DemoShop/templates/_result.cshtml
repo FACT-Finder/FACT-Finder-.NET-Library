@@ -4,20 +4,6 @@
 @{
     var campaigns = PageData["campaigns"] as CampaignList;
     
-    if(campaigns.HasAdvisorTree())
-    {
-        <div id="advisorCampaign">
-		    <p>Debug-Ausgabe:</p>
-		    <div style="margin-left:10px;">
-		    @foreach (AdvisorQuestion question in campaigns.GetAdvisorTree())
-            {
-                PageData["question"] = question;
-                @RenderPage("~/templates/_advisorQuestion");
-		    }
-		    </div>
-		</div>
-    }
-    
     if(campaigns.HasActiveQuestions())
     {
         <div id="advisorCampaign">
@@ -37,7 +23,6 @@
     if(result != null && result.Count > 0 && !ffParameters.IsNavigation)
     {
         var breadCrumbTrail = PageData["breadCrumbTrail"] as IList<BreadCrumbItem>;
-        bool first = true;
 
         StringBuilder sb = new StringBuilder();
         
@@ -51,7 +36,7 @@
         }
         
         <p id="breadCrumbTrail">
-            Your search for "@Html.Raw(sb.ToString())" matched @result.FoundRecordsCount products.
+            @Html.Raw(String.Format(Resources.Messages.ResultCount, sb.ToString(), result.FoundRecordsCount))
         </p>
     }
     
@@ -61,7 +46,7 @@
     
     if(sws != null && sws.Count > 0 && !ffParameters.IsNavigation)
     {
-        <p class="resultSingleQueries">For some parts of your query we found these result counts:</p>
+        <p class="resultSingleQueries">@Resources.Messages.SingleWordResults</p>
         <ul class="resultsSingleQueriesList">
         @foreach (var query in sws)
         {
@@ -78,12 +63,12 @@
     {
         var sorting = PageData["sorting"] as IList<Item>;
         <div class="optionBox sortBox">
-            Sorting:
+            @Resources.Sorting.Title:
 			<select onchange="document.location.href=this.value;">
             @foreach (Item sortItem in sorting)
             {
                 <option value="@(sortItem.Url)"@(sortItem.Selected ? " selected" : "")>
-                    @(sortItem.Selected ? sortItem.Label+" (selected)" : sortItem.Label)
+                    @(sortItem.Selected ? String.Format("{0} ({1})", sortItem.Label, Resources.Sorting.Selected) : sortItem.Label)
                 </option>
             }
             </select>
@@ -94,7 +79,7 @@
     else
     {
         <div class="paging browseTop">
-            Select a category to see the products in it.
+            @Resources.Messages.SelectCategory
         </div>
     }
     
@@ -140,7 +125,7 @@
                 foreach (Item option in productsPerPageOptions)
                 {
                     <option value="@(option.Url)"@(option.Selected ? " selected" : "")>
-                        @option.Label Products per Page
+                        @String.Format(Resources.Paging.ProductsPerPage, option.Label)
                     </option>
                 }
             }
