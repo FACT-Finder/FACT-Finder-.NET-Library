@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using log4net;
 
 namespace Omikron.FactFinder.Json.FF67
@@ -19,12 +19,22 @@ namespace Omikron.FactFinder.Json.FF67
 
         public void SetProductIDs(IList<int> productIDs)
         {
-            throw new NotImplementedException();
+            ProductIDs.Clear();
+            var idParameters = new NameValueCollection();
+            foreach(var id in productIDs)
+            {
+                ProductIDs.Add(id);
+                idParameters.Add("id", id.ToString());
+            }
+            DataProvider.SetParameters(idParameters);
+            RecommendationsUpToDate = false;
         }
 
         public void AddProductID(int productID)
         {
-            throw new NotImplementedException();
+            ProductIDs.Add(productID);
+            DataProvider.AddParameter("id", productID.ToString());
+            RecommendationsUpToDate = false;
         }
 
 

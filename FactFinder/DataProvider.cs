@@ -38,6 +38,11 @@ namespace Omikron.FactFinder
             Parameters.Add(parameters);
         }
 
+        public virtual void AddParameters(NameValueCollection parameters)
+        {
+            Parameters.Add(parameters);
+        }
+
         public virtual void ResetParameters(NameValueCollection parameters)
         {
             Parameters = parameters;
@@ -48,9 +53,19 @@ namespace Omikron.FactFinder
             Parameters[parameter.Key] = parameter.Value;
         }
 
+        public virtual void AddParameter(KeyValuePair<string, string> parameter)
+        {
+            Parameters.Add(parameter.Key, parameter.Value);
+        }
+
         public virtual void SetParameter(string name, string value)
         {
             Parameters[name] = value;
+        }
+
+        public virtual void AddParameter(string name, string value)
+        {
+            Parameters.Add(name, value);
         }
 
         public virtual void UnsetParameter(string name)
