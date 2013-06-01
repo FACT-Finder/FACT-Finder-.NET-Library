@@ -69,6 +69,11 @@ namespace Omikron.FactFinder
             Parameters.Remove(name);
         }
 
+        public void UnsetAllParameters()
+        {
+            Parameters = new NameValueCollection();
+        }
+
         public Uri GetUrlWithoutAuthentication()
         {
             var config = ConnectionSection.GetSection();

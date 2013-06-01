@@ -34,12 +34,21 @@ namespace Omikron.FactFinderTests
         }
 
         [TestMethod]
+        public void TestChannelIsSetByDefault()
+        {
+            Assert.IsNotNull(UrlBuilder.GetParameters()["channel"]);
+        }
+
+        [TestMethod]
         public void TestSetSingleParameter()
         {
+            UrlBuilder.UnsetAllParameters(); // clear default channel parameter
             UrlBuilder.SetParameter("query", "bmx");
 
-            var expectedParameters = new NameValueCollection();
-            expectedParameters["query"] = "bmx";
+            var expectedParameters = new NameValueCollection()
+            {
+                {"query", "bmx"}
+            };
 
             NameValueCollection actualParameters = UrlBuilder.GetParameters();
             Assert.IsTrue(expectedParameters.NameValueCollectionEquals(actualParameters));
@@ -114,6 +123,7 @@ namespace Omikron.FactFinderTests
         [TestMethod]
         public void TestUnsetParameter()
         {
+            UrlBuilder.UnsetAllParameters(); // clear default channel parameter
             UrlBuilder.SetParameter("query", "bmx");
             UrlBuilder.SetParameter("format", "xml");
 

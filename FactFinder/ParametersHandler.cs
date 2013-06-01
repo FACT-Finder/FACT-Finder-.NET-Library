@@ -22,8 +22,9 @@ namespace Omikron.FactFinder
             {
                 if (_requestParameters == null)
                 {
-                    _requestParameters = HttpContext.Current.Request.QueryString;
-                    _requestParameters.Add(HttpContext.Current.Request.Form);
+                    var request = HttpContextFactory.Current.Request;
+                    _requestParameters = request.QueryString;
+                    _requestParameters.Add(request.Form);
                 }
                 return _requestParameters;
             }
@@ -36,7 +37,7 @@ namespace Omikron.FactFinder
             {
                 if (_requestTarget == null)
                 {
-                    _requestTarget = HttpContext.Current.Request.Url.LocalPath;
+                    _requestTarget = HttpContextFactory.Current.Request.Url.LocalPath;
                 }
                 return _requestTarget;
             }
