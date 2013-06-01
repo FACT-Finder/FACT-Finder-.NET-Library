@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Omikron.FactFinder.Data
@@ -13,7 +14,7 @@ namespace Omikron.FactFinder.Data
         { }
 
         public ProductsPerPageOptions(
-            IDictionary<int, string> options, 
+            IDictionary<int, Uri> options, 
             int defaultOption = -1, 
             int selectedOption = -1
         )
@@ -32,7 +33,7 @@ namespace Omikron.FactFinder.Data
 
             if (options.Count == 0) // FF 6.7 may occasionally return stripped down results
             {
-                var defaultItem = new Item(defaultOption.ToString(), "", defaultOption == selectedOption);
+                var defaultItem = new Item(defaultOption.ToString(), null, defaultOption == selectedOption);
                 DefaultOption = defaultItem;
                 this.Add(defaultItem);
                 if (defaultOption == selectedOption)
@@ -41,7 +42,7 @@ namespace Omikron.FactFinder.Data
                 }
                 else
                 {
-                    var selectedItem = new Item(selectedOption.ToString(), "", true);
+                    var selectedItem = new Item(selectedOption.ToString(), null, true);
                     SelectedOption = selectedItem;
                     this.Add(selectedItem);
                 }

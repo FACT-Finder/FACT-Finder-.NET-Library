@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using log4net;
 using Omikron.FactFinder.Data;
+
 namespace Omikron.FactFinder.Json.FF67
 {
     public class JsonSearchAdapter : Omikron.FactFinder.Json.FF66.JsonSearchAdapter
@@ -101,7 +103,7 @@ namespace Omikron.FactFinder.Json.FF67
             foreach (var answerData in questionData.answers)
             {
                 string text = (string)answerData.text;
-                string parameters = ParametersHandler.GeneratePageLink(
+                Uri parameters = ParametersHandler.GeneratePageLink(
                     ParametersHandler.ParseParametersFromString((string)answerData.@params)
                 );
                 
@@ -112,7 +114,7 @@ namespace Omikron.FactFinder.Json.FF67
                 
                 answers.Add(new AdvisorAnswer(
                     text,
-                    parameters,
+                    parameters.Query,
                     subquestions
                 ));
             }

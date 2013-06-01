@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace Omikron.FactFinder.Data
@@ -23,10 +24,10 @@ namespace Omikron.FactFinder.Data
             NextPageLink = nextPageLink;
         }
 
-        public string GetPageLink(int pageNumber, string linkTarget = null)
+        public Uri GetPageLink(int pageNumber, string linkTarget = null)
         {
             if (pageNumber > PageCount || pageNumber < 1)
-                return "";
+                return null;
 
             var parameters = new NameValueCollection();
             parameters["page"] = pageNumber.ToString();

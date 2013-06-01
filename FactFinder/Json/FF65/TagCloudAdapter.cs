@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using log4net;
 using Omikron.FactFinder.Data;
@@ -38,7 +39,9 @@ namespace Omikron.FactFinder.Json.FF65
             {
                 tagCloud.Add(new TagQuery(
                     (string)tagQuery.query,
-                    (string)tagQuery.@params,
+                        // We append an arbitrary scheme and host, because properties like Query are not
+                        // defined on relative URIs.
+                    new Uri((string)tagQuery.@params, UriKind.Relative),
                     false,
                     (float)tagQuery.weight,
                     (int)tagQuery.searchCount

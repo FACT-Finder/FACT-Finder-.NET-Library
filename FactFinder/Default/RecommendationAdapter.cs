@@ -13,7 +13,7 @@ namespace Omikron.FactFinder.Default
             {
                 if (ProductIDs.Count == 0)
                 {
-                    log.Error("Recommendations cannot be loaded without a product ID.");
+                    log.Warn("Recommendations cannot be loaded without a product ID.");
                     return new ResultRecords();
                 }
 

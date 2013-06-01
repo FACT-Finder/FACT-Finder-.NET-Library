@@ -118,8 +118,8 @@ namespace Omikron.FactFinder.Json.FF65
             SearchParameters searchParameters;
             if (BreadCrumbTrail.Count > 0)
             {
-                string paramString = BreadCrumbTrail.Last().Url;
-                searchParameters = ParametersHandler.GetFactFinderParametersFromString(paramString);
+                Uri url = BreadCrumbTrail.Last().Url;
+                searchParameters = ParametersHandler.GetFactFinderParametersFromUrl(url);
             }
             else
             {
@@ -190,7 +190,7 @@ namespace Omikron.FactFinder.Json.FF65
 
                 foreach (var element in elements)
                 {
-                    string filterLink = ParametersHandler.GeneratePageLink(
+                    Uri filterLink = ParametersHandler.GeneratePageLink(
                         ParametersHandler.ParseParametersFromString((string)element.searchParams)
                     );
 
@@ -199,8 +199,7 @@ namespace Omikron.FactFinder.Json.FF65
                     if (asnGroup.Style == AsnGroupStyle.Slider)
                     {
                         NameValueCollection parameters = ParametersHandler.ParseParametersFromString((string)element.searchParams);
-                        filterLink += String.Format("&{0}=", parameters.AllKeys.Last());
-
+   
                         filter = new AsnSliderItem(
                             filterLink,
                             (float)element.absoluteMinValue,
@@ -256,7 +255,7 @@ namespace Omikron.FactFinder.Json.FF65
 
             foreach (var sortItemData in JsonData.sortsList)
             {
-                string sortLink = ParametersHandler.GeneratePageLink(
+                Uri sortLink = ParametersHandler.GeneratePageLink(
                     ParametersHandler.ParseParametersFromString(sortItemData.searchParams)
                 );
 
@@ -294,7 +293,7 @@ namespace Omikron.FactFinder.Json.FF65
             Item link = null;
             if (linkData != null)
             {
-                string pageLink = ParametersHandler.GeneratePageLink(
+                Uri pageLink = ParametersHandler.GeneratePageLink(
                     ParametersHandler.ParseParametersFromString(linkData.searchParams)
                 );
 
@@ -309,7 +308,7 @@ namespace Omikron.FactFinder.Json.FF65
 
         protected override ProductsPerPageOptions CreateProductsPerPageOptions()
         {
-            var options = new Dictionary<int, string>();
+            var options = new Dictionary<int, Uri>();
             int defaultOption = -1;
             int selectedOption = -1;
 
@@ -338,7 +337,7 @@ namespace Omikron.FactFinder.Json.FF65
                 int i = 1;
                 foreach (var breadCrumbData in JsonData.breadCrumbTrailItems)
                 {
-                    string link = ParametersHandler.GeneratePageLink(
+                    Uri link = ParametersHandler.GeneratePageLink(
                         ParametersHandler.ParseParametersFromString((string)breadCrumbData.searchParams)
                     );
 
