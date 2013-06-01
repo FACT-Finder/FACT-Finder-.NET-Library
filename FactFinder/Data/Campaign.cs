@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Omikron.FactFinder.Data
 {
@@ -104,6 +102,14 @@ namespace Omikron.FactFinder.Data
         public bool HasAdvisorTree()
         {
             return AdvisorTree.Count > 0;
+        }
+
+        /// <summary>
+        /// Use this exception class to signal that a redirect 
+        /// </summary>
+        public class RedirectException : Exception
+        {
+            public RedirectException() : base() { }
         }
     }
 }

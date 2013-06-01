@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
 using System.Web.Script.Serialization;
 using log4net;
 using Omikron.FactFinder.Data;
@@ -344,22 +343,21 @@ namespace Omikron.FactFinder.Json.FF65
                     );
 
                     string fieldName = "";
-                    string fieldUnit = "";
 
                     BreadCrumbItemType type = GetBreadCrumbItemTypeFromString((string)breadCrumbData.type);
                     if (type == BreadCrumbItemType.Filter)
                     {
                         fieldName = (string)breadCrumbData.associatedFieldName;
-                        fieldUnit = ""; // TODO: Where is this data in JSON?
                     }
                     
                     breadCrumbTrail.Add(new BreadCrumbItem(
-                        (string)breadCrumbData.value,
+                        (string)breadCrumbData.text,
                         link,
                         (i == nBreadCrumbs),
                         type,
                         fieldName,
-                        fieldUnit
+                        "" // The JSON response does not have a separate field for the unit but instead includes
+                           // it in the "text" field.
                     ));
 
                     ++i;
@@ -443,7 +441,7 @@ namespace Omikron.FactFinder.Json.FF65
                 singleWordSearch.Add(new SuggestQuery(
                     query,
                     ParametersHandler.GeneratePageLink(parameters),
-                    (int)swsData.recordData
+                    (int)swsData.recordCount
                 ));
             }
 

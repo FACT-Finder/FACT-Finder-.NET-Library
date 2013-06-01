@@ -11,7 +11,7 @@
 				<td class="previousPage">
 					@if (paging.PreviousPageLink != null) 
                     {
-						<a href="@(paging.PreviousPageLink.Url)">previous page</a>
+						<a href="@(paging.PreviousPageLink.Url)">@Resources.Paging.PreviousPage</a>
 					}
 				</td>
 				<td class="pageLinks">
@@ -26,12 +26,12 @@
 				<td class="nextPage">
 					@if (paging.NextPageLink != null)
                     {
-						<a href="@(paging.NextPageLink.Url)">next page</a>
+						<a href="@(paging.NextPageLink.Url)">@Resources.Paging.NextPage</a>
 					}
 				</td>
 			</tr>
 		</table>
     } else {
-		@:Page 1 of 1
+		@:@String.Format(Resources.Paging.PageMofN, 1, 1)
 	}	
 </div>

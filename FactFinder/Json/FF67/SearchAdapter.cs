@@ -42,9 +42,9 @@ namespace Omikron.FactFinder.Json.FF67
                             if (label != "")
                                 feedback[label] = (string)feedbackData.text;
 
-                            string nr = feedbackData.nr.ToString();
-                            if(nr != "")
-                                feedback[nr] = (string)feedbackData.text;
+                            string id = feedbackData.id.ToString();
+                            if (id != "")
+                                feedback[id] = (string)feedbackData.text;
                         }
 
                         campaign.AddFeedback(feedback);

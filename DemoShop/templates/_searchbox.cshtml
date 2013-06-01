@@ -10,13 +10,13 @@
 		<!-- input type="hidden" name="{* $channelParam *}" value="{* channel *}" / -->
 		<input type="text" name="query" id="query" value=
             @if(ffParameters.Query == "" || ffParameters.IsNavigation) {
-			    @: "enter search query..." class="default"
+			    @: "@Resources.Page.EnterSearchQuery" class="default"
 			} else {
 				@: "@(ffParameters.Query)"
             }
 			autocomplete="off" />
 
-		<input type="image" id="submit" src="@Href("~/files/images/searchbox_button_en.png")"/>
+		<input type="image" id="submit" src="@Href(String.Format("~/files/images/{0}", @Resources.Page.SearchButtonImageFileName))"/>
 		<div id="suggestLayer" class="suggestLayer"></div>
 		<script type="text/javascript">
 		<!--

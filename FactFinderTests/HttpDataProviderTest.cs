@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Omikron.FactFinder;
-using System.Net;
+﻿using System.Net;
 using log4net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Omikron.FactFinder;
 
 namespace Omikron.FactFinderTests
 {

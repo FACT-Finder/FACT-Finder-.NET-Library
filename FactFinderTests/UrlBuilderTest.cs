@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Specialized;
+using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
-using System.Collections.Specialized;
-using System.Security.Cryptography;
-using Omikron.FactFinderTests.Utility;
 using Omikron.FactFinder.Configuration;
-using System.Configuration;
-using log4net;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests
 {
@@ -34,12 +29,21 @@ namespace Omikron.FactFinderTests
         }
 
         [TestMethod]
+        public void TestChannelIsSetByDefault()
+        {
+            Assert.IsNotNull(UrlBuilder.GetParameters()["channel"]);
+        }
+
+        [TestMethod]
         public void TestSetSingleParameter()
         {
+            UrlBuilder.UnsetAllParameters(); // clear default channel parameter
             UrlBuilder.SetParameter("query", "bmx");
 
-            var expectedParameters = new NameValueCollection();
-            expectedParameters["query"] = "bmx";
+            var expectedParameters = new NameValueCollection()
+            {
+                {"query", "bmx"}
+            };
 
             NameValueCollection actualParameters = UrlBuilder.GetParameters();
             Assert.IsTrue(expectedParameters.NameValueCollectionEquals(actualParameters));
@@ -114,6 +118,7 @@ namespace Omikron.FactFinderTests
         [TestMethod]
         public void TestUnsetParameter()
         {
+            UrlBuilder.UnsetAllParameters(); // clear default channel parameter
             UrlBuilder.SetParameter("query", "bmx");
             UrlBuilder.SetParameter("format", "xml");
 

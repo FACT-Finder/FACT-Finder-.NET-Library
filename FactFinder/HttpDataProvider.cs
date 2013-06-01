@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.IO;
-using Omikron.FactFinder.Configuration;
-using System.Configuration;
-using log4net;
 using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using log4net;
+using Omikron.FactFinder.Configuration;
 
 namespace Omikron.FactFinder
 {

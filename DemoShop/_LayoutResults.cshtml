@@ -27,7 +27,7 @@
 			@RenderPage("~/templates/js/infomodus.js.cshtml")
 		</script>
 
-        @campaigns.GetFeedbackFor("html header")
+        @Html.Raw(campaigns.GetFeedbackFor("html header"))
     </head>
     <body>
         <script type="text/javascript" src="@Href("~/files/js/wz_tooltip/wz_tooltip.js")"></script>
@@ -42,7 +42,7 @@
                 </div>
 
                 <div id="SearchboxCMPlaceHolder">
-                    @campaigns.GetFeedbackFor("header")
+                    @Html.Raw(campaigns.GetFeedbackFor("header"))
                 </div>
 
                 @if(!ffParameters.IsNavigation)
@@ -54,12 +54,12 @@
             </div>
 
             <div id="content">
-				<div id="asnColumn" class="asnHintEN" >
-					@campaigns.GetFeedbackFor("above asn")
+				<div id="asnColumn" class="@Resources.AfterSearchNavigation.AsnHintCSSClass" >
+					@Html.Raw(campaigns.GetFeedbackFor("above asn"))
 
 					@RenderPage("~/templates/_asn.cshtml")
 
-					@campaigns.GetFeedbackFor("before asn")
+					@Html.Raw(campaigns.GetFeedbackFor("below asn"))
 				</div>
 
 				<div id="resultColumn">
@@ -67,18 +67,17 @@
                 </div>
 
 				<div id="infoColumn">
-					@campaigns.GetFeedbackFor("above info panel")
+					@Html.Raw(campaigns.GetFeedbackFor("above info panel"))
 
 					@if (!ffParameters.IsNavigation) {
 						<div id="infoPlaceHolder">
-							<h3>Info column</h3>
-                            <p>When you activate the Help mode, an explanatory text for the elements on this page will appear. Move the mouse cursor over an element to display the help text for that element.</p>
+							@Html.Raw(Resources.InfoMode.Placeholder)
 						</div>
                     }
 
 					@if (asn.HasPreviewImages() && campaigns.HasPushedProducts()) {
 						<div id="pushedProducts">
-							<p>Our Topsellers</p>
+							<p>@Resources.Products.PushedProducts</p>
 
 							@foreach (Record record in campaigns.GetPushedProducts()) {
                                 PageData["record"] = record;
