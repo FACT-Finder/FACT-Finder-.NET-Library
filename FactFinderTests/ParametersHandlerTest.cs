@@ -1,12 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Specialized;
+using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinderTests.Utility;
-using log4net;
-using System.Collections.Specialized;
 
 namespace Omikron.FactFinderTests
 {

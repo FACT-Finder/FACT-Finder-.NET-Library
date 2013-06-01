@@ -53,7 +53,7 @@ $(document).ready(
 
 
 function activateManagement(){
-	$('img#managementButton').attr('src', 'files/images/demoshop/modus_management_on.png');
+	$('img#managementButton').attr('src', 'files/images/modus_management_on.png');
 
 	//activate trash if this is possible (=function exists)
 	if(typeof activateProductTrash == 'function'){
@@ -64,7 +64,7 @@ function activateManagement(){
 
 }
 function deactivateManagement(){
-	$('img#managementButton').attr('src', 'files/images/demoshop/modus_management_off.png');
+	$('img#managementButton').attr('src', 'files/images/modus_management_off.png');
 
 	if(typeof deactivateProductTrash == 'function'){
 		deactivateProductTrash();
@@ -78,7 +78,7 @@ function deactivateManagement(){
 function imageNotFound(img){
 	//if the product picture wasn't found use a default picture
 	$(img).show();
-	img.src = 'files/images/demoshop/noProductPicture.jpg';
+	img.src = 'files/images/noProductPicture.jpg';
 	img.onerror = null;
 }
 function resizePicture(img, maxWidth, maxHeight){
@@ -91,7 +91,7 @@ function resizePicture(img, maxWidth, maxHeight){
 function hideDefaultInputText(){
 	var input = document.forms['search_word_inc']['query'];
 	//if the default text is in the field remove it and remove css-class
-	if($.trim(input.value) == 'enter search query...'){
+	if($.trim(input.value) == '@(Resources.Page.EnterSearchQuery)'){
 		input.value = '';
 		$(input).removeClass('default');
 	}
@@ -100,7 +100,7 @@ function checkInputText(){
 	var input = document.forms['search_word_inc']['query'];
 	if($.trim(input.value) == ''){
 		//if there is no query write default text and add css class.
-		input.value = 'enter search query...';
+		input.value = '@(Resources.Page.EnterSearchQuery)';
 		$(input).addClass('default');
 	}
 }

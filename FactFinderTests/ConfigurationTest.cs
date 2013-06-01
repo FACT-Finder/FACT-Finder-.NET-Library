@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+﻿using System.Collections.Generic;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Configuration;
@@ -39,7 +36,7 @@ namespace Omikron.FactFinderTests
 
                 Assert.AreEqual(@"user", section.Authentication.UserName);
                 Assert.AreEqual(@"userpw", section.Authentication.Password);
-                Assert.AreEqual(AuthenticationType.Simple, section.Authentication.Type);
+                Assert.AreEqual(AuthenticationType.Advanced, section.Authentication.Type);
                 Assert.AreEqual(@"FACT-FINDER", section.Authentication.Prefix);
                 Assert.AreEqual(@"FACT-FINDER", section.Authentication.Postfix);
             }

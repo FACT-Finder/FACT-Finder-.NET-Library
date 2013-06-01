@@ -1,4 +1,6 @@
-﻿@using Omikron.FactFinder.Data
+﻿@using System.Globalization
+
+@using Omikron.FactFinder.Data
 
 @{
     var asn = PageData["asn"] as AfterSearchNavigation;
@@ -24,15 +26,17 @@
 							e.innerHTML = input;
 							return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 						}
-						
+						@*We use the ToString() versions that take an IFormatProvider and supply the
+                          invariant culture, so that floating point numbers are serialized with a decimal
+                          point regardless of the current culture.*@
 						function oneTouchSliderOnLoad() {
 							oneTouchSlider.addSlider({
 								hostElementId: 'price-slider',
-								leftBorder: @(slider.AbsoluteMinimum),
-							    rightBorder: @(slider.AbsoluteMaximum),
-							    currentLeft: @(slider.SelectedMinimum),
-							    currentRight: @(slider.SelectedMaximum),
-							    unit: htmlDecode('&euro;'),
+								leftBorder: @(slider.AbsoluteMinimum.ToString(CultureInfo.InvariantCulture)),
+							    rightBorder: @(slider.AbsoluteMaximum.ToString(CultureInfo.InvariantCulture)),
+							    currentLeft: @(slider.SelectedMinimum.ToString(CultureInfo.InvariantCulture)),
+							    currentRight: @(slider.SelectedMaximum.ToString(CultureInfo.InvariantCulture)),
+							    unit: '@(group.Unit)',
 								callback: sliderSelect
 							});
 						}
@@ -53,7 +57,7 @@
                     {
                         <p class="asnElement selected lvl@(item.ClusterLevel)">
                             <a href="@(item.Url)">@item.Label @group.Unit<br />
-                            <span>(remove filter)</span></a>
+                            <span>(@Resources.AfterSearchNavigation.RemoveFilter)</span></a>
                         </p>
                     }
                     else
@@ -68,14 +72,14 @@
                                 }
                                 </a>
                             </p>
-                                linkCount++;
+                            linkCount++;
                         }
                         else
                         {
                             if (linkCount == group.DetailedLinkCount)
                             {
                                 @:<select onchange="if (this.value = (this.value != \'\') {document.location.href=this.value;}">
-                                    <option value="">@(group.Count - linkCount) more...</option>
+                                    <option value="">@String.Format(Resources.AfterSearchNavigation.MoreLinks, group.Count - linkCount)</option>
                             }
                             <option value="@(item.Url)">
                                 @item.Label @group.Unit
@@ -84,7 +88,7 @@
                                     @: (@item.MatchCount)
                                 }
                             </option>
-                                linkCount++;
+                            linkCount++;
                         }
                     }
                 }
@@ -99,7 +103,7 @@
     
             </div>
     
-    		@:@campaigns.GetFeedbackFor("below each asn group")
+    		@:@Html.Raw(campaigns.GetFeedbackFor("below each asn group"))
         }
     }
 }

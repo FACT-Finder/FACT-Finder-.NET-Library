@@ -1,12 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
-using Omikron.FactFinder.Json.FF68;
 using Omikron.FactFinder.Data;
-using log4net;
+using Omikron.FactFinder.Json.FF68;
 
 namespace Omikron.FactFinderTests.Json.FF68
 {

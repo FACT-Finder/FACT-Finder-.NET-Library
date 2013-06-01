@@ -61,7 +61,7 @@ namespace Omikron.FactFinder.Json.FF66
                 var item = new SingleWordSearchQuery(
                     query,
                     ParametersHandler.GeneratePageLink(parameters),
-                    (int)swsData.recordData
+                    (int)swsData.recordCount
                 );
 
                 int position = 1;

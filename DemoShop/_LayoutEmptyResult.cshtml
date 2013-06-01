@@ -34,19 +34,19 @@
 
                 <div id="SearchboxCMPlaceHolder">
                     @if(campaigns != null) { 
-                        @:@campaigns.GetFeedbackFor("header")
+                        @:@Html.Raw(campaigns.GetFeedbackFor("header"))
                     }
                 </div>
             </div>
 
             <div id="content">
-				<div id="asnColumn" class="asnHintEN" >
+				<div id="asnColumn">
                     @if(campaigns != null) { 
-                        @:@campaigns.GetFeedbackFor("above asn")
+                        @:@Html.Raw(campaigns.GetFeedbackFor("above asn"))
                     }
                     @if (campaigns != null)
                     { 
-                        @:@campaigns.GetFeedbackFor("below asn")
+                        @:@Html.Raw(campaigns.GetFeedbackFor("below asn"))
                     }
 				</div>
 
@@ -56,7 +56,7 @@
 
 				<div id="infoColumn">
                     @if(campaigns != null) { 
-                        @:@campaigns.GetFeedbackFor("above info panel")
+                        @:@Html.Raw(campaigns.GetFeedbackFor("above info panel"))
                     }
                     <div id="infoPlaceHolder"></div>
 				</div>

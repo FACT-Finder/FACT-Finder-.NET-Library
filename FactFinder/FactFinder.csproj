@@ -89,6 +89,7 @@
     <Compile Include="Default\RecommendationAdapter.cs" />
     <Compile Include="Default\TagCloudAdapter.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="HttpContextFactory.cs" />
     <Compile Include="HttpDataProvider.cs" />
     <Compile Include="DataProvider.cs" />
     <Compile Include="IUnixClock.cs" />
