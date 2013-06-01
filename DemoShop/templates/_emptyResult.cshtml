@@ -1,7 +1,7 @@
 ﻿@using Omikron.FactFinder.Data
 
 @{ 
-    var campaigns = PageData["campaigns"] as CampaignList; 
+    var campaigns = PageData["campaigns"] as CampaignList ?? new CampaignList(); 
 }
 
 <p id="breadCrumbTrail">@Html.Raw(PageData["message"])</p>
