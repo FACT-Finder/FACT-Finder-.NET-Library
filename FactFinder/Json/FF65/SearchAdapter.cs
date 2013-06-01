@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
 using System.Web.Script.Serialization;
 using log4net;
 using Omikron.FactFinder.Data;

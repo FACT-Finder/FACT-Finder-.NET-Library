@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Omikron.FactFinder.Default;
-using Omikron.FactFinder.Data;
-using System.Web.Script.Serialization;
-using Omikron.FactFinder.Json.Helper;
+﻿using System.Web.Script.Serialization;
 using log4net;
+using Omikron.FactFinder.Data;
+using Omikron.FactFinder.Default;
+using Omikron.FactFinder.Json.Helper;
 
 namespace Omikron.FactFinder.Json.FF65
 {

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using log4net;
+﻿using log4net;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
