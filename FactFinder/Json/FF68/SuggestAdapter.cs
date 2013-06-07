@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using log4net;
 using Omikron.FactFinder.Data;
 
@@ -33,7 +34,7 @@ namespace Omikron.FactFinder.Json.FF68
                     ),
                     (int)suggestData.hitCount,
                     (string)suggestData.type,
-                    (string)suggestData.image
+                    new Uri((string)suggestData.image, UriKind.RelativeOrAbsolute)
                 ));
             }
 

@@ -387,7 +387,7 @@ namespace Omikron.FactFinder.Json.FF65
                 var campaign = new Campaign(
                     (string)campaignData.name,
                     (string)campaignData.category,
-                    (string)campaignData.target.destination
+                    new Uri((string)campaignData.target.destination, UriKind.RelativeOrAbsolute)
                 );
 
                 if (campaignData.feedbackTexts.Count > 0)

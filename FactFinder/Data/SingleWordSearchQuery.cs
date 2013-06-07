@@ -12,7 +12,7 @@ namespace Omikron.FactFinder.Data
             Uri url,
             int hitCount = 0,
             string type = "",
-            string imageUrl = ""
+            Uri imageUrl = null
         )
             : base(query, url, hitCount, type, imageUrl)
         {

@@ -6,8 +6,8 @@
 @using Omikron.FactFinder.Json.FF68
 
 
-
 @{
+    log4net.Config.XmlConfigurator.Configure();
     // Uncomment as necessary for localization testing
     // (If all lines are uncommented, the request's preferred language will be used)
     
@@ -37,7 +37,7 @@
 
         if (PageData["campaigns"].HasRedirect())
         {
-            Response.Redirect(PageData["campaigns"].GetRedirectUrl(), true); // execution ends here
+            Response.Redirect(PageData["campaigns"].GetRedirectUrl().ToString(), true); // execution ends here
         }
 
         PageData["status"] = searchAdapter.SearchStatus;

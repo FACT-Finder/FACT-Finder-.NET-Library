@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web.Script.Serialization;
 using log4net;
@@ -56,7 +57,7 @@ namespace Omikron.FactFinder.Json.FF65
                     ParametersHandler.GeneratePageLink(parameters),
                     (int)suggestData.hitCount,
                     (string)suggestData.type,
-                    (string)suggestData.imageUrl
+                    new Uri((string)suggestData.imageUrl, UriKind.RelativeOrAbsolute)
                 ));
             }
 

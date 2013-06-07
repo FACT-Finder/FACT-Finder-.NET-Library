@@ -27,7 +27,7 @@ namespace Omikron.FactFinder.Json.FF67
                 var campaign = new Campaign(
                     (string)campaignData.name,
                     (string)campaignData.category,
-                    (string)campaignData.target.destination
+                    new Uri((string)campaignData.target.destination, UriKind.RelativeOrAbsolute)
                 );
 
                 string flavor = (string)campaignData.flavour;

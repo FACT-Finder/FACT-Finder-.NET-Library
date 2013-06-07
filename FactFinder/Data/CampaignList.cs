@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Omikron.FactFinder.Data
 {
@@ -25,13 +26,13 @@ namespace Omikron.FactFinder.Data
             return false;
         }
 
-        public string GetRedirectUrl()
+        public Uri GetRedirectUrl()
         {
             foreach (var campaign in this)
                 if (campaign.HasRedirect())
                     return campaign.RedirectUrl;
 
-            return "";
+            return null;
         }
 
         public bool HasPushedProducts()
