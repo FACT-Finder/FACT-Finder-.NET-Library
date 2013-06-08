@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Net;
 using System.Web;
 using log4net;
 using log4net.Config;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Omikron.FactFinder;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests
 {
@@ -17,6 +19,7 @@ namespace Omikron.FactFinderTests
         {
             XmlConfigurator.Configure();
             HttpContextFactory.Current = GetMockedHttpContext();
+            WebRequest.RegisterPrefix("http://", new TestWebRequestCreate());
         }
 
         private TestContext _testContext;
@@ -42,7 +45,7 @@ namespace Omikron.FactFinderTests
             var request  = new Mock<HttpRequestBase>();
             var response = new Mock<HttpResponseBase>();
             var session  = new Mock<HttpSessionStateBase>();
-            var server = new Mock<HttpServerUtilityBase>();
+            var server   = new Mock<HttpServerUtilityBase>();
 
             request.Setup(req => req.QueryString).Returns(new NameValueCollection());
             request.Setup(req => req.Form).Returns(new NameValueCollection());

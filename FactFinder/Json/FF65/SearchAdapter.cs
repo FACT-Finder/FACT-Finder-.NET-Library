@@ -17,14 +17,15 @@ namespace Omikron.FactFinder.Json.FF65
 
         static JsonSearchAdapter()
         {
-            sortingDescriptions = new Dictionary<string, string>()
+            // TODO: Move this to i18n
+            /*sortingDescriptions = new Dictionary<string, string>()
             {
                 { "sort.relevanceDescription", "Relevance" },
                 { "sort.titleAsc", "Name (A-Z)" },
                 { "sort.titleDesc", "Name (Z-A)" },
                 { "sort.priceAsc", "Increasing Price" },
                 { "sort.priceDesc", "Decreasing Price" }
-            };
+            };*/
             log = LogManager.GetLogger(typeof(JsonSearchAdapter));
         }
 
@@ -44,8 +45,7 @@ namespace Omikron.FactFinder.Json.FF65
                 {
                     var jsonSerializer = new JavaScriptSerializer();
                     jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-                    dynamic temp = jsonSerializer.Deserialize(base.Data, typeof(object));
-                    _jsonData = temp.searchResult;
+                    _jsonData = jsonSerializer.Deserialize(base.Data, typeof(object));
                 }
                 return _jsonData;
             }
@@ -77,7 +77,7 @@ namespace Omikron.FactFinder.Json.FF65
                 _articleNumberSearchStatus = SearchStatus.NoResult;
                 return;
             }
-            switch ((string)JsonData.resultArticleNumberStatus)
+            switch ((string)JsonData.searchResult.resultArticleNumberStatus)
             {
             case "nothingFound":
                 _isArticleNumberSearch = true;
@@ -97,12 +97,17 @@ namespace Omikron.FactFinder.Json.FF65
 
         protected override bool CreateIsSearchTimedOut()
         {
-            return (bool)JsonData.timedOut;
+            return (bool)JsonData.searchResult.timedOut;
+        }
+
+        protected override int CreateSearchTime()
+        {
+            return (int)JsonData.searchResult.searchTime;
         }
 
         protected override SearchStatus CreateSearchStatus()
         {
-            switch ((string)JsonData.resultStatus)
+            switch ((string)JsonData.searchResult.resultStatus)
             {
             case "nothingFound":
                 return SearchStatus.EmptyResult;
@@ -133,15 +138,17 @@ namespace Omikron.FactFinder.Json.FF65
             var result = new List<Record>();
             int resultCount = 0;
 
-            if (JsonData.records.Count > 0)
+            var searchResultData = JsonData.searchResult;
+
+            if (searchResultData.records.Count > 0)
             {
-                resultCount = (int)JsonData.resultCount;
+                resultCount = (int)searchResultData.resultCount;
 
                 int positionOffset = (Paging.CurrentPage - 1) * Int32.Parse(ProductsPerPageOptions.SelectedOption.Label);
 
                 int positionCounter = 1;
 
-                foreach (var recordData in JsonData.records)
+                foreach (var recordData in searchResultData.records)
                 {
                     int position = positionCounter + positionOffset;
                     int originalPosition = position;
@@ -172,7 +179,7 @@ namespace Omikron.FactFinder.Json.FF65
         {
             var asn = new List<AsnGroup>();
 
-            foreach (var groupData in JsonData.groups)
+            foreach (var groupData in JsonData.searchResult.groups)
             {
                 string groupName = (string)groupData.name;
                 string groupUnit = (string)groupData.unit;
@@ -249,18 +256,18 @@ namespace Omikron.FactFinder.Json.FF65
             }
         }
 
-        protected override IList<Item> CreateSorting()
+        protected override IList<Item>CreateSorting()
         {
             var sorting = new List<Item>();
 
-            foreach (var sortItemData in JsonData.sortsList)
+            foreach (var sortItemData in JsonData.searchResult.sortsList)
             {
                 Uri sortLink = ParametersHandler.GeneratePageLink(
                     ParametersHandler.ParseParametersFromString(sortItemData.searchParams)
                 );
 
                 sorting.Add(new Item(
-                    sortingDescriptions[sortItemData.description],
+                    (string)sortItemData.description,
                     sortLink,
                     (bool)sortItemData.selected
                 ));
@@ -271,16 +278,16 @@ namespace Omikron.FactFinder.Json.FF65
 
         protected override Paging CreatePaging()
         {
-
+            var searchResultData = JsonData.searchResult;
             var paging = new Paging(
-                (int)JsonData.paging.currentPage,
-                (int)JsonData.paging.pageCount,
-                BuildPageLink(JsonData.paging.previousLink),
-                BuildPageLink(JsonData.paging.nextLink),
+                (int)searchResultData.paging.currentPage,
+                (int)searchResultData.paging.pageCount,
+                BuildPageLink(searchResultData.paging.previousLink),
+                BuildPageLink(searchResultData.paging.nextLink),
                 ParametersHandler
             );
 
-            foreach (var pageLinkData in JsonData.paging.pageLinks)
+            foreach (var pageLinkData in searchResultData.paging.pageLinks)
             {
                 paging.Add(BuildPageLink(pageLinkData));
             }
@@ -312,7 +319,7 @@ namespace Omikron.FactFinder.Json.FF65
             int defaultOption = -1;
             int selectedOption = -1;
 
-            foreach(var optionData in JsonData.resultsPerPageList)
+            foreach(var optionData in JsonData.searchResult.resultsPerPageList)
             {
                 int value = (int)optionData.value;
                 if ((bool)optionData.@default)
@@ -331,11 +338,12 @@ namespace Omikron.FactFinder.Json.FF65
         protected override IList<BreadCrumbItem> CreateBreadCrumbTrail()
         {
             var breadCrumbTrail = new List<BreadCrumbItem>();
-            int nBreadCrumbs = JsonData.breadCrumbTrailItems.Count;
+            var breadCrumbs = JsonData.searchResult.breadCrumbTrailItems;
+            int nBreadCrumbs = breadCrumbs.Count;
             if (nBreadCrumbs > 0)
             {
                 int i = 1;
-                foreach (var breadCrumbData in JsonData.breadCrumbTrailItems)
+                foreach (var breadCrumbData in breadCrumbs)
                 {
                     Uri link = ParametersHandler.GeneratePageLink(
                         ParametersHandler.ParseParametersFromString((string)breadCrumbData.searchParams)
@@ -382,55 +390,76 @@ namespace Omikron.FactFinder.Json.FF65
         {
             var campaigns = new List<Campaign>();
 
-            foreach (var campaignData in JsonData.campaigns)
+            if (JsonData.ContainsKey("campaigns"))
             {
-                var campaign = new Campaign(
-                    (string)campaignData.name,
-                    (string)campaignData.category,
-                    new Uri((string)campaignData.target.destination, UriKind.RelativeOrAbsolute)
-                );
-
-                if (campaignData.feedbackTexts.Count > 0)
+                foreach (var campaignData in JsonData.campaigns)
                 {
-                    var feedback = new Dictionary<string, string>();
+                    var campaign = CreateEmptyCampaignObject(campaignData);
 
-                    foreach (var feedbackData in campaignData.feedbackTexts)
-                    {
-                        string nr = feedbackData.nr.ToString();
-                        feedback[nr] = (string)feedbackData.text;
-                    }
+                    FillCampaignObject(campaign, campaignData);
 
-                    campaign.AddFeedback(feedback);
+                    campaigns.Add(campaign);
                 }
-
-                if (campaignData.pushedProductsRecords.Count > 0)
-                {
-                    var pushedProducts = new List<Record>();
-
-                    foreach(var recordData in campaignData.pushedProductsRecords)
-                    {
-                        var record = new Record((string)recordData.id);
-                        record.SetFieldValues(recordData.record.AsDictionary());
-                        pushedProducts.Add(record);
-                    }
-
-                    campaign.AddPushedProducts(pushedProducts);
-                }
-
-                campaigns.Add(campaign);
             }
 
             return new CampaignList(campaigns);
+        }
+
+        protected virtual Campaign CreateEmptyCampaignObject(dynamic campaignData)
+        {
+            return new Campaign(
+                (string)campaignData.name,
+                (string)campaignData.category,
+                new Uri((string)campaignData.target.destination, UriKind.RelativeOrAbsolute)
+            );
+        }
+
+        protected virtual void FillCampaignObject(Campaign campaign, dynamic campaignData)
+        {
+            FillCampaignWithFeedback(campaign, campaignData);
+            FillCampaignWithPushedProducts(campaign, campaignData);
+        }
+
+        protected virtual void FillCampaignWithFeedback(Campaign campaign, dynamic campaignData)
+        {
+            if (campaignData.feedbackTexts.Count > 0)
+            {
+                var feedback = new Dictionary<string, string>();
+
+                for (int i = 0; i < campaignData.feedbackTexts.Count; i++)
+                {
+                    feedback[i.ToString()] = (string)(campaignData.feedbackTexts[i]);
+                }
+
+                campaign.AddFeedback(feedback);
+            }
+        }
+        protected virtual void FillCampaignWithPushedProducts(Campaign campaign, dynamic campaignData)
+        {
+
+            if (campaignData.pushedProducts.Count > 0)
+            {
+                var pushedProducts = new List<Record>();
+
+                foreach (var recordData in JsonData.pushedProducts)
+                {
+                    var record = new Record((string)recordData.id);
+                    record.SetFieldValues(recordData.record.AsDictionary());
+                    pushedProducts.Add(record);
+                }
+
+                campaign.AddPushedProducts(pushedProducts);
+            }
         }
 
         protected override IList<SuggestQuery> CreateSingleWordSearch()
         {
             var singleWordSearch = new List<SuggestQuery>();
 
-            if (JsonData.singleWordResults == null)
+            if (JsonData.searchResult.singleWordResults == null)
                 return singleWordSearch;
 
-            foreach (var swsData in JsonData.singleWordResults)
+            foreach (var swsData in JsonData.searchResult.singleWordResults)
             {
                 string query = (string)swsData.word;
                 var parameters = new NameValueCollection()

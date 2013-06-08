@@ -77,10 +77,20 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="Utility\ExtensionMethods.cs" />
     <Compile Include="UrlBuilderTest.cs" />
-    <Compile Include="Utility\TestWebRequest.cs" />
     <Compile Include="Utility\TestWebRequestCreate.cs" />
-    <Compile Include="Utility\TestWebResponse.cs" />
     <Content Include="Properties\AssemblyInfo.cs" />
+    <None Include="Responses\Json65\Search_query=campaigns.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json66\Search_query=campaigns.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json67\Search_query=campaigns.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Raw\WhatsHot_do=getTagCloud.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FactFinder\FactFinder.csproj">
@@ -91,6 +101,18 @@
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\Search_query=bmx.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json67\Search_query=bmx.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json65\Search_query=bmx.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json66\Search_query=bmx.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

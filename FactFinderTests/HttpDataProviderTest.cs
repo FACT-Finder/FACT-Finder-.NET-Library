@@ -2,6 +2,7 @@
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests
 {
@@ -15,6 +16,7 @@ namespace Omikron.FactFinderTests
         public static void InitializeClass(TestContext context)
         {
             log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/Raw/");
         }
 
         [TestInitialize]

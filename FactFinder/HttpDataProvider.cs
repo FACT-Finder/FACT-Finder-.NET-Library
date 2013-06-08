@@ -72,7 +72,7 @@ namespace Omikron.FactFinder
 
             Uri url = GetAuthenticationUrl(); 
 
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url.ToString());
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.KeepAlive = false;
             webRequest.Method = "GET";
 
@@ -83,7 +83,7 @@ namespace Omikron.FactFinder
                 webRequest.Headers.Add("Accept-Language", config.Language);
             }
 
-            log.InfoFormat("Sending request to URL: {0}", url.ToString());
+            log.InfoFormat("Sending request to URL: {0}", url);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
 
             LastStatusCode = webResponse.StatusCode;

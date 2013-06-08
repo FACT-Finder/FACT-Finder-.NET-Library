@@ -23,15 +23,17 @@ namespace Omikron.FactFinder.Json.FF66
             var result = new List<Record>();
             int resultCount = 0;
 
-            if (JsonData.records.Count > 0)
+            var searchResultData = JsonData.searchResult;
+
+            if (searchResultData.records.Count > 0)
             {
-                resultCount = (int)JsonData.resultCount;
+                resultCount = (int)searchResultData.resultCount;
 
                 int positionOffset = (Paging.CurrentPage - 1) * Int32.Parse(ProductsPerPageOptions.SelectedOption.Label);
 
                 int positionCounter = 1;
 
-                foreach (var recordData in JsonData.records)
+                foreach (var recordData in searchResultData.records)
                 {
                     int position = positionCounter + positionOffset;
                     ++positionCounter;
@@ -47,10 +49,10 @@ namespace Omikron.FactFinder.Json.FF66
         {
             var singleWordSearch = new List<SuggestQuery>();
 
-            if (JsonData.singleWordResults == null)
+            if (JsonData.searchResult.singleWordResults == null)
                 return singleWordSearch;
 
-            foreach (var swsData in JsonData.singleWordResults)
+            foreach (var swsData in JsonData.searchResult.singleWordResults)
             {
                 string query = (string)swsData.word;
                 var parameters = new NameValueCollection()
