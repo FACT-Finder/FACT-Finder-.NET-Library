@@ -35,6 +35,13 @@ namespace Omikron.FactFinderTests.Json.FF68
         {
             SuggestAdapter.SetParameter("query", "bmx");
             var suggestions = SuggestAdapter.Suggestions;
+
+            Assert.AreEqual(4, suggestions.Count);
+            Assert.AreEqual("bmx sophie", suggestions[0].Query);
+            Assert.AreEqual("searchTerm", suggestions[0].Type);
+            Assert.AreEqual("brand", suggestions[1].Type);
+            Assert.AreEqual("category", suggestions[2].Type);
+            Assert.AreEqual("productName", suggestions[3].Type);
         }
     }
 }

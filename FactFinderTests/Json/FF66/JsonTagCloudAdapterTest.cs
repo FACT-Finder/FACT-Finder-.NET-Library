@@ -34,6 +34,11 @@ namespace Omikron.FactFinderTests.Json.FF66
         public void TestGetTagCloud()
         {
             var tagCloud = TagCloudAdapter.TagCloud;
+
+            Assert.AreEqual(5, tagCloud.Count);
+            Assert.AreEqual(0.0196, tagCloud[0].Weight, 0.00001);
+            Assert.AreEqual(265, tagCloud[0].SearchCount);
+            Assert.AreEqual("26 zoll", tagCloud[0].Label);
         }
     }
 }

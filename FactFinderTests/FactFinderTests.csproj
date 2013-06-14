@@ -56,9 +56,6 @@
   <ItemGroup>
     <Compile Include="ExtensionMethodsTest.cs" />
     <Compile Include="HttpDataProviderTest.cs" />
-    <Compile Include="Json\FF65\JsonSuggestAdapterTest.cs" />
-    <Compile Include="Json\FF65\JsonSearchAdapterTest.cs" />
-    <Compile Include="Json\FF65\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonSearchAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonSuggestAdapterTest.cs" />
@@ -71,7 +68,6 @@
     <Compile Include="Json\FF68\JsonTagCloudAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonTagCloudAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonTagCloudAdapterTest.cs" />
-    <Compile Include="Json\FF65\JsonTagCloudAdapterTest.cs" />
     <Compile Include="ParametersHandlerTest.cs" />
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="BaseTest.cs" />
@@ -79,13 +75,55 @@
     <Compile Include="UrlBuilderTest.cs" />
     <Compile Include="Utility\TestWebRequestCreate.cs" />
     <Content Include="Properties\AssemblyInfo.cs" />
-    <None Include="Responses\Json65\Search_query=campaigns.json">
+    <None Include="Responses\Json66\Suggest_query=bmx.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json66\Search_query=bmx.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Json66\Search_query=campaigns.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Responses\Json67\Recommender_do=getRecommendation_id=274036,233431_idsOnly=false.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json67\Recommender_do=getRecommendation_id=233431_idsOnly=false.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json67\Recommender_do=getRecommendation_id=274036_idsOnly=true.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json67\Recommender_do=getRecommendation_id=274036_idsOnly=false.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Responses\Json67\Search_query=campaigns.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json67\Suggest_query=bmx.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json67\WhatsHot_do=getTagCloud.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\Recommender_do=getRecommendation_id=233431_idsOnly=false.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\Recommender_do=getRecommendation_id=274036,233431_idsOnly=false.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\Recommender_do=getRecommendation_id=274036_idsOnly=false.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\Recommender_do=getRecommendation_id=274036_idsOnly=true.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\Search_query=campaigns.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\Suggest_query=bmx.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\Json68\WhatsHot_do=getTagCloud.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Raw\WhatsHot_do=getTagCloud.json">
@@ -109,10 +147,7 @@
     <None Include="Responses\Json67\Search_query=bmx.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json65\Search_query=bmx.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Responses\Json66\Search_query=bmx.json">
+    <None Include="Responses\Json66\WhatsHot_do=getTagCloud.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

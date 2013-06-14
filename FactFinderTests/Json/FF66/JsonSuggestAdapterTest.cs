@@ -34,7 +34,12 @@ namespace Omikron.FactFinderTests.Json.FF66
         public void TestGetSuggestions()
         {
             SuggestAdapter.SetParameter("query", "bmx");
-            //var suggestions = SuggestAdapter.Suggestions;
+            var suggestions = SuggestAdapter.Suggestions;
+
+            Assert.AreEqual(3, suggestions.Count);
+            Assert.AreEqual("BMX", suggestions[0].Query);
+            Assert.AreEqual("category" ,suggestions[0].Type);
+            Assert.AreEqual("productName", suggestions[2].Type);
         }
     }
 }

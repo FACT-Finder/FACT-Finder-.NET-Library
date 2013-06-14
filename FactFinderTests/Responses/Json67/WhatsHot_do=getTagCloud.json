@@ -1,0 +1,32 @@
+﻿[
+    {
+        "params": "/FACT-Finder6.7/WhatsHot.ff?seoPath=%2F26+zoll%2Fq&channel=de",
+        "query": "26 zoll",
+        "searchCount": 265,
+        "weight": 0.0196
+    },
+    {
+        "params": "/FACT-Finder6.7/WhatsHot.ff?seoPath=%2F28%2Bzoll%2Bdamen%2Fq&channel=de",
+        "query": "28+zoll+damen",
+        "searchCount": 1515,
+        "weight": 0.7002
+    },
+    {
+        "params": "/FACT-Finder6.7/WhatsHot.ff?seoPath=%2Fabus%2Fq&channel=de",
+        "query": "abus",
+        "searchCount": 292,
+        "weight": 0.0575
+    },
+    {
+        "params": "/FACT-Finder6.7/WhatsHot.ff?seoPath=%2Fbell%2Fq&channel=de",
+        "query": "bell",
+        "searchCount": 257,
+        "weight": 0.0077
+    },
+    {
+        "params": "/FACT-Finder6.7/WhatsHot.ff?seoPath=%2Fbergamont%2Fq&channel=de",
+        "query": "bergamont",
+        "searchCount": 367,
+        "weight": 0.1467
+    }
+]

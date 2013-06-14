@@ -47,8 +47,8 @@ namespace Omikron.FactFinderTests.Utility
             {
                 sb.AppendFormat(
                     "_{0}={1}", 
-                    HttpUtility.UrlEncode(key), 
-                    HttpUtility.UrlEncode(parameters[key])
+                    key, 
+                    parameters[key]
                 );
             }
 

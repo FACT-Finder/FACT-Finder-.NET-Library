@@ -66,7 +66,7 @@ namespace Omikron.FactFinder.Data
 
         public bool HasRedirect()
         {
-            return RedirectUrl != null;
+            return RedirectUrl != null && RedirectUrl.ToString() != "";
         }
 
         public bool HasPushedProducts()
