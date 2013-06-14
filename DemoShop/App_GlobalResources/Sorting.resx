@@ -120,6 +120,21 @@
   <data name="Selected" xml:space="preserve">
     <value>selected</value>
   </data>
+  <data name="sort_priceAsc" xml:space="preserve">
+    <value>Increasing Price</value>
+  </data>
+  <data name="sort_priceDesc" xml:space="preserve">
+    <value>Decreasing Price</value>
+  </data>
+  <data name="sort_relevanceDescription" xml:space="preserve">
+    <value>Relevance</value>
+  </data>
+  <data name="sort_titleAsc" xml:space="preserve">
+    <value>Name (A-Z)</value>
+  </data>
+  <data name="sort_titleDesc" xml:space="preserve">
+    <value>Name (Z-A)</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Sorting</value>
   </data>

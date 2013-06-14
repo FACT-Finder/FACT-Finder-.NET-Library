@@ -1,0 +1,482 @@
+﻿{
+    "searchResult": {
+        "appliedPreprocessorEntries": [],
+        "breadCrumbTrailItems": [
+            {
+                "associatedFieldName": null,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&followSearch=9672&format=JSON",
+                "text": "kontakt",
+                "type": "search",
+                "value": "kontakt"
+            }
+        ],
+        "campaignsList": [
+            {
+                "activeQuestions": [],
+                "advisorTree": [],
+                "feedbackTexts": [],
+                "flavour": "REDIRECT",
+                "id": "0",
+                "name": "Kontakt",
+                "pushedProductsRecordList": [],
+                "target": {
+                    "destination": "http://www.fact-finder.de",
+                    "name": ""
+                }
+            },
+            {
+                "activeQuestions": [],
+                "advisorTree": [],
+                "feedbackTexts": [
+                    {
+                        "html": true,
+                        "id": 9,
+                        "label": "html header",
+                        "text": "test feedback 1"
+                    }
+                ],
+                "flavour": "FEEDBACK",
+                "id": "9",
+                "name": "Mountainbike",
+                "pushedProductsRecordList": [],
+                "target": {
+                    "destination": "",
+                    "name": ""
+                }
+            },
+            {
+                "activeQuestions": [],
+                "advisorTree": [],
+                "feedbackTexts": [
+                    {
+                        "html": true,
+                        "id": 6,
+                        "label": "below header",
+                        "text": "test feedback 3"
+                    },
+                    {
+                        "html": true,
+                        "id": 9,
+                        "label": "html header",
+                        "text": "test feedback 2"
+                    }
+                ],
+                "flavour": "FEEDBACK",
+                "id": "10",
+                "name": "Mountainbike",
+                "pushedProductsRecordList": [],
+                "target": {
+                    "destination": "",
+                    "name": ""
+                }
+            },
+            {
+                "activeQuestions": [
+                    {
+                        "answers": [
+                            {
+                                "id": "1",
+                                "params": "/FACT-Finder6.7/Search.ff?query=fahrrad&channel=de&advisorStatus=12-_0_0&format=JSON",
+                                "questions": [],
+                                "text": "answer text 1"
+                            },
+                            {
+                                "id": "6",
+                                "params": "/FACT-Finder6.7/Search.ff?query=fahrrad&channel=de&advisorStatus=12-_0_1&format=JSON",
+                                "questions": [],
+                                "text": "answer text 2"
+                            }
+                        ],
+                        "id": "0",
+                        "text": "question text",
+                        "visible": true
+                    }
+                ],
+                "advisorTree": [],
+                "feedbackTexts": [],
+                "flavour": "ADVISOR",
+                "id": "12",
+                "name": "Fahrradberater",
+                "pushedProductsRecordList": [],
+                "target": {
+                    "destination": "",
+                    "name": ""
+                }
+            },
+            {
+                "activeQuestions": [],
+                "advisorTree": [],
+                "feedbackTexts": [],
+                "flavour": "FEEDBACK",
+                "id": "3",
+                "name": "NoMatch",
+                "pushedProductsRecordList": [
+                    {
+                        "foundWords": [],
+                        "id": "247968",
+                        "keywords": null,
+                        "position": 0,
+                        "record": {
+                            "products_ean": "..4000990073110..#..4000990073110..#..4000990073127..#..4000990073127..#..4000990073134..#..4000990073134..",
+                            "products_retail_price": "999.00",
+                            "products_special_offer3": "0",
+                            "products_ranking_profit": "19406",
+                            "FFiPhoneVariants": "",
+                            "Farbe": "..schwarz..#..schwarz..#..schwarz..",
+                            "products_special_offer2": "0",
+                            "products_price_min": "699.99",
+                            "products_price_max": "699.99",
+                            "products_ranking_charge": "26584",
+                            "products_image": "http://www.fahrrad.de/media/products/Chur_Herren02_01.jpg",
+                            "shop_id": "44",
+                            "products_you_save_money": "299.01",
+                            "imageUrlLarge": "http://www.fahrrad.de/media/products/Chur_Herren02_01[320x480].jpg?forceSize=true&forceAspectRatio=true",
+                            "Breite": "",
+                            "category1": "..Fahrräder..",
+                            "category0": "Katalog",
+                            "products_best_price": "0",
+                            "category3": "..Herrenräder ab 500€..",
+                            "category2": "..Trekkingräder..",
+                            "evaluation_total": "",
+                            "category": "Katalog >> Fahrräder >> Trekkingräder >> Herrenräder ab 500€",
+                            "FFCliplisterQuality": "175",
+                            "products_id": "247968",
+                            "products_video": "0",
+                            "AdditionalAttributes": "|Rahmenhöhe=50|Rahmenhöhe=55|Rahmenhöhe=60|",
+                            "products_description": "Mit dem Ortler Chur Trekkingrad lassen sich Touren planen und umsetzen, denn seine Ausstattung ist zuverlässig wie ein schweizerisches Uhrwerk und bis ins letzte Detail durchdacht. Der leichte Alurahmen ist mit einem Shimano XT/Deore Komponentenmix ausgestattet und gewinnt durch die Federgabel mit Lockout zusätzlichen Fahrkomfort. Das gibt der Wegewahl ausreichend Freiraum. Auch auf Waldwegen, gröberem Kies und Schotterwegen ist der Chur Fahrer komfortabel und sicher unterwegs. Die hochwertigen Schwalbe-Reifen mit extra Pannenschutz haben auch bei Nässe und losem Untergrund guten Grip bei geringen Rollwiderstand. Mit 27 Gängen findet sich auf längeren Anstiegen immer die richtige Übersetzung. Bergab ist Verlass auf die Magura Scheibenbremse: sie hat eine leicht dosierbare Bremskraft und sorgt auf Abfahrten für entspannten Fahrgenuss sowie Sicherheit. Das Chur ist aber erst mit seinem hochwertigen, bis ins Detail durchdachten Straßenpaket vollständig: Bei Ortler gehören hier Nabendynamo, Halogenscheinwerfer, LED Rücklicht und ein stabiler Alu Trekking-Gepäckträger zum guten Ton und werden durch sinnvolle Extras wie geschickt platzierter SKS Luftpumpe und Lenkerhörnchen für zusätzliche Griffvariationen ergänzt. Das Ortler Chur ist ein zuverlässiger Begleiter für Trekking begeisterte Radler im Alltag wie auf Reisetour. Bauart: Trekkingrahmen , Materialtyp: Aluminium , Material: 7005 Aluminium , weitere Merkmale: Pro Light, 2-fach konifiziert , Bauart: Federgabel , Federweg: 63 mm, Marke: Suntour , Typ: NEX 4610 V2 Lockout , Schaltungstyp: Kettenschaltung , Anzahl Gänge: 27 , Marke: Shimano , Typ: XT , Ausführung: 3-fach , Marke: Shimano , Typ: Deore , Marke: Shimano , Typ: Deore , Marke: Shimano , Typ: FC-M431 , Übersetzung Blatt 1: 26 Zähne, Übersetzung Blatt 2: 36 , Übersetzung Blatt 3: 48 , Marke: Shimano , Typ: BB-UN26 , Bauart: Cartridge , Marke: Shimano , Typ: CN-HG 53 , Marke: Shimano , Typ: Deore , Übersetzung: 11 Zähne, Marke: Magura , Typ: Julie , Bauart: hydraulische Scheibenbremse , Bremsscheibendurchmesser: 180 mm, Marke: Magura , Typ: Julie , Bauart: hydraulische Scheibenbremse , : 160 mm, Marke: Magura , Typ: Julie , Marke: Tacoma , Typ: Touring mit Barends , Bauart: Flat Bar , Material: Alu , Marke: Tacoma , Typ: Travel , Bauart: Konus , Material: Alu , winkelverstellbar: ja , : Ergogrip, Shimano Soft , : Zero, semi-integriert, gedichtet , : Selle Royal Wave Comfort , Bauart: gefedert , Durchmesser: 27.2 mm, Typ: Polygon , Material: Alu , Marke: Shimano , Typ: DH-3D30 , Nabendynamo: ja , Marke: Blackcomp , Typ: Alu KT Disc gedichtet , Marke: Rodi , Typ: Freeway Disc , Material: Aluminium , Bauart: Hohlkammer , Größe: 28 Zoll, : 36 , Marke: Schwalbe , Typ: Silento , Größe: 28 Zoll, Reifenbreite: 40 mm, besondere Merkmale: Pannenschutz , besondere Merkmale: Reflex , Marke: Schwalbe , Typ: Silento , Größe: 28 Zoll, Reifenbreite: 40 mm, besondere Merkmale: Reflex , besondere Merkmale: Pannenschutz , : VP-990A , Marke: Massload Pro Trekking , Material: Aluminium , Bauart: Hinterbauständer , Material: Kunststoff , : ja , Bauart: Nabendynamo , Marke: Shimano , Typ: DH-3D30 , Marke: Busch & Müller , Bauart: Halogen , Typ: Lumotec N2 , Zusatzfunktionen: mit Schalter , Zusatzfunktionen: mit Reflektor , Marke: Basta , LED: ja , Typ: Ray Steady , Zusatzfunktionen: Standlicht , : ja , : Lenkerhörnchen , : 16.5 kg (ca.), : Reise",
+                            "imageUrlSmall": "http://www.fahrrad.de/media/products/Chur_Herren02_01[85x85].jpg?forceSize=true&forceAspectRatio=true",
+                            "products_name": "Ortler Chur",
+                            "AdditionalAttributes_values": "50 55 60",
+                            "FFAutomaticSearchOptimization": "28 ZOLL=84|ORTLER CHUR HERREN=11|CHUR=30|ORTLER TREKKINGRAD=12|ORTRLER CHUR=21|OETLER CHUR=11|TRAVELLER 5.2=17|HYDRAULISCHE SCHEIBENBREMSE=4|LENKERHOERNCHEN=2|TREKKING=12|TREKKINGRAD=13|DAMEN TREKKINGRAD=1|TOURENRAD=87|WINKEL SKS=19|HALOGEN SCHEINWERFER FUER NABENDYNAMO LED STANDLICHT=3|26ER TREKKINGRAD=12|ALU TREKKING FAHRRAD=10|BB-UN26E=28",
+                            "cash_back_amount": "",
+                            "month-campaign": "",
+                            "Größe": "",
+                            "products_quantity_unit": "",
+                            "coupon-campaign": "",
+                            "products_special_offer": "0",
+                            "products_price": "699.99",
+                            "availability": "3",
+                            "imageUrlMid": "http://www.fahrrad.de/media/products/Chur_Herren02_01[200x200].jpg?forceSize=true&forceAspectRatio=true",
+                            "categories_free_shipping": "0",
+                            "Länge": "",
+                            "products_model_year": "2011",
+                            "products_link_self": "http://www.fahrrad.de/fahrraeder/trekkingraeder/28he-chur-27g-xt-50/247968.html",
+                            "manufacturers_name": "Ortler",
+                            "manufacturers_image": "http://www.fahrrad.de/media/products/ortler.jpg",
+                            "manufacturers_free_shipping": "0",
+                            "categories_image": "",
+                            "FFCheckoutCount": "18",
+                            "products_free_shipping": "0",
+                            "manufacturers_id": "446",
+                            "products_quantity": "",
+                            "products_you_save_percent": "29.93",
+                            "FFAfterSearchReorder": ""
+                        },
+                        "searchSimilarity": 0,
+                        "seoPath": "",
+                        "simiMalusAdd": 0,
+                        "simiMalusMul": 1
+                    }
+                ],
+                "target": {
+                    "destination": "",
+                    "name": ""
+                }
+            }
+        ],
+        "channel": "de",
+        "errorMessage": null,
+        "filters": [],
+        "groups": [
+            {
+                "detailedLinks": 10,
+                "elements": [
+                    {
+                        "absoluteMaxValue": 4999.9,
+                        "absoluteMinValue": 11.49,
+                        "active": false,
+                        "associatedFieldName": "products_price_min",
+                        "clusterLevel": 0,
+                        "name": "Preis",
+                        "previewImageURL": null,
+                        "recordCount": 0,
+                        "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&followSearch=9672&format=JSON&filterproducts_price_min=",
+                        "selected": false,
+                        "selectedMaxValue": 4999.9,
+                        "selectedMinValue": 11.49
+                    }
+                ],
+                "filterStyle": "SLIDER",
+                "groupOrder": 1,
+                "name": "Preis",
+                "selectedElements": [],
+                "showPreviewImages": false,
+                "type": "number",
+                "unit": "€"
+            }
+        ],
+        "paging": {
+            "currentPage": 1,
+            "firstLink": {
+                "caption": "1",
+                "currentPage": false,
+                "number": 1,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&followSearch=9672&format=JSON"
+            },
+            "lastLink": {
+                "caption": "10",
+                "currentPage": false,
+                "number": 10,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=10&followSearch=9672&format=JSON"
+            },
+            "nextLink": {
+                "caption": "paging.next",
+                "currentPage": false,
+                "number": 2,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=2&followSearch=9672&format=JSON"
+            },
+            "pageCount": 10,
+            "pageLinks": [
+                {
+                    "caption": "1",
+                    "currentPage": true,
+                    "number": 1,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "2",
+                    "currentPage": false,
+                    "number": 2,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=2&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "3",
+                    "currentPage": false,
+                    "number": 3,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=3&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "4",
+                    "currentPage": false,
+                    "number": 4,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=4&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "5",
+                    "currentPage": false,
+                    "number": 5,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=5&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "6",
+                    "currentPage": false,
+                    "number": 6,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=6&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "7",
+                    "currentPage": false,
+                    "number": 7,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=7&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "8",
+                    "currentPage": false,
+                    "number": 8,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=8&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "9",
+                    "currentPage": false,
+                    "number": 9,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=9&followSearch=9672&format=JSON"
+                },
+                {
+                    "caption": "10",
+                    "currentPage": false,
+                    "number": 10,
+                    "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&page=10&followSearch=9672&format=JSON"
+                }
+            ],
+            "pagingConf": {
+                "defaultResultsPerPage": 0,
+                "linkCount": 10,
+                "nextCaption": ">>",
+                "previousCaption": "paging.previous",
+                "resultsPerPage": [
+                    {
+                        "default": true,
+                        "selected": false,
+                        "value": 12
+                    },
+                    {
+                        "default": false,
+                        "selected": false,
+                        "value": 24
+                    },
+                    {
+                        "default": false,
+                        "selected": false,
+                        "value": 36
+                    }
+                ]
+            },
+            "previousLink": null,
+            "resultsPerPage": 12
+        },
+        "records": [
+            {
+                "foundWords": [],
+                "id": "4667",
+                "keywords": [
+                    "CONTINENTAL CONTACT 26",
+                    "CONTINENTAL CONTACT SAFETY SYSTEM",
+                    "REIFEN 37-622",
+                    "37-622"
+                ],
+                "position": 1,
+                "record": {
+                    "products_ean": "..4032191425801..#..4032191425801..",
+                    "products_retail_price": "",
+                    "__ORIG_POSITION__": "1",
+                    "products_special_offer3": "0",
+                    "products_ranking_profit": "16587",
+                    "FFiPhoneVariants": "",
+                    "Farbe": "..schwarz..",
+                    "products_special_offer2": "0",
+                    "products_price_min": "19.99",
+                    "products_price_max": "19.99",
+                    "products_ranking_charge": "4551",
+                    "products_image": "http://www.fahrrad.de/media/products/bikeparts/9b8b62a2ca63ae8ccbcbcc40bf94d7d4.JPG",
+                    "shop_id": "44",
+                    "products_you_save_money": "",
+                    "imageUrlLarge": "http://www.fahrrad.de/media/products/bikeparts/9b8b62a2ca63ae8ccbcbcc40bf94d7d4[320x480].JPG?forceSize=true&forceAspectRatio=true",
+                    "Breite": "",
+                    "category1": "..Fahrradteile..",
+                    "category0": "Katalog",
+                    "products_best_price": "0",
+                    "category3": "..Trekking / City Reifen..",
+                    "category2": "..Reifen & Schläuche..",
+                    "evaluation_total": "",
+                    "category": "Katalog >> Fahrradteile >> Reifen & Schläuche >> Trekking / City Reifen",
+                    "FFCliplisterQuality": "",
+                    "products_id": "4667",
+                    "products_video": "0",
+                    "AdditionalAttributes": "|Ausführung=28\" (37-622) schwarz|",
+                    "products_description": "Reifen Continental Contact C 192   CONTACT: 'Schnell, sicher und komfortabel'.  Der Contact ist der Alleskönner unter den City-/Trekkingreifen.   - Ein gleichmäßiges Mittellaufband sorgt für ruhigen und schnellen Lauf auf der Straße. - Flexible Schulterblöcke und feine Lamellen stellen den Grip in der Kurve und auf losem Untergrund sicher.&nbsp;- Feinstes Karkassengewebe reduziert den Rollwiderstand und erhöht den Komfort spürbar.   - Extrem pannensicher mit SafetySystem-Garantie.",
+                    "imageUrlSmall": "http://www.fahrrad.de/media/products/bikeparts/9b8b62a2ca63ae8ccbcbcc40bf94d7d4[85x85].JPG?forceSize=true&forceAspectRatio=true",
+                    "products_name": "Continental Contact C 192",
+                    "AdditionalAttributes_values": "28\" (37-622) schwarz",
+                    "FFAutomaticSearchOptimization": "REIFEN 37-622=4|CONTINENTAL CONTACT 26=82|37-622=3|CONTINENTAL CONTACT SAFETY SYSTEM=11",
+                    "cash_back_amount": "",
+                    "month-campaign": "",
+                    "Größe": "",
+                    "products_quantity_unit": "",
+                    "coupon-campaign": "",
+                    "products_special_offer": "0",
+                    "products_price": "19.99",
+                    "availability": "3",
+                    "imageUrlMid": "http://www.fahrrad.de/media/products/bikeparts/9b8b62a2ca63ae8ccbcbcc40bf94d7d4[200x200].JPG?forceSize=true&forceAspectRatio=true",
+                    "categories_free_shipping": "0",
+                    "Länge": "",
+                    "products_model_year": "",
+                    "products_link_self": "http://www.fahrrad.de/fahrradteile/reifen-schlaeuche/reifen-conti-contact-c-192/4667.html",
+                    "manufacturers_name": "Continental",
+                    "manufacturers_image": "http://www.fahrrad.de/media/products/continental.jpg",
+                    "manufacturers_free_shipping": "0",
+                    "categories_image": "",
+                    "FFCheckoutCount": "0",
+                    "products_free_shipping": "0",
+                    "manufacturers_id": "109",
+                    "products_quantity": "",
+                    "products_you_save_percent": "",
+                    "FFAfterSearchReorder": ""
+                },
+                "searchSimilarity": 96.72,
+                "seoPath": "/Continental-Contact-C-192-4667.html",
+                "simiMalusAdd": 0,
+                "simiMalusMul": 1
+            }
+        ],
+        "resultArticleNumberStatus": "noArticleNumberSearch",
+        "resultCount": 116,
+        "resultStatus": "resultsFound",
+        "resultsPerPageList": [
+            {
+                "default": true,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&followSearch=9672&format=JSON",
+                "selected": true,
+                "value": 12
+            },
+            {
+                "default": false,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&productsPerPage=24&followSearch=9672&format=JSON",
+                "selected": false,
+                "value": 24
+            },
+            {
+                "default": false,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&productsPerPage=36&followSearch=9672&format=JSON",
+                "selected": false,
+                "value": 36
+            }
+        ],
+        "searchControlParams": {
+            "disableCache": false,
+            "generateAdvisorTree": false,
+            "idsOnly": false,
+            "useAsn": true,
+            "useCampaigns": true,
+            "useFoundWords": false,
+            "useKeywords": true
+        },
+        "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&followSearch=9672&format=JSON",
+        "searchTime": 38,
+        "simiFirstRecord": 9672,
+        "simiLastRecord": 8539,
+        "singleWordResults": null,
+        "sortsList": [
+            {
+                "description": "sort.relevanceDescription",
+                "name": null,
+                "order": "desc",
+                "relevanceSortItem": true,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&channel=de&followSearch=9672&format=JSON",
+                "selected": true
+            },
+            {
+                "description": "sort.titleAsc",
+                "name": "products_name",
+                "order": "asc",
+                "relevanceSortItem": false,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&sortproducts_name=asc&channel=de&followSearch=9672&format=JSON",
+                "selected": false
+            },
+            {
+                "description": "sort.titleDesc",
+                "name": "products_name",
+                "order": "desc",
+                "relevanceSortItem": false,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&sortproducts_name=desc&channel=de&followSearch=9672&format=JSON",
+                "selected": false
+            },
+            {
+                "description": "sort.priceAsc",
+                "name": "products_price_min",
+                "order": "asc",
+                "relevanceSortItem": false,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&sortproducts_price_min=asc&channel=de&followSearch=9672&format=JSON",
+                "selected": false
+            },
+            {
+                "description": "sort.priceDesc",
+                "name": "products_price_min",
+                "order": "desc",
+                "relevanceSortItem": false,
+                "searchParams": "/FACT-Finder6.7/Search.ff?seoPath=%2Fkontakt%2Fq&sortproducts_price_min=desc&channel=de&followSearch=9672&format=JSON",
+                "selected": false
+            }
+        ],
+        "timedOut": false
+    }
+}

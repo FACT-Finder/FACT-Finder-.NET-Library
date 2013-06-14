@@ -67,8 +67,9 @@
 			<select onchange="document.location.href=this.value;">
             @foreach (Item sortItem in sorting)
             {
+                var label =  HttpContext.GetGlobalResourceObject("Sorting", sortItem.Label.Replace('.', '_'));
                 <option value="@(sortItem.Url)"@(sortItem.Selected ? " selected" : "")>
-                    @(sortItem.Selected ? String.Format("{0} ({1})", sortItem.Label, Resources.Sorting.Selected) : sortItem.Label)
+                    @(sortItem.Selected ? String.Format("{0} ({1})", label, Resources.Sorting.Selected) : label)
                 </option>
             }
             </select>

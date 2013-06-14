@@ -1,0 +1,42 @@
+﻿[
+    {
+        "attributes": {},
+        "hitCount": 17,
+        "image": "",
+        "name": "bmx sophie",
+        "searchParams": "/FACT-Finder6.8/Search.ff?query=bmx+sophie&channel=de&ignoreForCache=queryFromSuggest&queryFromSuggest=true&ignoreForCache=userInput&userInput=bmx",
+        "type": "searchTerm"
+    },
+    {
+        "attributes": {
+            "sourceField": "Brand"
+        },
+        "hitCount": 0,
+        "image": "",
+        "name": "Total BMX",
+        "searchParams": "/FACT-Finder6.8/Search.ff?query=Total+BMX+*&filterBrand=Total+BMX&channel=de&ignoreForCache=queryFromSuggest&queryFromSuggest=true&ignoreForCache=userInput&userInput=bmx",
+        "type": "brand"
+    },
+    {
+        "attributes": {
+            "parentCategory": "Fahrradteile/BMX Teile",
+            "sourceField": "Category3"
+        },
+        "hitCount": 0,
+        "image": "",
+        "name": "BMX Laufräder",
+        "searchParams": "/FACT-Finder6.8/Search.ff?query=*&filterCategory3=BMX+Laufr%C3%A4der&filterCategory2=BMX+Teile&filterCategory1=Fahrradteile&channel=de&catalog=true&ignoreForCache=queryFromSuggest&queryFromSuggest=true&ignoreForCache=userInput&userInput=bmx",
+        "type": "category"
+    },
+    {
+        "attributes": {
+            "id": "265896",
+            "deeplink": "Detail.ff?id=265896&channel=de"
+        },
+        "hitCount": 0,
+        "image": "http://images.internetstores.de/products/gus_distribution/1079-OEM_Eastern_Bikes_Burnout_View2[219x140].jpg?forceSize=true&forceAspectRatio=true",
+        "name": "Eastern Reifen Burnout 20x2,1 OEM",
+        "searchParams": "/FACT-Finder6.8/Search.ff?query=Eastern+Reifen+Burnout+20x2%2C1+OEM&channel=de&ignoreForCache=queryFromSuggest&queryFromSuggest=true&ignoreForCache=userInput&userInput=bmx",
+        "type": "productName"
+    }
+]

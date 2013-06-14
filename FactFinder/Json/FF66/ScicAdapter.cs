@@ -1,13 +1,26 @@
-﻿namespace Omikron.FactFinder.Json.FF66
+﻿using log4net;
+using Omikron.FactFinder.Default;
+
+namespace Omikron.FactFinder.Json.FF66
 {
-    public class JsonScicAdapter : Omikron.FactFinder.Json.FF65.JsonScicAdapter
+    public class JsonScicAdapter : ScicAdapter
     {
+        private static ILog log;
+
+        static JsonScicAdapter()
+        {
+            log = LogManager.GetLogger(typeof(JsonScicAdapter));
+        }
+
         public JsonScicAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
-        { }
+        { 
+            DataProvider.Type = RequestType.ShoppingCartInformationCollector;
+        }
 
-        /*
-         * no changes in FF 6.6
-         */
+        public override bool ApplyTracking()
+        {
+            return Data.Trim() == "true";
+        }
     }
 }

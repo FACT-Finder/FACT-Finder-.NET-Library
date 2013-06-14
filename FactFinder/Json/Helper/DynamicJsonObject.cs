@@ -82,5 +82,10 @@ namespace Omikron.FactFinder.Json.Helper
 
             return true;
         }
+
+        public bool ContainsKey(string key)
+        {
+            return _dictionary.ContainsKey(key);
+        }
     }
 }
