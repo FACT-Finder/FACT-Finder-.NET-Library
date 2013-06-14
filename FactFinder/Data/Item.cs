@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Omikron.FactFinder.Data
 {
 
@@ -9,10 +10,10 @@ namespace Omikron.FactFinder.Data
     public class Item
     {
         public string Label { get; private set; }
-        public virtual string Url { get; private set; }
+        public virtual Uri Url { get; private set; }
         public virtual bool Selected { get; private set; }
 
-        public Item(string label, string url, bool selected = false)
+        public Item(string label, Uri url, bool selected = false)
         {
             Label = label;
             Url = url;

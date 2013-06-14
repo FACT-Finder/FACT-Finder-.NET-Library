@@ -39,9 +39,8 @@ WARN  - These should be used, when the programmer anticipates that the
 INFO  - Log messages at this level are used to trace very coarse-grained
         control flow. Logging at this level should allow the user to see
         when the library is active and what it does, but the messages should
-        not clutter up a production log too much. For instance, creation of
-        important objects (like Adapters) or requests to the FACT-Finder server
-        should be logged at INFO level.
+        not clutter up a production log too much. For instance, requests to 
+        the FACT-Finder server should be logged at INFO level.
 DEBUG - This is for all logging messages that are too fine-grained to be
         logged in a production environment. Any information that is deemed
         useful for development by a programmer can be logged at DEBUG level.

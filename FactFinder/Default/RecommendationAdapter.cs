@@ -13,7 +13,7 @@ namespace Omikron.FactFinder.Default
             {
                 if (ProductIDs.Count == 0)
                 {
-                    log.Error("Recommendations cannot be loaded without a product ID.");
+                    log.Warn("Recommendations cannot be loaded without a product ID.");
                     return new ResultRecords();
                 }
 
@@ -26,7 +26,7 @@ namespace Omikron.FactFinder.Default
             }
         }
 
-        protected IList<int> ProductIDs;
+        protected IList<string> ProductIDs;
         protected bool RecommendationsUpToDate { get; set; }
 
         private bool _idsOnly;
@@ -74,13 +74,13 @@ namespace Omikron.FactFinder.Default
         {
             log.Debug("Initialize new RecommendationAdapter.");
             
-            ProductIDs = new List<int>();
+            ProductIDs = new List<string>();
             RecommendationsUpToDate = false;
             MaxResults = 0;
             IDsOnly = false;
         }
 
-        public virtual void SetProductID(int productID)
+        public virtual void SetProductID(string productID)
         {
             ProductIDs.Clear();
             ProductIDs.Add(productID);

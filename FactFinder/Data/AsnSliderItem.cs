@@ -9,19 +9,20 @@ namespace Omikron.FactFinder.Data
         public float SelectedMinimum { get; private set; }
         public float SelectedMaximum { get; private set; }
 
-        public override string Url
+        public override Uri Url
         {
             get
             {
-                return String.Format("{0}{1}-{2}", base.Url, SelectedMinimum, SelectedMaximum);
+                return new Uri(String.Format("{0}&filter{1}={2}-{3}", base.Url, Field, SelectedMinimum, SelectedMaximum));
             }
         }
 
+        // Use this to append the "left-right" part in JavaScript
         public string BaseUrl
         {
             get
             {
-                return base.Url;
+                return String.Format("{0}&filter{1}=", base.Url, Field);
             }
         }
 
@@ -34,7 +35,7 @@ namespace Omikron.FactFinder.Data
         }
 
         public AsnSliderItem(
-            string baseUrl,
+            Uri baseUrl,
             float absoluteMinimum = 0,
             float absoluteMaximum = 0,
             float selectedMinimum = 0,

@@ -35,7 +35,8 @@ namespace Omikron.FactFinder
             {
                 if (_requestTarget == null)
                 {
-                    _requestTarget = HttpContextFactory.Current.Request.Url.LocalPath;
+                    var url = HttpContextFactory.Current.Request.Url;
+                    _requestTarget = String.Format("{0}://{1}{2}", url.Scheme, url.Authority, url.AbsolutePath);
                 }
                 return _requestTarget;
             }
@@ -126,16 +127,16 @@ namespace Omikron.FactFinder
             }
         }
 
-        public string GeneratePageLink(NameValueCollection parameters, string linkTarget = "")
+        public Uri GeneratePageLink(NameValueCollection parameters, string linkTarget = null)
         {
-            if (linkTarget == "")
+            if (String.IsNullOrWhiteSpace(linkTarget))
             {
                 linkTarget = RequestTarget;
             }
 
             parameters = ServerToClientRequestParameters(parameters);
 
-            return String.Format("{0}?{1}", linkTarget, parameters.ToUriQueryString());
+            return new Uri(String.Format("{0}?{1}", linkTarget, parameters.ToUriQueryString()));
         }
 
         public NameValueCollection ParseParametersFromString(string queryString)
@@ -145,6 +146,11 @@ namespace Omikron.FactFinder
         }
 
         public SearchParameters GetFactFinderParametersFromString(string paramString)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SearchParameters GetFactFinderParametersFromUrl(Uri url)
         {
             throw new NotImplementedException();
         }
