@@ -1,7 +1,9 @@
-﻿using log4net;
+﻿using System;
+using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Json.FF66;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests.Json.FF66
 {
@@ -15,6 +17,7 @@ namespace Omikron.FactFinderTests.Json.FF66
         public static void InitializeClass(TestContext context)
         {
             log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/Json66/");
         }
 
         [TestInitialize]
@@ -29,52 +32,12 @@ namespace Omikron.FactFinderTests.Json.FF66
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        // The recommendation engine did not expose a JSON API until FF 6.7
         public void TestGetRecommendations()
         {
-            RecommendationAdapter.SetProductID(274036);
+            RecommendationAdapter.SetProductID("274036");
             var recommendations = RecommendationAdapter.Recommendations;
-            Assert.AreEqual(10, recommendations.FoundRecordsCount);
-        }
-
-        [TestMethod]
-        public void TestIDsOnly()
-        {
-            RecommendationAdapter.SetProductID(274036);
-            RecommendationAdapter.IDsOnly = true;
-            var recommendations = RecommendationAdapter.Recommendations;
-            Assert.AreEqual(10, recommendations.FoundRecordsCount);
-        }
-
-        [TestMethod]
-        public void TestReload()
-        {
-            RecommendationAdapter.SetProductID(274036);
-            var recommendations = RecommendationAdapter.Recommendations;
-            string firstID = recommendations[0].ID;
-            RecommendationAdapter.SetProductID(233431);
-            recommendations = RecommendationAdapter.Recommendations;
-            string secondID = recommendations[0].ID;
-            Assert.IsTrue(firstID != secondID);
-        }
-
-        [TestMethod]
-        public void TestReloadAfterIDsOnly()
-        {
-            RecommendationAdapter.SetProductID(274036);
-            RecommendationAdapter.IDsOnly = true;
-            var recommendations = RecommendationAdapter.Recommendations;
-            RecommendationAdapter.IDsOnly = false;
-            recommendations = RecommendationAdapter.Recommendations;
-            Assert.IsNotNull(recommendations[0].GetFieldValue("Price"));
-        }
-
-        [TestMethod]
-        public void TestMaximumResults()
-        {
-            RecommendationAdapter.SetProductID(274036);
-            RecommendationAdapter.MaxResults = 5;
-            var recommendations = RecommendationAdapter.Recommendations;
-            Assert.AreEqual(5, recommendations.FoundRecordsCount);
         }
     }
 }

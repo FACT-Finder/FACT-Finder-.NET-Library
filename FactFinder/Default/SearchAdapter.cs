@@ -12,6 +12,7 @@ namespace Omikron.FactFinder.Default
         protected SearchStatus _articleNumberSearchStatus;
         protected bool? _isArticleNumberSearch;
         protected bool? _isSearchTimedOut;
+        protected int? _searchTime;
         protected SearchStatus _searchStatus;
         protected ResultRecords _result;
         protected AfterSearchNavigation _asn;
@@ -51,6 +52,16 @@ namespace Omikron.FactFinder.Default
                 if (_isSearchTimedOut == null)
                     _isSearchTimedOut = CreateIsSearchTimedOut();
                 return (bool)_isSearchTimedOut;
+            }
+        }
+
+        public int SearchTime
+        {
+            get
+            {
+                if (_searchTime == null)
+                    _searchTime = CreateSearchTime();
+                return (int)_searchTime;
             }
         }
 
@@ -199,6 +210,12 @@ namespace Omikron.FactFinder.Default
         protected virtual bool CreateIsSearchTimedOut()
         {
             return false;
+        }
+
+        // Default behavior mimicks a successful search (carried out in no time) with empty results
+        protected virtual int CreateSearchTime()
+        {
+            return 0;
         }
 
         // Default behavior mimicks a successful search with empty results

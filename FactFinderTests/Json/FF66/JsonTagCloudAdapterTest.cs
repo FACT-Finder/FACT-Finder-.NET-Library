@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Json.FF66;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests.Json.FF66
 {
@@ -15,6 +16,7 @@ namespace Omikron.FactFinderTests.Json.FF66
         public static void InitializeClass(TestContext context)
         {
             log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/Json66/");
         }
 
         [TestInitialize]
@@ -32,6 +34,11 @@ namespace Omikron.FactFinderTests.Json.FF66
         public void TestGetTagCloud()
         {
             var tagCloud = TagCloudAdapter.TagCloud;
+
+            Assert.AreEqual(5, tagCloud.Count);
+            Assert.AreEqual(0.0196, tagCloud[0].Weight, 0.00001);
+            Assert.AreEqual(265, tagCloud[0].SearchCount);
+            Assert.AreEqual("26 zoll", tagCloud[0].Label);
         }
     }
 }

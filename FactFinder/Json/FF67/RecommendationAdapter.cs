@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Web.Script.Serialization;
 using log4net;
+using Omikron.FactFinder.Data;
+using Omikron.FactFinder.Json.Helper;
 
 namespace Omikron.FactFinder.Json.FF67
 {
@@ -15,9 +18,48 @@ namespace Omikron.FactFinder.Json.FF67
 
         public JsonRecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
-        { }
+        {
+            DataProvider.Type = RequestType.Recommendation;
+            DataProvider.SetParameter("format", "json");
+            DataProvider.SetParameter("do", "getRecommendation");
+        }
 
-        public void SetProductIDs(IList<int> productIDs)
+        protected override ResultRecords CreateRecommendations()
+        {
+            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+
+            jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
+
+            dynamic jsonData = jsonSerializer.Deserialize(Data, typeof(object));
+
+            var records = new List<Record>();
+
+            int position = 0;
+
+            foreach (var recordData in jsonData)
+            {
+                if (IDsOnly)
+                {
+                    Record ffRecord = new Record((string)recordData.id);
+                    records.Add(ffRecord);
+                    continue;
+                }
+
+                records.Add(new Record(
+                    (string)recordData.id,
+                    100,
+                    position,
+                    position,
+                    recordData.record.AsDictionary()
+                ));
+
+                position++;
+            }
+
+            return new ResultRecords(records, jsonData.Length);
+        }
+
+        public void SetProductIDs(IList<string> productIDs)
         {
             ProductIDs.Clear();
             var idParameters = new NameValueCollection();
@@ -30,13 +72,11 @@ namespace Omikron.FactFinder.Json.FF67
             RecommendationsUpToDate = false;
         }
 
-        public void AddProductID(int productID)
+        public void AddProductID(string productID)
         {
             ProductIDs.Add(productID);
             DataProvider.AddParameter("id", productID.ToString());
             RecommendationsUpToDate = false;
         }
-
-
     }
 }

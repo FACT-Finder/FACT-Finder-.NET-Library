@@ -93,13 +93,6 @@
     <Compile Include="HttpDataProvider.cs" />
     <Compile Include="DataProvider.cs" />
     <Compile Include="IUnixClock.cs" />
-    <Compile Include="EncodingHandler.cs" />
-    <Compile Include="Json\FF65\ImportAdapter.cs" />
-    <Compile Include="Json\FF65\ScicAdapter.cs" />
-    <Compile Include="Json\FF65\SuggestAdapter.cs" />
-    <Compile Include="Json\FF65\RecommendationAdapter.cs" />
-    <Compile Include="Json\FF65\SearchAdapter.cs" />
-    <Compile Include="Json\FF65\TagCloudAdapter.cs" />
     <Compile Include="Json\FF66\ImportAdapter.cs" />
     <Compile Include="Json\FF66\ScicAdapter.cs" />
     <Compile Include="Json\FF66\SuggestAdapter.cs" />
@@ -132,6 +125,7 @@
   <ItemGroup>
     <Content Include="LoggingGuidelines.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

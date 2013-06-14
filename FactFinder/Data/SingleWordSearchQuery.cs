@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Omikron.FactFinder.Data
 {
@@ -8,10 +9,10 @@ namespace Omikron.FactFinder.Data
 
         public SingleWordSearchQuery(
             string query,
-            string url,
+            Uri url,
             int hitCount = 0,
             string type = "",
-            string imageUrl = ""
+            Uri imageUrl = null
         )
             : base(query, url, hitCount, type, imageUrl)
         {

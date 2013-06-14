@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Omikron.FactFinder.Data
 {
     public class BreadCrumbItem : Item
@@ -9,7 +10,7 @@ namespace Omikron.FactFinder.Data
 
         public BreadCrumbItem(
             string value,
-            string url,
+            Uri url,
             bool selected = false,
             BreadCrumbItemType type = BreadCrumbItemType.Filter,
             string fieldName = "",

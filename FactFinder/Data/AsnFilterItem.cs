@@ -1,4 +1,5 @@
 ﻿
+using System;
 namespace Omikron.FactFinder.Data
 {
     public class AsnFilterItem : Item
@@ -10,7 +11,7 @@ namespace Omikron.FactFinder.Data
 
         public AsnFilterItem(
             string value,
-            string url,
+            Uri url,
             bool selected = false,
             int matchCount = 0,
             int clusterLevel = 0,

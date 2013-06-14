@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Json.FF66;
+using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests.Json.FF66
 {
@@ -15,6 +16,7 @@ namespace Omikron.FactFinderTests.Json.FF66
         public static void InitializeClass(TestContext context)
         {
             log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/Json66/");
         }
 
         [TestInitialize]
@@ -32,7 +34,12 @@ namespace Omikron.FactFinderTests.Json.FF66
         public void TestGetSuggestions()
         {
             SuggestAdapter.SetParameter("query", "bmx");
-            //var suggestions = SuggestAdapter.Suggestions;
+            var suggestions = SuggestAdapter.Suggestions;
+
+            Assert.AreEqual(3, suggestions.Count);
+            Assert.AreEqual("BMX", suggestions[0].Query);
+            Assert.AreEqual("category" ,suggestions[0].Type);
+            Assert.AreEqual("productName", suggestions[2].Type);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Omikron.FactFinder.Data
     {
         public string Name { get; private set; }
         public string Category { get; private set; }
-        public string RedirectUrl { get; private set; }
+        public Uri RedirectUrl { get; private set; }
         public List<Record> PushedProducts { get; private set; }
         public Dictionary<string, string> Feedback { get; private set; }
         public List<AdvisorQuestion> ActiveQuestions { get; private set; }
@@ -16,7 +16,7 @@ namespace Omikron.FactFinder.Data
         public Campaign(
             string name = "",
             string category = "",
-            string redirectUrl = "",
+            Uri redirectUrl = null,
             IList<Record> pushedProducts = null,
             IDictionary<string, string> feedback = null,
             IList<AdvisorQuestion> activeQuestions = null,
@@ -66,7 +66,7 @@ namespace Omikron.FactFinder.Data
 
         public bool HasRedirect()
         {
-            return RedirectUrl != "";
+            return RedirectUrl != null && RedirectUrl.ToString() != "";
         }
 
         public bool HasPushedProducts()

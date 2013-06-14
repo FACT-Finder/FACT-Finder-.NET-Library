@@ -8,10 +8,14 @@ namespace Omikron.FactFinder.Data
         public string Parameters { get; private set; }
         public List<AdvisorQuestion> SubQuestions { get; private set; }
 
-        public AdvisorAnswer(string text = "", string parameters = "", IEnumerable<AdvisorQuestion> subQuestions = null)
+        public AdvisorAnswer(
+            string text = "",
+            string parameters = "",
+            IEnumerable<AdvisorQuestion> subQuestions = null
+            )
         {
             Text = text.Trim();
-            Parameters = parameters.Trim();
+            Parameters = parameters;
             SubQuestions = new List<AdvisorQuestion>();
             if (subQuestions != null)
                 AddSubQuestions(subQuestions);

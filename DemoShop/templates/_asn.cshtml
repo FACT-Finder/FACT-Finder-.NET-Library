@@ -78,7 +78,7 @@
                         {
                             if (linkCount == group.DetailedLinkCount)
                             {
-                                @:<select onchange="if (this.value = (this.value != \'\') {document.location.href=this.value;}">
+                                @:<select onchange="if (this.value != '') {document.location.href=this.value;}">
                                     <option value="">@String.Format(Resources.AfterSearchNavigation.MoreLinks, group.Count - linkCount)</option>
                             }
                             <option value="@(item.Url)">
