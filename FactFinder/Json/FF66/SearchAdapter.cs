@@ -480,11 +480,20 @@ namespace Omikron.FactFinder.Json.FF66
             {
                 var pushedProducts = new List<Record>();
 
-                foreach (var recordData in JsonData.pushedProducts)
+                foreach (var recordData in campaignData.pushedProducts)
                 {
-                    var record = new Record((string)recordData.id);
-                    record.SetFieldValues(recordData.record.AsDictionary());
-                    pushedProducts.Add(record);
+                    var fieldName = (string)recordData.field;
+                    var fieldValue = (string)recordData.name;
+                    foreach (var pushedProductData in JsonData.pushedProducts)
+                    {
+                        if ((string)pushedProductData.record[fieldName] == fieldValue)
+                        {
+                            var record = new Record((string)pushedProductData.id);
+                            record.SetFieldValues(pushedProductData.record.AsDictionary());
+                            pushedProducts.Add(record);
+                            break;
+                        }
+                    }
                 }
 
                 campaign.AddPushedProducts(pushedProducts);
