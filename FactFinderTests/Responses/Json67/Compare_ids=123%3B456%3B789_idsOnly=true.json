@@ -1,0 +1,69 @@
+{
+    "attributes": [
+        {
+            "attributeName": "Hersteller",
+            "different": true,
+            "sourceField": "manufacturers_name"
+        },
+        {
+            "attributeName": "Farbe",
+            "different": true,
+            "sourceField": "Farbe"
+        },
+        {
+            "attributeName": "Modelljahr",
+            "different": false,
+            "sourceField": "products_model_year"
+        }
+    ],
+    "records": [
+        {
+            "fieldNames": [
+                "Modelljahr",
+                "Hersteller",
+                "Farbe",
+                "AdditionalAttributes"
+            ],
+            "id": "123",
+            "record": {
+                "Modelljahr": "2012",
+                "Hersteller": "Serious",
+                "Farbe": "..grau..#..weiß..",
+                "AdditionalAttributes": ""
+            },
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [
+                "Modelljahr",
+                "Hersteller",
+                "Farbe",
+                "AdditionalAttributes"
+            ],
+            "id": "456",
+            "record": {
+                "Modelljahr": "2012",
+                "Hersteller": "KHE",
+                "Farbe": "..schwarz..",
+                "AdditionalAttributes": ""
+            },
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [
+                "Modelljahr",
+                "Hersteller",
+                "Farbe",
+                "AdditionalAttributes"
+            ],
+            "id": "789",
+            "record": {
+                "Modelljahr": "2012",
+                "Hersteller": "KHE",
+                "Farbe": "..schwarz..",
+                "AdditionalAttributes": ""
+            },
+            "simiMalusMul": 1
+        }
+    ]
+}

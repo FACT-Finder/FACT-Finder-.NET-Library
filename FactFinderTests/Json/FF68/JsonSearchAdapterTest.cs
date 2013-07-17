@@ -178,6 +178,7 @@ namespace Omikron.FactFinderTests.Json.FF68
             var pushedProducts = campaigns.GetPushedProducts();
             Assert.AreEqual(1, pushedProducts.Count);
             Assert.AreEqual("221094", pushedProducts[0].ID);
+            Assert.AreEqual(@"..Fahrräder..", pushedProducts[0].GetFieldValue("Category1"));
 
             Assert.IsTrue(campaigns.HasActiveQuestions());
             Assert.AreEqual(1, campaigns.GetActiveQuestions().Count);

@@ -1,0 +1,90 @@
+[
+    {
+        "activeQuestions": [],
+        "advisorTree": [],
+        "category": "",
+        "feedbackTexts": [],
+        "flavour": "REDIRECT",
+        "id": "17",
+        "name": "Shopping Cart Test",
+        "pushedProductsRecords": [],
+        "target": {
+            "destination": "http://www.fact-finder.de",
+            "name": ""
+        }
+    },
+    {
+        "activeQuestions": [],
+        "advisorTree": [],
+        "category": "",
+        "feedbackTexts": [
+            {
+                "html": true,
+                "id": 9,
+                "label": "html header",
+                "text": "test feedback"
+            }
+        ],
+        "flavour": "FEEDBACK",
+        "id": "18",
+        "name": "Shopping Cart Test",
+        "pushedProductsRecords": [
+            {
+                "foundWords": [],
+                "id": "278003",
+                "keywords": null,
+                "position": 0,
+                "record": {
+                    "PriceRetail": "469.99",
+                    "PricePurchase": "0.00",
+                    "Brand": "KHE",
+                    "ImageURL": "http://images.internetstores.de/products/1304_012_09_Shotgun_st[219x140].jpg?forceSize=true&forceAspectRatio=true",
+                    "ProductRankingCharge": "34309",
+                    "EAN": "..4250583623752..",
+                    "RatingAverage": "",
+                    "ArticleNumber": "278003",
+                    "FFAutomaticSearchOptimization": "",
+                    "TargetGroupBike": "..Gravity..",
+                    "RatingQuantity": "",
+                    "ProductReductionMoney": "70.00",
+                    "ProductURL": "fahrraeder/bmx/khe-shotgun-st-gun-grey/278003.html",
+                    "Category3": "..SALE..",
+                    "Category2": "..BMX..|..Katalog..",
+                    "Category5": "..BMX Bikes..",
+                    "Category4": "..Fahrräder..",
+                    "Availability": "3",
+                    "Category1": "..Fahrräder..",
+                    "ProductRankingProfit": "19847",
+                    "Category6": "",
+                    "ProductReductionPercent": "15",
+                    "Description": "Geometriedaten: Oberrohr: 52,3 cm Kettenstrebe: 34,3 cm Steuerrohrwinkel: 75°",
+                    "Colors": "..grau..",
+                    "Options": "|Oberrohrlänge=20,6 Zoll|",
+                    "TargetGroupOutdoor": "",
+                    "Features": "|3645=KHE|65=KHE|182=1|3644=25|78=Freizeit|63=20|2=4130 CrMo|40=2-teilig|75=11.3|61=KHE|41=Hi-Ten light steel|183=1 Paar|31=KHE|9=1|64=2.3|68=2.3|52=KHE|153=4130 Cr-Mo|33=U-Brake|185=steel pegs|3523=3-teilig|3642=KHE|44=A-Head|38=KHE|67=20|5957=Stahl|21=MidBB sealed|3=integrated Headset|36=Prism Pincher|53=Prism Female axle hub, 36 Loch|3649=Alienation PBR vorne, Alienation Blacksheep double wall|22=gedichtet|3647=CrMo|74=Kettenspanner|39=Extra wide, 8° high|3646=Prism, 175 mm|32=Prism, soft pads|55=semi sealed Female axle cassette hub 9T 36 Loch|62=Prism Fat|73=Prism thin plastic|23=KMC 1/2 x 1/8 \" black|66=Prism Fat|69=KHE Prism Ansa|48=KHE Exhib|71=KHE Exhib|3643=Rotor steel chrome|43=KHE Prism Frontload|",
+                    "BrandId": "63",
+                    "Name": "KHE Shotgun ST gun grey",
+                    "ShortDescription": "Materialtyp: Stahl |Material: 4130 CrMo |weitere Merkmale: integrated Headset |Material: 4130 Cr-Mo |Anzahl Gänge: 1 |Marke: KHE |Typ: Prism, 175 mm |Bauart: 3-teilig |Material: CrMo |Marke: KHE |Typ: Rotor steel chrome |Anzahl Zähne: 25 Zähne|Typ: MidBB sealed |Bauart: gedichtet |Marke: KMC 1/2 x 1/8 \" black |Marke: KHE |Typ: Prism, soft pads |Bauart: U-Brake |Marke: Prism Pincher |Marke: KHE |Typ: Extra wide, 8° high |Bauart: 2-teilig |Material: Hi-Ten light steel |Typ: KHE Prism Frontload |Bauart: A-Head |KHE Prism Ansa |KHE Exhib |Typ: KHE Exhib |Marke: KHE |Typ: Prism Female axle hub, 36 Loch |Typ: semi sealed Female axle cassette hub 9T 36 Loch |Marke & Typ: Alienation PBR vorne, Alienation Blacksheep double wall |Marke: KHE |Typ: Prism Fat |Größe: 20 Zoll|Reifenbreite: 2.3 Zoll|Marke: KHE |Typ: Prism Fat |Größe: 20 Zoll|Reifenbreite: 2.3 Zoll|Prism thin plastic |Anzahl: 1 Paar |Typ: steel pegs |11.3 kg (ca.)|Kettenspanner |Freizeit",
+                    "Category": "Katalog/Fahrräder/BMX%7CKatalog/SALE/Fahrräder/BMX Bikes",
+                    "FFCliplisterQuality": "",
+                    "Sizes": "",
+                    "Gender": "..Damen..|..Herren..",
+                    "ProductProperty": "",
+                    "Price": "399.99",
+                    "CategoryIds": "36896 >> 36897 >> 36904|36896 >> 38500 >> 37451 >> 84913",
+                    "SlowSeller": "",
+                    "ProductModelYear": "2012",
+                    "FFAfterSearchReorder": ""
+                },
+                "searchSimilarity": 0,
+                "seoPath": "",
+                "simiMalusAdd": 0,
+                "simiMalusMul": 1
+            }
+        ],
+        "target": {
+            "destination": "",
+            "name": ""
+        }
+    }
+]
