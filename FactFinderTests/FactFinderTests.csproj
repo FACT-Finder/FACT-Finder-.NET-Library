@@ -56,14 +56,20 @@
   <ItemGroup>
     <Compile Include="ExtensionMethodsTest.cs" />
     <Compile Include="HttpDataProviderTest.cs" />
+    <Compile Include="Json\FF66\JsonSimilarRecordsAdapterTest.cs" />
+    <Compile Include="Json\FF66\JsonCompareAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonSearchAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonSuggestAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonCompareAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonSimilarRecordsAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonSuggestAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonCompareAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonSearchAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonSimilarRecordsAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonSuggestAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonTagCloudAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonTagCloudAdapterTest.cs" />
@@ -75,10 +81,10 @@
     <Compile Include="UrlBuilderTest.cs" />
     <Compile Include="Utility\TestWebRequestCreate.cs" />
     <Content Include="Properties\AssemblyInfo.cs" />
-    <None Include="Responses\Json66\Compare_ids=123%253B456%253B789.json">
+    <None Include="Responses\Json66\Compare_ids=123%3b456%3b789_idsOnly=false.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json66\Compare_ids=123%253B456%253B789_idsOnly=true.json">
+    <None Include="Responses\Json66\Compare_ids=123%3b456%3b789_idsOnly=true.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Json66\Search_query=bmx.json">
@@ -90,7 +96,7 @@
     <None Include="Responses\Json66\Search_query=error.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json66\SimilarRecords_id=123.json">
+    <None Include="Responses\Json66\SimilarRecords_id=123_idsOnly=false.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Json66\SimilarRecords_id=123_idsOnly=true.json">
@@ -105,10 +111,10 @@
     <None Include="Responses\Json66\WhatsHot_do=getTagCloud.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json67\Compare_ids=123%253B456%253B789.json">
+    <None Include="Responses\Json67\Compare_ids=123%3b456%3b789_idsOnly=false.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json67\Compare_ids=123%253B456%253B789_idsOnly=true.json">
+    <None Include="Responses\Json67\Compare_ids=123%3b456%3b789_idsOnly=true.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Json67\ProductCampaign_do=getProductCampaigns_productNumber=123.json">
@@ -135,7 +141,7 @@
     <None Include="Responses\Json67\Search_query=error.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json67\SimilarRecords_id=123.json">
+    <None Include="Responses\Json67\SimilarRecords_id=123_idsOnly=false.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Json67\SimilarRecords_id=123_idsOnly=true.json">
@@ -150,10 +156,10 @@
     <None Include="Responses\Json67\WhatsHot_do=getTagCloud.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json68\Compare_ids=123%253B456%253B789.json">
+    <None Include="Responses\Json68\Compare_ids=123%3b456%3b789_idsOnly=false.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json68\Compare_ids=123%253B456%253B789_idsOnly=true.json">
+    <None Include="Responses\Json68\Compare_ids=123%3b456%3b789_idsOnly=true.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Json68\ProductCampaign_do=getProductCampaigns_productNumber=123.json">
@@ -180,7 +186,7 @@
     <None Include="Responses\Json68\Search_query=error.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Json68\SimilarRecords_id=123.json">
+    <None Include="Responses\Json68\SimilarRecords_id=123_idsOnly=false.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Json68\SimilarRecords_id=123_idsOnly=true.json">
