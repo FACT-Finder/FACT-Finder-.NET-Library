@@ -61,12 +61,14 @@
     <Compile Include="Json\FF66\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonSearchAdapterTest.cs" />
     <Compile Include="Json\FF66\JsonSuggestAdapterTest.cs" />
+    <Compile Include="Json\FF67\JsonProductCampaignAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonCompareAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonSearchAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonSimilarRecordsAdapterTest.cs" />
     <Compile Include="Json\FF67\JsonSuggestAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonCompareAdapterTest.cs" />
+    <Compile Include="Json\FF68\JsonProductCampaignAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonRecommendationAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonSearchAdapterTest.cs" />
     <Compile Include="Json\FF68\JsonSimilarRecordsAdapterTest.cs" />
