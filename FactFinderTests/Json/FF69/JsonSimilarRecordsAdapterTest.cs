@@ -2,10 +2,10 @@
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
-using Omikron.FactFinder.Json.FF68;
+using Omikron.FactFinder.Json.FF69;
 using Omikron.FactFinderTests.Utility;
 
-namespace Omikron.FactFinderTests.Json.FF68
+namespace Omikron.FactFinderTests.Json.FF69
 {
     [TestClass]
     public class JsonSimilarRecordsAdapterTest : BaseTest
@@ -17,7 +17,7 @@ namespace Omikron.FactFinderTests.Json.FF68
         public static void InitializeClass(TestContext context)
         {
             log = LogManager.GetLogger(typeof(JsonSimilarRecordsAdapterTest));
-            TestWebRequestCreate.SetupResponsePath("Responses/Json68/");
+            TestWebRequestCreate.SetupResponsePath("Responses/Json69/");
         }
 
         [TestInitialize]
@@ -37,9 +37,9 @@ namespace Omikron.FactFinderTests.Json.FF68
             SimilarRecordsAdapter.SetProductID("123");
             var records = SimilarRecordsAdapter.Records;
 
-            Assert.AreEqual(10, records.Count);
-            Assert.AreEqual("293398", records[0].ID);
-            Assert.AreEqual("..Fahrräder..", records[0].GetFieldValue("Category1"));
+            Assert.AreEqual(6, records.Count);
+            Assert.AreEqual("221911", records[0].ID);
+            Assert.AreEqual("..BMX Bikes..", records[0].GetFieldValue("Category3"));
         }
 
         [TestMethod]
@@ -49,8 +49,8 @@ namespace Omikron.FactFinderTests.Json.FF68
             SimilarRecordsAdapter.IDsOnly = true;
             var recordIDs = SimilarRecordsAdapter.Records;
 
-            Assert.AreEqual(10, recordIDs.Count);
-            Assert.AreEqual("232670", recordIDs[0].ID);
+            Assert.AreEqual(6, recordIDs.Count);
+            Assert.AreEqual("278006", recordIDs[0].ID);
         }
 
         [TestMethod]
@@ -62,11 +62,11 @@ namespace Omikron.FactFinderTests.Json.FF68
             SimilarRecordsAdapter.IDsOnly = false;
             var records = SimilarRecordsAdapter.Records;
 
-            Assert.AreEqual(10, recordIDs.Count);
-            Assert.AreEqual("232670", recordIDs[0].ID);
-            Assert.AreEqual(10, records.Count);
-            Assert.AreEqual("293398", records[0].ID);
-            Assert.AreEqual("..Fahrräder..", records[0].GetFieldValue("Category1"));
+            Assert.AreEqual(6, recordIDs.Count);
+            Assert.AreEqual("278006", recordIDs[0].ID);
+            Assert.AreEqual(6, records.Count);
+            Assert.AreEqual("221911", records[0].ID);
+            Assert.AreEqual("..BMX Bikes..", records[0].GetFieldValue("Category3"));
         }
 
         [TestMethod]
@@ -86,8 +86,8 @@ namespace Omikron.FactFinderTests.Json.FF68
             SimilarRecordsAdapter.SetProductID("123");
             var attributes = SimilarRecordsAdapter.SimilarAttributes;
 
-            Assert.AreEqual(6, attributes.Count);
-            Assert.AreEqual("..Fahrräder..", attributes["Category1"]);
+            Assert.AreEqual(3, attributes.Count);
+            Assert.AreEqual("..BMX Bikes..", attributes["Category3"]);
         }
     }
 }

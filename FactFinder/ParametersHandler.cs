@@ -127,11 +127,16 @@ namespace Omikron.FactFinder
             }
         }
 
-        public Uri GeneratePageLink(NameValueCollection parameters, string linkTarget = null)
+        public Uri GeneratePageLink(NameValueCollection parameters, NameValueCollection addParameters = null, string linkTarget = null)
         {
             if (String.IsNullOrWhiteSpace(linkTarget))
             {
                 linkTarget = RequestTarget;
+            }
+
+            if (addParameters != null)
+            {
+                parameters.Add(addParameters);
             }
 
             parameters = ServerToClientRequestParameters(parameters);

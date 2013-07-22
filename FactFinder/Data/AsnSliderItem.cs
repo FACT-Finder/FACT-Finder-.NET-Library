@@ -40,9 +40,10 @@ namespace Omikron.FactFinder.Data
             float absoluteMaximum = 0,
             float selectedMinimum = 0,
             float selectedMaximum = 0,
-            string field = ""
+            string field = "",
+            string refKey = null
         )
-            : base("", baseUrl, false, 0, 0, "", field)
+            : base("", baseUrl, false, 0, 0, "", field, refKey)
         {
             AbsoluteMinimum = absoluteMinimum;
             AbsoluteMaximum = absoluteMaximum;

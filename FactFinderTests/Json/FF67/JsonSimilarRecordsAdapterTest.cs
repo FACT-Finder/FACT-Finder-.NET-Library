@@ -2,7 +2,7 @@
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
-using Omikron.FactFinder.Json.FF66;
+using Omikron.FactFinder.Json.FF67;
 using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests.Json.FF67

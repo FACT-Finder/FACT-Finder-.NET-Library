@@ -32,7 +32,7 @@ namespace Omikron.FactFinder.Data
             var parameters = new NameValueCollection();
             parameters["page"] = pageNumber.ToString();
 
-            return ParametersHandler.GeneratePageLink(parameters, linkTarget);
+            return ParametersHandler.GeneratePageLink(parameters, null, linkTarget);
         }
     }
 }

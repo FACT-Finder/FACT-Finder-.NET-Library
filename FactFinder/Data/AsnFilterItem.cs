@@ -9,6 +9,8 @@ namespace Omikron.FactFinder.Data
         public string PreviewImage { get; private set; }
         public string Field { get; private set; }
 
+        public string RefKey { get; private set; }
+
         public AsnFilterItem(
             string value,
             Uri url,
@@ -16,7 +18,8 @@ namespace Omikron.FactFinder.Data
             int matchCount = 0,
             int clusterLevel = 0,
             string previewImage = "",
-            string field = ""
+            string field = "",
+            string refKey = null
         )
             : base(value, url, selected)
         {
@@ -24,6 +27,7 @@ namespace Omikron.FactFinder.Data
             ClusterLevel = clusterLevel;
             PreviewImage = previewImage;
             Field = field;
+            RefKey = refKey;
         }
 
         public bool HasPreviewImage()
