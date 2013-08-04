@@ -13,6 +13,7 @@
     public static readonly RequestType Compare                          = new RequestType(8,  "Compare.ff");
     public static readonly RequestType Import                           = new RequestType(9,  "Import.ff");
     public static readonly RequestType TagCloud                         = new RequestType(10, "TagCloud.ff");
+    public static readonly RequestType Tracking                         = new RequestType(11, "Tracking.ff");
 
     private RequestType(int value, string name)
     {
@@ -20,7 +21,7 @@
         this.value = value;
     }
 
-    public override string  ToString()
+    public override string ToString()
     {
  	     return name;
     }

@@ -3,9 +3,10 @@
 @using Omikron.FactFinder.Raw
 
 @{
+    Response.ContentType = "text/javascript";
     var parametersHandler = new ParametersHandler();
     var suggestProvider = new HttpDataProvider();
     var suggestAdapter = new RawSuggestAdapter(suggestProvider, parametersHandler);
 }
 
-@(suggestAdapter.RawSuggestions)
+@Html.Raw(suggestAdapter.RawSuggestions)

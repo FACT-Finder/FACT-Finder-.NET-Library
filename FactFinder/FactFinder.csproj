@@ -60,6 +60,7 @@
     <Compile Include="Configuration\IgnoreRuleElement.cs" />
     <Compile Include="Configuration\IgnoreRuleElementCollection.cs" />
     <Compile Include="Configuration\ParametersSection.cs" />
+    <Compile Include="EventType.cs" />
     <Compile Include="Data\AdvisorAnswer.cs" />
     <Compile Include="Data\AdvisorQuestion.cs" />
     <Compile Include="Data\AfterSearchNavigation.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Data\SuggestQuery.cs" />
     <Compile Include="Data\TagQuery.cs" />
     <Compile Include="Default\CompareAdapter.cs" />
+    <Compile Include="Default\TrackingAdapter.cs" />
     <Compile Include="Default\ProductCampaignAdapter.cs" />
     <Compile Include="Default\SimilarRecordsAdapter.cs" />
     <Compile Include="Default\ImportAdapter.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Json\Helper\DynamicJsonObject.cs" />
     <Compile Include="ParametersHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Raw\TrackingAdapter.cs" />
     <Compile Include="Raw\SuggestAdapter.cs" />
     <Compile Include="RequestType.cs" />
     <Compile Include="UnixClock.cs" />

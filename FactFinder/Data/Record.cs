@@ -16,8 +16,6 @@ namespace Omikron.FactFinder.Data
         public string SeoPath { get; private set; }
         public IList<string> Keywords { get; private set; }
 
-        public string RefKey { get; private set; }
-
         public Record(
             string id, 
             float similarity = 100, 
@@ -25,8 +23,8 @@ namespace Omikron.FactFinder.Data
             int originalPosition = 0,
             IDictionary<string, object> fields = null,
             string seoPath = "",
-            IList<string> keywords = null,
-            string refKey = null)
+            IList<string> keywords = null
+        )
         {
             ID = id.Trim();
             // Clamp similarity to range 0 to 100
@@ -35,7 +33,6 @@ namespace Omikron.FactFinder.Data
             OriginalPosition = originalPosition;
             SeoPath = seoPath;
             Keywords = keywords;
-            RefKey = refKey;
 
             if (fields != null)
             {

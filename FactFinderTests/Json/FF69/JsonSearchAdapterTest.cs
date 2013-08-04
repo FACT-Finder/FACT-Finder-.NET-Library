@@ -42,7 +42,6 @@ namespace Omikron.FactFinderTests.Json.FF69
             Assert.AreEqual("WOwfiHGNS", result.RefKey);
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("278003", result[0].ID);
-            Assert.AreEqual("3Xo4zcM8W", result[0].RefKey);
         }
 
         [TestMethod]
@@ -74,13 +73,11 @@ namespace Omikron.FactFinderTests.Json.FF69
             
             Assert.AreEqual(AsnGroupStyle.Default, asn[0].Style);
             Assert.AreEqual("Für Wen?", asn[0].Name);
-            Assert.AreEqual("MPAL3O7l0", asn[0].RefKey);
             Assert.AreEqual(5, asn[0].DetailedLinkCount);
             Assert.AreEqual(3, asn[0].Count);
             Assert.IsFalse(asn[0][0].Selected);
             Assert.IsFalse(asn[0][1].Selected);
             Assert.IsFalse(asn[0][2].Selected);
-            Assert.AreEqual("A6ERS6aWX", asn[0][2].RefKey);
             Assert.AreEqual(1, asn[0][2].MatchCount);
             
             Assert.AreEqual(AsnGroupStyle.Tree, asn[1].Style);

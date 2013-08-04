@@ -16,13 +16,15 @@
 
         <link rel="shortcut icon" href="@Href("~/files/images/favicon.ico")">
         <link rel="stylesheet" type="text/css" href="@Href("~/files/css/main.css")">
+        <link rel="stylesheet" type="text/css" href="@Href("~/files/css/suggest.css")">
         
-        <script type="text/javascript" src="@Href("~/files/js/ffsuggest.js")"></script>
-        <script type="text/javascript" src="@Href("~/files/js/ffscic.js")"></script>
+        <script type="text/javascript" src="@Href("~/files/js/ffsuggest.list.noJquery.jsonp.js")"></script>
+        <script type="text/javascript" src="@Href("~/files/js/fftracking.js")"></script>
         <script type="text/javascript" src="@Href("~/files/js/jquery/jquery-1.2.6.min.js")"></script>
         <script type="text/javascript" src="http://static.express.fact-finder.com/onetouchslider-1.0/de.factfinder.asn.slider.OneTouchSlider.nocache.js"></script>
         
 		<script language="JavaScript" type="text/javascript">
+		    @RenderPage("~/templates/_extratracking.cshtml")
 		    @RenderPage("~/templates/js/demoshop.js.cshtml")
 			@RenderPage("~/templates/js/infomodus.js.cshtml")
 		</script>
@@ -31,6 +33,7 @@
     </head>
     <body>
         <script type="text/javascript" src="@Href("~/files/js/wz_tooltip/wz_tooltip.js")"></script>
+
         <div id="container">
             <div id="header">
                 @RenderPage("~/templates/_header.cshtml")

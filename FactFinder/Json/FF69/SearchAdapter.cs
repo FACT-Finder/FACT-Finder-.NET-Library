@@ -21,8 +21,7 @@ namespace Omikron.FactFinder.Json.FF69
                 groupName,
                 (int)groupData.detailedLinks,
                 groupUnit,
-                GetAsnGroupStyleFromString((string)groupData.filterStyle),
-                (string)groupData.refKey
+                GetAsnGroupStyleFromString((string)groupData.filterStyle)
             );
         }
 
@@ -42,8 +41,7 @@ namespace Omikron.FactFinder.Json.FF69
                     (float)element.absoluteMaxValue,
                     (float)element.selectedMinValue,
                     (float)element.selectedMaxValue,
-                    (string)element.associatedFieldName,
-                    (string)element.refKey
+                    (string)element.associatedFieldName
                 );
             }
             else
@@ -55,8 +53,7 @@ namespace Omikron.FactFinder.Json.FF69
                     (int)element.recordCount,
                     (int)element.clusterLevel,
                     (string)(element.previewImageURL ?? ""),
-                    (string)(element.associatedFieldName ?? ""),
-                    (string)element.refKey
+                    (string)(element.associatedFieldName ?? "")
                 );
             }
             return filter;
@@ -65,7 +62,7 @@ namespace Omikron.FactFinder.Json.FF69
         protected override Uri CreateLink(dynamic element)
         {
             var additionalParameters = new NameValueCollection();
-            additionalParameters["refKey"] = (string)element.refKey;
+            additionalParameters["sourceRefKey"] = Result.RefKey;
             return ParametersHandler.GeneratePageLink(
                 ParametersHandler.ParseParametersFromString((string)element.searchParams),
                 additionalParameters
@@ -126,8 +123,7 @@ namespace Omikron.FactFinder.Json.FF69
                 originalPosition,
                 fieldValues,
                 (string)recordData.seoPath,
-                keywords,
-                (string)recordData.refKey
+                keywords
             );
         }
     }
