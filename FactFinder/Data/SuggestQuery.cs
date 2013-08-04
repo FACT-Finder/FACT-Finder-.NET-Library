@@ -10,12 +10,15 @@ namespace Omikron.FactFinder.Data
         public string Type { get; private set; }
         public Uri ImageUrl { get; private set; }
 
+        public string RefKey { get; private set; }
+
         public SuggestQuery(
             string query,
             Uri url,
             int hitCount = 0,
             string type = "",
-            Uri imageUrl = null
+            Uri imageUrl = null,
+            string refKey = null
         )
         {
             Query = query;
@@ -23,6 +26,7 @@ namespace Omikron.FactFinder.Data
             HitCount = hitCount;
             Type = type;
             ImageUrl = imageUrl;
+            RefKey = refKey;
         }
     }
 }

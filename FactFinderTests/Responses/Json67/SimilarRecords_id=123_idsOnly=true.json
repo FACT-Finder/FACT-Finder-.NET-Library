@@ -1,0 +1,78 @@
+{
+    "attributes": [
+        {
+            "name": "category1",
+            "value": "..Fahrräder.."
+        },
+        {
+            "name": "category2",
+            "value": "..BMX.."
+        },
+        {
+            "name": "category3",
+            "value": "..BMX Räder bis 300€.."
+        }
+    ],
+    "records": [
+        {
+            "fieldNames": [],
+            "id": "278034",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "221911",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "277976",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "232670",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "277986",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "277992",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "240659",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "277984",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "278017",
+            "record": {},
+            "simiMalusMul": 1
+        },
+        {
+            "fieldNames": [],
+            "id": "317151",
+            "record": {},
+            "simiMalusMul": 1
+        }
+    ]
+}

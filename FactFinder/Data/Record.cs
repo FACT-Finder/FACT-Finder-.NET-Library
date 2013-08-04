@@ -23,7 +23,8 @@ namespace Omikron.FactFinder.Data
             int originalPosition = 0,
             IDictionary<string, object> fields = null,
             string seoPath = "",
-            IList<string> keywords = null)
+            IList<string> keywords = null
+        )
         {
             ID = id.Trim();
             // Clamp similarity to range 0 to 100

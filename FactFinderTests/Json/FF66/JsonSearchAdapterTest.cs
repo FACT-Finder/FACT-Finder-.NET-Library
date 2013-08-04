@@ -172,6 +172,7 @@ namespace Omikron.FactFinderTests.Json.FF66
             var pushedProducts = campaigns.GetPushedProducts();
             Assert.AreEqual(3, pushedProducts.Count);
             Assert.AreEqual("11660", pushedProducts[0].ID);
+            Assert.AreEqual(@"Katalog >> Geschenkgutscheine", pushedProducts[0].GetFieldValue("category"));
         }
     }
 }

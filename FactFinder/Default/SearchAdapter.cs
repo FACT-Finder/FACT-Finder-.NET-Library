@@ -191,7 +191,7 @@ namespace Omikron.FactFinder.Default
         public SearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {
-            log.Debug("Initialize new RecommendationAdapter.");
+            log.Debug("Initialize new SearchAdapter.");
         }
 
         // Default behavior mimicks a non-article-number search

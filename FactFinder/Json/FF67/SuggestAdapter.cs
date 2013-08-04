@@ -7,7 +7,7 @@
         { }
 
         /*
-         * no changes in FF 6.6
+         * no changes in FF 6.7
          */
     }
 }
