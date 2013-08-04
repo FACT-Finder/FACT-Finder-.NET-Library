@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Web.Script.Serialization;
 using log4net;
 using Omikron.FactFinder.Data;

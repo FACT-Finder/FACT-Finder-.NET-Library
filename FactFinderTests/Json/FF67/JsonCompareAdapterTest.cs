@@ -1,5 +1,4 @@
-﻿using System;
-using log4net;
+﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Json.FF67;
