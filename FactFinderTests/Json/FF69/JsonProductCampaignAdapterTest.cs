@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
