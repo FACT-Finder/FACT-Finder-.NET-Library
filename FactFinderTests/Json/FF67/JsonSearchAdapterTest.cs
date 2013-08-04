@@ -177,6 +177,7 @@ namespace Omikron.FactFinderTests.Json.FF67
             var pushedProducts = campaigns.GetPushedProducts();
             Assert.AreEqual(1, pushedProducts.Count);
             Assert.AreEqual("247968", pushedProducts[0].ID);
+            Assert.AreEqual(@"Katalog", pushedProducts[0].GetFieldValue("category0"));
 
             Assert.IsTrue(campaigns.HasActiveQuestions());
             Assert.AreEqual(1, campaigns.GetActiveQuestions().Count);
@@ -184,9 +185,9 @@ namespace Omikron.FactFinderTests.Json.FF67
             Assert.AreEqual("question text", question.Text);
             Assert.AreEqual(2, question.Answers.Count);
             Assert.AreEqual("answer text 1", question.Answers[0].Text);
-            Assert.AreEqual(0, question.Answers[0].SubQuestions.Count);
+            Assert.IsFalse(question.Answers[0].HasSubQuestions());
             Assert.AreEqual("answer text 2", question.Answers[1].Text);
-            Assert.AreEqual(0, question.Answers[0].SubQuestions.Count);
+            Assert.IsFalse(question.Answers[1].HasSubQuestions());
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Omikron.FactFinder.Json.FF66
         public JsonTagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {
-            DataProvider.Type = RequestType.TagCloud;
+            DataProvider.Type = RequestType.WhatsHot;
             DataProvider.SetParameter("format", "json");
             DataProvider.SetParameter("do", "getTagCloud");
         }

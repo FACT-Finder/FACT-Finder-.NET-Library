@@ -16,7 +16,7 @@ namespace Omikron.FactFinderTests.Json.FF68
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            log = LogManager.GetLogger(typeof(JsonRecommendationAdapterTest));
             TestWebRequestCreate.SetupResponsePath("Responses/Json68/");
         }
 

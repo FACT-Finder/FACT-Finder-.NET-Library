@@ -1,9 +1,10 @@
 ﻿@using System.Globalization
+@using System.Collections.Specialized
 
 @using Omikron.FactFinder
 @using Omikron.FactFinder.Data
 @using Omikron.FactFinder.Default
-@using Omikron.FactFinder.Json.FF68
+@using Omikron.FactFinder.Json.FF69
 
 
 @{
@@ -31,6 +32,18 @@
     SearchParameters ffParameters = parametersHandler.GetFactFinderParameters();
     PageData["ffParameters"] = ffParameters;
 
+    var trackingEvents = new Dictionary<EventType, NameValueCollection>();
+    PageData["trackingEvents"] = trackingEvents;
+    
+    if (HttpContext.Current.Session.IsNewSession)
+    {
+        trackingEvents[EventType.SessionStart] = new NameValueCollection();
+        
+        // We need to set some value so that ASP.NET does not create a new session
+        // for each request.
+        HttpContext.Current.Session["started"] = true;
+    }
+    
     try
     {
         PageData["campaigns"] = searchAdapter.Campaigns;
@@ -59,6 +72,7 @@
         switch((SearchStatus)PageData["status"])
         {
         case SearchStatus.ResultsFound:
+            trackingEvents[EventType.Display] = new NameValueCollection();
             Layout = "~/_LayoutResults.cshtml";
             @RenderPage("~/templates/_result.cshtml");
             break;

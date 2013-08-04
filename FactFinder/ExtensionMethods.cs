@@ -27,12 +27,10 @@ namespace Omikron.FactFinder
             // This is actually an HttpValueCollection, whose ToString() overload does all the work
             NameValueCollection query = HttpUtility.ParseQueryString(string.Empty);
 
+            // Copy all keys over and make sure to handle multi-value keys properly
             foreach (string key in nvc)
-            {
-                char[] delimiter = { ',' };
-                foreach (string value in nvc[key].Split(delimiter))
-                    query[key] = nvc[key];
-            }
+                foreach (string value in nvc.GetValues(key))
+                    query.Add(key, value);
 
             return query.ToString();
         }

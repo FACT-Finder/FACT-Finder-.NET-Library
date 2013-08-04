@@ -44,13 +44,12 @@ namespace Omikron.FactFinderTests.Utility
 
             // Write out elements in canonical order
             foreach (var key in parameters.AllKeys.OrderBy(k => k))
-            {
-                sb.AppendFormat(
-                    "_{0}={1}", 
-                    key, 
-                    parameters[key]
-                );
-            }
+                foreach (string value in parameters.GetValues(key).OrderBy(k => k))
+                    sb.AppendFormat(
+                        "_{0}={1}", 
+                        key,
+                        value
+                    );
 
             sb.Append(".json");
             

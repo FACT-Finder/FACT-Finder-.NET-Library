@@ -28,7 +28,7 @@
 <div class="productWrap">
 	<div class="product">
 		<div class="picture">
-			<a href="@detailUrl" onclick="@(util.CreateJavaScriptClickCode(record, title, sid))">
+			<a href="@detailUrl" onclick="@(util.CreateJavaScriptClickCode(record, title, sid, false))">
 				<img valign="top" src="@imageUrl" alt="no picture"
 					title="@title" onload="resizePicture(this, 120, 170)" onerror="imageNotFound(this)"
 					onmouseover="TagToTip('descr@(articleNr)', SHADOW, true)" onmouseout="UnTip()" />
@@ -57,7 +57,7 @@
 		</div>
 
 		<div class="title">
-			<a href="@(detailUrl)" onclick="@(util.CreateJavaScriptClickCode(record, title, sid))">
+			<a href="@(detailUrl)" onclick="@(util.CreateJavaScriptClickCode(record, title, sid, false))">
 			@{
                 if(title.Length > 23)
                 {

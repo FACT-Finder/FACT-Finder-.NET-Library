@@ -84,7 +84,7 @@ namespace Omikron.FactFinder.Default
         {
             ProductIDs.Clear();
             ProductIDs.Add(productID);
-            DataProvider.SetParameter("id", productID.ToString());
+            DataProvider.SetParameter("id", productID);
             RecommendationsUpToDate = false;
         }
         

@@ -15,7 +15,7 @@ namespace Omikron.FactFinder.Default
         public ScicAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {
-            log.Debug("Initialize new RecommendationAdapter.");
+            log.Debug("Initialize new ScicAdapter.");
         }
 
         // returns success boolean

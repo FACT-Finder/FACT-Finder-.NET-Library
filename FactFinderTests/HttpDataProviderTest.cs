@@ -33,7 +33,7 @@ namespace Omikron.FactFinderTests
         [TestMethod()]
         public void TestGetData()
         {
-            DataProvider.Type = RequestType.TagCloud;
+            DataProvider.Type = RequestType.WhatsHot;
             DataProvider.SetParameter("do", "getTagCloud");
             DataProvider.SetParameter("format", "json");
             string test = DataProvider.Data;

@@ -197,91 +197,9 @@ div.suggestFormWrap{
 	z-index:1001;
 }
 
-div.suggestLayer {
-	position: relative;
-	top: 0;
-	left: 28px;
-	width: 1px;
-	height: 1px;
-	display: none;
-	padding: 0;
-	margin: 0;
-	z-index: 1000;
-	background-color: white;
-	background: transparent;
-
-}
-
-table.suggestLayer {
-	font-size: 11px;
-	width: 130px;
-	border: 1px solid #5C7997;
-	height: 12px;
-	background-color: white;
-	color: #173553;
-	cursor: pointer;
-}
-tr.suggestLayer { 
-	height: 12px;
-}
-td.suggestLayer {
-	padding: 0;
-	height: 12px;
-}
-tr.suggestHeader{
-	color: #173553;
-	font-weight: normal;
-	font-size: 10px;
-}
-tr.suggestHeader td{
-	border-bottom: 1px solid #5C7997;
-	padding: 3px 3px 3px 5px;
-}
-td.suggestFooter{
-	height:25px;
-	border-top:solid 1px #5C7997; 
-	font-size:9px;
-	color: #173553;
-	background-color: #FCFCFC;
-	background-image: url("../../images/logo_fact-finder_suggest.gif");
-	background-repeat: no-repeat;
-	background-position: right;
-}
-
-td.suggestTextQuery{
-	font-weight: bold; 
-	padding: 2px 15px 2px 10px;
-}
-span.suggestTextQueryTyped{
-	color: #5c7997;
-	text-decoration: underline;
-}
-td.suggestTextType{
-	padding: 2px 5px 2px 15px;
-	width: 30%;
-}
-td.suggestTextAmount{
-	padding: 2px 5px 2px 15px;
-	width: 30%;
-	text-align: right;
-}
-tr.suggestRow{
-	padding: 2px 2px 2px 0px;
-	background-color: #FCFCFC;
-}
-
-tr.suggestHighlight{
-	color: #FCFCFC;
-	background-color: #173553;
-}
-tr.suggestHighlight span.suggestTextQueryTyped{
-	color: white;	
-}
-td.suggestImage{
-	height: 40px;
-}
-td.suggestImage img{
-	height: 40px;
+.suggestFormWrap div.suggestLayer {
+    margin-left: 30px;
+    margin-top: 2px;
 }
 
 /*****************************************************************************/

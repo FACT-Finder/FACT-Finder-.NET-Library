@@ -1,0 +1,62 @@
+{
+    "attributes": [
+        {
+            "name": "category1",
+            "value": "..Fahrräder.."
+        },
+        {
+            "name": "category2",
+            "value": "..BMX.."
+        },
+        {
+            "name": "category3",
+            "value": "..BMX Räder bis 300€.."
+        },
+        {
+            "name": "category4",
+            "value": ""
+        }
+    ],
+    "records": [
+        {
+            "id": "301997",
+            "record": {}
+        },
+        {
+            "id": "319621",
+            "record": {}
+        },
+        {
+            "id": "301128",
+            "record": {}
+        },
+        {
+            "id": "293410",
+            "record": {}
+        },
+        {
+            "id": "319294",
+            "record": {}
+        },
+        {
+            "id": "302002",
+            "record": {}
+        },
+        {
+            "id": "277976",
+            "record": {}
+        },
+        {
+            "id": "301867",
+            "record": {}
+        },
+        {
+            "id": "293388",
+            "record": {}
+        },
+        {
+            "id": "254371",
+            "record": {}
+        }
+    ]
+}

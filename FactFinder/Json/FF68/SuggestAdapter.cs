@@ -26,7 +26,6 @@ namespace Omikron.FactFinder.Json.FF68
             foreach (var suggestData in JsonData)
             {
                 string query = (string)suggestData.name;
-                var parameters = new Dictionary<string, string>() { { "query", query } };
                 suggestions.Add(new SuggestQuery(
                     query,
                     ParametersHandler.GeneratePageLink(

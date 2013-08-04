@@ -12,9 +12,18 @@ namespace Omikron.FactFinder.Data
         public Item PreviousPageLink { get; private set; }
         public Item NextPageLink { get; private set; }
 
+        private string SourceRefKey;
+
         private ParametersHandler ParametersHandler;
 
-        public Paging(int currentPage, int pageCount, Item previousPageLink, Item nextPageLink, ParametersHandler parametersHandler)
+        public Paging(
+            int currentPage, 
+            int pageCount, 
+            Item previousPageLink, 
+            Item nextPageLink, 
+            ParametersHandler parametersHandler,
+            string sourceRefKey = null
+        )
             : base()
         {
             CurrentPage = currentPage;
@@ -22,6 +31,7 @@ namespace Omikron.FactFinder.Data
             ParametersHandler = parametersHandler;
             PreviousPageLink = previousPageLink;
             NextPageLink = nextPageLink;
+            SourceRefKey = sourceRefKey;
         }
 
         public Uri GetPageLink(int pageNumber, string linkTarget = null)
@@ -32,7 +42,10 @@ namespace Omikron.FactFinder.Data
             var parameters = new NameValueCollection();
             parameters["page"] = pageNumber.ToString();
 
-            return ParametersHandler.GeneratePageLink(parameters, linkTarget);
+            if (SourceRefKey != null)
+                parameters["sourceRefKey"] = SourceRefKey;
+
+            return ParametersHandler.GeneratePageLink(parameters, null, linkTarget);
         }
     }
 }

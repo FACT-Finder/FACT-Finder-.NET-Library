@@ -1,0 +1,11 @@
+﻿@using Omikron.FactFinder
+@using Omikron.FactFinder.Default
+@using Omikron.FactFinder.Raw
+
+@{
+    var parametersHandler = new ParametersHandler();
+    var dataProvider = new HttpDataProvider();
+    var trackingAdapter = new RawTrackingAdapter(dataProvider, parametersHandler);
+}
+
+@(trackingAdapter.DoTrackingFromRequest())

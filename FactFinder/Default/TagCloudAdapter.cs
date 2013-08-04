@@ -27,7 +27,7 @@ namespace Omikron.FactFinder.Default
         public TagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
             : base(dataProvider, parametersHandler)
         {
-            log.Debug("Initialize new RecommendationAdapter.");
+            log.Debug("Initialize new TagCloudAdapter.");
         }
         
         protected virtual IList<TagQuery> CreateTagCloud()
