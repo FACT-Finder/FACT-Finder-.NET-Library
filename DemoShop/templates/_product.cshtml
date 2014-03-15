@@ -14,7 +14,7 @@
     };
 
     var record = PageData["record"] as Record;
-    var util = PageData["util"] as Util;
+    var util = PageData["util"] as RenderHelper;
 
     string articleNr    = (string)record.GetFieldValue(fieldnames["artNo"]);
     string title        = (string)record.GetFieldValue(fieldnames["title"]);

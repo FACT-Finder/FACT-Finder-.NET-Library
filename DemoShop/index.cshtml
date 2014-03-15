@@ -67,7 +67,7 @@
 
         PageData["tagCloud"] = tagCloudAdapter.TagCloud;
 
-        PageData["util"] = new Util(ffParameters, searchAdapter);
+        PageData["util"] = new RenderHelper(ffParameters, searchAdapter);
     
         switch((SearchStatus)PageData["status"])
         {

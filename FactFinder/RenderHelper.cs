@@ -8,12 +8,12 @@ using Omikron.FactFinder.Default;
 
 namespace Omikron.FactFinder
 {
-    public class Util
+    public class RenderHelper
     {
         protected SearchAdapter SearchAdapter { get; set; }
         protected SearchParameters FFParameters { get; set; }
 
-        public Util(SearchParameters ffParameters, SearchAdapter searchAdapter)
+        public RenderHelper(SearchParameters ffParameters, SearchAdapter searchAdapter)
         {
             SearchAdapter = searchAdapter;
             FFParameters = ffParameters;
