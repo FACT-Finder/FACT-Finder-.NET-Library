@@ -1,9 +1,10 @@
 ﻿using System.Collections.Specialized;
 using log4net;
+using Omikron.FactFinder.Adapter;
 
 namespace Omikron.FactFinder.Default
 {
-    public class ScicAdapter : Adapter
+    public class ScicAdapter : AbstractAdapter
     {
         private static ILog log;
 

@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapter.cs" />
+    <Compile Include="Adapter\AbstractAdapter.cs" />
     <Compile Include="Configuration\AuthenticationType.cs" />
     <Compile Include="Configuration\AuthenticationElement.cs" />
     <Compile Include="Configuration\ConnectionProtocol.cs" />
@@ -100,15 +100,15 @@
     <Compile Include="IUnixClock.cs" />
     <Compile Include="Json\FF67\SimilarRecordsAdapter.cs" />
     <Compile Include="Json\FF68\SimilarRecordsAdapter.cs" />
-    <Compile Include="Json\FF69\CompareAdapter.cs" />
-    <Compile Include="Json\FF69\ImportAdapter.cs" />
-    <Compile Include="Json\FF69\ProductCampaignAdapter.cs" />
-    <Compile Include="Json\FF69\RecommendationAdapter.cs" />
-    <Compile Include="Json\FF69\ScicAdapter.cs" />
-    <Compile Include="Json\FF69\SearchAdapter.cs" />
-    <Compile Include="Json\FF69\SimilarRecordsAdapter.cs" />
-    <Compile Include="Json\FF69\SuggestAdapter.cs" />
-    <Compile Include="Json\FF69\TagCloudAdapter.cs" />
+    <Compile Include="Adapter\CompareAdapter.cs" />
+    <Compile Include="Adapter\ImportAdapter.cs" />
+    <Compile Include="Adapter\ProductCampaignAdapter.cs" />
+    <Compile Include="Adapter\RecommendationAdapter.cs" />
+    <Compile Include="Adapter\ScicAdapter.cs" />
+    <Compile Include="Adapter\SearchAdapter.cs" />
+    <Compile Include="Adapter\SimilarRecordsAdapter.cs" />
+    <Compile Include="Adapter\SuggestAdapter.cs" />
+    <Compile Include="Adapter\TagCloudAdapter.cs" />
     <Compile Include="Json\FF66\CompareAdapter.cs" />
     <Compile Include="Json\FF66\SimilarRecordsAdapter.cs" />
     <Compile Include="Json\FF66\ImportAdapter.cs" />

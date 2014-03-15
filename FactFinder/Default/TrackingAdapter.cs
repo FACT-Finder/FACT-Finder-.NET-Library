@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Specialized;
 using log4net;
+using Omikron.FactFinder.Adapter;
 
 namespace Omikron.FactFinder.Default
 {
-    public class TrackingAdapter : Adapter
+    public class TrackingAdapter: AbstractAdapter
     {
         private static ILog log;
 

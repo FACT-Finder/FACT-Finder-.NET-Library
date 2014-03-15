@@ -1,9 +1,10 @@
 ﻿using log4net;
+using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
 {
-    public class ImportAdapter : Adapter
+    public class ImportAdapter: AbstractAdapter
     {
         private static ILog log;
 

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using log4net;
+using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
 {
-    public class ProductCampaignAdapter : Adapter
+    public class ProductCampaignAdapter: AbstractAdapter
     {
         private CampaignList _campaigns;
         public CampaignList Campaigns

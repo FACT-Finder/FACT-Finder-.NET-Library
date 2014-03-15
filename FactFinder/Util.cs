@@ -55,7 +55,7 @@ namespace Omikron.FactFinder
             // Escape single quotes that are not yet escaped
             sid = Regex.Replace(sid, @"
                     (?<!\\)     # Make sure the match is not preceded by further backslashes
-                    ((?:\\\\)*) # match an capture an even number of backslashes in group 1 (to write back)
+                    ((?:\\\\)*) # match and capture an even number of backslashes in group 1 (to write back)
                     '           # match a single quote
                 ", @"$1\'", RegexOptions.IgnorePatternWhitespace);
 

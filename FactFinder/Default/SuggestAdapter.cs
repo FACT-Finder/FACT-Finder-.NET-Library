@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using log4net;
+using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
 {
-    public class SuggestAdapter : Adapter
+    public class SuggestAdapter: AbstractAdapter
     {
         private IList<SuggestQuery> _suggestions;
         public IList<SuggestQuery> Suggestions

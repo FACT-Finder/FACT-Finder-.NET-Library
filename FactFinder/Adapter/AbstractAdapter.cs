@@ -1,20 +1,20 @@
 ﻿using System.Collections.Specialized;
 using log4net;
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Adapter
 {
-    public abstract class Adapter
+    public abstract class AbstractAdapter
     {
         protected DataProvider DataProvider;
         protected ParametersHandler ParametersHandler;
 
         private static ILog log;
 
-        static Adapter()
+        static AbstractAdapter()
         {
-            log = LogManager.GetLogger(typeof(Adapter));
+            log = LogManager.GetLogger(typeof(AbstractAdapter));
         }
 
-        public Adapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+        public AbstractAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
         {
             DataProvider = dataProvider;
             ParametersHandler = parametersHandler;

@@ -1,5 +1,5 @@
 ﻿
-namespace Omikron.FactFinder.Json.FF69
+namespace Omikron.FactFinder.Adapter
 {
     public class JsonProductCampaignAdapter : Omikron.FactFinder.Json.FF68.JsonProductCampaignAdapter
     {

@@ -1,4 +1,4 @@
-﻿namespace Omikron.FactFinder.Json.FF69
+﻿namespace Omikron.FactFinder.Adapter
 {
     public class JsonSimilarRecordsAdapter : Omikron.FactFinder.Json.FF68.JsonSimilarRecordsAdapter
     {

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using log4net;
+using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Configuration;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default
 {
-    public class SearchAdapter : Adapter
+    public class SearchAdapter: AbstractAdapter
     {
         protected SearchStatus _articleNumberSearchStatus;
         protected bool? _isArticleNumberSearch;
