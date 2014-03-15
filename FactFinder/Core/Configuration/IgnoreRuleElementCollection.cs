@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 
-namespace Omikron.FactFinder.Configuration
+namespace Omikron.FactFinder.Core.Configuration
 {
     [ConfigurationCollection(typeof(IgnoreRuleElement),
        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]

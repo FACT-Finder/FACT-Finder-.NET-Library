@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Omikron.FactFinder.Configuration
+namespace Omikron.FactFinder.Core.Configuration
 {
     public class ParameterRulesElement : ConfigurationElement
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 
-namespace Omikron.FactFinder.Configuration
+namespace Omikron.FactFinder.Core.Configuration
 {
-    [ConfigurationCollection(typeof(RequireRuleElement),
+    [ConfigurationCollection(typeof(MappingRuleElement),
        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public class RequireRuleElementCollection : ConfigurationElementCollection
+    public class MappingRuleElementCollection : ConfigurationElementCollection
     {
         #region Static Fields
 
@@ -27,16 +27,16 @@ namespace Omikron.FactFinder.Configuration
 
         #endregion
 
-        public RequireRuleElementCollection()
+        public MappingRuleElementCollection()
         {
             _properties = new ConfigurationPropertyCollection();
         }
 
         #region Indexers
 
-        public RequireRuleElement this[int index]
+        public MappingRuleElement this[int index]
         {
-            get { return (RequireRuleElement)base.BaseGet(index); }
+            get { return (MappingRuleElement)base.BaseGet(index); }
             set
             {
                 if (base.BaseGet(index) != null)
@@ -47,9 +47,9 @@ namespace Omikron.FactFinder.Configuration
             }
         }
 
-        new public RequireRuleElement this[string name]
+        new public MappingRuleElement this[string name]
         {
-            get { return (RequireRuleElement)base.BaseGet(name); }
+            get { return (MappingRuleElement)base.BaseGet(name); }
         }
 
         #endregion
@@ -58,12 +58,12 @@ namespace Omikron.FactFinder.Configuration
 
         protected override ConfigurationElement CreateNewElement()
         {
-            return new RequireRuleElement();
+            return new MappingRuleElement();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return (element as RequireRuleElement).Name;
+            return (element as MappingRuleElement).Name;
         }
 
         #endregion
@@ -74,8 +74,8 @@ namespace Omikron.FactFinder.Configuration
 
             foreach (var rawRule in this)
             {
-                var rule = rawRule as RequireRuleElement;
-                result[rule.Name] = rule.Default;
+                var rule = rawRule as MappingRuleElement;
+                result[rule.Name] = rule.MapTo;
             }
 
             return result;

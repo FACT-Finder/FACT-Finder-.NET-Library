@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Configuration;
 using log4net;
 
-namespace Omikron.FactFinder.Configuration
+namespace Omikron.FactFinder.Core.Configuration
 {
     public class ConnectionSection : ConfigurationSection
     {

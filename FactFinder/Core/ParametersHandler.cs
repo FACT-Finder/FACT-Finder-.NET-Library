@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using log4net;
-using Omikron.FactFinder.Configuration;
+using Omikron.FactFinder.Core.Configuration;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
 

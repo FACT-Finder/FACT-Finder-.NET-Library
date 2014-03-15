@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Omikron.FactFinder.Configuration;
+using Omikron.FactFinder.Core.Configuration;
 
 namespace Omikron.FactFinderTests
 {

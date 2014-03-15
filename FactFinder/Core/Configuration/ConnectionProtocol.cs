@@ -1,4 +1,4 @@
-﻿namespace Omikron.FactFinder.Configuration
+﻿namespace Omikron.FactFinder.Core.Configuration
 {
     public enum ConnectionProtocol
     {

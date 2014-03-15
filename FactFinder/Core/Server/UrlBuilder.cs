@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using log4net;
-using Omikron.FactFinder.Configuration;
+using Omikron.FactFinder.Core.Configuration;
 using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Core.Server
