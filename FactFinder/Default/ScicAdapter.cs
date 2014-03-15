@@ -1,6 +1,8 @@
 ﻿using System.Collections.Specialized;
 using log4net;
 using Omikron.FactFinder.Adapter;
+using Omikron.FactFinder.Core;
+using Omikron.FactFinder.Core.Server;
 
 namespace Omikron.FactFinder.Default
 {

@@ -4,6 +4,8 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Configuration;
+using Omikron.FactFinder.Core;
+using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Util;
 using Omikron.FactFinderTests.Utility;
 

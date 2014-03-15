@@ -2,6 +2,10 @@
 using System.Collections.Specialized;
 using log4net;
 using Omikron.FactFinder.Adapter;
+using Omikron.FactFinder.Core;
+using Omikron.FactFinder.Core.Server;
+using Omikron.FactFinder.Data;
+using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Default
 {

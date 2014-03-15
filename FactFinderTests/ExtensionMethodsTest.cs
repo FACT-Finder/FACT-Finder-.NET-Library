@@ -1,6 +1,6 @@
 ﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Omikron.FactFinder;
+using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinderTests
 {

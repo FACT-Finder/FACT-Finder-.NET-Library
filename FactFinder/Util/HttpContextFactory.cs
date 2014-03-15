@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Util
 {
     /// <summary>
     /// Abstraction of HttpContext.Current to make testing of the web service easier.

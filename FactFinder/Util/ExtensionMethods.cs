@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Util
 {
     public static class ExtensionMethods
     {

@@ -7,6 +7,7 @@ using log4net.Config;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Omikron.FactFinder;
+using Omikron.FactFinder.Util;
 using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests

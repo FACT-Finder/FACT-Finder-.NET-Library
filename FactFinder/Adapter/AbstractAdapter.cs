@@ -1,5 +1,7 @@
 ﻿using System.Collections.Specialized;
 using log4net;
+using Omikron.FactFinder.Core.Server;
+using Omikron.FactFinder.Core;
 namespace Omikron.FactFinder.Adapter
 {
     public abstract class AbstractAdapter

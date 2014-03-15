@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using log4net;
-using Omikron.FactFinder.Core.Server;
 
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Core.Server
 {
     public abstract class DataProvider
     {

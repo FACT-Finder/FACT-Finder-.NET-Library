@@ -1,4 +1,5 @@
 ﻿using Omikron.FactFinder.Core.Server;
+using Omikron.FactFinder.Core;
 namespace Omikron.FactFinder.Adapter
 {
     public class JsonTagCloudAdapter : Omikron.FactFinder.Json.FF68.JsonTagCloudAdapter

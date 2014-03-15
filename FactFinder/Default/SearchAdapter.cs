@@ -4,6 +4,8 @@ using System.Runtime.Serialization;
 using log4net;
 using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Configuration;
+using Omikron.FactFinder.Core;
+using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Default

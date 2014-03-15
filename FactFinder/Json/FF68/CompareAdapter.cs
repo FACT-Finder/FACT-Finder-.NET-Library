@@ -1,4 +1,6 @@
-﻿namespace Omikron.FactFinder.Json.FF68
+﻿using Omikron.FactFinder.Core.Server;
+using Omikron.FactFinder.Core;
+namespace Omikron.FactFinder.Json.FF68
 {
     public class JsonCompareAdapter : Omikron.FactFinder.Json.FF67.JsonCompareAdapter
     {

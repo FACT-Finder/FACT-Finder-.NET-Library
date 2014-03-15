@@ -1,4 +1,6 @@
 ﻿using log4net;
+using Omikron.FactFinder.Core;
+using Omikron.FactFinder.Core.Server;
 namespace Omikron.FactFinder.Json.FF67
 {
     public class JsonScicAdapter : Omikron.FactFinder.Json.FF66.JsonScicAdapter

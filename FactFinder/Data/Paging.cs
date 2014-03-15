@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using Omikron.FactFinder.Core;
 
 namespace Omikron.FactFinder.Data
 {

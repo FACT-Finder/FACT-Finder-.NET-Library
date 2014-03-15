@@ -1,5 +1,6 @@
 ﻿using System.Web.Script.Serialization;
 using log4net;
+using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Default;

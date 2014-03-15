@@ -6,8 +6,9 @@ using System.Web;
 using log4net;
 using Omikron.FactFinder.Configuration;
 using Omikron.FactFinder.Data;
+using Omikron.FactFinder.Util;
 
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Core
 {
     public class ParametersHandler
     {
