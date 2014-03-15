@@ -16,7 +16,7 @@ namespace Omikron.FactFinderTests
         public static void InitializeClass(TestContext context)
         {
             log = LogManager.GetLogger(typeof(UrlBuilderTest));
-            TestWebRequestCreate.SetupResponsePath("Responses/Raw/");
+            TestWebRequestCreate.SetupResponsePath("Responses/");
         }
 
         [TestInitialize]

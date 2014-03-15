@@ -1,13 +1,13 @@
 ﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
-using Omikron.FactFinder.Json.FF68;
+using Omikron.FactFinder.Json.FF69;
 using Omikron.FactFinderTests.Utility;
 
-namespace Omikron.FactFinderTests.Json.FF68
+namespace Omikron.FactFinderTests.Adapter
 {
     [TestClass]
-    public class JsonTagCloudAdapterTest : BaseTest
+    public class TagCloudTest : BaseTest
     {
         private UnixClock Clock { get; set; }
         private JsonTagCloudAdapter TagCloudAdapter { get; set; }
@@ -15,8 +15,8 @@ namespace Omikron.FactFinderTests.Json.FF68
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(UrlBuilderTest));
-            TestWebRequestCreate.SetupResponsePath("Responses/Json68/");
+            log = LogManager.GetLogger(typeof(TagCloudTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/");
         }
 
         [TestInitialize]
@@ -36,9 +36,9 @@ namespace Omikron.FactFinderTests.Json.FF68
             var tagCloud = TagCloudAdapter.TagCloud;
 
             Assert.AreEqual(5, tagCloud.Count);
-            Assert.AreEqual(0.0334, tagCloud[0].Weight, 0.00001);
-            Assert.AreEqual(265, tagCloud[0].SearchCount);
-            Assert.AreEqual("26 zoll", tagCloud[0].Label);
+            Assert.AreEqual(0.561, tagCloud[0].Weight, 0.0001);
+            Assert.AreEqual(1266, tagCloud[0].SearchCount);
+            Assert.AreEqual("28+zoll+damen", tagCloud[0].Label);
         }
     }
 }

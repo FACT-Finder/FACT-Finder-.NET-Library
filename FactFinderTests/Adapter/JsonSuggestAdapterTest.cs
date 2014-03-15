@@ -4,10 +4,10 @@ using Omikron.FactFinder;
 using Omikron.FactFinder.Json.FF69;
 using Omikron.FactFinderTests.Utility;
 
-namespace Omikron.FactFinderTests.Json.FF69
+namespace Omikron.FactFinderTests.Adapter
 {
     [TestClass]
-    public class JsonSuggestAdapterTest : BaseTest
+    public class SuggestTest : BaseTest
     {
         private UnixClock Clock { get; set; }
         private JsonSuggestAdapter SuggestAdapter { get; set; }
@@ -15,8 +15,8 @@ namespace Omikron.FactFinderTests.Json.FF69
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(UrlBuilderTest));
-            TestWebRequestCreate.SetupResponsePath("Responses/Json69/");
+            log = LogManager.GetLogger(typeof(SuggestTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/");
         }
 
         [TestInitialize]

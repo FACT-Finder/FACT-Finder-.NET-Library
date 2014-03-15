@@ -4,10 +4,10 @@ using Omikron.FactFinder;
 using Omikron.FactFinder.Json.FF69;
 using Omikron.FactFinderTests.Utility;
 
-namespace Omikron.FactFinderTests.Json.FF69
+namespace Omikron.FactFinderTests.Adapter
 {
     [TestClass]
-    public class JsonSimilarRecordsAdapterTest : BaseTest
+    public class SimilarRecordsTest : BaseTest
     {
         private UnixClock Clock { get; set; }
         private JsonSimilarRecordsAdapter SimilarRecordsAdapter { get; set; }
@@ -15,8 +15,8 @@ namespace Omikron.FactFinderTests.Json.FF69
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(JsonSimilarRecordsAdapterTest));
-            TestWebRequestCreate.SetupResponsePath("Responses/Json69/");
+            log = LogManager.GetLogger(typeof(SimilarRecordsTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/");
         }
 
         [TestInitialize]

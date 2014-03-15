@@ -1,13 +1,13 @@
 ﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
-using Omikron.FactFinder.Json.FF66;
+using Omikron.FactFinder.Json.FF69;
 using Omikron.FactFinderTests.Utility;
 
-namespace Omikron.FactFinderTests.Json.FF66
+namespace Omikron.FactFinderTests.Adapter
 {
     [TestClass]
-    public class JsonCompareAdapterTest : BaseTest
+    public class CompareTest : BaseTest
     {
         private UnixClock Clock { get; set; }
         private JsonCompareAdapter CompareAdapter { get; set; }
@@ -15,8 +15,8 @@ namespace Omikron.FactFinderTests.Json.FF66
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(JsonCompareAdapterTest));
-            TestWebRequestCreate.SetupResponsePath("Responses/Json66/");
+            log = LogManager.GetLogger(typeof(CompareTest));
+            TestWebRequestCreate.SetupResponsePath("Responses/");
         }
 
         [TestInitialize]
@@ -44,7 +44,7 @@ namespace Omikron.FactFinderTests.Json.FF66
 
             Assert.AreEqual(3, records.Count);
             Assert.AreEqual("123", records[0].ID);
-            Assert.AreEqual("Serious", records[0].GetFieldValue("Hersteller"));
+            Assert.AreEqual("..schwarz..", records[0].GetFieldValue("Farbe"));
         }
 
         [TestMethod]
@@ -76,9 +76,10 @@ namespace Omikron.FactFinderTests.Json.FF66
             CompareAdapter.SetProductIDs(productIDs);
             var attributes = CompareAdapter.ComparableAttributes;
 
-            Assert.AreEqual(3, attributes.Count);
+            Assert.AreEqual(7, attributes.Count);
+            Assert.IsFalse(attributes["Hersteller"]);
             Assert.IsTrue(attributes["Farbe"]);
-            Assert.IsTrue(attributes["Hersteller"]);
+            Assert.IsTrue(attributes["Material"]);
             Assert.IsFalse(attributes["Modelljahr"]);
         }
     }
