@@ -6,7 +6,7 @@ using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Util;
-using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinderTests.TestUtility ;
 
 namespace Omikron.FactFinderTests.Adapter
 {

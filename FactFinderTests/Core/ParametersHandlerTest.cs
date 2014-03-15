@@ -3,9 +3,9 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Core;
-using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinderTests.TestUtility;
 
-namespace Omikron.FactFinderTests
+namespace Omikron.FactFinderTests.Core
 {
     [TestClass]
     public class ParametersHandlerTest : BaseTest

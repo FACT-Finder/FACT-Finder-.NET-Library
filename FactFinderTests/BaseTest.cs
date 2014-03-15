@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Util;
-using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinderTests.TestUtility ;
 
 namespace Omikron.FactFinderTests
 {

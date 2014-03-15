@@ -4,9 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Util;
-using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinderTests.TestUtility ;
 
-namespace Omikron.FactFinderTests
+namespace Omikron.FactFinderTests.Core.Server
 {
     [TestClass]
     public class HttpDataProviderTest : BaseTest
@@ -17,7 +17,7 @@ namespace Omikron.FactFinderTests
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            log = LogManager.GetLogger(typeof(HttpDataProviderTest));
             TestWebRequestCreate.SetupResponsePath("Responses/");
         }
 

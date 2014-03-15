@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Adapter;
-using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinderTests.TestUtility ;
 using Omikron.FactFinder.Util;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Core;

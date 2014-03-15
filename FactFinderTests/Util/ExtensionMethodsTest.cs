@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Util;
 
-namespace Omikron.FactFinderTests
+namespace Omikron.FactFinderTests.Util
 {
     [TestClass]
     public class ExtensionMethodsTest : BaseTest
@@ -10,7 +10,7 @@ namespace Omikron.FactFinderTests
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            log = LogManager.GetLogger(typeof(ExtensionMethodsTest));
         }
 
         [TestInitialize]

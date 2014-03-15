@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 
-namespace Omikron.FactFinderTests.Utility
+namespace Omikron.FactFinderTests.TestUtility
 {
     public static class ExtensionMethods
     {

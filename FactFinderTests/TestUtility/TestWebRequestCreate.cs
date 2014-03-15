@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using Moq;
 
-namespace Omikron.FactFinderTests.Utility
+namespace Omikron.FactFinderTests.TestUtility
 {
     // Taken from http://blog.salamandersoft.co.uk/index.php/2009/10/how-to-mock-httpwebrequest-when-unit-testing/
 

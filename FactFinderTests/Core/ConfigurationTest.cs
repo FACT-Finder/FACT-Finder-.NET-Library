@@ -3,7 +3,7 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Core.Configuration;
 
-namespace Omikron.FactFinderTests
+namespace Omikron.FactFinderTests.Core
 {
     [TestClass]
     public class ConfigurationTest : BaseTest

@@ -7,9 +7,9 @@ using Omikron.FactFinder.Core.Configuration;
 using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Util;
-using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinderTests.TestUtility ;
 
-namespace Omikron.FactFinderTests
+namespace Omikron.FactFinderTests.Core.Server
 {
     [TestClass]
     public class UrlBuilderTest : BaseTest
