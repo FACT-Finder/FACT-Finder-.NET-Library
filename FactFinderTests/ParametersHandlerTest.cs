@@ -14,7 +14,7 @@ namespace Omikron.FactFinderTests
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            log = LogManager.GetLogger(typeof(UrlBuilderTest));
+            log = LogManager.GetLogger(typeof(ParametersHandlerTest));
             ParametersConverter = new ParametersHandler();
         }
 
