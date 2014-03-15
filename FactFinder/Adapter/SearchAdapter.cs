@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Core;
 namespace Omikron.FactFinder.Adapter
 {
     public class JsonSearchAdapter : Omikron.FactFinder.Json.FF68.JsonSearchAdapter

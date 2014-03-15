@@ -1,5 +1,5 @@
-﻿using Omikron.FactFinder.Core.Server;
-using Omikron.FactFinder.Core;
+﻿using Omikron.FactFinder.Core;
+using Omikron.FactFinder.Core.Server;
 namespace Omikron.FactFinder.Adapter
 {
     public class JsonSimilarRecordsAdapter : Omikron.FactFinder.Json.FF68.JsonSimilarRecordsAdapter

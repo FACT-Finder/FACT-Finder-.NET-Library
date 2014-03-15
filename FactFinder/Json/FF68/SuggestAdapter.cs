@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using log4net;
+using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Core;
 
 namespace Omikron.FactFinder.Json.FF68
 {
