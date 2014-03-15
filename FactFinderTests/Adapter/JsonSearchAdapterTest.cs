@@ -5,6 +5,7 @@ using Omikron.FactFinder;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Adapter;
 using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinderTests.Adapter
 {

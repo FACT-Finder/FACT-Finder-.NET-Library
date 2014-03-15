@@ -1,4 +1,5 @@
 ﻿using log4net;
+using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Default;
 
 namespace Omikron.FactFinder.Raw

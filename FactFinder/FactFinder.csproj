@@ -97,7 +97,7 @@
     <Compile Include="HttpContextFactory.cs" />
     <Compile Include="HttpDataProvider.cs" />
     <Compile Include="DataProvider.cs" />
-    <Compile Include="IUnixClock.cs" />
+    <Compile Include="Util\IUnixClock.cs" />
     <Compile Include="Json\FF67\SimilarRecordsAdapter.cs" />
     <Compile Include="Json\FF68\SimilarRecordsAdapter.cs" />
     <Compile Include="Adapter\CompareAdapter.cs" />
@@ -139,16 +139,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Raw\TrackingAdapter.cs" />
     <Compile Include="Raw\SuggestAdapter.cs" />
-    <Compile Include="RequestType.cs" />
-    <Compile Include="UnixClock.cs" />
-    <Compile Include="UnixClockStub.cs" />
+    <Compile Include="Core\Server\RequestType.cs" />
+    <Compile Include="Util\UnixClock.cs" />
+    <Compile Include="Util\UnixClockStub.cs" />
     <Compile Include="UrlBuilder.cs" />
-    <Compile Include="Util.cs" />
+    <Compile Include="Core\Page\RenderHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LoggingGuidelines.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\Client\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

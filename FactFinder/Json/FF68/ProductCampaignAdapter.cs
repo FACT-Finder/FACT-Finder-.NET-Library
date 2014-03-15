@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using log4net;
+using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Json.FF68

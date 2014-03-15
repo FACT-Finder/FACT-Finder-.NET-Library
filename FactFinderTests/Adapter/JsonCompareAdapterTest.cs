@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder;
 using Omikron.FactFinder.Adapter;
+using Omikron.FactFinder.Util;
 using Omikron.FactFinderTests.Utility;
 
 namespace Omikron.FactFinderTests.Adapter

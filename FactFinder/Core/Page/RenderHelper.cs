@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Default;
 
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Core.Page
 {
     public class RenderHelper
     {

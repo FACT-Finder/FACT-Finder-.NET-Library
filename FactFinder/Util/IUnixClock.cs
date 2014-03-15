@@ -1,5 +1,5 @@
 ﻿
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Util
 {
     public interface IUnixClock
     {

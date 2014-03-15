@@ -5,6 +5,8 @@ using System.IO;
 using System.Net;
 using log4net;
 using Omikron.FactFinder.Configuration;
+using Omikron.FactFinder.Core.Server;
+using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder
 {

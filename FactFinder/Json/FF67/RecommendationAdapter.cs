@@ -2,6 +2,7 @@
 using System.Collections.Specialized;
 using System.Web.Script.Serialization;
 using log4net;
+using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Json.Helper;
 

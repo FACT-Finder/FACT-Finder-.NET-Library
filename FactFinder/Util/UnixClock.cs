@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Omikron.FactFinder
+namespace Omikron.FactFinder.Util
 {
     public class UnixClock : IUnixClock
     {
