@@ -57,7 +57,7 @@ namespace Omikron.FactFinder.Default
 
         static ProductCampaignAdapter()
         {
-            log = LogManager.GetLogger(typeof(RecommendationAdapter));
+            log = LogManager.GetLogger(typeof(ProductCampaignAdapter));
         }
 
         public ProductCampaignAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
