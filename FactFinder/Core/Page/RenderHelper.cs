@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using System.Text.RegularExpressions;
-using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Adapter;
+using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Core.Page

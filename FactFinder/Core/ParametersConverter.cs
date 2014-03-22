@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Web;
 using log4net;
 using Omikron.FactFinder.Core.Configuration;
-using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Core
 {

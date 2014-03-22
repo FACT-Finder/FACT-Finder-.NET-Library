@@ -1,10 +1,10 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using log4net;
 using Omikron.FactFinder.Core;
-using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Core.Client;
+using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Util;
-using System;
 
 namespace Omikron.FactFinder.Adapter
 {

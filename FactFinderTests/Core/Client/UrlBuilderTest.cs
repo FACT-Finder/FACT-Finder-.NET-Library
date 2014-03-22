@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Web;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Client;
-using Omikron.FactFinder.Util;
 using Omikron.FactFinderTests.TestUtility;
 
 namespace Omikron.FactFinderTests.Core.Client
