@@ -7,14 +7,14 @@ using Omikron.FactFinderTests.TestUtility;
 namespace Omikron.FactFinderTests.Core
 {
     [TestClass]
-    public class ParametersHandlerTest : BaseTest
+    public class ParametersConverterTest : BaseTest
     {
         private static ParametersConverter ParametersConverter { get; set; }
 
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            log = LogManager.GetLogger(typeof(ParametersHandlerTest));
+            log = LogManager.GetLogger(typeof(ParametersConverterTest));
             ParametersConverter = new ParametersConverter();
         }
 
@@ -27,19 +27,19 @@ namespace Omikron.FactFinderTests.Core
         [TestMethod]
         public void TestGetServerRequestParameters()
         {
-            var pageParameters = new NameValueCollection();
+            var pageParameters = new NameValueCollection() {
+                {"keywords", "test"},
+                {"username", "admin"},
+                {"productsPerPage", "12"},
+            };
 
-            pageParameters["keywords"] = "test";
-            pageParameters["username"] = "admin";
-            pageParameters["productsPerPage"] = "12";
+            var expectedServerParameters = new NameValueCollection() {
+                {"query", "test"},
+                {"productsPerPage", "12"},
+                {"channel", "de"},
+            };
 
-            var expectedServerParameters = new NameValueCollection();
-
-            expectedServerParameters["query"] = "test";
-            expectedServerParameters["productsPerPage"] = "12";
-            expectedServerParameters["channel"] = "de";
-
-            var actualServerParameters = ParametersHandlerTest.ParametersConverter.ClientToServerRequestParameters(pageParameters);
+            var actualServerParameters = ParametersConverterTest.ParametersConverter.ClientToServerRequestParameters(pageParameters);
 
             Assert.IsTrue(expectedServerParameters.NameValueCollectionEquals(actualServerParameters));
         }
@@ -55,7 +55,7 @@ namespace Omikron.FactFinderTests.Core
 
             expectedServerParameters["channel"] = "en";
 
-            var actualServerParameters = ParametersHandlerTest.ParametersConverter.ClientToServerRequestParameters(pageParameters);
+            var actualServerParameters = ParametersConverterTest.ParametersConverter.ClientToServerRequestParameters(pageParameters);
 
             Assert.IsTrue(expectedServerParameters.NameValueCollectionEquals(actualServerParameters));
 
@@ -81,7 +81,7 @@ namespace Omikron.FactFinderTests.Core
             expectedPageParameters["productsPerPage"] = "12";
             expectedPageParameters["test"] = "value";
 
-            var actualPageParameters = ParametersHandlerTest.ParametersConverter.ServerToClientRequestParameters(serverParameters);
+            var actualPageParameters = ParametersConverterTest.ParametersConverter.ServerToClientRequestParameters(serverParameters);
 
             Assert.IsTrue(expectedPageParameters.NameValueCollectionEquals(actualPageParameters));
         }
