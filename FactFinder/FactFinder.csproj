@@ -87,7 +87,6 @@
     <Compile Include="Data\TagQuery.cs" />
     <Compile Include="Default\CompareAdapter.cs" />
     <Compile Include="Default\TrackingAdapter.cs" />
-    <Compile Include="Default\ProductCampaignAdapter.cs" />
     <Compile Include="Default\ImportAdapter.cs" />
     <Compile Include="Util\ExtensionMethods.cs" />
     <Compile Include="Util\HttpContextFactory.cs" />
@@ -105,11 +104,9 @@
     <Compile Include="Json\FF66\CompareAdapter.cs" />
     <Compile Include="Json\FF66\ImportAdapter.cs" />
     <Compile Include="Json\FF67\CompareAdapter.cs" />
-    <Compile Include="Json\FF67\ProductCampaignAdapter.cs" />
     <Compile Include="Json\FF67\ImportAdapter.cs" />
     <Compile Include="Json\FF68\CompareAdapter.cs" />
     <Compile Include="Json\FF68\ImportAdapter.cs" />
-    <Compile Include="Json\FF68\ProductCampaignAdapter.cs" />
     <Compile Include="Util\Json\DynamicJsonConverter.cs" />
     <Compile Include="Util\Json\DynamicJsonObject.cs" />
     <Compile Include="Core\ParametersConverter.cs" />
