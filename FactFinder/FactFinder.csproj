@@ -89,7 +89,6 @@
     <Compile Include="Default\TrackingAdapter.cs" />
     <Compile Include="Default\ProductCampaignAdapter.cs" />
     <Compile Include="Default\ImportAdapter.cs" />
-    <Compile Include="Default\SearchAdapter.cs" />
     <Compile Include="Default\RecommendationAdapter.cs" />
     <Compile Include="Util\ExtensionMethods.cs" />
     <Compile Include="Util\HttpContextFactory.cs" />
