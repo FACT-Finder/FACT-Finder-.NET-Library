@@ -99,7 +99,7 @@
                                                     break;
         }
     }
-    catch (Omikron.FactFinder.Default.SearchAdapter.NoQueryException)
+    catch (Search.NoQueryException)
     {
         Layout = "~/_LayoutEmptyResult.cshtml";
         PageData["message"] = Resources.Messages.NoQuery;

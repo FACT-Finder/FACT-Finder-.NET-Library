@@ -4,17 +4,17 @@ using System.Collections.Specialized;
 using System.Text;
 using System.Text.RegularExpressions;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Default;
+using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Core.Page
 {
     public class RenderHelper
     {
-        protected SearchAdapter SearchAdapter { get; set; }
+        protected Search SearchAdapter { get; set; }
         protected SearchParameters FFParameters { get; set; }
 
-        public RenderHelper(SearchParameters ffParameters, SearchAdapter searchAdapter)
+        public RenderHelper(SearchParameters ffParameters, Search searchAdapter)
         {
             SearchAdapter = searchAdapter;
             FFParameters = ffParameters;
