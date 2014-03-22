@@ -10,7 +10,7 @@ using System.Linq;
 // http://stackoverflow.com/questions/3142495/deserialize-json-into-c-sharp-dynamic-object
 // (with some modifications)
 
-namespace Omikron.FactFinder.Json.Helper
+namespace Omikron.FactFinder.Util.Json
 {
 
     public sealed class DynamicJsonObject : DynamicObject

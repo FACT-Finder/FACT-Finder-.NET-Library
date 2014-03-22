@@ -4,7 +4,7 @@ using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Default;
-using Omikron.FactFinder.Json.Helper;
+using Omikron.FactFinder.Util.Json;
 
 namespace Omikron.FactFinder.Json.FF66
 {

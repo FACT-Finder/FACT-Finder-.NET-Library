@@ -8,7 +8,7 @@ using System.Web.Script.Serialization;
 // and
 // http://stackoverflow.com/questions/3142495/deserialize-json-into-c-sharp-dynamic-object
 
-namespace Omikron.FactFinder.Json.Helper
+namespace Omikron.FactFinder.Util.Json
 {
     public class DynamicJsonConverter : JavaScriptConverter
     {
