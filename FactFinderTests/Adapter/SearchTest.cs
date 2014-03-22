@@ -15,7 +15,7 @@ namespace Omikron.FactFinderTests.Adapter
     public class SearchTest : BaseTest
     {
         private UnixClock Clock { get; set; }
-        private JsonSearchAdapter SearchAdapter { get; set; }
+        private Search SearchAdapter { get; set; }
 
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
@@ -34,7 +34,7 @@ namespace Omikron.FactFinderTests.Adapter
             var requestParser = new RequestParser();
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            SearchAdapter = new JsonSearchAdapter(dataProvider, parametersHandler, clientUrlBuilder);
+            SearchAdapter = new Search(dataProvider, parametersHandler, clientUrlBuilder);
         }
 
         [TestMethod]

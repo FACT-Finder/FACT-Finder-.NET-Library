@@ -8,9 +8,9 @@ using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Adapter
 {
-    public class JsonSearchAdapter : Omikron.FactFinder.Json.FF68.JsonSearchAdapter
+    public class Search : Omikron.FactFinder.Json.FF68.JsonSearchAdapter
     {
-        public JsonSearchAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+        public Search(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
             : base(dataProvider, parametersConverter, urlBuilder)
         { }
 

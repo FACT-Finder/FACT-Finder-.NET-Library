@@ -10,15 +10,15 @@ using Omikron.FactFinderTests.TestUtility;
 namespace Omikron.FactFinderTests.Adapter
 {
     [TestClass]
-    public class TagCloudTest : BaseTest
+    public class SuggestTest : BaseTest
     {
         private UnixClock Clock { get; set; }
-        private TagCloudAdapter TagCloudAdapter { get; set; }
+        private Suggest SuggestAdapter { get; set; }
 
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
         {
-            log = LogManager.GetLogger(typeof(TagCloudTest));
+            log = LogManager.GetLogger(typeof(SuggestTest));
             TestWebRequestCreate.SetupResponsePath("Responses/");
         }
 
@@ -32,18 +32,21 @@ namespace Omikron.FactFinderTests.Adapter
             var requestParser = new RequestParser();
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            TagCloudAdapter = new TagCloudAdapter(dataProvider, parametersHandler, clientUrlBuilder);
+            SuggestAdapter = new Suggest(dataProvider, parametersHandler, clientUrlBuilder);
         }
 
         [TestMethod]
-        public void TestGetTagCloud()
+        public void TestGetSuggestions()
         {
-            var tagCloud = TagCloudAdapter.TagCloud;
+            SuggestAdapter.SetParameter("query", "bmx");
+            var suggestions = SuggestAdapter.Suggestions;
 
-            Assert.AreEqual(5, tagCloud.Count);
-            Assert.AreEqual(0.561, tagCloud[0].Weight, 0.0001);
-            Assert.AreEqual(1266, tagCloud[0].SearchCount);
-            Assert.AreEqual("28+zoll+damen", tagCloud[0].Label);
+            Assert.AreEqual(3, suggestions.Count);
+            Assert.AreEqual("Verde BMX", suggestions[0].Query);
+            Assert.AreEqual("8blKVw-P5", suggestions[0].RefKey);
+            Assert.AreEqual("brand", suggestions[0].Type);
+            Assert.AreEqual("category", suggestions[1].Type);
+            Assert.AreEqual("productName", suggestions[2].Type);
         }
     }
 }

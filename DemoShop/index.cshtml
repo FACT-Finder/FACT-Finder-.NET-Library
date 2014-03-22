@@ -27,8 +27,8 @@
     var requestParameters = requestParser.RequestParameters;
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-    JsonSearchAdapter searchAdapter = new JsonSearchAdapter(searchProvider, parametersHandler, clientUrlBuilder);
-    TagCloudAdapter tagCloudAdapter = new TagCloudAdapter(tagCloudProvider, parametersHandler, clientUrlBuilder);
+    Search searchAdapter = new Search(searchProvider, parametersHandler, clientUrlBuilder);
+    TagCloud tagCloudAdapter = new TagCloud(tagCloudProvider, parametersHandler, clientUrlBuilder);
 
     if (Int32.Parse(requestParameters["productsPerPage"] ?? "12") > 60)
     {

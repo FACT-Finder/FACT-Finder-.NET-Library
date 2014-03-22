@@ -14,7 +14,7 @@ namespace Omikron.FactFinderTests.Adapter
     public class ProductCampaignTest : BaseTest
     {
         private UnixClock Clock { get; set; }
-        private JsonProductCampaignAdapter ProductCampaignAdapter { get; set; }
+        private ProductCampaign ProductCampaignAdapter { get; set; }
 
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
@@ -33,7 +33,7 @@ namespace Omikron.FactFinderTests.Adapter
             var requestParser = new RequestParser();
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            ProductCampaignAdapter = new JsonProductCampaignAdapter(dataProvider, parametersHandler, clientUrlBuilder);
+            ProductCampaignAdapter = new ProductCampaign(dataProvider, parametersHandler, clientUrlBuilder);
         }
 
         [TestMethod]

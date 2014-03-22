@@ -13,7 +13,7 @@ namespace Omikron.FactFinderTests.Adapter
     public class CompareTest : BaseTest
     {
         private UnixClock Clock { get; set; }
-        private JsonCompareAdapter CompareAdapter { get; set; }
+        private Compare CompareAdapter { get; set; }
 
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
@@ -32,7 +32,7 @@ namespace Omikron.FactFinderTests.Adapter
             var requestParser = new RequestParser();
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            CompareAdapter = new JsonCompareAdapter(dataProvider, parametersHandler, clientUrlBuilder);
+            CompareAdapter = new Compare(dataProvider, parametersHandler, clientUrlBuilder);
         }
 
         [TestMethod]

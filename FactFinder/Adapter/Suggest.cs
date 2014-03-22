@@ -9,7 +9,7 @@ using Omikron.FactFinder.Util.Json;
 
 namespace Omikron.FactFinder.Adapter
 {
-    public class SuggestAdapter : AbstractAdapter
+    public class Suggest : AbstractAdapter
     {
         private IList<SuggestQuery> _suggestions;
         public IList<SuggestQuery> Suggestions
@@ -50,12 +50,12 @@ namespace Omikron.FactFinder.Adapter
 
         private static ILog log;
 
-        static SuggestAdapter()
+        static Suggest()
         {
-            log = LogManager.GetLogger(typeof(SuggestAdapter));
+            log = LogManager.GetLogger(typeof(Suggest));
         }
 
-        public SuggestAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+        public Suggest(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
             : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new SuggestAdapter.");

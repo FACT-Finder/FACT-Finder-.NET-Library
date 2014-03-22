@@ -9,7 +9,7 @@ using Omikron.FactFinder.Util.Json;
 
 namespace Omikron.FactFinder.Adapter
 {
-    public class TagCloudAdapter : AbstractAdapter
+    public class TagCloud : AbstractAdapter
     {
         private IList<TagQuery> _tagCloud;
         public IList<TagQuery> TagCloud
@@ -24,12 +24,12 @@ namespace Omikron.FactFinder.Adapter
 
         private static ILog log;
 
-        static TagCloudAdapter()
+        static TagCloud()
         {
-            log = LogManager.GetLogger(typeof(TagCloudAdapter));
+            log = LogManager.GetLogger(typeof(TagCloud));
         }
 
-        public TagCloudAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+        public TagCloud(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
             : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new TagCloudAdapter.");

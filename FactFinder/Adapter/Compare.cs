@@ -2,9 +2,9 @@
 using Omikron.FactFinder.Core.Server;
 namespace Omikron.FactFinder.Adapter
 {
-    public class JsonSimilarRecordsAdapter : Omikron.FactFinder.Json.FF68.JsonSimilarRecordsAdapter
+    public class Compare : Omikron.FactFinder.Json.FF68.JsonCompareAdapter
     {
-        public JsonSimilarRecordsAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+        public Compare(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
             : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
