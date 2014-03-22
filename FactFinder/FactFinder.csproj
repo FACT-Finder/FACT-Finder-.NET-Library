@@ -85,7 +85,6 @@
     <Compile Include="Data\SingleWordSearchQuery.cs" />
     <Compile Include="Data\SuggestQuery.cs" />
     <Compile Include="Data\TagQuery.cs" />
-    <Compile Include="Default\CompareAdapter.cs" />
     <Compile Include="Default\TrackingAdapter.cs" />
     <Compile Include="Util\ExtensionMethods.cs" />
     <Compile Include="Util\HttpContextFactory.cs" />
@@ -100,9 +99,6 @@
     <Compile Include="Adapter\SimilarRecords.cs" />
     <Compile Include="Adapter\Suggest.cs" />
     <Compile Include="Adapter\TagCloud.cs" />
-    <Compile Include="Json\FF66\CompareAdapter.cs" />
-    <Compile Include="Json\FF67\CompareAdapter.cs" />
-    <Compile Include="Json\FF68\CompareAdapter.cs" />
     <Compile Include="Util\Json\DynamicJsonConverter.cs" />
     <Compile Include="Util\Json\DynamicJsonObject.cs" />
     <Compile Include="Core\ParametersConverter.cs" />
