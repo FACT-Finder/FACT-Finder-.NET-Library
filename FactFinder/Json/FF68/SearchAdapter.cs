@@ -6,8 +6,8 @@ namespace Omikron.FactFinder.Json.FF68
 {
     public class JsonSearchAdapter : Omikron.FactFinder.Json.FF67.JsonSearchAdapter
     {
-        public JsonSearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSearchAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         protected override CampaignList CreateCampaigns()

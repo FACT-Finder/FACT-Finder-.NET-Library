@@ -4,8 +4,8 @@ namespace Omikron.FactFinder.Json.FF67
 {
     public class JsonSuggestAdapter : Omikron.FactFinder.Json.FF66.JsonSuggestAdapter
     {
-        public JsonSuggestAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSuggestAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         /*

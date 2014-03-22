@@ -18,8 +18,8 @@ namespace Omikron.FactFinder.Json.FF67
             log = LogManager.GetLogger(typeof(JsonRecommendationAdapter));
         }
 
-        public JsonRecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonRecommendationAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.Recommendation;
             DataProvider.SetParameter("format", "json");

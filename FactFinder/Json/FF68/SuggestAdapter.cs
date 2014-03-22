@@ -16,8 +16,8 @@ namespace Omikron.FactFinder.Json.FF68
             log = LogManager.GetLogger(typeof(JsonSuggestAdapter));
         }
 
-        public JsonSuggestAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSuggestAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         // TODO: Utilize all new Suggest features
@@ -30,9 +30,7 @@ namespace Omikron.FactFinder.Json.FF68
                 string query = (string)suggestData.name;
                 suggestions.Add(new SuggestQuery(
                     query,
-                    ParametersHandler.GeneratePageLink(
-                        ParametersHandler.ParseParametersFromString((string)suggestData.searchParams)
-                    ),
+                    ConvertServerQueryToClientUrl((string)suggestData.searchParams),
                     (int)suggestData.hitCount,
                     (string)suggestData.type,
                     new Uri((string)suggestData.image, UriKind.RelativeOrAbsolute)

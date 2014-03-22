@@ -4,12 +4,14 @@ using System.Collections.Specialized;
 using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
+using Omikron.FactFinder.Util;
+
 namespace Omikron.FactFinder.Adapter
 {
     public class JsonSearchAdapter : Omikron.FactFinder.Json.FF68.JsonSearchAdapter
     {
-        public JsonSearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSearchAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         protected override AsnGroup CreateGroupInstance(dynamic groupData)
@@ -28,13 +30,13 @@ namespace Omikron.FactFinder.Adapter
 
         protected override AsnFilterItem CreateFilter(dynamic asnGroup, dynamic element)
         {
-            Uri filterLink = CreateLink(element);
+            Uri filterLink = ConvertServerQueryToClientUrl(element.searchParams);
 
             AsnFilterItem filter;
 
             if (asnGroup.Style == AsnGroupStyle.Slider)
             {
-                NameValueCollection parameters = ParametersHandler.ParseParametersFromString((string)element.searchParams);
+                NameValueCollection parameters = ((string)element.searchParams).ToParameters();
 
                 filter = new AsnSliderItem(
                     filterLink,
@@ -58,16 +60,6 @@ namespace Omikron.FactFinder.Adapter
                 );
             }
             return filter;
-        }
-
-        protected override Uri CreateLink(dynamic element)
-        {
-            var additionalParameters = new NameValueCollection();
-            additionalParameters["sourceRefKey"] = Result.RefKey;
-            return ParametersHandler.GeneratePageLink(
-                ParametersHandler.ParseParametersFromString((string)element.searchParams),
-                additionalParameters
-            );
         }
 
         protected override ResultRecords CreateResult()

@@ -59,5 +59,13 @@ namespace Omikron.FactFinder.Util
             }
             return sb.ToString();
         }
+
+        // We can't add a static extension method NameValueCollection.FromParameters(), so
+        // we'll add a conversion method to String instead.
+        public static NameValueCollection ToParameters(this string queryString)
+        {
+            char[] querySeparator = { '?' };
+            return HttpUtility.ParseQueryString(queryString.Split(querySeparator).Last());
+        }
     }
 }

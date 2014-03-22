@@ -8,8 +8,8 @@ namespace Omikron.FactFinder.Adapter
 {
     public class JsonSuggestAdapter : Omikron.FactFinder.Json.FF68.JsonSuggestAdapter
     {
-        public JsonSuggestAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSuggestAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         protected override IList<SuggestQuery> CreateSuggestions()
@@ -21,9 +21,7 @@ namespace Omikron.FactFinder.Adapter
                 string query = (string)suggestData.name;
                 suggestions.Add(new SuggestQuery(
                     query,
-                    ParametersHandler.GeneratePageLink(
-                        ParametersHandler.ParseParametersFromString((string)suggestData.searchParams)
-                    ),
+                    ConvertServerQueryToClientUrl((string)suggestData.searchParams),
                     (int)suggestData.hitCount,
                     (string)suggestData.type,
                     new Uri((string)suggestData.image, UriKind.RelativeOrAbsolute),

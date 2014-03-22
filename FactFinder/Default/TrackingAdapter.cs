@@ -4,6 +4,7 @@ using log4net;
 using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
+using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
 
@@ -18,15 +19,15 @@ namespace Omikron.FactFinder.Default
             log = LogManager.GetLogger(typeof(TrackingAdapter));
         }
 
-        public TrackingAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public TrackingAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new TrackingAdapter.");
         }
 
         public bool DoTrackingFromRequest()
         {
-            DataProvider.ResetParameters(ParametersHandler.GetRequestParamsForServer());
+            DataProvider.ResetParameters(new RequestParser().RequestParameters);
 
             return ApplyTracking();
         }

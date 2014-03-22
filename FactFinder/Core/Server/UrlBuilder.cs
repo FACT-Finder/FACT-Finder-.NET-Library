@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using log4net;
+using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Core.Configuration;
 using Omikron.FactFinder.Util;
 
@@ -8,7 +9,7 @@ namespace Omikron.FactFinder.Core.Server
 {
     public class UrlBuilder
     {
-        private ParametersHandler ParametersHandler;
+        private ParametersConverter ParametersConverter;
         private IUnixClock Clock;
 
         private NameValueCollection Parameters;
@@ -22,12 +23,12 @@ namespace Omikron.FactFinder.Core.Server
             log = LogManager.GetLogger(typeof(UrlBuilder));
         }
 
-        public UrlBuilder(ParametersHandler parametersHandler, IUnixClock clock)
+        public UrlBuilder(ParametersConverter parametersConverter, IUnixClock clock)
         {
             log.Debug("Initialize new UrlBuilder.");
-            ParametersHandler = parametersHandler;
+            ParametersConverter = parametersConverter;
             Clock = clock;
-            Parameters = parametersHandler.GetRequestParamsForServer();
+            Parameters = new RequestParser().RequestParameters;
         }
 
         public void SetParameter(string name, string value)
@@ -75,7 +76,7 @@ namespace Omikron.FactFinder.Core.Server
         {
             var config = ConnectionSection.GetSection();
 
-            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}/{3}/{4}?{5}",
@@ -93,7 +94,7 @@ namespace Omikron.FactFinder.Core.Server
         {
             var config = ConnectionSection.GetSection();
 
-            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
 
             parameters["timestamp"] = Clock.Now().ToString();
             parameters["username"] = config.Authentication.UserName;
@@ -114,7 +115,7 @@ namespace Omikron.FactFinder.Core.Server
         {
             var config = ConnectionSection.GetSection();
 
-            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
 
             string timestamp = Clock.Now().ToString();
 
@@ -142,7 +143,7 @@ namespace Omikron.FactFinder.Core.Server
         {
             var config = ConnectionSection.GetSection();
 
-            NameValueCollection parameters = ParametersHandler.ClientToServerRequestParameters(Parameters);
+            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}@{3}:{4}/{5}/{6}?{7}",

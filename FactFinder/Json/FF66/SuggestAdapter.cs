@@ -35,8 +35,8 @@ namespace Omikron.FactFinder.Json.FF66
             }
         }
 
-        public JsonSuggestAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSuggestAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.Suggest;
             DataProvider.SetParameter("format", "json");
@@ -56,7 +56,7 @@ namespace Omikron.FactFinder.Json.FF66
 
                 suggestions.Add(new SuggestQuery(
                     query,
-                    ParametersHandler.GeneratePageLink(parameters),
+                    UrlBuilder.GenerateUrl(parameters),
                     (int)suggestData.hitCount,
                     (string)suggestData.type,
                     new Uri((string)suggestData.imageURL, UriKind.RelativeOrAbsolute)

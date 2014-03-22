@@ -28,8 +28,8 @@ namespace Omikron.FactFinder.Json.FF66
             }
         }
 
-        public JsonCompareAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonCompareAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.Compare;
             DataProvider.SetParameter("format", "json");

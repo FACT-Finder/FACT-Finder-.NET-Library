@@ -85,8 +85,8 @@ namespace Omikron.FactFinder.Default
             }
         }
 
-        public SimilarRecordsAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public SimilarRecordsAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new SimilarRecordsAdapter.");
 

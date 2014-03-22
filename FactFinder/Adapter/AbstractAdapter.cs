@@ -2,12 +2,17 @@
 using log4net;
 using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
+using Omikron.FactFinder.Core.Client;
+using Omikron.FactFinder.Util;
+using System;
+
 namespace Omikron.FactFinder.Adapter
 {
     public abstract class AbstractAdapter
     {
         protected DataProvider DataProvider;
-        protected ParametersHandler ParametersHandler;
+        protected ParametersConverter ParametersConverter;
+        protected Omikron.FactFinder.Core.Client.UrlBuilder UrlBuilder;
 
         private static ILog log;
 
@@ -16,10 +21,11 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(AbstractAdapter));
         }
 
-        public AbstractAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
+        public AbstractAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
         {
             DataProvider = dataProvider;
-            ParametersHandler = parametersHandler;
+            ParametersConverter = parametersConverter;
+            UrlBuilder = urlBuilder;
         }
 
         protected virtual string Data
@@ -38,6 +44,11 @@ namespace Omikron.FactFinder.Adapter
         public void SetParameters(NameValueCollection parameters)
         {
             DataProvider.SetParameters(parameters);
+        }
+
+        protected Uri ConvertServerQueryToClientUrl(string query)
+        {
+            return UrlBuilder.GenerateUrl(query.ToParameters());
         }
     }
 }

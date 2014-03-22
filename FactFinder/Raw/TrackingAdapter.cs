@@ -14,8 +14,8 @@ namespace Omikron.FactFinder.Raw
             log = LogManager.GetLogger(typeof(RawTrackingAdapter));
         }
 
-        public RawTrackingAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public RawTrackingAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.Tracking;
         }

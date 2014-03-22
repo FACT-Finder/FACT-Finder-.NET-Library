@@ -4,8 +4,8 @@ namespace Omikron.FactFinder.Adapter
 {
     public class JsonImportAdapter : Omikron.FactFinder.Json.FF68.JsonImportAdapter
     {
-        public JsonImportAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonImportAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         /*

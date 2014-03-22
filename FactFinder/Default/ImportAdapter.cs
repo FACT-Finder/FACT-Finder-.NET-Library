@@ -15,8 +15,8 @@ namespace Omikron.FactFinder.Default
             log = LogManager.GetLogger(typeof(ImportAdapter));
         }
 
-        public ImportAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public ImportAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new ImportAdapter.");
         }

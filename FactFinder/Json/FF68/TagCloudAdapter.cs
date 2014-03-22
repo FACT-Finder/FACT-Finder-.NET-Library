@@ -4,8 +4,8 @@ namespace Omikron.FactFinder.Json.FF68
 {
     public class JsonTagCloudAdapter : Omikron.FactFinder.Json.FF67.JsonTagCloudAdapter
     {
-        public JsonTagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonTagCloudAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         /*

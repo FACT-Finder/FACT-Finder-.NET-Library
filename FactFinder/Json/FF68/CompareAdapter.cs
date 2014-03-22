@@ -4,8 +4,8 @@ namespace Omikron.FactFinder.Json.FF68
 {
     public class JsonCompareAdapter : Omikron.FactFinder.Json.FF67.JsonCompareAdapter
     {
-        public JsonCompareAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonCompareAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         /*

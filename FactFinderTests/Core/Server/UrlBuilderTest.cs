@@ -28,7 +28,7 @@ namespace Omikron.FactFinderTests.Core.Server
         {
             base.InitializeTest();
             Clock = new UnixClockStub();
-            UrlBuilder = new UrlBuilder(new ParametersHandler(), Clock);
+            UrlBuilder = new UrlBuilder(new ParametersConverter(), Clock);
         }
 
         [TestMethod]

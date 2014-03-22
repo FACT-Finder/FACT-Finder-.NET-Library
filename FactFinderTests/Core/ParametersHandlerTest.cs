@@ -9,13 +9,13 @@ namespace Omikron.FactFinderTests.Core
     [TestClass]
     public class ParametersHandlerTest : BaseTest
     {
-        private static ParametersHandler ParametersConverter { get; set; }
+        private static ParametersConverter ParametersConverter { get; set; }
 
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
             log = LogManager.GetLogger(typeof(ParametersHandlerTest));
-            ParametersConverter = new ParametersHandler();
+            ParametersConverter = new ParametersConverter();
         }
 
         [TestInitialize]

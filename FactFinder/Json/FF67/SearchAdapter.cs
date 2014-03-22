@@ -16,8 +16,8 @@ namespace Omikron.FactFinder.Json.FF67
             log = LogManager.GetLogger(typeof(JsonSearchAdapter));
         }
 
-        public JsonSearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSearchAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         protected override CampaignList CreateCampaigns()
@@ -131,9 +131,7 @@ namespace Omikron.FactFinder.Json.FF67
             foreach (var answerData in questionData.answers)
             {
                 string text = (string)answerData.text;
-                Uri parameters = ParametersHandler.GeneratePageLink(
-                    ParametersHandler.ParseParametersFromString((string)answerData.@params)
-                );
+                Uri parameters = ConvertServerQueryToClientUrl((string)answerData.@params);
                 
                 var subquestions = new List<AdvisorQuestion>();
                 if (recursive)

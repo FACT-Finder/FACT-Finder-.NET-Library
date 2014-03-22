@@ -19,8 +19,8 @@ namespace Omikron.FactFinder.Json.FF66
             log = LogManager.GetLogger(typeof(JsonTagCloudAdapter));
         }
 
-        public JsonTagCloudAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonTagCloudAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.WhatsHot;
             DataProvider.SetParameter("format", "json");

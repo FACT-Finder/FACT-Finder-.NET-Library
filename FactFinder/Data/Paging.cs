@@ -15,21 +15,21 @@ namespace Omikron.FactFinder.Data
 
         private string SourceRefKey;
 
-        private ParametersHandler ParametersHandler;
+        private ParametersConverter ParametersConverter;
 
         public Paging(
             int currentPage, 
             int pageCount, 
             Item previousPageLink, 
             Item nextPageLink, 
-            ParametersHandler parametersHandler,
+            ParametersConverter parametersConverter,
             string sourceRefKey = null
         )
             : base()
         {
             CurrentPage = currentPage;
             PageCount = pageCount;
-            ParametersHandler = parametersHandler;
+            ParametersConverter = parametersConverter;
             PreviousPageLink = previousPageLink;
             NextPageLink = nextPageLink;
             SourceRefKey = sourceRefKey;
@@ -37,16 +37,7 @@ namespace Omikron.FactFinder.Data
 
         public Uri GetPageLink(int pageNumber, string linkTarget = null)
         {
-            if (pageNumber > PageCount || pageNumber < 1)
-                return null;
-
-            var parameters = new NameValueCollection();
-            parameters["page"] = pageNumber.ToString();
-
-            if (SourceRefKey != null)
-                parameters["sourceRefKey"] = SourceRefKey;
-
-            return ParametersHandler.GeneratePageLink(parameters, null, linkTarget);
+            throw new NotImplementedException();
         }
     }
 }

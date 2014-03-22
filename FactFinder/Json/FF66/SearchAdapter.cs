@@ -9,6 +9,7 @@ using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Default;
 using Omikron.FactFinder.Json.Helper;
+using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Json.FF66
 {
@@ -36,8 +37,8 @@ namespace Omikron.FactFinder.Json.FF66
             }
         }
 
-        public JsonSearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSearchAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.Search;
             DataProvider.SetParameter("format", "json");
@@ -116,11 +117,11 @@ namespace Omikron.FactFinder.Json.FF66
             if (BreadCrumbTrail.Count > 0)
             {
                 Uri url = BreadCrumbTrail.Last().Url;
-                searchParameters = ParametersHandler.GetFactFinderParametersFromUrl(url);
+                searchParameters = new SearchParameters(url.ToString().ToParameters());
             }
             else
             {
-                searchParameters = ParametersHandler.GetFactFinderParameters();
+                searchParameters = new SearchParameters(new NameValueCollection());
             }
             return searchParameters;
         }
@@ -169,7 +170,7 @@ namespace Omikron.FactFinder.Json.FF66
 
                 var item = new SingleWordSearchQuery(
                     query,
-                    ParametersHandler.GeneratePageLink(parameters),
+                    UrlBuilder.GenerateUrl(parameters),
                     (int)swsData.recordCount
                 );
 
@@ -256,13 +257,13 @@ namespace Omikron.FactFinder.Json.FF66
 
         protected virtual AsnFilterItem CreateFilter(dynamic asnGroup, dynamic element)
         {
-            Uri filterLink = CreateLink(element);
+            Uri filterLink = ConvertServerQueryToClientUrl(element.searchParams);
 
             AsnFilterItem filter;
 
             if (asnGroup.Style == AsnGroupStyle.Slider)
             {
-                NameValueCollection parameters = ParametersHandler.ParseParametersFromString((string)element.searchParams);
+                NameValueCollection parameters = ((string)element.searchParams).ToParameters();
 
                 filter = new AsnSliderItem(
                     filterLink,
@@ -312,7 +313,7 @@ namespace Omikron.FactFinder.Json.FF66
 
             foreach (var sortItemData in JsonData.searchResult.sortsList)
             {
-                Uri sortLink = CreateLink(sortItemData);
+                Uri sortLink = ConvertServerQueryToClientUrl(sortItemData.searchParams);
 
                 sorting.Add(new Item(
                     (string)sortItemData.description,
@@ -332,7 +333,7 @@ namespace Omikron.FactFinder.Json.FF66
                 (int)searchResultData.paging.pageCount,
                 BuildPageLink(searchResultData.paging.previousLink),
                 BuildPageLink(searchResultData.paging.nextLink),
-                ParametersHandler
+                ParametersConverter
             );
 
             foreach (var pageLinkData in searchResultData.paging.pageLinks)
@@ -348,9 +349,7 @@ namespace Omikron.FactFinder.Json.FF66
             Item link = null;
             if (linkData != null)
             {
-                Uri pageLink = ParametersHandler.GeneratePageLink(
-                    ParametersHandler.ParseParametersFromString((string)linkData.searchParams)
-                );
+                Uri pageLink = ConvertServerQueryToClientUrl((string)linkData.searchParams);
 
                 link = new Item(
                     linkData.caption,
@@ -375,9 +374,7 @@ namespace Omikron.FactFinder.Json.FF66
                 if ((bool)optionData.selected)
                     selectedOption = value;
 
-                options[value] = ParametersHandler.GeneratePageLink(
-                    ParametersHandler.ParseParametersFromString((string)optionData.searchParams)
-                );
+                options[value] = ConvertServerQueryToClientUrl((string)optionData.searchParams);
             }
 
             return new ProductsPerPageOptions(options, defaultOption, selectedOption);
@@ -393,7 +390,7 @@ namespace Omikron.FactFinder.Json.FF66
                 int i = 1;
                 foreach (var breadCrumbData in breadCrumbs)
                 {
-                    Uri link = CreateLink(breadCrumbData);
+                    Uri link = ConvertServerQueryToClientUrl(breadCrumbData.searchParams);
 
                     string fieldName = "";
 
@@ -505,13 +502,6 @@ namespace Omikron.FactFinder.Json.FF66
 
                 campaign.AddPushedProducts(pushedProducts);
             }
-        }
-
-        protected virtual Uri CreateLink(dynamic element)
-        {
-            return ParametersHandler.GeneratePageLink(
-                ParametersHandler.ParseParametersFromString((string)element.searchParams)
-            );
         }
     }
 }

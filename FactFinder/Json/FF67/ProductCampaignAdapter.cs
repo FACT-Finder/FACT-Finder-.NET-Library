@@ -34,8 +34,8 @@ namespace Omikron.FactFinder.Json.FF67
             }
         }
 
-        public JsonProductCampaignAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonProductCampaignAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.ProductCampaign;
             DataProvider.SetParameter("format", "json");
@@ -149,9 +149,7 @@ namespace Omikron.FactFinder.Json.FF67
             foreach (var answerData in questionData.answers)
             {
                 string text = (string)answerData.text;
-                Uri parameters = ParametersHandler.GeneratePageLink(
-                    ParametersHandler.ParseParametersFromString("") // TODO: Read out that huge params object
-                );
+                Uri parameters = ConvertServerQueryToClientUrl(""); // TODO: Read out that huge params object
 
                 var subquestions = new List<AdvisorQuestion>();
                 if (recursive)

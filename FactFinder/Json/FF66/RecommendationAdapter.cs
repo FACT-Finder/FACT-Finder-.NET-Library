@@ -7,8 +7,8 @@ namespace Omikron.FactFinder.Json.FF66
 {
     public class JsonRecommendationAdapter : RecommendationAdapter
     {
-        public JsonRecommendationAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonRecommendationAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         protected override Data.ResultRecords CreateRecommendations()

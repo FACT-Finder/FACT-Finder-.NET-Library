@@ -6,6 +6,7 @@
 @using Omikron.FactFinder.Default
 @using Omikron.FactFinder.Adapter
 @using Omikron.FactFinder.Core
+@using Omikron.FactFinder.Core.Client
 @using Omikron.FactFinder.Core.Page
 @using Omikron.FactFinder.Core.Server
 
@@ -20,19 +21,22 @@
     // Culture = "en-us"; UICulture = "en-us";
 
     PageData["Title"] = String.Format(Resources.Page.PageTitle, Request.Params["query"]);
-    ParametersHandler parametersHandler = new ParametersHandler();
+    ParametersConverter parametersHandler = new ParametersConverter();
     DataProvider searchProvider = new HttpDataProvider();
     DataProvider tagCloudProvider = new HttpDataProvider();
+    var requestParser = new RequestParser();
+    var requestParameters = requestParser.RequestParameters;
+    var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-    SearchAdapter searchAdapter = new JsonSearchAdapter(searchProvider, parametersHandler);
-    TagCloudAdapter tagCloudAdapter = new JsonTagCloudAdapter(tagCloudProvider, parametersHandler);
+    SearchAdapter searchAdapter = new JsonSearchAdapter(searchProvider, parametersHandler, clientUrlBuilder);
+    TagCloudAdapter tagCloudAdapter = new JsonTagCloudAdapter(tagCloudProvider, parametersHandler, clientUrlBuilder);
 
-    if (Int32.Parse(parametersHandler.GetRequestParam("productsPerPage", "12")) > 60)
+    if (Int32.Parse(requestParameters["productsPerPage"] ?? "12") > 60)
     {
         searchProvider.SetParameter("productsPerPage", "12");
     }
 
-    SearchParameters ffParameters = parametersHandler.GetFactFinderParameters();
+    SearchParameters ffParameters = new SearchParameters(requestParameters);
     PageData["ffParameters"] = ffParameters;
 
     var trackingEvents = new Dictionary<EventType, NameValueCollection>();

@@ -3,6 +3,7 @@ using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Core;
+using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
@@ -28,10 +29,12 @@ namespace Omikron.FactFinderTests.Adapter
         {
             base.InitializeTest();
             Clock = new UnixClock();
-            var parametersHandler = new ParametersHandler();
+            var parametersHandler = new ParametersConverter();
             var dataProvider = new HttpDataProvider();
+            var requestParser = new RequestParser();
+            var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            SearchAdapter = new JsonSearchAdapter(dataProvider, parametersHandler);
+            SearchAdapter = new JsonSearchAdapter(dataProvider, parametersHandler, clientUrlBuilder);
         }
 
         [TestMethod]

@@ -28,8 +28,8 @@ namespace Omikron.FactFinder.Json.FF66
             }
         }
 
-        public JsonSimilarRecordsAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonSimilarRecordsAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             DataProvider.Type = RequestType.SimilarRecords;
             DataProvider.SetParameter("format", "json");

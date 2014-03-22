@@ -60,8 +60,8 @@ namespace Omikron.FactFinder.Default
             log = LogManager.GetLogger(typeof(RecommendationAdapter));
         }
 
-        public ProductCampaignAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public ProductCampaignAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new ProductCampaignAdapter.");
             

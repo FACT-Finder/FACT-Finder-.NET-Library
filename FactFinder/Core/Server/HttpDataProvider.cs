@@ -46,7 +46,7 @@ namespace Omikron.FactFinder.Core.Server
             : base()
         {
             log.Debug("Initialize new HttpDataProvider.");
-            UrlBuilder = new UrlBuilder(new ParametersHandler(), new UnixClock());
+            UrlBuilder = new UrlBuilder(new ParametersConverter(), new UnixClock());
         }
 
         private string _data;

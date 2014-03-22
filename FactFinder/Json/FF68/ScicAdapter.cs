@@ -4,8 +4,8 @@ namespace Omikron.FactFinder.Json.FF68
 {
     public class JsonScicAdapter : Omikron.FactFinder.Json.FF67.JsonScicAdapter
     {
-        public JsonScicAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public JsonScicAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         { }
 
         /*

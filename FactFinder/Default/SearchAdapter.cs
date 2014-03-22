@@ -7,6 +7,7 @@ using Omikron.FactFinder.Core.Configuration;
 using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
+using System.Collections.Specialized;
 
 namespace Omikron.FactFinder.Default
 {
@@ -191,8 +192,8 @@ namespace Omikron.FactFinder.Default
             log = LogManager.GetLogger(typeof(SearchAdapter));
         }
 
-        public SearchAdapter(DataProvider dataProvider, ParametersHandler parametersHandler)
-            : base(dataProvider, parametersHandler)
+        public SearchAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+            : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new SearchAdapter.");
         }
@@ -245,7 +246,7 @@ namespace Omikron.FactFinder.Default
 
         protected virtual Paging CreatePaging()
         {
-            return new Paging(1, 1, null, null, ParametersHandler);
+            return new Paging(1, 1, null, null, ParametersConverter);
         }
 
         protected virtual ProductsPerPageOptions CreateProductsPerPageOptions()
@@ -270,7 +271,7 @@ namespace Omikron.FactFinder.Default
 
         protected virtual SearchParameters CreateSearchParameters()
         {
-            return new SearchParameters("", ConnectionSection.GetSection().Channel);
+            return new SearchParameters(new NameValueCollection());
         }
 
         [Serializable]
