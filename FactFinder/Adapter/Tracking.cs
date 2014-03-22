@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Specialized;
 using log4net;
-using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Core;
-using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Core.Client;
+using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
 
-namespace Omikron.FactFinder.Default
+namespace Omikron.FactFinder.Adapter
 {
-    public class TrackingAdapter: AbstractAdapter
+    public class Tracking : AbstractAdapter
     {
         private static ILog log;
 
-        static TrackingAdapter()
+        static Tracking()
         {
-            log = LogManager.GetLogger(typeof(TrackingAdapter));
+            log = LogManager.GetLogger(typeof(Tracking));
         }
 
-        public TrackingAdapter(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
+        public Tracking(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
             : base(dataProvider, parametersConverter, urlBuilder)
         {
             log.Debug("Initialize new TrackingAdapter.");
+
+            DataProvider.Type = RequestType.Tracking;
         }
 
         public bool DoTrackingFromRequest()
@@ -74,11 +75,10 @@ namespace Omikron.FactFinder.Default
 
             return parameters;
         }
-        
-        protected virtual bool ApplyTracking()
+
+        protected bool ApplyTracking()
         {
-            log.Error("Tracking not available before FF 6.9!");
-            return false;
+            return Data.Trim() == "The event was successfully tracked";
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿@using Omikron.FactFinder
-@using Omikron.FactFinder.Default
-@using Omikron.FactFinder.Raw
+@using Omikron.FactFinder.Adapter
 @using Omikron.FactFinder.Core
 @using Omikron.FactFinder.Core.Client
 @using Omikron.FactFinder.Core.Server
@@ -10,7 +9,7 @@
     var dataProvider = new HttpDataProvider();
     var requestParser = new RequestParser();
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
-    var trackingAdapter = new RawTrackingAdapter(dataProvider, parametersHandler, clientUrlBuilder);
+    var trackingAdapter = new Tracking(dataProvider, parametersHandler, clientUrlBuilder);
 }
 
 @(trackingAdapter.DoTrackingFromRequest())
