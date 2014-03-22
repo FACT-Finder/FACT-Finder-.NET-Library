@@ -38,7 +38,7 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestGetTagCloud()
         {
-            var tagCloud = TagCloudAdapter.TagCloud;
+            var tagCloud = TagCloudAdapter.TagCloudData;
 
             Assert.AreEqual(5, tagCloud.Count);
             Assert.AreEqual(0.561, tagCloud[0].Weight, 0.0001);

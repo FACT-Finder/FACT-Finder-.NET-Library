@@ -12,7 +12,7 @@ namespace Omikron.FactFinder.Adapter
     public class TagCloud : AbstractAdapter
     {
         private IList<TagQuery> _tagCloud;
-        public IList<TagQuery> TagCloud
+        public IList<TagQuery> TagCloudData
         {
             get
             {
