@@ -54,6 +54,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Client\UrlBuilderTest.cs" />
     <Compile Include="Core\Client\RequestParserTest.cs" />
     <Compile Include="Util\ExtensionMethodsTest.cs" />
     <Compile Include="Core\Server\HttpDataProviderTest.cs" />

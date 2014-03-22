@@ -49,7 +49,7 @@ namespace Omikron.FactFinderTests
 
             request.Setup(req => req.QueryString).Returns(new NameValueCollection());
             request.Setup(req => req.Form).Returns(new NameValueCollection());
-            request.Setup(req => req.Url).Returns(new Uri("http://localhost:80/TestShop/index.cshtml"));
+            request.Setup(req => req.Url).Returns(new Uri("http://localhost/TestShop/index.cshtml"));
 
             context.Setup(ctx => ctx.Request).Returns(request.Object);
             context.Setup(ctx => ctx.Response).Returns(response.Object);

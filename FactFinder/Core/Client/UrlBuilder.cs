@@ -28,11 +28,6 @@ namespace Omikron.FactFinder.Core.Client
             ParametersConverter = new ParametersConverter();
         }
 
-        public UrlBuilder()
-        {
-            // TODO: Complete member initialization
-        }
-
         public Uri GenerateUrl(NameValueCollection parameters, string linkTarget = null)
         {
             if (String.IsNullOrWhiteSpace(linkTarget))
