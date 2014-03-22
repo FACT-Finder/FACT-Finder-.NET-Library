@@ -1,5 +1,5 @@
 ﻿@using Omikron.FactFinder
-@using Omikron.FactFinder.Default
+@using Omikron.FactFinder.Adapter
 @using Omikron.FactFinder.Raw
 @using Omikron.FactFinder.Core
 @using Omikron.FactFinder.Core.Client
@@ -11,7 +11,7 @@
     var suggestProvider = new HttpDataProvider();
     var requestParser = new RequestParser();
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
-    var suggestAdapter = new RawSuggestAdapter(suggestProvider, parametersHandler, clientUrlBuilder);
+    var suggestAdapter = new SuggestAdapter(suggestProvider, parametersHandler, clientUrlBuilder);
 }
 
 @Html.Raw(suggestAdapter.RawSuggestions)

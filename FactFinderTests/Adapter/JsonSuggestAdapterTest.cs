@@ -13,7 +13,7 @@ namespace Omikron.FactFinderTests.Adapter
     public class SuggestTest : BaseTest
     {
         private UnixClock Clock { get; set; }
-        private JsonSuggestAdapter SuggestAdapter { get; set; }
+        private SuggestAdapter SuggestAdapter { get; set; }
 
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
@@ -32,7 +32,7 @@ namespace Omikron.FactFinderTests.Adapter
             var requestParser = new RequestParser();
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            SuggestAdapter = new JsonSuggestAdapter(dataProvider, parametersHandler, clientUrlBuilder);
+            SuggestAdapter = new SuggestAdapter(dataProvider, parametersHandler, clientUrlBuilder);
         }
 
         [TestMethod]

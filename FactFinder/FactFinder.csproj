@@ -91,7 +91,6 @@
     <Compile Include="Default\SimilarRecordsAdapter.cs" />
     <Compile Include="Default\ImportAdapter.cs" />
     <Compile Include="Default\ScicAdapter.cs" />
-    <Compile Include="Default\SuggestAdapter.cs" />
     <Compile Include="Default\SearchAdapter.cs" />
     <Compile Include="Default\RecommendationAdapter.cs" />
     <Compile Include="Util\ExtensionMethods.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="Json\FF66\SimilarRecordsAdapter.cs" />
     <Compile Include="Json\FF66\ImportAdapter.cs" />
     <Compile Include="Json\FF66\ScicAdapter.cs" />
-    <Compile Include="Json\FF66\SuggestAdapter.cs" />
     <Compile Include="Json\FF66\SearchAdapter.cs" />
     <Compile Include="Json\FF66\RecommendationAdapter.cs" />
     <Compile Include="Json\FF67\CompareAdapter.cs" />
@@ -123,12 +121,10 @@
     <Compile Include="Json\FF67\ScicAdapter.cs" />
     <Compile Include="Json\FF67\SearchAdapter.cs" />
     <Compile Include="Json\FF67\RecommendationAdapter.cs" />
-    <Compile Include="Json\FF67\SuggestAdapter.cs" />
     <Compile Include="Json\FF68\CompareAdapter.cs" />
     <Compile Include="Json\FF68\ImportAdapter.cs" />
     <Compile Include="Json\FF68\ProductCampaignAdapter.cs" />
     <Compile Include="Json\FF68\ScicAdapter.cs" />
-    <Compile Include="Json\FF68\SuggestAdapter.cs" />
     <Compile Include="Json\FF68\RecommendationAdapter.cs" />
     <Compile Include="Json\FF68\SearchAdapter.cs" />
     <Compile Include="Util\Json\DynamicJsonConverter.cs" />
@@ -136,7 +132,6 @@
     <Compile Include="Core\ParametersConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Raw\TrackingAdapter.cs" />
-    <Compile Include="Raw\SuggestAdapter.cs" />
     <Compile Include="Core\Server\RequestType.cs" />
     <Compile Include="Util\UnixClock.cs" />
     <Compile Include="Util\UnixClockStub.cs" />
