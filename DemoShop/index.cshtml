@@ -3,7 +3,6 @@
 
 @using Omikron.FactFinder
 @using Omikron.FactFinder.Data
-@using Omikron.FactFinder.Default
 @using Omikron.FactFinder.Adapter
 @using Omikron.FactFinder.Core
 @using Omikron.FactFinder.Core.Client
@@ -28,8 +27,8 @@
     var requestParameters = requestParser.RequestParameters;
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-    SearchAdapter searchAdapter = new JsonSearchAdapter(searchProvider, parametersHandler, clientUrlBuilder);
-    TagCloudAdapter tagCloudAdapter = new JsonTagCloudAdapter(tagCloudProvider, parametersHandler, clientUrlBuilder);
+    JsonSearchAdapter searchAdapter = new JsonSearchAdapter(searchProvider, parametersHandler, clientUrlBuilder);
+    TagCloudAdapter tagCloudAdapter = new TagCloudAdapter(tagCloudProvider, parametersHandler, clientUrlBuilder);
 
     if (Int32.Parse(requestParameters["productsPerPage"] ?? "12") > 60)
     {
@@ -100,7 +99,7 @@
                                                     break;
         }
     }
-    catch (SearchAdapter.NoQueryException)
+    catch (Omikron.FactFinder.Default.SearchAdapter.NoQueryException)
     {
         Layout = "~/_LayoutEmptyResult.cshtml";
         PageData["message"] = Resources.Messages.NoQuery;

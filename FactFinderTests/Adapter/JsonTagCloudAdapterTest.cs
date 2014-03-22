@@ -13,7 +13,7 @@ namespace Omikron.FactFinderTests.Adapter
     public class TagCloudTest : BaseTest
     {
         private UnixClock Clock { get; set; }
-        private JsonTagCloudAdapter TagCloudAdapter { get; set; }
+        private TagCloudAdapter TagCloudAdapter { get; set; }
 
         [ClassInitialize]
         public static void InitializeClass(TestContext context)
@@ -32,7 +32,7 @@ namespace Omikron.FactFinderTests.Adapter
             var requestParser = new RequestParser();
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            TagCloudAdapter = new JsonTagCloudAdapter(dataProvider, parametersHandler, clientUrlBuilder);
+            TagCloudAdapter = new TagCloudAdapter(dataProvider, parametersHandler, clientUrlBuilder);
         }
 
         [TestMethod]

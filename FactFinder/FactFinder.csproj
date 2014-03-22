@@ -94,7 +94,6 @@
     <Compile Include="Default\SuggestAdapter.cs" />
     <Compile Include="Default\SearchAdapter.cs" />
     <Compile Include="Default\RecommendationAdapter.cs" />
-    <Compile Include="Default\TagCloudAdapter.cs" />
     <Compile Include="Util\ExtensionMethods.cs" />
     <Compile Include="Util\HttpContextFactory.cs" />
     <Compile Include="Core\Server\HttpDataProvider.cs" />
@@ -118,7 +117,6 @@
     <Compile Include="Json\FF66\SuggestAdapter.cs" />
     <Compile Include="Json\FF66\SearchAdapter.cs" />
     <Compile Include="Json\FF66\RecommendationAdapter.cs" />
-    <Compile Include="Json\FF66\TagCloudAdapter.cs" />
     <Compile Include="Json\FF67\CompareAdapter.cs" />
     <Compile Include="Json\FF67\ProductCampaignAdapter.cs" />
     <Compile Include="Json\FF67\ImportAdapter.cs" />
@@ -126,13 +124,11 @@
     <Compile Include="Json\FF67\SearchAdapter.cs" />
     <Compile Include="Json\FF67\RecommendationAdapter.cs" />
     <Compile Include="Json\FF67\SuggestAdapter.cs" />
-    <Compile Include="Json\FF67\TagCloudAdapter.cs" />
     <Compile Include="Json\FF68\CompareAdapter.cs" />
     <Compile Include="Json\FF68\ImportAdapter.cs" />
     <Compile Include="Json\FF68\ProductCampaignAdapter.cs" />
     <Compile Include="Json\FF68\ScicAdapter.cs" />
     <Compile Include="Json\FF68\SuggestAdapter.cs" />
-    <Compile Include="Json\FF68\TagCloudAdapter.cs" />
     <Compile Include="Json\FF68\RecommendationAdapter.cs" />
     <Compile Include="Json\FF68\SearchAdapter.cs" />
     <Compile Include="Util\Json\DynamicJsonConverter.cs" />
