@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
 using log4net;
-using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Core.Configuration;
 using Omikron.FactFinder.Util;
 
@@ -9,12 +8,7 @@ namespace Omikron.FactFinder.Core.Server
 {
     public class UrlBuilder
     {
-        private ParametersConverter ParametersConverter;
         private IUnixClock Clock;
-
-        private NameValueCollection Parameters;
-
-        public string Action { get; set; }
 
         private static ILog log;
 
@@ -23,60 +17,17 @@ namespace Omikron.FactFinder.Core.Server
             log = LogManager.GetLogger(typeof(UrlBuilder));
         }
 
-        public UrlBuilder(ParametersConverter parametersConverter, IUnixClock clock)
+        public UrlBuilder(IUnixClock clock)
         {
-            log.Debug("Initialize new UrlBuilder.");
-            ParametersConverter = parametersConverter;
+            log.Debug("Initialize new Server.UrlBuilder.");
             Clock = clock;
-            Parameters = new RequestParser().RequestParameters;
         }
 
-        public void SetParameter(string name, string value)
+        public Uri GetUrlWithoutAuthentication(RequestType action, NameValueCollection parameters)
         {
-            Parameters[name] = value;
-        }
+            EnsureChannelParameter(parameters);
 
-        public NameValueCollection GetParameters()
-        {
-            return Parameters;
-        }
-
-        /// <summary>
-        /// Sets the given parameters. All previous values for the given keys will be replaced.
-        /// Unmentioned keys will remain.
-        /// </summary>
-        /// <param name="parameters">Key-value pairs to be added.</param>
-        public void SetParameters(NameValueCollection parameters)
-        {
-
-            foreach (string key in parameters)
-            {
-                Parameters.Remove(key);
-            }
-
-            Parameters.Add(parameters);
-        }
-
-        public void ResetParameters(NameValueCollection parameters)
-        {
-            Parameters = new NameValueCollection(parameters);
-        }
-
-        public void UnsetParameter(string name)
-        {
-            Parameters.Remove(name);
-        }
-
-        public void UnsetAllParameters()
-        {
-            Parameters = new NameValueCollection();
-        }
-
-        public Uri GetUrlWithoutAuthentication()
-        {
             var config = ConnectionSection.GetSection();
-
-            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}/{3}/{4}?{5}",
@@ -84,17 +35,34 @@ namespace Omikron.FactFinder.Core.Server
                 config.ServerAddress,
                 config.Port,
                 config.Context,
-                Action,
+                action,
                 parameters.ToUriQueryString()
             ));
 
         }
-
-        public Uri GetUrlWithSimpleAuthentication()
+        
+        public Uri GetUrlWithAuthentication(RequestType action, NameValueCollection parameters)
         {
             var config = ConnectionSection.GetSection();
 
-            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
+            switch (config.Authentication.Type)
+            {
+                case AuthenticationType.Http:
+                    return GetUrlWithHttpAuthentication(action, parameters);
+                case AuthenticationType.Simple:
+                    return GetUrlWithSimpleAuthentication(action, parameters);
+                case AuthenticationType.Advanced:
+                    return GetUrlWithAdvancedAuthentication(action, parameters);
+                default:
+                    throw new Exception("Invalid authentication type configured.");
+            }
+        }
+
+        public Uri GetUrlWithSimpleAuthentication(RequestType action, NameValueCollection parameters)
+        {
+            EnsureChannelParameter(parameters);
+
+            var config = ConnectionSection.GetSection();
 
             parameters["timestamp"] = Clock.Now().ToString();
             parameters["username"] = config.Authentication.UserName;
@@ -106,16 +74,16 @@ namespace Omikron.FactFinder.Core.Server
                 config.ServerAddress,
                 config.Port,
                 config.Context,
-                Action,
+                action,
                 parameters.ToUriQueryString()
             ));
         }
 
-        public Uri GetUrlWithAdvancedAuthentication()
+        public Uri GetUrlWithAdvancedAuthentication(RequestType action, NameValueCollection parameters)
         {
-            var config = ConnectionSection.GetSection();
+            EnsureChannelParameter(parameters);
 
-            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
+            var config = ConnectionSection.GetSection();
 
             string timestamp = Clock.Now().ToString();
 
@@ -134,16 +102,16 @@ namespace Omikron.FactFinder.Core.Server
                 config.ServerAddress,
                 config.Port,
                 config.Context,
-                Action,
+                action,
                 parameters.ToUriQueryString()
             ));
         }
 
-        public Uri GetUrlWithHttpAuthentication()
+        public Uri GetUrlWithHttpAuthentication(RequestType action, NameValueCollection parameters)
         {
-            var config = ConnectionSection.GetSection();
+            EnsureChannelParameter(parameters);
 
-            NameValueCollection parameters = ParametersConverter.ClientToServerRequestParameters(Parameters);
+            var config = ConnectionSection.GetSection();
 
             return new Uri(String.Format(
                 "{0}://{1}:{2}@{3}:{4}/{5}/{6}?{7}",
@@ -153,9 +121,20 @@ namespace Omikron.FactFinder.Core.Server
                 config.ServerAddress,
                 config.Port,
                 config.Context,
-                Action,
+                action,
                 parameters.ToUriQueryString()
             ));
+        }
+
+        public void EnsureChannelParameter(NameValueCollection parameters)
+        {
+            var config = ConnectionSection.GetSection();
+
+            if (String.IsNullOrEmpty(parameters["channel"]) &&
+                config.Channel != "")
+            {
+                parameters["channel"] = config.Channel;
+            }
         }
     }
 }

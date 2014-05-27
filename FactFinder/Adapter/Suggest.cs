@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util.Json;
 
 namespace Omikron.FactFinder.Adapter
 {
@@ -33,20 +30,7 @@ namespace Omikron.FactFinder.Adapter
             }
         }
 
-        private dynamic _jsonData;
-        protected dynamic JsonData
-        {
-            get
-            {
-                if (_jsonData == null)
-                {
-                    var jsonSerializer = new JavaScriptSerializer();
-                    jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-                    _jsonData = jsonSerializer.Deserialize(base.Data, typeof(object));
-                }
-                return _jsonData;
-            }
-        }
+        protected dynamic JsonData { get { return ResponseContent; } }
 
         private static ILog log;
 
@@ -55,16 +39,24 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(Suggest));
         }
 
-        public Suggest(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public Suggest(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new SuggestAdapter.");
-            DataProvider.Type = RequestType.Suggest;
-            DataProvider.SetParameter("format", "json");
+            log.Debug("Initialize new Suggest adapter.");
+
+            Request.Action = RequestType.Suggest;
         }
 
         protected IList<SuggestQuery> CreateSuggestions()
         {
+            UseJsonResponseContentProcessor();
+
+            string oldFormat = null;
+            if (Parameters["format"] != null)
+                oldFormat = Parameters["format"];
+
+            Parameters["format"] = "json";
+
             var suggestions = new List<SuggestQuery>();
 
             foreach (var suggestData in JsonData)
@@ -80,12 +72,33 @@ namespace Omikron.FactFinder.Adapter
                 ));
             }
 
+            if (oldFormat != null)
+                Parameters["format"] = oldFormat;
+
             return suggestions;
         }
 
-        protected string CreateRawSuggestions()
+
+        /**
+         * Get the suggestions from FACT-Finder as the string returned by the
+         * server.
+         *
+         * The format parameter is optional. Either 'json' or 'jsonp'. Use to
+         * overwrite the 'format' request parameter.
+         * The callback parameter is optional. Pass in a (JavaScript) function
+         * name to overwrite the 'callback' request parameter, which determines 
+         * the name of the callback the response is wrapped in.
+         */
+        protected string CreateRawSuggestions(string format = null, string callback = null)
         {
-            return Data;
+            UsePassthroughResponseContentProcessor();
+
+            if (format != null)
+                Parameters["format"] = format;
+            if (callback != null)
+                Parameters["callback"] = callback;
+
+            return (string)ResponseContent;
         }
     }
 }

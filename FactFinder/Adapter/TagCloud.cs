@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util.Json;
 
 namespace Omikron.FactFinder.Adapter
 {
@@ -29,23 +26,21 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(TagCloud));
         }
 
-        public TagCloud(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public TagCloud(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new TagCloudAdapter.");
+            log.Debug("Initialize new TagCloud adapter.");
 
-            DataProvider.Type = RequestType.TagCloud;
-            DataProvider.SetParameter("format", "json");
-            DataProvider.SetParameter("do", "getTagCloud");
+            Request.Action = RequestType.TagCloud;
+            Parameters["format"] = "json";
+            Parameters["do"] = "getTagCloud";
+
+            UseJsonResponseContentProcessor();
         }
 
         protected IList<TagQuery> CreateTagCloud()
         {
-            var jsonSerializer = new JavaScriptSerializer();
-
-            jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-
-            dynamic jsonData = jsonSerializer.Deserialize(Data, typeof(object));
+            dynamic jsonData = ResponseContent;
 
             var tagCloud = new List<TagQuery>();
 

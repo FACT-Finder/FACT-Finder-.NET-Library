@@ -1,38 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using log4net;
 using Omikron.FactFinder.Core.Configuration;
-using Omikron.FactFinder.Util;
 
 namespace Omikron.FactFinder.Core.Server
 {
     public class HttpDataProvider : DataProvider
     {
-        public override RequestType Type
-        {
-            get
-            {
-                return base.Type;
-            }
-            set
-            {
-                base.Type = value;
-                UrlBuilder.Action = value.ToString();
-                _dataUpToDate = false;
-            }
-        }
-
-        public override NameValueCollection Parameters
-        {
-            get
-            {
-                return UrlBuilder.GetParameters();
-            }
-        }
-
         protected UrlBuilder UrlBuilder;
 
         private static ILog log;
@@ -42,108 +18,111 @@ namespace Omikron.FactFinder.Core.Server
             log = LogManager.GetLogger(typeof(HttpDataProvider));
         }
 
-        public HttpDataProvider() 
+        public HttpDataProvider(UrlBuilder urlBuilder) 
             : base()
         {
             log.Debug("Initialize new HttpDataProvider.");
-            UrlBuilder = new UrlBuilder(new ParametersConverter(), new UnixClock());
+            UrlBuilder = urlBuilder;
         }
 
-        private string _data;
-        private bool _dataUpToDate = false;
-        public override string Data
+        override public void LoadResponse(int id)
         {
-            get
-            {
-                if (!_dataUpToDate || _data == null)
-                    _data = GetData();
-                return _data; 
-            }
-        }
+            if (!ConnectionData.ContainsKey(id))
+                throw new ArgumentException(String.Format("Tried to get response for invalid ID {0}.", id));
 
-        public HttpStatusCode LastStatusCode { get; set; }
+            if (!HasUrlChanged(id))
+                return;
 
-        private string GetData()
-        {
-            if (Type == null)
+            var connectionData = ConnectionData[id];
+            
+            if (connectionData.Action == null)
             {
                 log.Error("Request type not set. Request could not be sent out.");
-                return "";
+                connectionData.SetNullResponse();
+                return;
             }
 
-            Uri url = GetAuthenticationUrl(); 
+            Uri url = UrlBuilder.GetUrlWithAuthentication(
+                connectionData.Action,
+                connectionData.Parameters
+            );
 
+            var response = RetrieveResponse(connectionData, url);
+
+            connectionData.SetResponse(response, url);
+
+            LogResult(response);
+        }
+
+        private Response RetrieveResponse(ConnectionData connectionData, Uri url)
+        {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.KeepAlive = false;
             webRequest.Method = "GET";
+
+            webRequest.Headers.Add(connectionData.HttpHeaderFields);
 
             var config = ConnectionSection.GetSection();
 
             if (config.Language != "")
             {
-                webRequest.Headers.Add("Accept-Language", config.Language);
+                webRequest.Headers.Add(HttpRequestHeader.AcceptLanguage, config.Language);
             }
 
             log.InfoFormat("Sending request to URL: {0}", url);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
 
-            LastStatusCode = webResponse.StatusCode;
+            var statusCode = webResponse.StatusCode;
 
             StreamReader responseStream = new StreamReader(webResponse.GetResponseStream(), true);
 
-            string response = responseStream.ReadToEnd();
+            string responseText = responseStream.ReadToEnd();
 
             responseStream.Close();
             webResponse.Close();
 
-            return response;
+            return new Response(
+                responseText,
+                statusCode
+            );
         }
 
-        private Uri GetAuthenticationUrl()
+        private void LogResult(Response response)
         {
-            var config = ConnectionSection.GetSection();
-
-            switch (config.Authentication.Type)
-            {
-                case AuthenticationType.Http:
-                    return UrlBuilder.GetUrlWithHttpAuthentication();
-                case AuthenticationType.Simple:
-                    return UrlBuilder.GetUrlWithSimpleAuthentication();
-                case AuthenticationType.Advanced:
-                    return UrlBuilder.GetUrlWithAdvancedAuthentication();
-                default:
-                    return UrlBuilder.GetUrlWithoutAuthentication();
-            }
+            var httpCode = (int)response.StatusCode;
+            if (httpCode >= 400)
+                log.ErrorFormat("Connection failed. HTTP code: {0}", httpCode);
+            else if (httpCode / 100 == 2)
+                log.Info("Request successful!");
+            else
+                log.InfoFormat("Got HTTP code {0}", httpCode);
         }
 
-        public override void SetParameters(NameValueCollection parameters)
+        private bool HasUrlChanged(int id)
         {
-            UrlBuilder.SetParameters(parameters);
-            _dataUpToDate = false;
+            var connectionData = ConnectionData[id];
+
+            if (connectionData.Response is NullResponse)
+                return true;
+
+            var url = UrlBuilder.GetUrlWithoutAuthentication(
+                connectionData.Action,
+                PrepareParameters(connectionData)
+            );
+
+            // TODO: Should we apply URL normalisation here?
+            // This code could be used to do that: http://stackoverflow.com/a/14977826/1633117
+            return url != connectionData.PreviousUrl;
         }
 
-        public override void ResetParameters(NameValueCollection parameters)
+        private NameValueCollection PrepareParameters(ConnectionData connectionData)
         {
-            UrlBuilder.ResetParameters(parameters);
-            _dataUpToDate = false;
-        }
+            var parameters = connectionData.Parameters;
 
-        public override void SetParameter(KeyValuePair<string, string> parameter)
-        {
-            UrlBuilder.SetParameter(parameter.Key, parameter.Value);
-            _dataUpToDate = false;
-        }
+            // TODO: Should we introduce a debug flag into the app.config?
+            // If so, we'd set the parameters['verbose'] = true; here
 
-        public override void SetParameter(string name, string value)
-        {
-            UrlBuilder.SetParameter(name, value);
-            _dataUpToDate = false;
-        }
-
-        public override void UnsetParameter(string name)
-        {
-            UrlBuilder.UnsetParameter(name);
-            _dataUpToDate = false;
+            return parameters;
         }
     }
 }

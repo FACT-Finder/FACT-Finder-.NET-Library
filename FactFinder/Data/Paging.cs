@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Omikron.FactFinder.Core;
 
 namespace Omikron.FactFinder.Data
 {
@@ -14,21 +13,17 @@ namespace Omikron.FactFinder.Data
 
         private string SourceRefKey;
 
-        private ParametersConverter ParametersConverter;
-
         public Paging(
             int currentPage, 
             int pageCount, 
             Item previousPageLink, 
-            Item nextPageLink, 
-            ParametersConverter parametersConverter,
+            Item nextPageLink,
             string sourceRefKey = null
         )
             : base()
         {
             CurrentPage = currentPage;
             PageCount = pageCount;
-            ParametersConverter = parametersConverter;
             PreviousPageLink = previousPageLink;
             NextPageLink = nextPageLink;
             SourceRefKey = sourceRefKey;

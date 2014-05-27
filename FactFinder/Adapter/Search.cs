@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Web.Script.Serialization;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
-using Omikron.FactFinder.Util.Json;
 
 namespace Omikron.FactFinder.Adapter
 {
@@ -190,37 +187,9 @@ namespace Omikron.FactFinder.Adapter
                 return _searchParameters;
             }
         }
-
-        protected override string Data
-        {
-            get
-            {
-                var parameters = DataProvider.Parameters;
-                if (String.IsNullOrEmpty(parameters["query"]) &&
-                    String.IsNullOrEmpty(parameters["seoPath"]) &&
-                    parameters["catalog"] != "true")
-                {
-                    throw new NoQueryException();
-                }
-                return DataProvider.Data;
-            }
-        }
         #endregion
 
-        private dynamic _jsonData;
-        protected dynamic JsonData
-        {
-            get
-            {
-                if (_jsonData == null)
-                {
-                    var jsonSerializer = new JavaScriptSerializer();
-                    jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-                    _jsonData = jsonSerializer.Deserialize(base.Data, typeof(object));
-                }
-                return _jsonData;
-            }
-        }
+        protected dynamic JsonData { get { return ResponseContent; } }
 
         private static ILog log;
 
@@ -229,12 +198,20 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(Search));
         }
 
-        public Search(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public Search(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new SearchAdapter.");
-            DataProvider.Type = RequestType.Search;
-            DataProvider.SetParameter("format", "json");
+            log.Debug("Initialize new Search adapter.");
+
+            Request.Action = RequestType.Search;
+            Parameters["format"] = "json";
+
+            UseJsonResponseContentProcessor();
+        }
+
+        public void SetQuery(string query)
+        {
+            Parameters["query"] = query;
         }
 
         protected SearchStatus CreateArticleNumberSearchStatus()
@@ -263,6 +240,7 @@ namespace Omikron.FactFinder.Adapter
                 _articleNumberSearchStatus = SearchStatus.NoResult;
                 return;
             }
+
             switch ((string)JsonData.searchResult.resultArticleNumberStatus)
             {
             case "nothingFound":
@@ -562,8 +540,7 @@ namespace Omikron.FactFinder.Adapter
                 (int)searchResultData.paging.currentPage,
                 (int)searchResultData.paging.pageCount,
                 BuildPageLink(searchResultData.paging.previousLink),
-                BuildPageLink(searchResultData.paging.nextLink),
-                ParametersConverter
+                BuildPageLink(searchResultData.paging.nextLink)
             );
 
             foreach (var pageLinkData in searchResultData.paging.pageLinks)

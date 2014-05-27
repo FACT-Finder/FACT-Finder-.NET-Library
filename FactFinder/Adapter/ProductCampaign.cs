@@ -1,12 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util.Json;
 namespace Omikron.FactFinder.Adapter
 {
     public class ProductCampaign : AbstractAdapter
@@ -62,20 +59,7 @@ namespace Omikron.FactFinder.Adapter
         protected IList<string> ProductIDs;
         protected bool CampaignsUpToDate { get; set; }
 
-        private dynamic _jsonData;
-        protected dynamic JsonData
-        {
-            get
-            {
-                if (_jsonData == null)
-                {
-                    var jsonSerializer = new JavaScriptSerializer();
-                    jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-                    _jsonData = jsonSerializer.Deserialize(base.Data, typeof(object));
-                }
-                return _jsonData;
-            }
-        }
+        protected dynamic JsonData { get { return ResponseContent; } }
 
         private static ILog log;
 
@@ -84,13 +68,15 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(ProductCampaign));
         }
 
-        public ProductCampaign(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public ProductCampaign(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new ProductCampaignAdapter.");
+            log.Debug("Initialize new ProductCampaign adapter.");
 
-            DataProvider.Type = RequestType.ProductCampaign;
-            DataProvider.SetParameter("format", "json");
+            Request.Action = RequestType.ProductCampaign;
+            Parameters["format"] = "json";
+
+            UseJsonResponseContentProcessor();
 
             ProductIDs = new List<string>();
             CampaignsUpToDate = false;
@@ -99,21 +85,21 @@ namespace Omikron.FactFinder.Adapter
         public void MakeProductDetailCampaign()
         {
             Type = CampaignType.ProductDetailPage;
-            DataProvider.SetParameter("do", "getProductCampaigns");
+            Parameters["do"] = "getProductCampaigns";
         }
 
         public void MakeShoppingCartCampaign()
         {
             Type = CampaignType.ShoppingCart;
-            DataProvider.SetParameter("do", "getShoppingCartCampaigns");
+            Parameters["do"] = "getShoppingCartCampaigns";
         }
 
         public virtual void SetProductIDs(string[] productIDs)
         {
             ProductIDs = productIDs;
-            DataProvider.UnsetParameter("productNumber");
+            Parameters.Remove("productNumber");
             foreach (var id in productIDs)
-                DataProvider.AddParameter("productNumber", id);
+                Parameters.Add("productNumber", id);
             CampaignsUpToDate = false;
         }
 

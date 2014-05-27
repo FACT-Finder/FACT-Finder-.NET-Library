@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util.Json;
 namespace Omikron.FactFinder.Adapter
 {
     public class SimilarRecords : AbstractAdapter
@@ -26,7 +23,7 @@ namespace Omikron.FactFinder.Adapter
                 if (_idsOnly && !value)
                     RecordsUpToDate = false;
                 _idsOnly = value;
-                DataProvider.SetParameter("idsOnly", value ? "true" : "false");
+                Parameters["idsOnly"] = value ? "true" : "false";
             }
         }
 
@@ -44,9 +41,9 @@ namespace Omikron.FactFinder.Adapter
                     RecordsUpToDate = false;
                 _maxRecordCount = value;
                 if (value == 0)
-                    DataProvider.UnsetParameter("maxRecordCount");
+                    Parameters.Remove("maxRecordCount");
                 else
-                    DataProvider.SetParameter("maxRecordCount", value.ToString());
+                    Parameters["maxRecordCount"] = value.ToString();
             }
         }
 
@@ -78,15 +75,7 @@ namespace Omikron.FactFinder.Adapter
             }
         }
 
-        protected dynamic JsonData
-        {
-            get
-            {
-                var jsonSerializer = new JavaScriptSerializer();
-                jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-                return jsonSerializer.Deserialize(base.Data, typeof(object));
-            }
-        }
+        protected dynamic JsonData { get { return ResponseContent; } }
 
         private static ILog log;
         
@@ -95,19 +84,21 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(SimilarRecords));
         }
 
-        public SimilarRecords(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public SimilarRecords(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new SimilarRecordsAdapter.");
-            DataProvider.Type = RequestType.SimilarRecords;
+            log.Debug("Initialize new SimilarRecords adapter.");
+
+            Request.Action = RequestType.SimilarRecords;
+            Parameters["format"] = "json";
+
+            UseJsonResponseContentProcessor();
 
             ProductID = "";
             RecordsUpToDate = false;
             AttributesUpToDate = false;
             IDsOnly = false;
             MaxRecordCount = 0;
-
-            DataProvider.SetParameter("format", "json");
         }
 
         public virtual void SetProductID(string productID)
@@ -115,7 +106,7 @@ namespace Omikron.FactFinder.Adapter
             if (productID != ProductID)
             {
                 ProductID = productID;
-                DataProvider.SetParameter("id", productID);
+                Parameters["id"] = productID;
                 RecordsUpToDate = false;
                 AttributesUpToDate = false;
             }

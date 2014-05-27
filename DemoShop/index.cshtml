@@ -20,20 +20,13 @@
     // Culture = "en-us"; UICulture = "en-us";
 
     PageData["Title"] = String.Format(Resources.Page.PageTitle, Request.Params["query"]);
-    ParametersConverter parametersHandler = new ParametersConverter();
-    DataProvider searchProvider = new HttpDataProvider();
-    DataProvider tagCloudProvider = new HttpDataProvider();
     var requestParser = new RequestParser();
     var requestParameters = requestParser.RequestParameters;
+    var requestFactory = new HttpRequestFactory(requestParameters);
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-    Search searchAdapter = new Search(searchProvider, parametersHandler, clientUrlBuilder);
-    TagCloud tagCloudAdapter = new TagCloud(tagCloudProvider, parametersHandler, clientUrlBuilder);
-
-    if (Int32.Parse(requestParameters["productsPerPage"] ?? "12") > 60)
-    {
-        searchProvider.SetParameter("productsPerPage", "12");
-    }
+    Search searchAdapter = new Search(requestFactory.GetRequest(), clientUrlBuilder);
+    TagCloud tagCloudAdapter = new TagCloud(requestFactory.GetRequest(), clientUrlBuilder);
 
     SearchParameters ffParameters = new SearchParameters(requestParameters);
     PageData["ffParameters"] = ffParameters;

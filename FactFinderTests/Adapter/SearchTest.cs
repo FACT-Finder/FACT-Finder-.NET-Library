@@ -2,11 +2,9 @@
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Adapter;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util;
 using Omikron.FactFinderTests.TestUtility;
 
 namespace Omikron.FactFinderTests.Adapter
@@ -14,7 +12,6 @@ namespace Omikron.FactFinderTests.Adapter
     [TestClass]
     public class SearchTest : BaseTest
     {
-        private UnixClock Clock { get; set; }
         private Search SearchAdapter { get; set; }
 
         [ClassInitialize]
@@ -28,20 +25,18 @@ namespace Omikron.FactFinderTests.Adapter
         public override void InitializeTest()
         {
             base.InitializeTest();
-            Clock = new UnixClock();
-            var parametersHandler = new ParametersConverter();
-            var dataProvider = new HttpDataProvider();
             var requestParser = new RequestParser();
+            var requestFactory = new HttpRequestFactory(requestParser.RequestParameters);
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            SearchAdapter = new Search(dataProvider, parametersHandler, clientUrlBuilder);
+            SearchAdapter = new Search(requestFactory.GetRequest(), clientUrlBuilder);
+
+            SearchAdapter.SetQuery("bmx");
         }
 
         [TestMethod]
         public void TestGetResult()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             var result = SearchAdapter.Result;
             Assert.AreEqual(66, result.FoundRecordsCount);
             Assert.AreEqual("WOwfiHGNS", result.RefKey);
@@ -52,8 +47,6 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestGetStatus()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             var status = SearchAdapter.SearchStatus;
 
             Assert.AreEqual(SearchStatus.ResultsFound, status);
@@ -62,8 +55,6 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestSearchTimeInfo()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             Assert.IsFalse(SearchAdapter.IsSearchTimedOut);
             Assert.AreEqual(100, SearchAdapter.SearchTime);
         }
@@ -71,8 +62,6 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestGetAfterSearchNavigation()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             var asn = SearchAdapter.Asn;
             Assert.AreEqual(4, asn.Count);
             
@@ -114,8 +103,6 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestGetProductsPerPageOptions()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             var pppOptions = SearchAdapter.ProductsPerPageOptions;
             Assert.AreEqual(3, pppOptions.Count);
             Assert.IsFalse(pppOptions[0].Selected);
@@ -128,8 +115,6 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestGetPaging()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             var paging = SearchAdapter.Paging;
             Assert.AreEqual(1, paging.CurrentPage);
             Assert.AreEqual(6, paging.PageCount);
@@ -139,8 +124,6 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestGetSorting()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             var sorting = SearchAdapter.Sorting;
             Assert.AreEqual(5, sorting.Count);
             Assert.AreEqual("sort.relevanceDescription", sorting[0].Label);
@@ -151,8 +134,6 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestGetBreadCrumbTrail()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             var breadCrumbTrail = SearchAdapter.BreadCrumbTrail;
             Assert.AreEqual(3, breadCrumbTrail.Count);
             Assert.AreEqual("bmx", breadCrumbTrail[0].Label);
@@ -162,15 +143,13 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestEmptyCampaigns()
         {
-            SearchAdapter.SetParameter("query", "bmx");
-
             Assert.AreEqual(0, SearchAdapter.Campaigns.Count);
         }
 
         [TestMethod]
         public void TestGetCampaigns()
         {
-            SearchAdapter.SetParameter("query", "campaigns");
+            SearchAdapter.SetQuery("campaigns");
 
             var campaigns = SearchAdapter.Campaigns;
 

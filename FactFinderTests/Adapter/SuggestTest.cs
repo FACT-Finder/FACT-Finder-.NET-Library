@@ -1,10 +1,8 @@
 ﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Adapter;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Core.Server;
-using Omikron.FactFinder.Util;
 using Omikron.FactFinderTests.TestUtility;
 
 namespace Omikron.FactFinderTests.Adapter
@@ -12,7 +10,6 @@ namespace Omikron.FactFinderTests.Adapter
     [TestClass]
     public class SuggestTest : BaseTest
     {
-        private UnixClock Clock { get; set; }
         private Suggest SuggestAdapter { get; set; }
 
         [ClassInitialize]
@@ -26,19 +23,20 @@ namespace Omikron.FactFinderTests.Adapter
         public override void InitializeTest()
         {
             base.InitializeTest();
-            Clock = new UnixClock();
-            var dataProvider = new HttpDataProvider();
-            var parametersHandler = new ParametersConverter();
             var requestParser = new RequestParser();
+            var parameters = requestParser.RequestParameters;
+
+            parameters["query"] = "bmx";
+
+            var requestFactory = new HttpRequestFactory(parameters);
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            SuggestAdapter = new Suggest(dataProvider, parametersHandler, clientUrlBuilder);
+            SuggestAdapter = new Suggest(requestFactory.GetRequest(), clientUrlBuilder);
         }
 
         [TestMethod]
         public void TestGetSuggestions()
         {
-            SuggestAdapter.SetParameter("query", "bmx");
             var suggestions = SuggestAdapter.Suggestions;
 
             Assert.AreEqual(3, suggestions.Count);

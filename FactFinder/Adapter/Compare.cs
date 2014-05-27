@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Script.Serialization;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util.Json;
 
 namespace Omikron.FactFinder.Adapter
 {
@@ -28,7 +25,7 @@ namespace Omikron.FactFinder.Adapter
                 if (_idsOnly && !value)
                     RecordsUpToDate = false;
                 _idsOnly = value;
-                DataProvider.SetParameter("idsOnly", value ? "true" : "false");
+                Parameters["idsOnly"] = value ? "true" : "false";
             }
         }
 
@@ -60,15 +57,7 @@ namespace Omikron.FactFinder.Adapter
             }
         }
 
-        protected dynamic JsonData
-        {
-            get
-            {
-                var jsonSerializer = new JavaScriptSerializer();
-                jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-                return jsonSerializer.Deserialize(base.Data, typeof(object));
-            }
-        }
+        protected dynamic JsonData { get { return ResponseContent; } }
 
         private static ILog log;
 
@@ -77,13 +66,15 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(Compare));
         }
 
-        public Compare(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public Compare(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new CompareAdapter.");
+            log.Debug("Initialize new Compare adapter.");
 
-            DataProvider.Type = RequestType.Compare;
-            DataProvider.SetParameter("format", "json");
+            Request.Action = RequestType.Compare;
+            Parameters["format"] = "json";
+
+            UseJsonResponseContentProcessor();
 
             ProductIDs = new List<string>();
             RecordsUpToDate = false;
@@ -94,7 +85,7 @@ namespace Omikron.FactFinder.Adapter
         public virtual void SetProductIDs(string[] productIDs)
         {
             ProductIDs = productIDs;
-            DataProvider.SetParameter("ids", String.Join(";", productIDs));
+            Parameters["ids"] = String.Join(";", productIDs);
             RecordsUpToDate = false;
             AttributesUpToDate = false;
         }

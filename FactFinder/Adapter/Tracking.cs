@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
@@ -18,17 +17,18 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(Tracking));
         }
 
-        public Tracking(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public Tracking(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new TrackingAdapter.");
+            log.Debug("Initialize new Tracking adapter.");
 
-            DataProvider.Type = RequestType.Tracking;
+            Request.Action = RequestType.Tracking;
         }
 
         public bool DoTrackingFromRequest()
         {
-            DataProvider.ResetParameters(new RequestParser().RequestParameters);
+            Parameters.Clear();
+            Parameters.Add(new RequestParser().RequestParameters);
 
             return ApplyTracking();
         }
@@ -38,7 +38,8 @@ namespace Omikron.FactFinder.Adapter
             log.Debug(String.Format("Tracking \"{0}\" event.", type.ToString()));
             NameValueCollection parameters = PrepareDefaultParameters(inputParameters);
             parameters["event"] = type.ToString();
-            DataProvider.ResetParameters(parameters);
+            Parameters.Clear();
+            Parameters.Add(parameters);
 
             return ApplyTracking();
         }
@@ -78,7 +79,7 @@ namespace Omikron.FactFinder.Adapter
 
         protected bool ApplyTracking()
         {
-            return Data.Trim() == "The event was successfully tracked";
+            return ((string)ResponseContent).Trim() == "The event was successfully tracked";
         }
     }
 }

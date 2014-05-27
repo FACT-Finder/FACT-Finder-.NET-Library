@@ -10,7 +10,6 @@ namespace Omikron.FactFinderTests.Core.Server
     [TestClass]
     public class HttpDataProviderTest : BaseTest
     {
-        private UnixClock Clock { get; set; }
         private HttpDataProvider DataProvider { get; set; }
 
         [ClassInitialize]
@@ -24,22 +23,33 @@ namespace Omikron.FactFinderTests.Core.Server
         public override void InitializeTest()
         {
             base.InitializeTest();
-            Clock = new UnixClock();
-            DataProvider = new HttpDataProvider();
+            var urlBuilder = new UrlBuilder(new UnixClock());
+            DataProvider = new HttpDataProvider(urlBuilder);
 
             //WebRequest.RegisterPrefix("test", new TestWebRequestCreate());
             //TestWebRequestCreate.CreateTestRequest("lol?");
         }
 
         [TestMethod()]
-        public void TestGetData()
+        public void TestLoadResponse()
         {
-            DataProvider.Type = RequestType.WhatsHot;
-            DataProvider.SetParameter("do", "getTagCloud");
-            DataProvider.SetParameter("format", "json");
-            string test = DataProvider.Data;
+            var connectionData = new ConnectionData();
+            int id = DataProvider.Register(connectionData);
 
-            Assert.AreEqual(HttpStatusCode.OK, DataProvider.LastStatusCode);
+            var parameters = connectionData.Parameters;
+
+            parameters["format"] = "json";
+            parameters["do"] = "getTagCloud";
+            parameters["test"] = "test";
+
+            connectionData.Action = RequestType.TagCloud;
+
+            DataProvider.LoadResponse(id);
+
+            var response = connectionData.Response;
+
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual("test response", response.Content);
         }
     }
 }

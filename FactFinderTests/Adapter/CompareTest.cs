@@ -1,10 +1,8 @@
 ﻿using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Omikron.FactFinder.Adapter;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Client;
 using Omikron.FactFinder.Core.Server;
-using Omikron.FactFinder.Util;
 using Omikron.FactFinderTests.TestUtility;
 
 namespace Omikron.FactFinderTests.Adapter
@@ -12,7 +10,6 @@ namespace Omikron.FactFinderTests.Adapter
     [TestClass]
     public class CompareTest : BaseTest
     {
-        private UnixClock Clock { get; set; }
         private Compare CompareAdapter { get; set; }
 
         [ClassInitialize]
@@ -26,13 +23,11 @@ namespace Omikron.FactFinderTests.Adapter
         public override void InitializeTest()
         {
             base.InitializeTest();
-            Clock = new UnixClock();
-            var dataProvider = new HttpDataProvider();
-            var parametersHandler = new ParametersConverter();
             var requestParser = new RequestParser();
+            var requestFactory = new HttpRequestFactory(requestParser.RequestParameters);
             var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
-            CompareAdapter = new Compare(dataProvider, parametersHandler, clientUrlBuilder);
+            CompareAdapter = new Compare(requestFactory.GetRequest(), clientUrlBuilder);
         }
 
         [TestMethod]

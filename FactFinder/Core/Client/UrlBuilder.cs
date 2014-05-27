@@ -19,7 +19,7 @@ namespace Omikron.FactFinder.Core.Client
 
         public UrlBuilder(RequestParser requestParser)
         {
-            log.Debug("Initialize new UrlBuilder.");
+            log.Debug("Initialize new Client.UrlBuilder.");
 
             RequestParser = requestParser;
             ParametersConverter = new ParametersConverter();

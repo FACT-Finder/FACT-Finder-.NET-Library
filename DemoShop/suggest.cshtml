@@ -3,14 +3,15 @@
 @using Omikron.FactFinder.Core
 @using Omikron.FactFinder.Core.Client
 @using Omikron.FactFinder.Core.Server
+@using Omikron.FactFinder.Util
 
 @{
     Response.ContentType = "text/javascript";
-    var parametersHandler = new ParametersConverter();
-    var suggestProvider = new HttpDataProvider();
     var requestParser = new RequestParser();
+    var requestParameters = requestParser.RequestParameters;
+    var requestFactory = new HttpRequestFactory(requestParameters);
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
-    var suggestAdapter = new Suggest(suggestProvider, parametersHandler, clientUrlBuilder);
+    var suggestAdapter = new Suggest(requestFactory.GetRequest(), clientUrlBuilder);
 }
 
 @Html.Raw(suggestAdapter.RawSuggestions)

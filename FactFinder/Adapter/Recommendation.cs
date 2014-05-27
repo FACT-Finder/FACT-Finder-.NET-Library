@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Web.Script.Serialization;
 using log4net;
-using Omikron.FactFinder.Core;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util.Json;
 namespace Omikron.FactFinder.Adapter
 {
     public class Recommendation : AbstractAdapter
@@ -45,7 +41,7 @@ namespace Omikron.FactFinder.Adapter
                 if (_idsOnly && !value)
                     RecommendationsUpToDate = false;
                 _idsOnly = value;
-                DataProvider.SetParameter("idsOnly", value ? "true" : "false");
+                Parameters["idsOnly"] = value ? "true" : "false";
             }
         }
         
@@ -60,9 +56,9 @@ namespace Omikron.FactFinder.Adapter
             {
                 _maxResults = value < 1 ? 0 : value;
                 if (value > 0)
-                    DataProvider.SetParameter("maxResults", value.ToString());
+                    Parameters["maxResults"] = value.ToString();
                 else
-                    DataProvider.UnsetParameter("maxResults");
+                    Parameters.Remove("maxResults");
             }
         }
 
@@ -73,14 +69,16 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(Recommendation));
         }
 
-        public Recommendation(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public Recommendation(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new RecommendationAdapter.");
+            log.Debug("Initialize new Recommendation adapter.");
 
-            DataProvider.Type = RequestType.Recommendation;
-            DataProvider.SetParameter("format", "json");
-            DataProvider.SetParameter("do", "getRecommendation");
+            Request.Action = RequestType.Recommendation;
+            Parameters["format"] = "json";
+            Parameters["do"] = "getRecommendation";
+
+            UseJsonResponseContentProcessor();
 
             ProductIDs = new List<string>();
             RecommendationsUpToDate = false;
@@ -91,11 +89,7 @@ namespace Omikron.FactFinder.Adapter
 
         protected ResultRecords CreateRecommendations()
         {
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-
-            jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-
-            dynamic jsonData = jsonSerializer.Deserialize(Data, typeof(object));
+            dynamic jsonData = ResponseContent;
 
             var records = new List<Record>();
 
@@ -128,27 +122,21 @@ namespace Omikron.FactFinder.Adapter
         {
             ProductIDs.Clear();
             ProductIDs.Add(productID);
-            DataProvider.SetParameter("id", productID);
+            Parameters["id"] = productID;
             RecommendationsUpToDate = false;
         }
 
         public void SetProductIDs(IList<string> productIDs)
         {
             ProductIDs.Clear();
-            var idParameters = new NameValueCollection();
             foreach(var id in productIDs)
-            {
-                ProductIDs.Add(id);
-                idParameters.Add("id", id.ToString());
-            }
-            DataProvider.SetParameters(idParameters);
-            RecommendationsUpToDate = false;
+                AddProductID(id);
         }
 
         public void AddProductID(string productID)
         {
             ProductIDs.Add(productID);
-            DataProvider.AddParameter("id", productID.ToString());
+            Parameters.Add("id", productID.ToString());
             RecommendationsUpToDate = false;
         }
     }

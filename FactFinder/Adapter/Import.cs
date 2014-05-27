@@ -1,27 +1,11 @@
-﻿using System.Web.Script.Serialization;
-using log4net;
-using Omikron.FactFinder.Core;
+﻿using log4net;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
-using Omikron.FactFinder.Util.Json;
 namespace Omikron.FactFinder.Adapter
 {
     public class Import : AbstractAdapter
     {
-        private dynamic _jsonData;
-        protected dynamic JsonData
-        {
-            get
-            {
-                if (_jsonData == null)
-                {
-                    var jsonSerializer = new JavaScriptSerializer();
-                    jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
-                    _jsonData = jsonSerializer.Deserialize(base.Data, typeof(object));
-                }
-                return _jsonData;
-            }
-        }
+        protected dynamic JsonData { get { return ResponseContent; } }
 
         private static ILog log;
 
@@ -30,12 +14,15 @@ namespace Omikron.FactFinder.Adapter
             log = LogManager.GetLogger(typeof(Import));
         }
 
-        public Import(DataProvider dataProvider, ParametersConverter parametersConverter, Omikron.FactFinder.Core.Client.UrlBuilder urlBuilder)
-            : base(dataProvider, parametersConverter, urlBuilder)
+        public Import(Request request, Core.Client.UrlBuilder urlBuilder)
+            : base(request, urlBuilder)
         {
-            log.Debug("Initialize new ImportAdapter.");
+            log.Debug("Initialize new Import adapter.");
 
-            DataProvider.SetParameter("format", "json");
+            Parameters["format"] = "xml";
+
+            // TODO: Implement XML processor
+            UsePassthroughResponseContentProcessor();
         }
         
         public object TriggerDataImport(bool updateFiles = false)
@@ -55,21 +42,21 @@ namespace Omikron.FactFinder.Adapter
 
         protected object TriggerImport(ImportType importType, bool updateFiles)
         {
-            DataProvider.SetParameter("download", updateFiles ? "true" : "false");
+            Parameters["download"] = updateFiles ? "true" : "false";
 
             switch (importType)
             {
             case ImportType.Suggest:
-                DataProvider.Type = RequestType.Import;
-                DataProvider.SetParameter("type", "suggest");
+                Request.Action = RequestType.Import;
+                Parameters["type"] = "suggest";
                 break;
             case ImportType.Recommendations:
-                DataProvider.Type = RequestType.Recommendation;
-                DataProvider.SetParameter("do", "importData");
+                Request.Action = RequestType.Recommendation;
+                Parameters["do"] = "importData";
                 break;
             case ImportType.Data:
             default:
-                DataProvider.Type = RequestType.Import;
+                Request.Action = RequestType.Import;
                 break;
             }
 
@@ -78,10 +65,10 @@ namespace Omikron.FactFinder.Adapter
             switch (importType)
             {
             case ImportType.Suggest:
-                DataProvider.UnsetParameter("type");
+                Parameters.Remove("type");
                 break;
             case ImportType.Recommendations:
-                DataProvider.UnsetParameter("do");
+                Parameters.Remove("do");
                 break;
             }
 

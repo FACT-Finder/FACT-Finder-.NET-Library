@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Core\Client\UrlBuilderTest.cs" />
     <Compile Include="Core\Client\RequestParserTest.cs" />
+    <Compile Include="Core\Server\HttpRequestFactoryTest.cs" />
     <Compile Include="Util\ExtensionMethodsTest.cs" />
     <Compile Include="Core\Server\HttpDataProviderTest.cs" />
     <Compile Include="Adapter\CompareTest.cs" />
@@ -76,6 +77,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Compare_ids=123%3b456%3b789_idsOnly=true.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\TagCloud_do=getTagCloud_test=test.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\ProductCampaign_do=getProductCampaigns_productNumber=123.json">

@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Specialized;
 using log4net;
 
 namespace Omikron.FactFinder.Core.Server
 {
     public abstract class DataProvider
     {
-        public virtual NameValueCollection Parameters { get; protected set; }
-        public virtual RequestType Type { get; set; }
+        protected Dictionary<int, ConnectionData> ConnectionData;
 
-        public virtual string Data { get; private set; }
+        static private int NextID = 0;
 
         private static ILog log;
 
@@ -20,57 +18,41 @@ namespace Omikron.FactFinder.Core.Server
 
         public DataProvider()
         {
-            Parameters = new NameValueCollection();
+            ConnectionData = new Dictionary<int, ConnectionData>();
         }
 
-        /// <summary>
-        /// Sets the given parameters. All previous values for the given keys will be replaced.
-        /// Unmentioned keys will remain.
-        /// </summary>
-        /// <param name="parameters">Key-value pairs to be added.</param>
-        public virtual void SetParameters(NameValueCollection parameters)
+        /**
+         * Make a connection data object known to the data provider and obtain an ID
+         * for it (basically, a handle).
+         */
+        public int Register(ConnectionData connectionData)
         {
-            foreach (string key in parameters)
-            {
-                Parameters.Remove(key);
-            }
+            int id = NextID++;
+            ConnectionData[id] = connectionData;
 
-            Parameters.Add(parameters);
+            log.DebugFormat("Registered connection data for ID {0}.", id);
+
+            return id;
         }
-
-        public virtual void AddParameters(NameValueCollection parameters)
+        
+        /**
+         * Remove all references to the connection data object identified by id.
+         */
+        public void Unregister(int id)
         {
-            Parameters.Add(parameters);
+            ConnectionData.Remove(id);
+
+            log.DebugFormat("Unregistered connection data for ID {0}.", id);
         }
 
-        public virtual void ResetParameters(NameValueCollection parameters)
-        {
-            Parameters = parameters;
-        }
-
-        public virtual void SetParameter(KeyValuePair<string, string> parameter)
-        {
-            Parameters[parameter.Key] = parameter.Value;
-        }
-
-        public virtual void AddParameter(KeyValuePair<string, string> parameter)
-        {
-            Parameters.Add(parameter.Key, parameter.Value);
-        }
-
-        public virtual void SetParameter(string name, string value)
-        {
-            Parameters[name] = value;
-        }
-
-        public virtual void AddParameter(string name, string value)
-        {
-            Parameters.Add(name, value);
-        }
-
-        public virtual void UnsetParameter(string name)
-        {
-            Parameters.Remove(name);
-        }
+        /**
+         * Load a response based on the current state of the connection data
+         * corresponding to id and fill that ConnectionData object with this
+         * response.
+         * 
+         * Note: The response is NOT returned by this function. It has to be
+         *       obtained directly from the ConnectionData object.
+         */
+        abstract public void LoadResponse(int id);
     }
 }
