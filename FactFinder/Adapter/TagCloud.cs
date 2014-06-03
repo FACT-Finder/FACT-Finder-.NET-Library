@@ -46,11 +46,13 @@ namespace Omikron.FactFinder.Adapter
 
             foreach (var tagQuery in jsonData)
             {
+                String queryString = (string)tagQuery.@params;
+                queryString = queryString.Substring(queryString.IndexOf("?"));
                 tagCloud.Add(new TagQuery(
                     (string)tagQuery.query,
                     // We append an arbitrary scheme and host, because properties like Query are not
                     // defined on relative URIs.
-                    new Uri((string)tagQuery.@params, UriKind.Relative),
+                    new Uri(queryString, UriKind.Relative),
                     false,
                     (float)tagQuery.weight,
                     (int)tagQuery.searchCount

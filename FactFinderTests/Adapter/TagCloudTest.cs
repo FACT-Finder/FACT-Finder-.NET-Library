@@ -36,7 +36,7 @@ namespace Omikron.FactFinderTests.Adapter
         public void TestGetTagCloud()
         {
             var tagCloud = TagCloudAdapter.TagCloudData;
-
+            Assert.AreEqual("?seoPath=%2F28%2Bzoll%2Bdamen%2Fq&channel=de", tagCloud[0].Url.OriginalString);
             Assert.AreEqual(5, tagCloud.Count);
             Assert.AreEqual(0.561, tagCloud[0].Weight, 0.0001);
             Assert.AreEqual(1266, tagCloud[0].SearchCount);
