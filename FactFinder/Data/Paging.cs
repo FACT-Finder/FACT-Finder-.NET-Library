@@ -11,14 +11,11 @@ namespace Omikron.FactFinder.Data
         public Item PreviousPageLink { get; private set; }
         public Item NextPageLink { get; private set; }
 
-        private string SourceRefKey;
-
         public Paging(
             int currentPage, 
             int pageCount, 
             Item previousPageLink, 
-            Item nextPageLink,
-            string sourceRefKey = null
+            Item nextPageLink
         )
             : base()
         {
@@ -26,7 +23,6 @@ namespace Omikron.FactFinder.Data
             PageCount = pageCount;
             PreviousPageLink = previousPageLink;
             NextPageLink = nextPageLink;
-            SourceRefKey = sourceRefKey;
         }
 
         public Uri GetPageLink(int pageNumber, string linkTarget = null)

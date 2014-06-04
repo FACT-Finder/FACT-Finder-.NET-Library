@@ -49,7 +49,7 @@ namespace Omikron.FactFinder.Core.Server
             {
                 case AuthenticationType.Http:
                     return GetUrlWithHttpAuthentication(action, parameters);
-                case AuthenticationType.Simple:
+                case AuthenticationType.Basic:
                     return GetUrlWithSimpleAuthentication(action, parameters);
                 case AuthenticationType.Advanced:
                     return GetUrlWithAdvancedAuthentication(action, parameters);

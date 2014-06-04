@@ -3,7 +3,7 @@
     public enum AuthenticationType
     {
         Http,
-        Simple,
+        Basic,
         Advanced
     }
 }

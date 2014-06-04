@@ -54,6 +54,8 @@
     <Compile Include="Core\Configuration\AuthenticationElement.cs" />
     <Compile Include="Core\Configuration\ConnectionProtocol.cs" />
     <Compile Include="Core\Configuration\ConnectionSection.cs" />
+    <Compile Include="Core\Configuration\ModulesSection.cs" />
+    <Compile Include="Core\Configuration\FieldsSection.cs" />
     <Compile Include="Core\Configuration\MappingRuleElementCollection.cs" />
     <Compile Include="Core\Configuration\RequireRuleElementCollection.cs" />
     <Compile Include="Core\Configuration\MappingRuleElement.cs" />

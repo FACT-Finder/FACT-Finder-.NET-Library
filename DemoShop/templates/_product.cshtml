@@ -1,28 +1,19 @@
 ﻿@using Omikron.FactFinder
 @using Omikron.FactFinder.Data
 @using Omikron.FactFinder.Core.Page
+@using Omikron.FactFinder.Core.Configuration
 
 @{
-    var fieldnames = new Dictionary<string, string>()
-    {
-    	{"id", "ArticleNumber"},
-	    {"title", "Name"},
-		{"artNo", "EAN"},
-		{"price", "Price"},
-		{"description", "Description"},
-		{"imageUrl", "ImageURL"},
-		{"detailUrl", "ProductURL"}
-    };
 
     var record = PageData["record"] as Record;
     var util = PageData["util"] as RenderHelper;
 
-    string articleNr    = (string)record.GetFieldValue(fieldnames["artNo"]);
-    string title        = (string)record.GetFieldValue(fieldnames["title"]);
-    string price        = (string)record.GetFieldValue(fieldnames["price"]);
-    string description  = (string)record.GetFieldValue(fieldnames["description"]);
-    string imageUrl     = (string)record.GetFieldValue(fieldnames["imageUrl"]);
-    string detailUrl    = (string)record.GetFieldValue(fieldnames["detailUrl"]);
+    string articleNr    = (string)record.GetFieldValue(FieldsSection.getInstance().productNumber);
+    string title        = (string)record.GetFieldValue(FieldsSection.getInstance().productName);
+    string price        = (string)record.GetFieldValue(FieldsSection.getInstance().price);
+    string description  = (string)record.GetFieldValue(FieldsSection.getInstance().description);
+    string imageUrl     = (string)record.GetFieldValue(FieldsSection.getInstance().imageUrl);
+    string detailUrl    = (string)record.GetFieldValue(FieldsSection.getInstance().deeplink);
     string sid          = "";
 }
 

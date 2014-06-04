@@ -133,5 +133,35 @@ namespace Omikron.FactFinderTests.Core
 
             #endregion
         }
+
+        [TestMethod]
+        public void TestFieldsSection()
+        {
+            FieldsSection section = FieldsSection.getInstance();
+            Assert.IsNotNull(section);
+            Assert.AreEqual(@"uid", section.recordId);
+            Assert.AreEqual(@"ArticleNumber", section.productNumber);
+            Assert.AreEqual(@"MasterProductNumber", section.masterProductNumber);
+            Assert.AreEqual(@"EAN", section.ean);
+            Assert.AreEqual(@"Name", section.productName);
+            Assert.AreEqual(@"Brand", section.brand);
+            Assert.AreEqual(@"Description", section.description);
+            Assert.AreEqual(@"Price", section.price);
+            Assert.AreEqual(@"ImageURL", section.imageUrl);
+            Assert.AreEqual(@"ProductURL", section.deeplink);
+        }
+
+        [TestMethod]
+        public void TestModulesSection()
+        {
+            ModulesSection section = ModulesSection.getInstance();
+            Assert.IsNotNull(section);
+            Assert.AreEqual(true, section.useCampaigns);
+            Assert.AreEqual(false, section.useRecommendations);
+            Assert.AreEqual(true, section.useSimilarRecords);
+            Assert.AreEqual(true, section.useSuggest);
+            Assert.AreEqual(false, section.useTagcloud);
+            Assert.AreEqual(true, section.useTracking);
+        }
     }
 }
