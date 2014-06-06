@@ -60,14 +60,12 @@ namespace Omikron.FactFinder.Util.Json
             if (!_dictionary.TryGetValue(name, out result))
             {
                 result = null;
-                return false;
             }
 
             var dictionary = result as IDictionary<string, object>;
             if (dictionary != null)
             {
                 result = new DynamicJsonObject(dictionary);
-                return true;
             }
 
             var arrayList = result as ArrayList;
@@ -77,7 +75,6 @@ namespace Omikron.FactFinder.Util.Json
                     result = new List<object>(arrayList.Cast<IDictionary<string, object>>().Select(x => new DynamicJsonObject(x)));
                 else
                     result = new List<object>(arrayList.Cast<object>());
-                return true;
             }
 
             return true;

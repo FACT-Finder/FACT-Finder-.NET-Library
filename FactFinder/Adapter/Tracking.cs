@@ -46,17 +46,12 @@ namespace Omikron.FactFinder.Adapter
 
         protected NameValueCollection PrepareDefaultParameters(NameValueCollection inputParameters)
         {
-            string sid = inputParameters["sid"];
-
-            if (String.IsNullOrEmpty(sid))
-                sid = HttpContextFactory.Current.Session.SessionID;
-
             string sourceRefKey = inputParameters["sourceRefKey"];
             if (String.IsNullOrEmpty(sourceRefKey))
                 throw new ArgumentException("Parameters need to contain sourceRefKey.");
 
             var parameters = new NameValueCollection();
-            parameters["sid"] = sid;
+
             parameters["sourceRefKey"] = sourceRefKey;
 
             string[] optionalParameters = new string[] {

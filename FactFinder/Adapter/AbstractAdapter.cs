@@ -52,6 +52,7 @@ namespace Omikron.FactFinder.Adapter
         {
             Request = request;
             Parameters = request.Parameters;
+            Parameters["sid"] = HttpContextFactory.Current.Session.SessionID;
             UrlBuilder = urlBuilder;
 
             UsePassthroughResponseContentProcessor();
