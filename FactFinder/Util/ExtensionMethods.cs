@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,36 +12,45 @@ namespace Omikron.FactFinder.Util
     {
         public static string ToUriQueryString(this IDictionary<string, string> dictionary)
         {
-            // This is actually an HttpValueCollection, whose ToString() overload does all the work
-            NameValueCollection query = HttpUtility.ParseQueryString(string.Empty);
-            
+            StringBuilder queryString = new StringBuilder();
             foreach (KeyValuePair<string, string> pair in dictionary)
             {
-                query[pair.Key] = pair.Value;
+                if (!String.IsNullOrEmpty(pair.Key) && !String.IsNullOrEmpty(pair.Value))
+                {
+                    if (queryString.Length > 0)
+                    { queryString.Append("&"); }
+                    queryString.Append(HttpUtility.UrlEncode(pair.Key)).Append("=").Append(HttpUtility.UrlEncode(pair.Value));
+                }
             }
 
-            return query.ToString();
+            return queryString.ToString();
         }
 
         public static string ToUriQueryString(this NameValueCollection nvc)
         {
-            // This is actually an HttpValueCollection, whose ToString() overload does all the work
-            NameValueCollection query = HttpUtility.ParseQueryString(string.Empty);
-
+            StringBuilder queryString = new StringBuilder();
             // Copy all keys over and make sure to handle multi-value keys properly
             foreach (string key in nvc)
-                foreach (string value in nvc.GetValues(key))
-                    query.Add(key, value);
-
-            return query.ToString();
+                if (!String.IsNullOrEmpty(key))
+                {
+                    string encodedKey = HttpUtility.UrlEncode(key);
+                    foreach (string value in nvc.GetValues(key))
+                        if (!String.IsNullOrEmpty(value))
+                        {
+                            if (queryString.Length > 0)
+                            { queryString.Append("&"); }
+                            queryString.Append(encodedKey).Append("=").Append(HttpUtility.UrlEncode(value));
+                        }
+                }
+            return queryString.ToString();
         }
 
-        public static IDictionary<string, string> ToDictionary(this NameValueCollection source)   
-        {   
-            return source.Cast<string>()  
-                         .Select(s => new { Key = s, Value = source[s] })  
-                         .ToDictionary(p => p.Key, p => p.Value); 
-        }  
+        public static IDictionary<string, string> ToDictionary(this NameValueCollection source)
+        {
+            return source.Cast<string>()
+                         .Select(s => new { Key = s, Value = source[s] })
+                         .ToDictionary(p => p.Key, p => p.Value);
+        }
 
         public static string ToMD5(this string input)
         {

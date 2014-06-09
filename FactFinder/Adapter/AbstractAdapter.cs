@@ -66,7 +66,9 @@ namespace Omikron.FactFinder.Adapter
         protected void UseJsonResponseContentProcessor()
         {
             UseResponseContentProcessor(content => {
+                
                 var jsonSerializer = new JavaScriptSerializer();
+                jsonSerializer.MaxJsonLength = Int32.MaxValue;
                 jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });
                 return jsonSerializer.Deserialize(content, typeof(object));
             });
