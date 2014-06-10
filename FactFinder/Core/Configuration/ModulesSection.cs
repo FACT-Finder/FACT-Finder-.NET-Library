@@ -19,7 +19,7 @@ namespace Omikron.FactFinder.Core.Configuration
         private ModulesSection() { }
 
         [ConfigurationProperty("tracking", DefaultValue = false, IsRequired = false, IsKey = true)]
-        public bool useTracking
+        public bool UseTracking
         {
             get
             {
@@ -31,7 +31,7 @@ namespace Omikron.FactFinder.Core.Configuration
             }
         }
         [ConfigurationProperty("suggest", DefaultValue = false, IsRequired = false, IsKey = true)]
-        public bool useSuggest
+        public bool UseSuggest
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Omikron.FactFinder.Core.Configuration
             }
         }
         [ConfigurationProperty("tagcloud", DefaultValue = false, IsRequired = false, IsKey = true)]
-        public bool useTagcloud
+        public bool UseTagcloud
         {
             get
             {
@@ -55,7 +55,7 @@ namespace Omikron.FactFinder.Core.Configuration
             }
         }
         [ConfigurationProperty("similarrecords", DefaultValue = false, IsRequired = false, IsKey = true)]
-        public bool useSimilarRecords
+        public bool UseSimilarRecords
         {
             get
             {
@@ -67,7 +67,7 @@ namespace Omikron.FactFinder.Core.Configuration
             }
         }
         [ConfigurationProperty("recommendations", DefaultValue = false, IsRequired = false, IsKey = true)]
-        public bool useRecommendations
+        public bool UseRecommendations
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Omikron.FactFinder.Core.Configuration
             }
         }
         [ConfigurationProperty("campaigns", DefaultValue = false, IsRequired = false, IsKey = true)]
-        public bool useCampaigns
+        public bool UseCampaigns
         {
             get
             {
@@ -94,23 +94,23 @@ namespace Omikron.FactFinder.Core.Configuration
         public override string ToString()
         {
             StringBuilder stringRepresentationOfInstance = new StringBuilder();
-            stringRepresentationOfInstance.Append("useTracking=").Append(useTracking).Append("; useSuggest=").Append(useSuggest).Append("; useTagCloud=").Append(useTagcloud).Append("; useSimilarRecords=").Append(useSimilarRecords).Append("; useRecommendations=").Append(useRecommendations).Append("; useCampaigns=").Append(useCampaigns);
+            stringRepresentationOfInstance.Append("useTracking=").Append(UseTracking).Append("; useSuggest=").Append(UseSuggest).Append("; useTagCloud=").Append(UseTagcloud).Append("; useSimilarRecords=").Append(UseSimilarRecords).Append("; useRecommendations=").Append(UseRecommendations).Append("; useCampaigns=").Append(UseCampaigns);
             return stringRepresentationOfInstance.ToString();
         }
 
-        public static ModulesSection getInstance()
+        public static ModulesSection GetInstance()
         {
-            return ModulesSectionProvider.INSTANCE;
+            return ModulesSectionProvider.Instance;
         }
 
         private static class ModulesSectionProvider
         {
-            public static ModulesSection INSTANCE = ConfigurationManager.GetSection("modules") as ModulesSection;
+            public static ModulesSection Instance = ConfigurationManager.GetSection("modules") as ModulesSection;
 
             static ModulesSectionProvider(){
                 if (log.IsDebugEnabled)
                 {
-                    log.Debug("Using module configuration: " + INSTANCE.ToString());
+                    log.Debug("Using module configuration: " + Instance.ToString());
                 }
             }
         }

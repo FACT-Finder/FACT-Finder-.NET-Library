@@ -459,7 +459,8 @@ namespace Omikron.FactFinder.Adapter
                 groupName,
                 (int)groupData.detailedLinks,
                 groupUnit,
-                GetAsnGroupStyleFromString((string)groupData.filterStyle)
+                GetAsnGroupStyleFromString((string)groupData.filterStyle),
+                GetAsnGroupSelectionTypeFromString((string)groupData.selectionType)
             );
         }
 
@@ -515,6 +516,20 @@ namespace Omikron.FactFinder.Adapter
             }
         }
 
+        protected virtual AsnGroupSelectionType GetAsnGroupSelectionTypeFromString(string selectionType)
+        {
+            switch (selectionType)
+            { 
+                case "multiSelectAnd":
+                    return AsnGroupSelectionType.multiSelectAnd;
+                case "multiSelectOr":
+                    return AsnGroupSelectionType.multiSelectOr;
+                case "singleShowUnselected":
+                    return AsnGroupSelectionType.singleShowUnselected;
+                default:
+                    return AsnGroupSelectionType.singleHideUnselected;
+            }
+        }
         protected IList<Item> CreateSorting()
         {
             var sorting = new List<Item>();

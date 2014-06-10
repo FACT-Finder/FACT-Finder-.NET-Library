@@ -27,7 +27,7 @@
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
     Search searchAdapter = new Search(requestFactory.GetRequest(), clientUrlBuilder);
-    TagCloud tagCloudAdapter = (ModulesSection.getInstance().useTagcloud) ? new TagCloud(requestFactory.GetRequest(), clientUrlBuilder) : null;
+    TagCloud tagCloudAdapter = (ModulesSection.GetInstance().UseTagcloud) ? new TagCloud(requestFactory.GetRequest(), clientUrlBuilder) : null;
 
     SearchParameters ffParameters = new SearchParameters(requestParameters);
     PageData["ffParameters"] = ffParameters;

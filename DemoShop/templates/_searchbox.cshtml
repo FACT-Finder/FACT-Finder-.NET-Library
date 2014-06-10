@@ -19,7 +19,7 @@
 
 		<input type="image" id="submit" src="@Href(String.Format("~/files/images/{0}", @Resources.Page.SearchButtonImageFileName))"/>
 		<div id="suggestLayer" class="suggestLayer"></div>
-        @if(ModulesSection.getInstance().useSuggest) {
+        @if(ModulesSection.GetInstance().UseSuggest) {
 		    <script type="text/javascript">
 		    <!--
 				    var suggest				= new FFSuggest();

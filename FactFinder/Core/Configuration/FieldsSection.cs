@@ -19,7 +19,7 @@ namespace Omikron.FactFinder.Core.Configuration
         private FieldsSection() { }
 
         [ConfigurationProperty("recordId", DefaultValue = null, IsRequired = true, IsKey = true)]
-        public string recordId
+        public string RecordId
         {
             get
             {
@@ -32,7 +32,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("productNumber", DefaultValue = null, IsRequired = true, IsKey = true)]
-        public string productNumber
+        public string ProductNumber
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("productName", DefaultValue = null, IsRequired = true, IsKey = true)]
-        public string productName
+        public string ProductName
         {
             get
             {
@@ -58,7 +58,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("price", DefaultValue = null, IsRequired = true, IsKey = true)]
-        public string price
+        public string Price
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("imageUrl", DefaultValue = null, IsRequired = true, IsKey = true)]
-        public string imageUrl
+        public string ImageUrl
         {
             get
             {
@@ -84,7 +84,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("deeplink", DefaultValue = null, IsRequired = true, IsKey = true)]
-        public string deeplink
+        public string Deeplink
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("masterProductNumber", DefaultValue = null, IsRequired = false, IsKey = true)]
-        public string masterProductNumber
+        public string MasterProductNumber
         {
             get
             {
@@ -110,7 +110,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("ean", DefaultValue = null, IsRequired = false, IsKey = true)]
-        public string ean
+        public string Ean
         {
             get
             {
@@ -123,7 +123,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("brand", DefaultValue = null, IsRequired = false, IsKey = true)]
-        public string brand
+        public string Brand
         {
             get
             {
@@ -136,7 +136,7 @@ namespace Omikron.FactFinder.Core.Configuration
         }
 
         [ConfigurationProperty("description", DefaultValue = null, IsRequired = false, IsKey = true)]
-        public string description
+        public string Description
         {
             get
             {
@@ -151,25 +151,25 @@ namespace Omikron.FactFinder.Core.Configuration
         public override string ToString()
         {
             StringBuilder stringRepresentationOfInstance = new StringBuilder();
-            stringRepresentationOfInstance.Append("recordId=").Append(recordId).Append("; productNumber=").Append(productNumber).Append("; masterProductNumber=").Append(masterProductNumber).Append("; ean=").Append(ean).Append("; productName=").Append(productName).Append("; brand=").Append(brand).Append("; price=").Append(price).Append("; description=").Append(description).Append("; imageUrl=").Append(imageUrl).Append("; deeplink=").Append(deeplink);
+            stringRepresentationOfInstance.Append("recordId=").Append(RecordId).Append("; productNumber=").Append(ProductNumber).Append("; masterProductNumber=").Append(MasterProductNumber).Append("; ean=").Append(Ean).Append("; productName=").Append(ProductName).Append("; brand=").Append(Brand).Append("; price=").Append(Price).Append("; description=").Append(Description).Append("; imageUrl=").Append(ImageUrl).Append("; deeplink=").Append(Deeplink);
             return stringRepresentationOfInstance.ToString();
         }
 
 
-        public static FieldsSection getInstance()
+        public static FieldsSection GetInstance()
         {
-            return FieldSectionProvider.INSTANCE;
+            return FieldSectionProvider.Instance;
         }
 
         private static class FieldSectionProvider
         {
-            public static FieldsSection INSTANCE = ConfigurationManager.GetSection("fields") as FieldsSection;
+            public static FieldsSection Instance = ConfigurationManager.GetSection("fields") as FieldsSection;
 
             static FieldSectionProvider()
             {
                 if (log.IsDebugEnabled)
                 {
-                    log.Debug("Using field configuration: " + INSTANCE.ToString());
+                    log.Debug("Using field configuration: " + Instance.ToString());
                 }
             }
         }

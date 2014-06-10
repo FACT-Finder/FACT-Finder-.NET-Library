@@ -137,31 +137,31 @@ namespace Omikron.FactFinderTests.Core
         [TestMethod]
         public void TestFieldsSection()
         {
-            FieldsSection section = FieldsSection.getInstance();
+            FieldsSection section = FieldsSection.GetInstance();
             Assert.IsNotNull(section);
-            Assert.AreEqual(@"uid", section.recordId);
-            Assert.AreEqual(@"ArticleNumber", section.productNumber);
-            Assert.AreEqual(@"MasterProductNumber", section.masterProductNumber);
-            Assert.AreEqual(@"EAN", section.ean);
-            Assert.AreEqual(@"Name", section.productName);
-            Assert.AreEqual(@"Brand", section.brand);
-            Assert.AreEqual(@"Description", section.description);
-            Assert.AreEqual(@"Price", section.price);
-            Assert.AreEqual(@"ImageURL", section.imageUrl);
-            Assert.AreEqual(@"ProductURL", section.deeplink);
+            Assert.AreEqual(@"uid", section.RecordId);
+            Assert.AreEqual(@"ArticleNumber", section.ProductNumber);
+            Assert.AreEqual(@"MasterProductNumber", section.MasterProductNumber);
+            Assert.AreEqual(@"EAN", section.Ean);
+            Assert.AreEqual(@"Name", section.ProductName);
+            Assert.AreEqual(@"Brand", section.Brand);
+            Assert.AreEqual(@"Description", section.Description);
+            Assert.AreEqual(@"Price", section.Price);
+            Assert.AreEqual(@"ImageURL", section.ImageUrl);
+            Assert.AreEqual(@"ProductURL", section.Deeplink);
         }
 
         [TestMethod]
         public void TestModulesSection()
         {
-            ModulesSection section = ModulesSection.getInstance();
+            ModulesSection section = ModulesSection.GetInstance();
             Assert.IsNotNull(section);
-            Assert.AreEqual(true, section.useCampaigns);
-            Assert.AreEqual(false, section.useRecommendations);
-            Assert.AreEqual(true, section.useSimilarRecords);
-            Assert.AreEqual(true, section.useSuggest);
-            Assert.AreEqual(false, section.useTagcloud);
-            Assert.AreEqual(true, section.useTracking);
+            Assert.AreEqual(true, section.UseCampaigns);
+            Assert.AreEqual(false, section.UseRecommendations);
+            Assert.AreEqual(true, section.UseSimilarRecords);
+            Assert.AreEqual(true, section.UseSuggest);
+            Assert.AreEqual(false, section.UseTagcloud);
+            Assert.AreEqual(true, section.UseTracking);
         }
     }
 }

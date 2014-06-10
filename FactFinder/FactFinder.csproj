@@ -69,6 +69,7 @@
     <Compile Include="Core\Server\IRequestFactory.cs" />
     <Compile Include="Core\Server\Request.cs" />
     <Compile Include="Core\Server\Response.cs" />
+    <Compile Include="Data\AsnGroupSelectionType.cs" />
     <Compile Include="Data\EventType.cs" />
     <Compile Include="Data\AdvisorAnswer.cs" />
     <Compile Include="Data\AdvisorQuestion.cs" />
