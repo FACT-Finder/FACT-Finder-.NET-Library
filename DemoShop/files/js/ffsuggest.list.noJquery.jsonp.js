@@ -272,6 +272,9 @@ function FFSuggest() {
 						+ '<li class="'+pSuggestHeaderClass+'" >Vorschl&auml;ge zur Suche...</li>';
 
 		pSuggest = jsonObj;
+		if (pSuggest.suggestions) {
+		    pSuggest = pSuggest.suggestions;
+		}
 
 		var query = pQueryInput.value;
 		// if the query contains regular expression metacharacters then escape them.
@@ -280,8 +283,8 @@ function FFSuggest() {
 		var cssRowClass = pShowImages?pSuggestRowClass+'WithImage '+pSuggestRowClass:pSuggestRowClass;
 		var tabWord='';
 		for (var i = 0; i < pSuggest.length; i++) {
-			var suggestQuery = jsonObj[i].name;
-			var suggestCount = jsonObj[i].hitCount;
+		    var suggestQuery = pSuggest[i].name;
+			var suggestCount = pSuggest[i].hitCount;
 			if (suggestCount==0) {
 				suggestCount = '';
 			}else if (suggestCount==1) {
@@ -291,7 +294,7 @@ function FFSuggest() {
 				suggestCount = '{0} Treffer';
 				suggestCount = suggestCount.replace(/\{0\}/,temp);
 			}
-			var suggestType = ptranslation[jsonObj[i].type];
+			var suggestType = ptranslation[pSuggest[i].type];
 			if (!suggestType) {
 				suggestType = "";
 			}
@@ -301,7 +304,7 @@ function FFSuggest() {
 					tabWord = query+suggestQuery.substring(query.length);
 				}
 			}
-			var suggestImageUrl = jsonObj[i].image;
+			var suggestImageUrl = pSuggest[i].image;
 
 			var id = pLayerName + '_' + i ;
 
@@ -338,13 +341,13 @@ function FFSuggest() {
 			}
 
 			// calback for "outside" listeners
-			fireSuggestCompleted(true, jsonObj);
+			fireSuggestCompleted(true, pSuggest);
 		} else {
 			hideLayer();
 			pLayer.innerHTML = '';
 
 			// callback for "outside" listeners
-			fireSuggestCompleted(false, jsonObj);
+			fireSuggestCompleted(false, pSuggest);
 		}
 	};
 
