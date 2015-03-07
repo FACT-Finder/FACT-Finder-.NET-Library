@@ -46,13 +46,7 @@ namespace Omikron.FactFinder.Adapter
 
         protected NameValueCollection PrepareDefaultParameters(NameValueCollection inputParameters)
         {
-            string sourceRefKey = inputParameters["sourceRefKey"];
-            if (String.IsNullOrEmpty(sourceRefKey))
-                throw new ArgumentException("Parameters need to contain sourceRefKey.");
-
             var parameters = new NameValueCollection();
-
-            parameters["sourceRefKey"] = sourceRefKey;
 
             string[] optionalParameters = new string[] {
                 "userId",

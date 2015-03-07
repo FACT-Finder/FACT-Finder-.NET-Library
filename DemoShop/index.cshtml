@@ -37,8 +37,6 @@
 
     if (HttpContext.Current.Session.IsNewSession)
     {
-        trackingEvents[EventType.SessionStart] = new NameValueCollection();
-
         // We need to set some value so that ASP.NET does not create a new session
         // for each request.
         HttpContext.Current.Session["started"] = true;
@@ -74,7 +72,6 @@
         switch ((SearchStatus)PageData["status"])
         {
             case SearchStatus.ResultsFound:
-                trackingEvents[EventType.Display] = new NameValueCollection();
                 Layout = "~/_LayoutResults.cshtml";
             @RenderPage("~/templates/_result.cshtml");
                                                      break;
