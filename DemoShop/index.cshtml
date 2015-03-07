@@ -3,47 +3,45 @@
 
 @using Omikron.FactFinder
 @using Omikron.FactFinder.Data
-@using Omikron.FactFinder.Default
-@using Omikron.FactFinder.Json.FF69
+@using Omikron.FactFinder.Adapter
+@using Omikron.FactFinder.Core
+@using Omikron.FactFinder.Core.Client
+@using Omikron.FactFinder.Core.Page
+@using Omikron.FactFinder.Core.Server
+@using Omikron.FactFinder.Core.Configuration
 
 
 @{
     log4net.Config.XmlConfigurator.Configure();
     // Uncomment as necessary for localization testing
     // (If all lines are uncommented, the request's preferred language will be used)
-    
+
     // Culture = "de-de"; UICulture = "de-de";
     // Culture = "en-gb"; UICulture = "en-gb";
     // Culture = "en-us"; UICulture = "en-us";
-    
-    PageData["Title"] = String.Format(Resources.Page.PageTitle, Request.Params["query"]);
-    ParametersHandler parametersHandler = new ParametersHandler();
-    DataProvider searchProvider = new HttpDataProvider();
-    DataProvider tagCloudProvider = new HttpDataProvider();
-    
-    SearchAdapter searchAdapter = new JsonSearchAdapter(searchProvider, parametersHandler);
-    TagCloudAdapter tagCloudAdapter = new JsonTagCloudAdapter(tagCloudProvider, parametersHandler);
-    
-    if(Int32.Parse(parametersHandler.GetRequestParam("productsPerPage", "12")) > 60)
-    {
-        searchProvider.SetParameter("productsPerPage", "12");
-    }
 
-    SearchParameters ffParameters = parametersHandler.GetFactFinderParameters();
+    PageData["Title"] = String.Format(Resources.Page.PageTitle, Request.Params["query"]);
+    var requestParser = new RequestParser();
+    var requestParameters = requestParser.RequestParameters;
+    var requestFactory = new HttpRequestFactory(requestParameters);
+    var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
+
+    Search searchAdapter = new Search(requestFactory.GetRequest(), clientUrlBuilder);
+    TagCloud tagCloudAdapter = (ModulesSection.GetInstance().UseTagcloud) ? new TagCloud(requestFactory.GetRequest(), clientUrlBuilder) : null;
+
+    SearchParameters ffParameters = new SearchParameters(requestParameters);
     PageData["ffParameters"] = ffParameters;
 
     var trackingEvents = new Dictionary<EventType, NameValueCollection>();
     PageData["trackingEvents"] = trackingEvents;
-    
+
     if (HttpContext.Current.Session.IsNewSession)
     {
-        trackingEvents[EventType.SessionStart] = new NameValueCollection();
-        
         // We need to set some value so that ASP.NET does not create a new session
         // for each request.
         HttpContext.Current.Session["started"] = true;
     }
-    
+
     try
     {
         PageData["campaigns"] = searchAdapter.Campaigns;
@@ -61,39 +59,40 @@
         PageData["breadCrumbTrail"] = searchAdapter.BreadCrumbTrail;
         PageData["singleWordSearch"] = searchAdapter.SingleWordSearch;
         PageData["paging"] = searchAdapter.Paging;
-        PageData["sorting"] = searchAdapter.Sorting;    
+        PageData["sorting"] = searchAdapter.Sorting;
         PageData["asn"] = searchAdapter.Asn;
         PageData["result"] = searchAdapter.Result;
-
-        PageData["tagCloud"] = tagCloudAdapter.TagCloud;
-
-        PageData["util"] = new Util(ffParameters, searchAdapter);
-    
-        switch((SearchStatus)PageData["status"])
+        if (tagCloudAdapter != null)
         {
-        case SearchStatus.ResultsFound:
-            trackingEvents[EventType.Display] = new NameValueCollection();
-            Layout = "~/_LayoutResults.cshtml";
-            @RenderPage("~/templates/_result.cshtml");
-            break;
-        case SearchStatus.EmptyResult:
-            Layout = "~/_LayoutEmptyResult.cshtml";
-            PageData["message"] = String.Format(Resources.Messages.EmptyResult, ffParameters.Query);
-            @RenderPage("~/templates/_emptyResult.cshtml");
-            break;
-        case SearchStatus.NoResult:
-            Layout = "~/_LayoutError.cshtml";
-            PageData["error"] = Resources.Messages.NoResult;
-            @RenderPage("~/templates/_error.cshtml");
-            break;
-        default:
-            Layout = "~/_LayoutError.cshtml";
-            PageData["error"] = Resources.Messages.Error;
-            @RenderPage("~/templates/_error.cshtml");
-            break;
+            PageData["tagCloud"] = tagCloudAdapter.TagCloudData;
         }
-    } 
-    catch(SearchAdapter.NoQueryException)
+
+        PageData["util"] = new RenderHelper(ffParameters, searchAdapter);
+
+        switch ((SearchStatus)PageData["status"])
+        {
+            case SearchStatus.ResultsFound:
+                Layout = "~/_LayoutResults.cshtml";
+            @RenderPage("~/templates/_result.cshtml");
+                                                     break;
+            case SearchStatus.EmptyResult:
+                                                     Layout = "~/_LayoutEmptyResult.cshtml";
+                                                     PageData["message"] = String.Format(Resources.Messages.EmptyResult, ffParameters.Query);
+            @RenderPage("~/templates/_emptyResult.cshtml");
+                                                          break;
+            case SearchStatus.NoResult:
+                                                          Layout = "~/_LayoutError.cshtml";
+                                                          PageData["error"] = Resources.Messages.NoResult;
+            @RenderPage("~/templates/_error.cshtml");
+                                                    break;
+            default:
+                                                    Layout = "~/_LayoutError.cshtml";
+                                                    PageData["error"] = Resources.Messages.Error;
+            @RenderPage("~/templates/_error.cshtml");
+                                                    break;
+        }
+    }
+    catch (Search.NoQueryException)
     {
         Layout = "~/_LayoutEmptyResult.cshtml";
         PageData["message"] = Resources.Messages.NoQuery;

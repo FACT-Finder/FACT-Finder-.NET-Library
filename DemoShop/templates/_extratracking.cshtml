@@ -6,7 +6,3 @@
         PageData["ffParameters"].Channel
     ));
 }
-
-function onSuggestCompleted(displayed, suggestResult) {
-    trackEvent('display', suggestResult[0].refKey, '@HttpContext.Current.Session.SessionID', '@PageData["ffParameters"].Channel', {});
-}

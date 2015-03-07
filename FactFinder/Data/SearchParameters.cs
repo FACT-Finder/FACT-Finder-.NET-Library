@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using Omikron.FactFinder.Core.Configuration;
 
 namespace Omikron.FactFinder.Data
 {
@@ -13,25 +16,32 @@ namespace Omikron.FactFinder.Data
         public bool IsNavigation { get; private set; }
         public int FollowSearch { get; private set; }
 
-        public SearchParameters(
-            string query,
-            string channel,
-            int productsPerPage = -1,
-            int currentPage = 1,
-            IDictionary<string, string> filters = null,
-            IDictionary<string, string> sortings = null,
-            bool isNavigation = false,
-            int followSearch = 10000
-        )
+        public SearchParameters(NameValueCollection parameters)
         {
-            Query = query;
-            Channel = channel;
-            ProductsPerPage = productsPerPage;
-            CurrentPage = currentPage;
-            Filters = filters ?? new Dictionary<string, string>();
-            Sortings = sortings ?? new Dictionary<string, string>();
-            IsNavigation = isNavigation;
-            FollowSearch = followSearch;
+            Query = parameters["query"] ?? "";
+            ProductsPerPage = Int32.Parse(parameters["productsPerPage"] ?? "-1");
+            CurrentPage = Int32.Parse(parameters["page"] ?? "1");
+            FollowSearch = Int32.Parse(parameters["followSearch"] ?? "10000");
+            IsNavigation = parameters["catalog"] == "true";
+
+            Filters = new Dictionary<string, string>();
+            Sortings = new Dictionary<string, string>();
+
+            foreach (string key in parameters)
+            {
+                string value = parameters[key];
+                if (key.StartsWith("filter"))
+                {
+                    Filters[key.Substring("filter".Length)] = value;
+                }
+                else if (key.StartsWith("sort") && (value == "asc" || value == "desc"))
+                {
+                    Sortings[key.Substring("sort".Length)] = value;
+                }
+            }
+
+            var config = ConnectionSection.GetSection();
+            Channel = config.Channel;
         }
     }
 }

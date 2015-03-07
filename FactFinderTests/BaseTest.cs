@@ -6,8 +6,8 @@ using log4net;
 using log4net.Config;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Omikron.FactFinder;
-using Omikron.FactFinderTests.Utility;
+using Omikron.FactFinder.Util;
+using Omikron.FactFinderTests.TestUtility ;
 
 namespace Omikron.FactFinderTests
 {
@@ -49,7 +49,7 @@ namespace Omikron.FactFinderTests
 
             request.Setup(req => req.QueryString).Returns(new NameValueCollection());
             request.Setup(req => req.Form).Returns(new NameValueCollection());
-            request.Setup(req => req.Url).Returns(new Uri("http://localhost:80/TestShop/index.cshtml"));
+            request.Setup(req => req.Url).Returns(new Uri("http://localhost/TestShop/index.cshtml"));
 
             context.Setup(ctx => ctx.Request).Returns(request.Object);
             context.Setup(ctx => ctx.Response).Returns(response.Object);

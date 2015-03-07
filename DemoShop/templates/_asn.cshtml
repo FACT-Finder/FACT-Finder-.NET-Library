@@ -48,29 +48,49 @@
                     <div id="price-slider" style="padding:20px;"></div>
                 }
                 break;
-            case AsnGroupStyle.Default:
             default:
                 int linkCount = 0;
-                foreach(AsnFilterItem item in group)
+                foreach (AsnFilterItem item in group)
                 {
-                    if(item.Selected)
+                    if (item.Selected)
                     {
                         <p class="asnElement selected lvl@(item.ClusterLevel)">
-                            <a href="@(item.Url)">@item.Label @group.Unit<br />
-                            <span>(@Resources.AfterSearchNavigation.RemoveFilter)</span></a>
+                        @if (group.SelectionType == AsnGroupSelectionType.singleShowUnselected)
+                        {
+                           <input type="radio" checked="checked" name="@(item.Label)" id="@(item.Label)" value="@(item.Url)" onchange="if (this.value != '') {document.location.href=this.value;}">
+                           <label for="@(item.Label)">@(item.Label) @group.Unit</label>
+                        }
+                        else if (group.Style == AsnGroupStyle.MultiSelect)
+                        {
+                            <input type="checkbox" checked="checked" name="@(item.Label)" id="@(item.Label)" value="@(item.Url)" onchange="if (this.value != '') {document.location.href=this.value;}">
+                            <label for="@(item.Label)">@(item.Label) @group.Unit</label>
+                        }
+                        else
+                        {
+                            <a href="@(item.Url)"> @item.Label @group.Unit<br /> <span>(@Resources.AfterSearchNavigation.RemoveFilter)</span>
+                            </a>
+                        }
                         </p>
                     }
                     else
                     {
-                        if(linkCount < group.DetailedLinkCount)
+                        if (linkCount < group.DetailedLinkCount)
                         {
                             <p class="asnElement lvl@(item.ClusterLevel)">
-                                <a href="@(item.Url)">@item.Label @group.Unit
-                                @if (!ffParameters.IsNavigation)
-                                {
-                                    <span>(@item.MatchCount)</span>
-                                }
-                                </a>
+                            @if (group.SelectionType == AsnGroupSelectionType.singleShowUnselected)
+                            {
+                                <input type="radio" name="@(item.Label)" id="@(item.Label)" value="@(item.Url)" onchange="if (this.value != '') {document.location.href=this.value;}">
+                                <label for="@(item.Label)">@(item.Label) @group.Unit (@item.MatchCount)</label>
+                            }
+                            else if (group.Style == AsnGroupStyle.MultiSelect)
+                            {
+                                <input type="checkbox" name="@(item.Label)" id="@(item.Label)" value="@(item.Url)" onchange="if (this.value != '') {document.location.href=this.value;}">
+                                <label for="@(item.Label)">@(item.Label) @group.Unit (@item.MatchCount)</label>
+                            }
+                            else
+                            {
+                                <a href="@(item.Url)">@item.Label @group.Unit <span>(@item.MatchCount)</span></a><br/>
+                            }
                             </p>
                             linkCount++;
                         }

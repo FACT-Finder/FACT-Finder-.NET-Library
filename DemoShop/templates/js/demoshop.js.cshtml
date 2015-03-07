@@ -30,15 +30,6 @@ $(document).ready(
 	 	$('div.passive > a').mouseover( function() { $(this).parent().fadeTo('normal', 1); } );
 	 	$('div.passive > a').mouseout( function() { $(this).parent().fadeTo('normal', 0.5); } );
 
-	 	//enable div:hover in IE
-	 	if($.browser.msie){
-	 		$('div.product').mouseover( function() { $(this).addClass("product-hover") } );
-	 		$('div.product').mouseout( function() { $(this).removeClass("product-hover") } );
-
-	 		$('div.asnImage').mouseover( function() { $(this).addClass("asnImage-hover") } );
-	 		$('div.asnImage').mouseout( function() { $(this).removeClass("asnImage-hover") } );
-	 	}
-
 		//set blur and focus events for the query input
 		$(document.forms["search_word_inc"]["query"]).blur( function() { checkInputText(); } );
 		$(document.forms["search_word_inc"]["query"]).focus( function() { hideDefaultInputText(); } );
