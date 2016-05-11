@@ -1,3 +1,8 @@
+Version 1.4.1
+# GZIP support
+# improved tracking script
+# reduced files in demo template
+
 Version 1.4
 # FACT-Finder >= 6.10 support
 # fixed url encoding

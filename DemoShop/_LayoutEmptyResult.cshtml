@@ -11,7 +11,7 @@
         <title>@PageData["Title"]</title>
 
         <link rel="shortcut icon" href="@Href("~/files/images/favicon.ico")">
-        <link rel="stylesheet" type="text/css" href="@Href("~/files/css/main.css")">
+        <link rel="stylesheet" type="text/css" href="@Href("~/files/css/demoshop.css")">
         <link rel="stylesheet" type="text/css" href="@Href("~/files/css/suggest.blockresponse.css")">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -55,12 +55,6 @@
                     @RenderBody()
                 </div>
 
-				<div id="infoColumn">
-                    @if(campaigns != null) { 
-                        @:@Html.Raw(campaigns.GetFeedbackFor("above info panel"))
-                    }
-                    <div id="infoPlaceHolder"></div>
-				</div>
             </div>
             
             <div id="footer">

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Omikron.FactFinder.Adapter;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
+using Omikron.FactFinder.Core.Configuration;
 
 namespace Omikron.FactFinder.Core.Page
 {
@@ -42,19 +43,17 @@ namespace Omikron.FactFinder.Core.Page
 
                 int currentPageNumber = SearchAdapter.Paging.CurrentPage;
                 string originalPageSize = SearchAdapter.ProductsPerPageOptions.DefaultOption.Label;
-                string pageSize = SearchAdapter.ProductsPerPageOptions.SelectedOption.Label;
 
                 int originalPosition = record.OriginalPosition;
                 if (originalPosition == 0) originalPosition = position;
 
-                string similarity = record.Similarity.ToString(System.Globalization.CultureInfo.CreateSpecificCulture("en-GB")); // two decimal places, no thousand separator
                 string id = record.ID;
+                string masterId = (string) record.GetFieldValue(FieldsSection.GetInstance().MasterProductNumber);
 
-                title = Regex.Replace(title, "['\"\\\0]", @"\$&");
                 sid = Regex.Replace(sid, "['\"\\\0]", @"\$&");
 
-                clickCode = String.Format("clickProduct('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', 'click');",
-                    query, id, position, originalPosition, currentPageNumber, similarity, sid, title, pageSize, originalPageSize, channel);
+                clickCode = String.Format("tracking.click('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');",
+                    channel, sid, id, masterId, query, position, originalPosition, currentPageNumber, originalPageSize); 
             }
 
             return clickCode;

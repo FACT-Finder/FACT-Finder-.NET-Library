@@ -59,9 +59,9 @@ namespace Omikron.FactFinder.Core.Server
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.KeepAlive = false;
             webRequest.Method = "GET";
-
+            webRequest.AutomaticDecompression = DecompressionMethods.GZip;
             webRequest.Headers.Add(connectionData.HttpHeaderFields);
-
+          
             var config = ConnectionSection.GetSection();
 
             if (config.Language != "")
