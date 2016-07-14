@@ -12,11 +12,14 @@ var tracking = {
         }
         $.ajax({
             type : "GET",
-            url: "tracking.cshtml",
+            url : "tracking.cshtml",
             data : params,
             contentType : "application/x-www-form-urlencoded; charset=UTF-8",
             cache : false,
-            async : false
+            async : false,
+            headers : {
+                'sid' : sessionId
+            }
         });
     },
 
@@ -30,6 +33,14 @@ var tracking = {
             origPos : origPos,
             page : page,
             origPageSize : origPageSize
+        });
+    },
+
+    recommendationClick : function(channel, sessionId, id, masterId, mainId) {
+        this.doTrack('recommendationClick', channel, sessionId, {
+            id : id,
+            masterId : masterId,
+            mainId : mainId
         });
     },
 
@@ -50,13 +61,15 @@ var tracking = {
         this.cart(channel, sessionId, id, masterId, count, price, query);
     },
 
-    checkout : function(channel, sessionId, id, masterId, count, price, query) {
+    checkout : function(channel, sessionId, id, masterId, count, price, query,
+            userId) {
         this.doTrack('checkout', channel, sessionId, {
             id : id,
             masterId : masterId,
             count : count,
             price : price,
-            query : query
+            query : query,
+            userId : userId
         });
     },
 
