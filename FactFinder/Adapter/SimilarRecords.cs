@@ -4,29 +4,10 @@ using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 namespace Omikron.FactFinder.Adapter
 {
-    public class SimilarRecords : AbstractAdapter
+    public class SimilarRecords : ConfigurableResponse
     {
         protected string ProductID { get; set; }
-
-        protected bool AttributesUpToDate { get; set; }
-        protected bool RecordsUpToDate { get; set; }
-
-        private bool _idsOnly;
-        public bool IDsOnly
-        {
-            protected get
-            {
-                return _idsOnly;
-            }
-            set
-            {
-                if (_idsOnly && !value)
-                    RecordsUpToDate = false;
-                _idsOnly = value;
-                Parameters["idsOnly"] = value ? "true" : "false";
-            }
-        }
-
+        
         private int _maxRecordCount;
         public int MaxRecordCount
         {
@@ -38,7 +19,7 @@ namespace Omikron.FactFinder.Adapter
             {
                 value = value < 0 ? 0 : value;
                 if (_maxRecordCount != value)
-                    RecordsUpToDate = false;
+                    UpToDate = false;
                 _maxRecordCount = value;
                 if (value == 0)
                     Parameters.Remove("maxRecordCount");
@@ -52,10 +33,10 @@ namespace Omikron.FactFinder.Adapter
         {
             get
             {
-                if (_similarAttributes == null || !AttributesUpToDate)
+                if (_similarAttributes == null || !UpToDate)
                 {
                     _similarAttributes = CreateSimilarAttributes();
-                    AttributesUpToDate = true;
+                    UpToDate = true;
                 }
                 return _similarAttributes;
             }
@@ -66,10 +47,10 @@ namespace Omikron.FactFinder.Adapter
         {
             get
             {
-                if (_records == null || !RecordsUpToDate)
+                if (_records == null || !UpToDate)
                 {
                     _records = CreateRecords();
-                    RecordsUpToDate = true;
+                    UpToDate = true;
                 }
                 return _records;
             }
@@ -95,9 +76,7 @@ namespace Omikron.FactFinder.Adapter
             UseJsonResponseContentProcessor();
 
             ProductID = "";
-            RecordsUpToDate = false;
-            AttributesUpToDate = false;
-            IDsOnly = false;
+            UpToDate = false;
             MaxRecordCount = 0;
         }
 
@@ -107,8 +86,7 @@ namespace Omikron.FactFinder.Adapter
             {
                 ProductID = productID;
                 Parameters["id"] = productID;
-                RecordsUpToDate = false;
-                AttributesUpToDate = false;
+                UpToDate = false;
             }
         }
 
@@ -130,12 +108,6 @@ namespace Omikron.FactFinder.Adapter
 
             foreach (var recordData in JsonData.records)
             {
-                if (IDsOnly)
-                {
-                    records.Add(new Record((string)recordData.id));
-                    continue;
-                }
-
                 records.Add(new Record(
                     (string)recordData.id,
                     100,

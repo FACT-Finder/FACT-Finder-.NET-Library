@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter\AbstractAdapter.cs" />
+    <Compile Include="Adapter\ConfigurableResponse.cs" />
+    <Compile Include="Adapter\PersonalisedResponse.cs" />
     <Compile Include="Core\Client\RequestParser.cs" />
     <Compile Include="Core\Client\UrlBuilder.cs" />
     <Compile Include="Core\Configuration\AuthenticationType.cs" />

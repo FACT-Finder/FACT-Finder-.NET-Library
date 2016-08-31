@@ -4,7 +4,7 @@ using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 namespace Omikron.FactFinder.Adapter
 {
-    public class Recommendation : AbstractAdapter
+    public class Recommendation : PersonalisedResponse
     {
         private ResultRecords _recommendations;
         public ResultRecords Recommendations
@@ -17,33 +17,16 @@ namespace Omikron.FactFinder.Adapter
                     return new ResultRecords();
                 }
 
-                if (_recommendations == null || !RecommendationsUpToDate)
+                if (_recommendations == null || !UpToDate)
                 {
                     _recommendations = CreateRecommendations();
-                    RecommendationsUpToDate = true;
+                    UpToDate = true;
                 }
                 return _recommendations; 
             }
         }
 
         protected IList<string> ProductIDs;
-        protected bool RecommendationsUpToDate { get; set; }
-
-        private bool _idsOnly;
-        public bool IDsOnly
-        {
-            protected get
-            {
-                return _idsOnly;
-            }
-            set
-            {
-                if (_idsOnly && !value)
-                    RecommendationsUpToDate = false;
-                _idsOnly = value;
-                Parameters["idsOnly"] = value ? "true" : "false";
-            }
-        }
         
         private int _maxResults;
         public int MaxResults
@@ -81,9 +64,8 @@ namespace Omikron.FactFinder.Adapter
             UseJsonResponseContentProcessor();
 
             ProductIDs = new List<string>();
-            RecommendationsUpToDate = false;
+            UpToDate = false;
             MaxResults = 0;
-            IDsOnly = false;
         }
         
 
@@ -97,13 +79,6 @@ namespace Omikron.FactFinder.Adapter
 
             foreach (var recordData in jsonData)
             {
-                if (IDsOnly)
-                {
-                    Record ffRecord = new Record((string)recordData.id);
-                    records.Add(ffRecord);
-                    continue;
-                }
-
                 records.Add(new Record(
                     (string)recordData.id,
                     100,
@@ -123,7 +98,7 @@ namespace Omikron.FactFinder.Adapter
             ProductIDs.Clear();
             ProductIDs.Add(productID);
             Parameters["id"] = productID;
-            RecommendationsUpToDate = false;
+            UpToDate = false;
         }
 
         public void SetProductIDs(IList<string> productIDs)
@@ -137,7 +112,7 @@ namespace Omikron.FactFinder.Adapter
         {
             ProductIDs.Add(productID);
             Parameters.Add("id", productID.ToString());
-            RecommendationsUpToDate = false;
+            UpToDate = false;
         }
     }
 }

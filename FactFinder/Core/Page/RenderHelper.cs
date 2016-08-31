@@ -21,16 +21,11 @@ namespace Omikron.FactFinder.Core.Page
             FFParameters = ffParameters;
         }
 
-        public string CreateJavaScriptClickCode(Record record, string title, string sid, bool useLegacyTracking = true)
+        public string CreateJavaScriptClickCode(Record record, string sid = null)
         {
             if (String.IsNullOrEmpty(sid))
                 sid = HttpContextFactory.Current.Session.SessionID;
 
-            return CreateLegacyJavaScriptClickCode(record, title, sid);
-        }
-
-        private string CreateLegacyJavaScriptClickCode(Record record, string title, string sid)
-        {
             string query = FFParameters.Query.Replace(@"'", @"\'");
 
             int position = record.Position;
@@ -47,13 +42,16 @@ namespace Omikron.FactFinder.Core.Page
                 int originalPosition = record.OriginalPosition;
                 if (originalPosition == 0) originalPosition = position;
 
+                string campaign = record.Campaign;
+                bool instoreAds = record.InstoreAds;
+
                 string id = record.ID;
-                string masterId = (string) record.GetFieldValue(FieldsSection.GetInstance().MasterProductNumber);
+                string masterId = (string)record.GetFieldValue(FieldsSection.GetInstance().MasterProductNumber);
 
                 sid = Regex.Replace(sid, "['\"\\\0]", @"\$&");
 
-                clickCode = String.Format("tracking.click('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');",
-                    channel, sid, id, masterId, query, position, originalPosition, currentPageNumber, originalPageSize); 
+                clickCode = String.Format("tracking.click('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}');",
+                    channel, sid, id, masterId, query, position, originalPosition, currentPageNumber, originalPageSize, campaign, instoreAds);
             }
 
             return clickCode;

@@ -3,6 +3,7 @@
     public enum BreadCrumbItemType
     {
         Search,
-        Filter
+        Filter,
+        Advisor
     }
 }
