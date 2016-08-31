@@ -41,7 +41,6 @@ namespace Omikron.FactFinderTests.Adapter
 
             Assert.AreEqual(3, suggestions.Count);
             Assert.AreEqual("Verde BMX", suggestions[0].Query);
-            Assert.AreEqual("8blKVw-P5", suggestions[0].RefKey);
             Assert.AreEqual("brand", suggestions[0].Type);
             Assert.AreEqual("category", suggestions[1].Type);
             Assert.AreEqual("productName", suggestions[2].Type);

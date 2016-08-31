@@ -34,15 +34,12 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestProductDetailCampaigns()
         {
-            var productIDs = new string[] {
+            var productNumbers = new string[] {
                 "123"
             };
-            ProductCampaignAdapter.SetProductIDs(productIDs);
+            ProductCampaignAdapter.SetProductNumbers(productNumbers);
             ProductCampaignAdapter.MakeProductDetailCampaign();
             var campaigns = ProductCampaignAdapter.Campaigns;
-
-            Assert.IsTrue(campaigns.HasRedirect());
-            Assert.AreEqual(new Uri("http://www.fact-finder.de"), campaigns.GetRedirectUrl());
 
             Assert.IsTrue(campaigns.HasFeedback());
             var expectedFeedback = "test feedback" + System.Environment.NewLine;
@@ -61,16 +58,36 @@ namespace Omikron.FactFinderTests.Adapter
         [TestMethod]
         public void TestShoppingCartCampaigns()
         {
-            var productIDs = new string[] {
+            var productNumbers = new string[] {
                 "456",
                 "789"
             };
-            ProductCampaignAdapter.SetProductIDs(productIDs);
+            ProductCampaignAdapter.SetProductNumbers(productNumbers);
             ProductCampaignAdapter.MakeShoppingCartCampaign();
             var campaigns = ProductCampaignAdapter.Campaigns;
 
-            Assert.IsTrue(campaigns.HasRedirect());
-            Assert.AreEqual(new Uri("http://www.fact-finder.de"), campaigns.GetRedirectUrl());
+            Assert.IsTrue(campaigns.HasFeedback());
+            var expectedFeedback = "test feedback" + System.Environment.NewLine;
+            Assert.AreEqual(expectedFeedback, campaigns.GetFeedbackFor("html header"));
+            Assert.AreEqual(expectedFeedback, campaigns.GetFeedbackFor("9"));
+
+            Assert.IsTrue(campaigns.HasPushedProducts());
+            var pushedProducts = campaigns.GetPushedProducts();
+            Assert.AreEqual(1, pushedProducts.Count);
+            Assert.AreEqual("221910", pushedProducts[0].ID);
+            Assert.AreEqual("KHE", pushedProducts[0].GetFieldValue("Brand"));
+
+            Assert.IsFalse(campaigns.HasActiveQuestions());
+        }
+
+        [TestMethod]
+        public void TestPageCampaigns()
+        {
+            var pageId = "123";
+
+            ProductCampaignAdapter.SetPageId(pageId);
+            ProductCampaignAdapter.MakePageCampaign();
+            var campaigns = ProductCampaignAdapter.Campaigns;
 
             Assert.IsTrue(campaigns.HasFeedback());
             var expectedFeedback = "test feedback" + System.Environment.NewLine;
