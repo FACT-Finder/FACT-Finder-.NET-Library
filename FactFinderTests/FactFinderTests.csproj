@@ -73,7 +73,7 @@
     <Compile Include="Core\Server\UrlBuilderTest.cs" />
     <Compile Include="TestUtility\TestWebRequestCreate.cs" />
     <Content Include="Properties\AssemblyInfo.cs" />
-    <None Include="Responses\Compare_ids=123%3b456%3b789_idsOnly=false.json">
+    <None Include="Responses\Compare_ids=123%3b456%3b789.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Compare_ids=123%3b456%3b789_idsOnly=true.json">
@@ -82,19 +82,22 @@
     <None Include="Responses\TagCloud_do=getTagCloud_test=test.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Responses\ProductCampaign_do=getPageCampaigns_pageId=123.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Responses\ProductCampaign_do=getProductCampaigns_productNumber=123.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\ProductCampaign_do=getShoppingCartCampaigns_productNumber=456_productNumber=789.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Recommender_do=getRecommendation_id=233431_idsOnly=false.json">
+    <None Include="Responses\Recommender_do=getRecommendation_id=233431.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Recommender_do=getRecommendation_id=233431_id=274036_idsOnly=false.json">
+    <None Include="Responses\Recommender_do=getRecommendation_id=233431_id=274036.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\Recommender_do=getRecommendation_id=274036_idsOnly=false.json">
+    <None Include="Responses\Recommender_do=getRecommendation_id=274036.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\Recommender_do=getRecommendation_id=274036_idsOnly=true.json">
@@ -109,7 +112,7 @@
     <None Include="Responses\Search_query=error.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Responses\SimilarRecords_id=123_idsOnly=false.json">
+    <None Include="Responses\SimilarRecords_id=123.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Responses\SimilarRecords_id=123_idsOnly=true.json">

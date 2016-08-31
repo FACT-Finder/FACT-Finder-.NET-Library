@@ -8,6 +8,7 @@ namespace Omikron.FactFinder.Data
     public class SearchParameters
     {
         public string Query { get; private set; }
+        public string SeoPath { get; private set; }
         public string Channel { get; private set; }
         public int ProductsPerPage { get; private set; }
         public int CurrentPage { get; private set; }
@@ -19,9 +20,10 @@ namespace Omikron.FactFinder.Data
         public SearchParameters(NameValueCollection parameters)
         {
             Query = parameters["query"] ?? "";
+            SeoPath = parameters["seoPath"] ?? "";
             ProductsPerPage = Int32.Parse(parameters["productsPerPage"] ?? "-1");
             CurrentPage = Int32.Parse(parameters["page"] ?? "1");
-            FollowSearch = Int32.Parse(parameters["followSearch"] ?? "10000");
+            FollowSearch = Int32.Parse(parameters["followSearch"] ?? "0");
             IsNavigation = parameters["catalog"] == "true";
 
             Filters = new Dictionary<string, string>();

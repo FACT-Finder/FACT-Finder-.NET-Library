@@ -3,6 +3,5 @@
     Default,
     Tree,
     MultiSelect,
-    Slider,
-    Color
+    Slider
 }

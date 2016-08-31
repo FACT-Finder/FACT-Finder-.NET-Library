@@ -39,7 +39,6 @@ namespace Omikron.FactFinderTests.Adapter
         {
             var result = SearchAdapter.Result;
             Assert.AreEqual(66, result.FoundRecordsCount);
-            Assert.AreEqual("WOwfiHGNS", result.RefKey);
             Assert.AreEqual(1, result.Count);
             Assert.AreEqual("278003", result[0].ID);
         }

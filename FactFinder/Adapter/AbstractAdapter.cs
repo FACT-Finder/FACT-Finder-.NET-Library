@@ -15,6 +15,8 @@ namespace Omikron.FactFinder.Adapter
         protected NameValueCollection Parameters;
         protected Core.Client.UrlBuilder UrlBuilder;
 
+        protected bool UpToDate { get; set; }
+
         protected delegate object processString(string str);
 
         private processString ProcessResponseContent;
@@ -52,7 +54,6 @@ namespace Omikron.FactFinder.Adapter
         {
             Request = request;
             Parameters = request.Parameters;
-            Parameters["sid"] = HttpContextFactory.Current.Session.SessionID;
             UrlBuilder = urlBuilder;
 
             UsePassthroughResponseContentProcessor();
@@ -65,8 +66,9 @@ namespace Omikron.FactFinder.Adapter
 
         protected void UseJsonResponseContentProcessor()
         {
-            UseResponseContentProcessor(content => {
-                
+            UseResponseContentProcessor(content =>
+            {
+
                 var jsonSerializer = new JavaScriptSerializer();
                 jsonSerializer.MaxJsonLength = Int32.MaxValue;
                 jsonSerializer.RegisterConverters(new[] { new DynamicJsonConverter() });

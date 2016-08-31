@@ -67,8 +67,7 @@ namespace Omikron.FactFinder.Adapter
                     ConvertServerQueryToClientUrl((string)suggestData.searchParams),
                     (int)suggestData.hitCount,
                     (string)suggestData.type,
-                    new Uri((string)suggestData.image, UriKind.RelativeOrAbsolute),
-                    (string)suggestData.refKey
+                    new Uri((string)suggestData.image, UriKind.RelativeOrAbsolute)
                 ));
             }
 

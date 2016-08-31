@@ -50,11 +50,7 @@ namespace Omikron.FactFinder.Adapter
 
             string[] optionalParameters = new string[] {
                 "userId",
-                "cookieId",
-                "price",
-                "amount",
-                "positive",
-                "message"
+                "cookieId"
             };
             foreach (var key in optionalParameters)
             {

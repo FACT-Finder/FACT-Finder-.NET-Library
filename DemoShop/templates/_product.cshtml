@@ -14,13 +14,13 @@
     string description  = (string)record.GetFieldValue(FieldsSection.GetInstance().Description);
     string imageUrl     = (string)record.GetFieldValue(FieldsSection.GetInstance().ImageUrl);
     string detailUrl    = (string)record.GetFieldValue(FieldsSection.GetInstance().Deeplink);
-    string sid          = "";
+    string sid          = "FF_SPECIFIC_SID_TO_BE_SET";
 }
 
 <div class="productWrap">
 	<div class="product">
 		<div class="picture">
-			<a href="@detailUrl" onclick="@(util.CreateJavaScriptClickCode(record, title, sid, true))">
+			<a href="@detailUrl" onclick="@(util.CreateJavaScriptClickCode(record, sid))">
 				<img valign="top" src="@imageUrl" alt="no picture"
 					title="@title" onload="resizePicture(this, 120, 170)" onerror="imageNotFound(this)"
 					onmouseover="TagToTip('descr@(articleNr)', SHADOW, true)" onmouseout="UnTip()" />
@@ -49,7 +49,7 @@
 		</div>
 
 		<div class="title">
-			<a href="@(detailUrl)" onclick="@(util.CreateJavaScriptClickCode(record, title, sid, true))">
+			<a href="@(detailUrl)" onclick="@(util.CreateJavaScriptClickCode(record, sid))">
 			@{
                 if(title.Length > 23)
                 {

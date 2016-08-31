@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using log4net;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
+using System.Web;
 namespace Omikron.FactFinder.Adapter
 {
-    public class ProductCampaign : AbstractAdapter
+    public class ProductCampaign : PersonalisedResponse
     {
         protected enum CampaignType
         {
             None,
+            PageCampaigns,
             ProductDetailPage,
             ShoppingCart
         }
@@ -20,22 +22,33 @@ namespace Omikron.FactFinder.Adapter
         {
             get
             {
-                if (ProductIDs.Count == 0)
-                {
-                    log.Warn("Campaigns cannot be loaded without a product ID.");
-                    return new CampaignList();
-                }
-
                 if (Type == CampaignType.None)
                 {
                     log.Warn("Campaign type not set.");
                     return new CampaignList();
                 }
 
-                if (_campaigns == null || !CampaignsUpToDate)
+                if (Type == CampaignType.ProductDetailPage || Type == CampaignType.ShoppingCart)
+                {
+                    if (ProductNumbers.Count == 0)
+                    {
+                        log.Warn("Campaigns cannot be loaded without a product number.");
+                        return new CampaignList();
+                    }
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(PageId))
+                    {
+                        log.Warn("Page campaigns cannot be loaded without a page ID.");
+                        return new CampaignList();
+                    }
+                }
+
+                if (_campaigns == null || !UpToDate)
                 {
                     _campaigns = CreateCampaigns();
-                    CampaignsUpToDate = true;
+                    UpToDate = true;
                 }
                 return _campaigns;
             }
@@ -51,13 +64,13 @@ namespace Omikron.FactFinder.Adapter
             set
             {
                 if (_type != value)
-                    CampaignsUpToDate = false;
+                    UpToDate = false;
                 _type = value;
             }
         }
 
-        protected IList<string> ProductIDs;
-        protected bool CampaignsUpToDate { get; set; }
+        protected IList<string> ProductNumbers;
+        protected string PageId;
 
         protected dynamic JsonData { get { return ResponseContent; } }
 
@@ -78,8 +91,8 @@ namespace Omikron.FactFinder.Adapter
 
             UseJsonResponseContentProcessor();
 
-            ProductIDs = new List<string>();
-            CampaignsUpToDate = false;
+            ProductNumbers = new List<string>();
+            UpToDate = false;
         }
 
         public void MakeProductDetailCampaign()
@@ -94,13 +107,29 @@ namespace Omikron.FactFinder.Adapter
             Parameters["do"] = "getShoppingCartCampaigns";
         }
 
-        public virtual void SetProductIDs(string[] productIDs)
+        public void MakePageCampaign()
         {
-            ProductIDs = productIDs;
+            Type = CampaignType.PageCampaigns;
+            Parameters["do"] = "getPageCampaigns";
+        }
+
+        public virtual void SetProductNumbers(string[] productNumbers)
+        {
+            ProductNumbers = productNumbers;
+            Parameters.Remove("pageId");
             Parameters.Remove("productNumber");
-            foreach (var id in productIDs)
-                Parameters.Add("productNumber", id);
-            CampaignsUpToDate = false;
+            foreach (var productNumber in productNumbers)
+                Parameters.Add("productNumber", productNumber);
+            UpToDate = false;
+        }
+
+        public virtual void SetPageId(string pageId)
+        {
+            PageId = pageId;
+            Parameters.Remove("pageId");
+            Parameters.Remove("productNumber");
+            Parameters.Add("pageId", pageId);
+            UpToDate = false;
         }
 
         protected CampaignList CreateCampaigns()
@@ -142,13 +171,20 @@ namespace Omikron.FactFinder.Adapter
 
                 foreach (var feedbackData in campaignData.feedbackTexts)
                 {
+                    bool html = (bool)feedbackData.html;
+                    string text = (string)feedbackData.text;
+                    if (!html)
+                    {
+                        text = HttpUtility.HtmlAttributeEncode(text);
+                    }
+
                     string label = feedbackData.label.ToString();
                     if (label != "")
-                        feedback[label] = (string)feedbackData.text;
+                        feedback[label] = text;
 
                     string id = feedbackData.id.ToString();
                     if (id != "")
-                        feedback[id] = (string)feedbackData.text;
+                        feedback[id] = text;
                 }
 
                 campaign.AddFeedback(feedback);

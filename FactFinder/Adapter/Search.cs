@@ -7,10 +7,11 @@ using log4net;
 using Omikron.FactFinder.Core.Server;
 using Omikron.FactFinder.Data;
 using Omikron.FactFinder.Util;
+using System.Web;
 
 namespace Omikron.FactFinder.Adapter
 {
-    public class Search : AbstractAdapter
+    public class Search : PersonalisedResponse
     {
         [Serializable]
         public class NoQueryException : Exception
@@ -207,6 +208,8 @@ namespace Omikron.FactFinder.Adapter
             Parameters["format"] = "json";
 
             UseJsonResponseContentProcessor();
+
+            UpToDate = false;
         }
 
         public void SetQuery(string query)
@@ -243,19 +246,19 @@ namespace Omikron.FactFinder.Adapter
 
             switch ((string)JsonData.searchResult.resultArticleNumberStatus)
             {
-            case "nothingFound":
-                _isArticleNumberSearch = true;
-                _articleNumberSearchStatus = SearchStatus.EmptyResult;
-                break;
-            case "resultsFound":
-                _isArticleNumberSearch = true;
-                _articleNumberSearchStatus = SearchStatus.ResultsFound;
-                break;
-            case "noArticleNumberSearch":
-            default:
-                _isArticleNumberSearch = false;
-                _articleNumberSearchStatus = SearchStatus.NoResult;
-                break;
+                case "nothingFound":
+                    _isArticleNumberSearch = true;
+                    _articleNumberSearchStatus = SearchStatus.EmptyResult;
+                    break;
+                case "resultsFound":
+                    _isArticleNumberSearch = true;
+                    _articleNumberSearchStatus = SearchStatus.ResultsFound;
+                    break;
+                case "noArticleNumberSearch":
+                default:
+                    _isArticleNumberSearch = false;
+                    _articleNumberSearchStatus = SearchStatus.NoResult;
+                    break;
             }
         }
 
@@ -273,12 +276,12 @@ namespace Omikron.FactFinder.Adapter
         {
             switch ((string)JsonData.searchResult.resultStatus)
             {
-            case "nothingFound":
-                return SearchStatus.EmptyResult;
-            case "resultsFound":
-                return SearchStatus.ResultsFound;
-            default:
-                return SearchStatus.NoResult;
+                case "nothingFound":
+                    return SearchStatus.EmptyResult;
+                case "resultsFound":
+                    return SearchStatus.ResultsFound;
+                default:
+                    return SearchStatus.NoResult;
             }
         }
 
@@ -329,14 +332,14 @@ namespace Omikron.FactFinder.Adapter
         {
             switch ((string)campaignData.flavour)
             {
-            case "FEEDBACK":
-                FillCampaignWithFeedback(campaign, campaignData);
-                FillCampaignWithPushedProducts(campaign, campaignData);
-                break;
+                case "FEEDBACK":
+                    FillCampaignWithFeedback(campaign, campaignData);
+                    FillCampaignWithPushedProducts(campaign, campaignData);
+                    break;
 
-            case "ADVISOR":
-                FillCampaignWithAdvisorData(campaign, campaignData);
-                break;
+                case "ADVISOR":
+                    FillCampaignWithAdvisorData(campaign, campaignData);
+                    break;
             }
         }
 
@@ -348,13 +351,20 @@ namespace Omikron.FactFinder.Adapter
 
                 foreach (var feedbackData in campaignData.feedbackTexts)
                 {
+                    bool html = (bool)feedbackData.html;
+                    string text = (string)feedbackData.text;
+                    if (!html)
+                    {
+                        text = HttpUtility.HtmlAttributeEncode(text);
+                    }
+
                     string label = feedbackData.label.ToString();
                     if (label != "")
-                        feedback[label] = (string)feedbackData.text;
+                        feedback[label] = text;
 
                     string id = feedbackData.id.ToString();
                     if (id != "")
-                        feedback[id] = (string)feedbackData.text;
+                        feedback[id] = text;
                 }
 
                 campaign.AddFeedback(feedback);
@@ -502,24 +512,22 @@ namespace Omikron.FactFinder.Adapter
         {
             switch (style)
             {
-            case "TREE":
-                return AsnGroupStyle.Tree;
-            case "MULTISELECT":
-                return AsnGroupStyle.MultiSelect;
-            case "SLIDER":
-                return AsnGroupStyle.Slider;
-            case "COLOR":
-                return AsnGroupStyle.Color;
-            case "DEFAULT":
-            default:
-                return AsnGroupStyle.Default;
+                case "TREE":
+                    return AsnGroupStyle.Tree;
+                case "MULTISELECT":
+                    return AsnGroupStyle.MultiSelect;
+                case "SLIDER":
+                    return AsnGroupStyle.Slider;
+                case "DEFAULT":
+                default:
+                    return AsnGroupStyle.Default;
             }
         }
 
         protected virtual AsnGroupSelectionType GetAsnGroupSelectionTypeFromString(string selectionType)
         {
             switch (selectionType)
-            { 
+            {
                 case "multiSelectAnd":
                     return AsnGroupSelectionType.multiSelectAnd;
                 case "multiSelectOr":
@@ -643,11 +651,13 @@ namespace Omikron.FactFinder.Adapter
         {
             switch (type)
             {
-            case "filter":
-                return BreadCrumbItemType.Filter;
-            case "search":
-            default:
-                return BreadCrumbItemType.Search;
+                case "filter":
+                    return BreadCrumbItemType.Filter;
+                case "advisor":
+                    return BreadCrumbItemType.Advisor;
+                case "search":
+                default:
+                    return BreadCrumbItemType.Search;
             }
         }
 
@@ -675,13 +685,15 @@ namespace Omikron.FactFinder.Adapter
                 }
             }
 
-            return new ResultRecords(result, resultCount, (string)searchResultData.refKey);
+            return new ResultRecords(result, resultCount);
         }
 
         protected Record GetRecordFromRawData(dynamic recordData, int position)
         {
 
             int originalPosition = position;
+            string campaign = null;
+            bool instoreAds = false;
 
             Dictionary<string, object> fieldValues = recordData.record.AsDictionary();
 
@@ -689,6 +701,18 @@ namespace Omikron.FactFinder.Adapter
             {
                 originalPosition = Int32.Parse((string)fieldValues["__ORIG_POSITION__"]);
                 fieldValues.Remove("__ORIG_POSITION__");
+            }
+
+            if (fieldValues.ContainsKey("__FFCampaign__"))
+            {
+                campaign = (string)fieldValues["__FFCampaign__"];
+                fieldValues.Remove("__FFCampaign__");
+            }
+
+            if (fieldValues.ContainsKey("__FFInstoreAds__"))
+            {
+                instoreAds = Boolean.Parse((string)fieldValues["__FFInstoreAds__"]);
+                fieldValues.Remove("__FFInstoreAds__");
             }
 
             var keywords = new List<string>();
@@ -704,8 +728,9 @@ namespace Omikron.FactFinder.Adapter
                 position,
                 originalPosition,
                 fieldValues,
-                (string)recordData.seoPath,
-                keywords
+                keywords,
+                campaign,
+                instoreAds
             );
         }
 

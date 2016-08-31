@@ -10,10 +10,11 @@ namespace Omikron.FactFinder.Data
         public float Similarity { get; private set; }
         public int Position { get; private set; }
         public int OriginalPosition { get; private set; }
+        public string Campaign { get; private set; }
+        public bool InstoreAds { get; private set; }
 
         private IDictionary<string, object> _customFields;
 
-        public string SeoPath { get; private set; }
         public IList<string> Keywords { get; private set; }
 
         public Record(
@@ -22,8 +23,9 @@ namespace Omikron.FactFinder.Data
             int position = 0, 
             int originalPosition = 0,
             IDictionary<string, object> fields = null,
-            string seoPath = "",
-            IList<string> keywords = null
+            IList<string> keywords = null,
+            string campaign = null,
+            bool instoreAds = false
         )
         {
             ID = id.Trim();
@@ -31,8 +33,9 @@ namespace Omikron.FactFinder.Data
             Similarity = Math.Max(0, Math.Min(100,similarity));
             Position = position;
             OriginalPosition = originalPosition;
-            SeoPath = seoPath;
             Keywords = keywords;
+            Campaign = campaign;
+            InstoreAds = instoreAds;
 
             if (fields != null)
             {

@@ -6,38 +6,19 @@ using Omikron.FactFinder.Data;
 
 namespace Omikron.FactFinder.Adapter
 {
-    public class Compare : AbstractAdapter
+    public class Compare : ConfigurableResponse
     {
         protected IList<string> ProductIDs { get; set; }
-
-        protected bool AttributesUpToDate { get; set; }
-        protected bool RecordsUpToDate { get; set; }
-
-        private bool _idsOnly;
-        public bool IDsOnly
-        {
-            protected get
-            {
-                return _idsOnly;
-            }
-            set
-            {
-                if (_idsOnly && !value)
-                    RecordsUpToDate = false;
-                _idsOnly = value;
-                Parameters["idsOnly"] = value ? "true" : "false";
-            }
-        }
 
         private IDictionary<string, bool> _comparableAttributes;
         public IDictionary<string, bool> ComparableAttributes
         {
             get
             {
-                if (_comparableAttributes == null || !AttributesUpToDate)
+                if (_comparableAttributes == null || !UpToDate)
                 {
                     _comparableAttributes = CreateComparableAttributes();
-                    AttributesUpToDate = true;
+                    UpToDate = true;
                 }
                 return _comparableAttributes;
             }
@@ -48,10 +29,10 @@ namespace Omikron.FactFinder.Adapter
         {
             get
             {
-                if (_comparedRecords == null || !RecordsUpToDate)
+                if (_comparedRecords == null || !UpToDate)
                 {
                     _comparedRecords = CreateComparedRecords();
-                    RecordsUpToDate = true;
+                    UpToDate = true;
                 }
                 return _comparedRecords;
             }
@@ -77,17 +58,14 @@ namespace Omikron.FactFinder.Adapter
             UseJsonResponseContentProcessor();
 
             ProductIDs = new List<string>();
-            RecordsUpToDate = false;
-            AttributesUpToDate = false;
-            IDsOnly = false;
+            UpToDate = false;
         }
 
         public virtual void SetProductIDs(string[] productIDs)
         {
             ProductIDs = productIDs;
             Parameters["ids"] = String.Join(";", productIDs);
-            RecordsUpToDate = false;
-            AttributesUpToDate = false;
+            UpToDate = false;
         }
 
         protected IDictionary<string, bool> CreateComparableAttributes()
@@ -108,12 +86,6 @@ namespace Omikron.FactFinder.Adapter
 
             foreach (var recordData in JsonData.records)
             {
-                if (IDsOnly)
-                {
-                    records.Add(new Record((string)recordData.id));
-                    continue;
-                }
-
                 records.Add(new Record(
                     (string)recordData.id,
                     100,

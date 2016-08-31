@@ -5,14 +5,11 @@
         private readonly string name;
         private readonly int value;
 
-        public static readonly EventType Display = new EventType(1, "display");
-        public static readonly EventType Feedback = new EventType(2, "feedback");
-        public static readonly EventType Inspect = new EventType(3, "inspect");
-        public static readonly EventType AvailabilityCheck = new EventType(4, "availabilityCheck");
-        public static readonly EventType Cart = new EventType(5, "cart");
-        public static readonly EventType Buy = new EventType(6, "buy");
-        public static readonly EventType CacheHit = new EventType(7, "cacheHit");
-        public static readonly EventType SessionStart = new EventType(8, "sessionStart");
+        public static readonly EventType Click = new EventType(1, "click");
+        public static readonly EventType Cart = new EventType(2, "cart");
+        public static readonly EventType Checkout = new EventType(3, "checkout");
+        public static readonly EventType RecommendationClick = new EventType(4, "recommendationClick");
+        public static readonly EventType Login = new EventType(5, "login");
 
         private EventType(int value, string name)
         {

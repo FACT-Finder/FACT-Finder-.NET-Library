@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@using System.Collections.Specialized
+﻿@using System.Collections.Specialized
 
 @using Omikron.FactFinder
 @using Omikron.FactFinder.Data
@@ -9,7 +8,6 @@
 @using Omikron.FactFinder.Core.Page
 @using Omikron.FactFinder.Core.Server
 @using Omikron.FactFinder.Core.Configuration
-
 
 @{
     log4net.Config.XmlConfigurator.Configure();
@@ -27,6 +25,7 @@
     var clientUrlBuilder = new Omikron.FactFinder.Core.Client.UrlBuilder(requestParser);
 
     Search searchAdapter = new Search(requestFactory.GetRequest(), clientUrlBuilder);
+    searchAdapter.Sid = "FF_SPECIFIC_SID_TO_BE_SET";
     TagCloud tagCloudAdapter = (ModulesSection.GetInstance().UseTagcloud) ? new TagCloud(requestFactory.GetRequest(), clientUrlBuilder) : null;
 
     SearchParameters ffParameters = new SearchParameters(requestParameters);
